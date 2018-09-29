@@ -293,9 +293,9 @@ class MySceneGraph {
         if (scalingIndex == -1)
             this.onXMLMinorError("initial scale undefined; assuming S = (1, 1, 1)");
         else {
-            var sx = this.reader.getFloat(children[scalingIndex], 'x');
-            var sy = this.reader.getFloat(children[scalingIndex], 'y');
-            var sz = this.reader.getFloat(children[scalingIndex], 'z');
+            var sx = this.reader.getFloat(children[scalingIndex], "x");
+            var sy = this.reader.getFloat(children[scalingIndex], "y");
+            var sz = this.reader.getFloat(children[scalingIndex], "z");
 
             if (sx == null || sy == null || sz == null) {
                 sx = 0;
