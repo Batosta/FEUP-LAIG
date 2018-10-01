@@ -122,8 +122,8 @@ class MySceneGraph {
                 this.onXMLMinorError("tag <lights> out of order");
 
             //Parse LIGHTS block
-            //if ((error = this.parseLights(nodes[index])) != null)
-                //return error;
+            if ((error = this.parseLights(nodes[index])) != null)
+                return error;
         }
 
         // <TEXTURES>
@@ -187,6 +187,99 @@ class MySceneGraph {
         }
 
     }
+
+    /**
+    * Parses the <AMBIENT> block.
+    */
+    parseAmbient(ambientNode) {
+
+        var children = ambientNode.children;
+
+        var nodeNames = [];
+
+        for (var i = 0; i < children.length; i++)
+            nodeNames.push(children[i].nodeName);
+
+        // ambient 
+        //default values
+        this.r = 0.1;
+        this.g = 0.1;
+        this.b = 0.1;
+        this.a = 0.1;
+
+        var indexAmbient = nodeNames.indexOf("ambient");
+        if (indexAmbient == -1) {
+            this.onXMLMinorError("Ambient component missing; assuming 'r = 0.1' 'g = 0.1' 'b = 0.1' 'a = 0.1'");
+        }
+        else {
+            this.r = this.reader.getFloat(children[indexAmbient], 'r');
+            this.g = this.reader.getFloat(children[indexAmbient], 'g');
+            this.b = this.reader.getFloat(children[indexAmbient], 'b');
+            this.a = this.reader.getFloat(children[indexAmbient], 'a');
+
+            if (!(this.r != null && !isNaN(this.r))) {
+                this.r = 0.1;
+                this.onXMLMinorError("unable to parse value for r; assuming 'r = 0.1'");
+            }
+            if (!(this.g != null && !isNaN(this.g))) {
+                this.g = 0.1;
+                this.onXMLMinorError("unable to parse value for g; assuming 'g = 0.1'");
+            }
+
+            if (!(this.b != null && !isNaN(this.b))) {
+                this.b = 0.1;
+                this.onXMLMinorError("unable to parse value for b; assuming 'b = 0.1'");
+            }
+
+            if (!(this.a != null && !isNaN(this.a))) {
+                this.a = 0.1;
+                this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
+            }
+        }
+        this.ambient = [];
+        ambient.push(r); ambient.push(g); ambient.push(b); ambient.push(a);
+
+        //background
+        //default values
+
+        this.r = 0.1;
+        this.g = 0.1;
+        this.b = 0.1;
+        this.a = 0.1;
+
+        var indexBackground = nodeNames.indexOf("background");
+        if(indexBackground == -1){
+            this.onXMLMinorError("Background component missing; assuming 'r = 0.1' 'g = 0.1' 'b = 0.1' 'a = 0.1'")
+        }else{
+            this.r = this.reader.getFloat(children[indexBackground]);
+            this.g = this.reader.getFloat(children[indexBackground]);
+            this.b = this.reader.getFloat(children[indexBackground]);
+            this.a = this.reader.getFloat(children[indexBackground]);
+
+            if (!(this.r != null && !isNaN(this.r))) {
+                this.r = 0.1;
+                this.onXMLMinorError("unable to parse value for r; assuming 'r = 0.1'");
+            }
+            if (!(this.g != null && !isNaN(this.g))) {
+                this.g = 0.1;
+                this.onXMLMinorError("unable to parse value for g; assuming 'g = 0.1'");
+            }
+
+            if (!(this.b != null && !isNaN(this.b))) {
+                this.b = 0.1;
+                this.onXMLMinorError("unable to parse value for b; assuming 'b = 0.1'");
+            }
+
+            if (!(this.a != null && !isNaN(this.a))) {
+                this.a = 0.1;
+                this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
+            }
+        }
+        this.background = [];
+        background.push(r); background.push(g); background.push(b); background.push(a);
+
+        this.log("Parsed ambient");
+    }  
 
     /**
      * Parses the <INITIALS> block.
@@ -598,6 +691,7 @@ class MySceneGraph {
             // Stores Light global information.
             this.lights[lightId] = grandChildren;
             numLights++;
+            this.log("Luz");
         }
 
         if (numLights == 0)
