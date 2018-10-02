@@ -121,8 +121,8 @@ class MySceneGraph {
                 this.onXMLMinorError("tag <views> out of order");
 
             //Parse views block
-            //if ((error = this.parseViews(nodes[index])) != null)
-                //return error;
+            if ((error = this.parseViews(nodes[index])) != null)
+                return error;
         }
 
         // <LIGHTS>
@@ -1147,6 +1147,78 @@ class MySceneGraph {
         this.log("Parsed nodes");
         return null;
     }
+
+    /**
+    *Parses the <VIEWS> block
+    *@param {views block element} viewsNode
+    */
+    parseViews(viewsNode){
+
+        this.defaultView = this.reader.getString(viewsNode, 'default');
+        this.log(this.defaultView);
+    
+        var children = viewsNode.children;
+        var nodesName = [];
+
+        for(var i = 0; i < children.length; i++){
+            nodesName.push(children[i].nodeName);
+        }
+
+        if(this.defaultView == "perspective"){
+
+            var perspectiveIndex = nodesName.indexOf("perspective");
+            this.idPerspective = this.reader.getString(children[perspectiveIndex], 'id');
+           
+            if(this.idPerspective == null)
+                this.onXMLError("ID missing");
+
+            this.nearPerspective = this.reader.getFloat(children[perspectiveIndex], 'near');
+            this.farPerspective = this.reader.getFloat(children[perspectiveIndex], 'far');
+            this.anglePerspective = this.reader.getFloat(children[perspectiveIndex], 'angle');
+            
+            var grandchildren = children[perspectiveIndex].children;
+            var nodesName2 = []; 
+            for(var j = 0; j < grandchildren.length; j++){
+                nodesName2.push(grandchildren[j].nodeName);
+            }
+
+            var fromIndex = nodesName2.indexOf("from");
+            var toIndex = nodesName2.indexOf("to");
+            this.fromTo = [];
+
+            this.x = this.reader.getFloat(grandchildren[fromIndex], 'x');
+            this.y = this.reader.getFloat(grandchildren[fromIndex], 'y');
+            this.z = this.reader.getFloat(grandchildren[fromIndex], 'z');
+            this.fromTo.push(this.x); this.fromTo.push(this.y); this.fromTo.push(this.z);
+
+            this.x = this.reader.getFloat(grandchildren[toIndex], 'x');
+            this.y = this.reader.getFloat(grandchildren[toIndex], 'y');
+            this.z = this.reader.getFloat(grandchildren[toIndex], 'z');
+            this.fromTo.push(this.x); this.fromTo.push(this.y); this.fromTo.push(this.z);
+        }
+        
+        if(this.defaultView == "ortho"){
+            
+            var orthoIndex = nodesName.indexOf("ortho");
+            this.idOrtho = this.reader.getString(children[orthoIndex], 'id');
+            this.log(this.idOrtho);
+            this.nearOrtho = this.reader.getString(children[orthoIndex], 'near');
+            this.log(this.nearOrtho);
+            this.leftOrtho = this.reader.getString(children[orthoIndex], 'left');
+            this.log(this.leftOrtho);
+            this.rightOrtho = this.reader.getString(children[orthoIndex], 'right');
+            this.log(this.rightOrtho);
+            this.topOrtho = this.reader.getString(children[orthoIndex], 'top');
+            this.log(this.topOrtho);
+            this.bottomOrtho =this.reader.getString(children[orthoIndex], 'bottom');
+            this.log(this.bottomOrtho);
+
+        }
+        
+
+        this.log("Parsed Views");
+}
+
 
     /*
      * Callback to be executed on any read error, showing an error on the console.

@@ -4,7 +4,7 @@
 
 	<scene root="SCENE" axis_length="1" />
 
-	<views default="perspective"> 
+	<views default="ortho"> 
 		<!-- tem de existir, pelo menos, uma vista de -->
 		<!-- entre as seguintes (perspective ou ortho) -->
 
