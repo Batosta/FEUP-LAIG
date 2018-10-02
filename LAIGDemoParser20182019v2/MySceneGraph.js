@@ -92,7 +92,7 @@ class MySceneGraph {
         // <SCENE>
         var index;
         if ((index = nodeNames.indexOf("scene")) == -1)
-            return "tag <scene> missing";
+            return this.onXMLError("tag <scene> missing");
         else {
             if (index != SCENE_INDEX)
                 this.onXMLMinorError("tag <scene> out of order");
@@ -104,7 +104,7 @@ class MySceneGraph {
 
         // <ambient>
         if((index =nodeNames.indexOf("ambient")) == -1)
-            return "tag <ambient> missing";
+            return this.onXMLError("tag <ambient> missing");
         else{
             if(index != AMBIENT_INDEX)
                 this.onXMLMinorError("tag <ambient> out of order");
@@ -115,19 +115,19 @@ class MySceneGraph {
 
         // <views>
         if ((index = nodeNames.indexOf("views")) == -1)
-            return "tag <views> missing";
+            return this.onXMLError("tag <views> missing");
         else {
             if (index != VIEWS_INDEX)
                 this.onXMLMinorError("tag <views> out of order");
 
             //Parse views block
-            //if ((error = this.parseIllumination(nodes[index])) != null)
+            //if ((error = this.parseViews(nodes[index])) != null)
                 //return error;
         }
 
         // <LIGHTS>
         if ((index = nodeNames.indexOf("lights")) == -1)
-            return "tag <lights> missing";
+            return this.onXMLError("tag <lights> missing");
         else {
             if (index != LIGHTS_INDEX)
                 this.onXMLMinorError("tag <lights> out of order");
@@ -139,7 +139,7 @@ class MySceneGraph {
 
         // <TEXTURES>
         if ((index = nodeNames.indexOf("textures")) == -1)
-            return "tag <textures> missing";
+            return this.onXMLError("tag <textures> missing");
         else {
             if (index != TEXTURES_INDEX)
                 this.onXMLMinorError("tag <textures> out of order");
@@ -151,7 +151,7 @@ class MySceneGraph {
 
         // <MATERIALS>
         if ((index = nodeNames.indexOf("materials")) == -1)
-            return "tag <materials> missing";
+            return this.onXMLError("tag <materials> missing");
         else {
             if (index != MATERIALS_INDEX)
                 this.onXMLMinorError("tag <materials> out of order");
@@ -163,7 +163,7 @@ class MySceneGraph {
 
         // <Transformations>
         if ((index = nodeNames.indexOf("transformations")) == -1)
-            return "tag <transformations> missing";
+            return this.onXMLError("tag <transformations> missing");
         else {
             if (index != TRANSFORMATIONS_INDEX)
                 this.onXMLMinorError("tag <transformations> out of order");
@@ -175,7 +175,7 @@ class MySceneGraph {
 
         //<Primitives>
         if((index = nodeNames.indexOf("primitives")) == -1)
-            return "tag <Primitives> missing";
+            return this.onXMLError("tag <Primitives> missing");
         else{
             if(index != PRIMITIVES_INDEX)
                 this.onXMLMinorError("tag <primitives> out of order");
@@ -187,7 +187,7 @@ class MySceneGraph {
 
         //<Components>
         if((index = nodeNames.indexOf("components")) == -1)
-            return "tag <components> missing";
+            return this.onXMLError("tag <components> missing");
         else{
             if(index != COMPONENTS_INDEX)
                 this.onXMLMinorError("tag <components> out of order");
@@ -208,10 +208,12 @@ class MySceneGraph {
         this.axis_length = this.reader.getFloat(sceneNode, 'axis_length');
 
         if(this.root == null)
-            return "root missing.";
+            return this.onXMLError("root missing.");
 
         if(this.axis_length == null)
-            return "axis_length missing";
+            return this.onXMLError("axis_length missing");
+
+        this.log("Parsed scene");
     }
 
     /**
@@ -742,6 +744,7 @@ class MySceneGraph {
                 this.pathTexture.push(path);
             }
         }
+        this.log("Parsed textures");
     }
 
     /**
@@ -911,12 +914,6 @@ class MySceneGraph {
             this.specular.push(this.r); this.specular.push(this.g); this.specular.push(this.b); this.specular.push(this.a);
         }
         this.log("Parsed materials");
-        for(var i=0; i < this.emission.length; i++){
-            this.log(this.emission[i]);
-            this.log(this.ambient[i]);
-            this.log(this.diffuse[i]);
-            this.log(this.specular[i]);
-        }
         return null;
     }
 
