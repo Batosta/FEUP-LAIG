@@ -294,7 +294,7 @@ class MySceneGraph {
         this.background.push(this.r); this.background.push(this.g); this.background.push(this.b); this.background.push(this.a);
 
         this.log("Parsed ambient");
-    }  
+    }
 
     /**
      * Parses the <INITIALS> block.
@@ -449,18 +449,6 @@ class MySceneGraph {
         this.axis = new CGFaxis(this, 1, 0.2);
 
         this.log("Parsed initials");
-
-        return null;
-    }
-
-    /**
-     * Parses the <ILLUMINATION> block.
-     * @param {illumination block element} illuminationNode
-     */
-    parseIllumination(illuminationNode) {
-        // TODO: Parse Illumination node
-
-        this.log("Parsed illumination");
 
         return null;
     }
@@ -721,12 +709,24 @@ class MySceneGraph {
      * Parses the <TEXTURES> block. 
      * @param {textures block element} texturesNode
      */
-    parseTextures(texturesNode) {
-        // TODO: Parse block
+    parseTextures(texturesNode){
 
-        console.log("Parsed textures");
+        var children = texturesNode.children;
 
-        return null;
+        this.pathTexture = [];
+
+        for(var i = 0; i < children.length; i++){
+
+            var tID = this.reader.getString(children[i], 'id');
+            var path = this.reader.getString(children[i], 'file');
+
+            if(tID == null || path == null){
+                this.onXMLMinorError("Error on ID or pathname");
+                continue;
+            }else{
+                this.pathTexture.push(path);
+            }
+        }
     }
 
     /**
