@@ -98,8 +98,8 @@ class MySceneGraph {
                 this.onXMLMinorError("tag <scene> out of order");
 
             //Parse INITIAL block
-            //if ((error = this.parseInitials(nodes[index])) != null)
-                //return error;
+            if ((error = this.parseScene(nodes[index])) != null)
+                return error;
         }
 
         // <ambient>
@@ -145,8 +145,8 @@ class MySceneGraph {
                 this.onXMLMinorError("tag <textures> out of order");
 
             //Parse TEXTURES block
-            //if ((error = this.parseTextures(nodes[index])) != null)
-                //return error;
+            if ((error = this.parseTextures(nodes[index])) != null)
+                return error;
         }
 
         // <MATERIALS>
@@ -157,8 +157,8 @@ class MySceneGraph {
                 this.onXMLMinorError("tag <materials> out of order");
 
             //Parse MATERIALS block
-            //if ((error = this.parseMaterials(nodes[index])) != null)
-                //return error;
+            if ((error = this.parseMaterials(nodes[index])) != null)
+                return error;
         }
 
         // <Transformations>
@@ -197,6 +197,21 @@ class MySceneGraph {
                 //return error;
         }
 
+    }
+
+    /**
+    * Parses the <SCENE> block
+    */
+    parseScene(sceneNode){
+
+        this.root = this.reader.getString(sceneNode, 'root');
+        this.axis_length = this.reader.getFloat(sceneNode, 'axis_length');
+
+        if(this.root == null)
+            return "root missing.";
+
+        if(this.axis_length == null)
+            return "axis_length missing";
     }
 
     /**
@@ -733,11 +748,176 @@ class MySceneGraph {
      * Parses the <MATERIALS> node.
      * @param {materials block element} materialsNode
      */
-    parseMaterials(materialsNode) {
-        // TODO: Parse block
-        this.log("Parsed materials");
-        return null;
+    parseMaterials(materialsNode){
+       
+        var children = materialsNode.children;
+        this.materials = []; this.shininesses = []; 
+        this.emission = []; //ex: [r, g, b, a, r, g, b, a ...]
+        this.ambient = []; //ex: [r, g, b, a, r, g, b, a ...]
+        this.diffuse = []; // ex: [r, g, b, a, r, g, b, a ...]
+        this.specular = []; //ex: [r, g, b, a, r, g, b, a ...]
 
+        for(var i = 0; i < children.length; i++){
+
+            var materialID = this.reader.getString(children[i], 'id');
+            var shininess = this.reader.getFloat(children[i], 'shininess');
+
+            if(materialID == null)
+                return "Error, ID missing";
+
+            if(shininess == null){
+                this.onXMLMinorError("shininess missing, assuming default value");
+                shininess = 0.1;
+            }
+
+            this.materials.push(materialID); this.shininesses.push(shininess);
+
+            var grandchildren = children[i].children;
+            var nodesName = [];
+
+            for(var j = 0; j < grandchildren.length; j++)
+                nodesName.push(grandchildren[j].nodeName);
+
+            var emissionIndex = nodesName.indexOf("emission");
+            var ambientIndex = nodesName.indexOf("ambient");
+            var diffuseIndex = nodesName.indexOf("diffuse");
+            var specularIndex = nodesName.indexOf("specular");
+
+            this.r = 0.1; this.g = 0.1; this.b = 0.1; this.a = 0.1;
+
+            if(emissionIndex == -1){
+                this.onXMLMinorError("emission component missing. Assuming default values");
+            }else{
+                this.r = this.reader.getFloat(grandchildren[emissionIndex], 'r');
+                this.g = this.reader.getFloat(grandchildren[emissionIndex], 'g');
+                this.b = this.reader.getFloat(grandchildren[emissionIndex], 'b');
+                this.a = this.reader.getFloat(grandchildren[emissionIndex], 'a');
+               
+                if (!(this.r != null || !isNaN(this.r))) {
+                    this.r = 0.1;
+                    this.onXMLMinorError("unable to parse value for r; assuming 'r = 0.1'");
+                }
+                if (!(this.g != null && !isNaN(this.g))) {
+                    this.g = 0.1;
+                    this.onXMLMinorError("unable to parse value for g; assuming 'g = 0.1'");
+                }
+
+                if (!(this.b != null && !isNaN(this.b))) {
+                    this.b = 0.1;
+                    this.onXMLMinorError("unable to parse value for b; assuming 'b = 0.1'");
+                }
+
+                if (!(this.a != null && !isNaN(this.a))) {
+                    this.a = 0.1;
+                    this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
+                }
+            }
+            
+            this.emission.push(this.r); this.emission.push(this.g); this.emission.push(this.b); this.emission.push(this.a);
+
+            this.r = 0.1; this.g = 0.1; this.b = 0.1; this.a = 0.1;
+
+            if(ambientIndex == -1){
+                this.onXMLMinorError("ambient component missing. Assuming default values");
+            }else{
+                this.r = this.reader.getFloat(grandchildren[ambientIndex], 'r');
+                this.g = this.reader.getFloat(grandchildren[ambientIndex], 'g');
+                this.b = this.reader.getFloat(grandchildren[ambientIndex], 'b');
+                this.a = this.reader.getFloat(grandchildren[ambientIndex], 'a');
+
+                if (!(this.r != null || !isNaN(this.r))) {
+                    this.r = 0.1;
+                    this.onXMLMinorError("unable to parse value for r; assuming 'r = 0.1'");
+                }
+                if (!(this.g != null && !isNaN(this.g))) {
+                    this.g = 0.1;
+                    this.onXMLMinorError("unable to parse value for g; assuming 'g = 0.1'");
+                }
+
+                if (!(this.b != null && !isNaN(this.b))) {
+                    this.b = 0.1;
+                    this.onXMLMinorError("unable to parse value for b; assuming 'b = 0.1'");
+                }
+
+                if (!(this.a != null && !isNaN(this.a))) {
+                    this.a = 0.1;
+                    this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
+                }
+            }
+            
+            this.ambient.push(this.r); this.ambient.push(this.g); this.ambient.push(this.b); this.ambient.push(this.a);
+
+            this.r = 0.1; this.g = 0.1; this.b = 0.1; this.a = 0.1;
+
+            if(diffuseIndex == -1){
+                this.onXMLMinorError("diffuse component missing. Assuming default values");
+            }else{
+                this.r = this.reader.getFloat(grandchildren[diffuseIndex], 'r');
+                this.g = this.reader.getFloat(grandchildren[diffuseIndex], 'g');
+                this.b = this.reader.getFloat(grandchildren[diffuseIndex], 'b');
+                this.a = this.reader.getFloat(grandchildren[diffuseIndex], 'a');
+
+                if (!(this.r != null || !isNaN(this.r))) {
+                    this.r = 0.1;
+                    this.onXMLMinorError("unable to parse value for r; assuming 'r = 0.1'");
+                }
+                if (!(this.g != null && !isNaN(this.g))) {
+                    this.g = 0.1;
+                    this.onXMLMinorError("unable to parse value for g; assuming 'g = 0.1'");
+                }
+
+                if (!(this.b != null && !isNaN(this.b))) {
+                    this.b = 0.1;
+                    this.onXMLMinorError("unable to parse value for b; assuming 'b = 0.1'");
+                }
+
+                if (!(this.a != null && !isNaN(this.a))) {
+                    this.a = 0.1;
+                    this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
+                }
+            }
+            
+            this.diffuse.push(this.r); this.diffuse.push(this.g); this.diffuse.push(this.b); this.diffuse.push(this.a);
+
+            this.r = 0.1; this.g = 0.1; this.b = 0.1; this.a = 0.1;
+
+            if(specularIndex == -1){
+                this.onXMLMinorError("specular component missing. Assuming default values");
+            }else{
+                this.r = this.reader.getFloat(grandchildren[specularIndex], 'r');
+                this.g = this.reader.getFloat(grandchildren[specularIndex], 'g');
+                this.b = this.reader.getFloat(grandchildren[specularIndex], 'b');
+                this.a = this.reader.getFloat(grandchildren[specularIndex], 'a');
+
+                if (!(this.r != null || !isNaN(this.r))) {
+                    this.r = 0.1;
+                    this.onXMLMinorError("unable to parse value for r; assuming 'r = 0.1'");
+                }
+                if (!(this.g != null && !isNaN(this.g))) {
+                    this.g = 0.1;
+                    this.onXMLMinorError("unable to parse value for g; assuming 'g = 0.1'");
+                }
+
+                if (!(this.b != null && !isNaN(this.b))) {
+                    this.b = 0.1;
+                    this.onXMLMinorError("unable to parse value for b; assuming 'b = 0.1'");
+                }
+
+                if (!(this.a != null && !isNaN(this.a))) {
+                    this.a = 0.1;
+                    this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
+                }
+            }
+            this.specular.push(this.r); this.specular.push(this.g); this.specular.push(this.b); this.specular.push(this.a);
+        }
+        this.log("Parsed materials");
+        for(var i=0; i < this.emission.length; i++){
+            this.log(this.emission[i]);
+            this.log(this.ambient[i]);
+            this.log(this.diffuse[i]);
+            this.log(this.specular[i]);
+        }
+        return null;
     }
 
     /**
