@@ -102,6 +102,17 @@ class MySceneGraph {
                 //return error;
         }
 
+        // <ambient>
+        if((index =nodeNames.indexOf("ambient")) == -1)
+            return "tag <ambient> missing";
+        else{
+            if(index != AMBIENT_INDEX)
+                this.onXMLMinorError("tag <ambient> out of order");
+            //PARSE AMBIENT BLOCK
+            if((error = this.parseAmbient(nodes[index])) != null)
+                return error;
+        }
+
         // <views>
         if ((index = nodeNames.indexOf("views")) == -1)
             return "tag <views> missing";
@@ -217,7 +228,8 @@ class MySceneGraph {
             this.b = this.reader.getFloat(children[indexAmbient], 'b');
             this.a = this.reader.getFloat(children[indexAmbient], 'a');
 
-            if (!(this.r != null && !isNaN(this.r))) {
+            this.log(this.r);
+            if (!(this.r != null || !isNaN(this.r))) {
                 this.r = 0.1;
                 this.onXMLMinorError("unable to parse value for r; assuming 'r = 0.1'");
             }
@@ -237,7 +249,10 @@ class MySceneGraph {
             }
         }
         this.ambient = [];
-        ambient.push(r); ambient.push(g); ambient.push(b); ambient.push(a);
+        this.ambient.push(this.r); 
+        this.ambient.push(this.g); 
+        this.ambient.push(this.b); 
+        this.ambient.push(this.a);
 
         //background
         //default values
@@ -251,10 +266,10 @@ class MySceneGraph {
         if(indexBackground == -1){
             this.onXMLMinorError("Background component missing; assuming 'r = 0.1' 'g = 0.1' 'b = 0.1' 'a = 0.1'")
         }else{
-            this.r = this.reader.getFloat(children[indexBackground]);
-            this.g = this.reader.getFloat(children[indexBackground]);
-            this.b = this.reader.getFloat(children[indexBackground]);
-            this.a = this.reader.getFloat(children[indexBackground]);
+            this.r = this.reader.getFloat(children[indexBackground], 'r');
+            this.g = this.reader.getFloat(children[indexBackground], 'g');
+            this.b = this.reader.getFloat(children[indexBackground], 'b');
+            this.a = this.reader.getFloat(children[indexBackground], 'a');
 
             if (!(this.r != null && !isNaN(this.r))) {
                 this.r = 0.1;
@@ -276,7 +291,7 @@ class MySceneGraph {
             }
         }
         this.background = [];
-        background.push(r); background.push(g); background.push(b); background.push(a);
+        this.background.push(this.r); this.background.push(this.g); this.background.push(this.b); this.background.push(this.a);
 
         this.log("Parsed ambient");
     }  
