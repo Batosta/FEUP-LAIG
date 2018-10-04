@@ -169,8 +169,8 @@ class MySceneGraph {
                 this.onXMLMinorError("tag <transformations> out of order");
 
             //Parse NODES block
-            //if ((error = this.parseNodes(nodes[index])) != null)
-                //return error;
+            if ((error = this.parseTransformations(nodes[index])) != null)
+                return error;
         }
 
         //<Primitives>
@@ -213,7 +213,7 @@ class MySceneGraph {
         if(this.axis_length == null)
             return this.onXMLError("axis_length missing");
 
-        this.log("Parsed scene");
+        this.log("Parsed Scene");
     }
 
     /**
@@ -309,7 +309,7 @@ class MySceneGraph {
         this.background = [];
         this.background.push(this.r); this.background.push(this.g); this.background.push(this.b); this.background.push(this.a);
 
-        this.log("Parsed ambient");
+        this.log("Parsed Ambient");
     }
 
     /**
@@ -464,7 +464,7 @@ class MySceneGraph {
         // Reference Length
         this.axis = new CGFaxis(this, 1, 0.2);
 
-        this.log("Parsed initials");
+        this.log("Parsed Initials");
 
         return null;
     }
@@ -713,14 +713,14 @@ class MySceneGraph {
         else if (numLights > 8)
             this.onXMLMinorError("too many lights defined; WebGL imposes a limit of 8 lights");
 
-        this.log("Parsed lights");
+        this.log("Parsed Lights");
 
         return null;
     }   
 
     /**
      * Parses the <PRIMITIVES> node.
-     * @param {primitives block element} primitivessNode
+     * @param {primitives block element} primitivesNode
      */
     parsePrimitives(primitivesNode) {
 
@@ -744,8 +744,6 @@ class MySceneGraph {
 
             var grandChildren = children[i].children;
 
-            
-            this.log(grandChildren[0].nodeName);
             if(grandChildren[0].nodeName == "rectangle"){            // Retrieves the rectangle specifications
 
                 // x1
@@ -938,7 +936,7 @@ class MySceneGraph {
             numPrimitives++;
         }
     
-        console.log("Parsed textures");
+        console.log("Parsed Primitives");
 
         return null;
     }
@@ -965,7 +963,116 @@ class MySceneGraph {
                 this.pathTexture.push(path);
             }
         }
-        this.log("Parsed textures");
+        this.log("Parsed Textures");
+    }
+
+    /**
+     * Parses the <TRANSFORMATIONS> node.
+     * @param {transformations block element} transformationsNode
+     */
+    parseTransformations(transformationsNode) {
+
+        var children = transformationsNode.children;
+
+        this.translates = []; //ex [x, y, z, ...]
+        this.rotates = []; //ex [axis, angle, ...]
+        this.scales = []; //ex [x, y, z, ...]
+
+        var numTransformations = 0;
+
+        // Any number of transformations
+        for(var i = 0; i < children.length; i++){
+
+            // Get id of the current transformations
+            var transformationId = this.reader.getString(children[i], 'id');
+            if(transformationId == null)
+                return "no ID defined for transformation";
+
+            var grandChildren = children[i].children;
+
+            
+            // Retrieves the translation components
+            if(grandChildren[0].nodeName == "translate"){
+
+                // x
+                var x = this.reader.getFloat(grandChildren[0], 'x');
+                if (!(x != null && !isNaN(x)))
+                    return "unable to parse x component of the translation for ID = " + transformationId;
+                else
+                    this.translates.push(x);
+                
+                // y
+                var y = this.reader.getFloat(grandChildren[0], 'y');
+                if (!(y != null && !isNaN(y)))
+                    return "unable to parse y component of the translation for ID = " + transformationId;
+                else
+                    this.translates.push(y);
+                
+                // z
+                var z = this.reader.getFloat(grandChildren[0], 'z');
+                if (!(z != null && !isNaN(z)))
+                    return "unable to parse z component of the translation for ID = " + transformationId;
+                else
+                    this.translates.push(z);
+            } 
+            else
+                return "translation undefined for ID = " + transformationId;
+
+
+            // Retrieves the rotation components
+            if(grandChildren[1].nodeName == "rotate"){
+
+                // axis
+                var axis = this.reader.getString(grandChildren[1], 'axis');
+                if (axis == null)
+                    return "unable to parse the axis of the rotation for ID = " + transformationId;
+                else
+                    this.rotates.push(axis);
+                
+                // angle
+                var angle = this.reader.getFloat(grandChildren[1], 'angle');
+                if (!(angle != null && !isNaN(angle)))
+                    return "unable to parse angle component of the rotation for ID = " + transformationId;
+                else
+                    this.rotates.push(angle);
+            } 
+            else
+                return "rotation undefined for ID = " + transformationId;
+
+
+            // Retrieves the scale components
+            if(grandChildren[2].nodeName == "scale"){
+
+                // x
+                var x = this.reader.getFloat(grandChildren[2], 'x');
+                if (!(x != null && !isNaN(x)))
+                    return "unable to parse x component of the scale for ID = " + transformationId;
+                else
+                    this.scales.push(x);
+                
+                // y
+                var y = this.reader.getFloat(grandChildren[2], 'y');
+                if (!(y != null && !isNaN(y)))
+                    return "unable to parse y component of the scale for ID = " + transformationId;
+                else
+                    this.scales.push(y);
+                
+                // z
+                var z = this.reader.getFloat(grandChildren[2], 'z');
+                if (!(z != null && !isNaN(z)))
+                    return "unable to parse z component of the scale for ID = " + transformationId;
+                else
+                    this.scales.push(z);
+            } 
+            else
+                return "scale undefined for ID = " + transformationId;
+
+            numTransformations++;
+        }
+    
+        console.log("Parsed Transformations");
+
+        return null;
     }
 
     /**
@@ -1134,17 +1241,7 @@ class MySceneGraph {
             }
             this.specular.push(this.r); this.specular.push(this.g); this.specular.push(this.b); this.specular.push(this.a);
         }
-        this.log("Parsed materials");
-        return null;
-    }
-
-    /**
-     * Parses the <NODES> block.
-     * @param {nodes block element} nodesNode
-     */
-    parseNodes(nodesNode) {
-        // TODO: Parse block
-        this.log("Parsed nodes");
+        this.log("Parsed Materials");
         return null;
     }
 
@@ -1155,7 +1252,6 @@ class MySceneGraph {
     parseViews(viewsNode){
 
         this.defaultView = this.reader.getString(viewsNode, 'default');
-        this.log(this.defaultView);
     
         var children = viewsNode.children;
         var nodesName = [];
@@ -1201,18 +1297,11 @@ class MySceneGraph {
             
             var orthoIndex = nodesName.indexOf("ortho");
             this.idOrtho = this.reader.getString(children[orthoIndex], 'id');
-            this.log(this.idOrtho);
             this.nearOrtho = this.reader.getString(children[orthoIndex], 'near');
-            this.log(this.nearOrtho);
             this.leftOrtho = this.reader.getString(children[orthoIndex], 'left');
-            this.log(this.leftOrtho);
             this.rightOrtho = this.reader.getString(children[orthoIndex], 'right');
-            this.log(this.rightOrtho);
             this.topOrtho = this.reader.getString(children[orthoIndex], 'top');
-            this.log(this.topOrtho);
             this.bottomOrtho =this.reader.getString(children[orthoIndex], 'bottom');
-            this.log(this.bottomOrtho);
-
         }
         
 
