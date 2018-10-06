@@ -193,8 +193,8 @@ class MySceneGraph {
                 this.onXMLMinorError("tag <components> out of order");
             
             //Parse COMPONENTS block 
-            //if((error = this.parseComponents(nodes[index])) != null)
-                //return error;
+            if((error = this.parseComponents(nodes[index])) != null)
+                return error;
         }
 
     }
@@ -1306,6 +1306,123 @@ class MySceneGraph {
         
 
         this.log("Parsed Views");
+}
+
+parseComponents(componentsNode){
+
+    var children = componentsNode.children;
+    var idC;
+    this.componentsID = [];
+
+    for(var i = 0; i < children.length; i++){
+        
+        idC = this.reader.getString(children[i], 'id');
+        if(idC == null){
+            this.onXMLError("ID for component missing");
+        }
+
+        this.componentsID.push(idC);
+
+        var grandchildren = children[i].children;
+
+        for(var j = 0; j < grandchildren.length; j++){
+
+            if(grandchildren[j].nodeName == "transformation"){
+                
+                var transformationref; 
+                var transformations = [];
+
+                var axis, angle;
+                var x, y, z;
+
+                var translateArray = []; //de 3 em 3 ;
+                var rotateArray = []; //2 em 2 
+                var scaleArray = []; // 3 em 3
+
+                var grandgrandchildren = grandchildren[j].children;
+                for(var b = 0; b < grandgrandchildren.length; b++){
+
+                    if(grandgrandchildren[b].nodeName == "transformationref"){
+
+                        transformationref = this.reader.getString(grandgrandchildren[b], 'id');
+                        transformations.push(transformationref);
+
+                    }else if(grandgrandchildren[b].nodeName == "translate"){
+
+                        x = this.reader.getFloat(grandgrandchildren[b], 'x');
+                        y = this.reader.getFloat(grandgrandchildren[b], 'y');
+                        z = this.reader.getFloat(grandgrandchildren[b], 'z');
+
+                        translateArray.push(x); translateArray.push(y); translateArray.push(z);
+
+                    }else if(grandgrandchildren[b].nodeName == "rotate"){
+
+                        axis = this.reader.getString(grandgrandchildren[b], 'axis');
+                        angle = this.reader.getFloat(grandgrandchildren[b],'angle');
+
+                        rotateArray.push(axis); rotateArray.push(angle);
+
+                    }else if(grandgrandchildren[b].nodeName == "scale"){
+
+                        
+                        x = this.reader.getFloat(grandgrandchildren[b], 'x');
+                        y = this.reader.getFloat(grandgrandchildren[b], 'y');
+                        z = this.reader.getFloat(grandgrandchildren[b], 'z');
+
+                        scaleArray.push(x); scaleArray.push(y); scaleArray.push(z)                        
+
+                    }
+                }
+            }
+
+            if(grandchildren[j].nodeName == "materials"){
+
+                var materialsArray = []; 
+                var grandgrandchildren = grandchildren[j].children;
+                var idMaterial;
+
+                if(grandgrandchildren.length > 1){
+                    this.log("More than one material, assuming the first.");
+                }
+
+                for(var k = 0; k < grandgrandchildren.length; k++){
+
+                    idMaterial = this.reader.getString(grandgrandchildren[k], 'id');
+                    materialsArray.push(idMaterial);
+
+                }
+            }
+
+            if(grandchildren[j].nodeName == "texture"){
+
+                var idT = this.reader.getString(grandchildren[j], 'id');
+                var length_s = this.reader.getFloat(grandchildren[j], 'length_s');
+                var length_t = this.reader.getFloat(grandchildren[j], 'length_t');
+
+            }
+
+            if(grandchildren[j].nodeName == "children"){
+
+                var componentrefArray = [];
+                var primitiverefArray = [];
+                var componentID;
+                var primitiveID;
+
+                var grandgrandchildren = grandchildren[j].children;
+                for(var a = 0; a < grandgrandchildren.length; a++){
+                    if(grandgrandchildren[a].nodeName == "componentref"){
+                        componentID = this.reader.getString(grandgrandchildren[a], 'id');
+                        componentrefArray.push(componentID);
+                    }else if(grandgrandchildren[a].nodeName == "primitiveref"){
+                        primitiveID = this.reader.getString(grandgrandchildren[a], 'id');
+                        primitiverefArray.push(primitiveID);
+                    }
+                }
+            }
+        }
+    }
+    this.log("Parsed Components");
+    return null;
 }
 
 
