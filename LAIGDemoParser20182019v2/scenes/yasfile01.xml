@@ -1,0 +1,29 @@
+<yas>
+
+	<scene root="SCENE" axis_length="1" />
+
+	<views default="perspective">
+	</views>
+
+	<ambient>
+	</ambient>
+
+	<lights>
+	</lights>
+
+	<textures>
+	</textures>
+
+	<materials>
+	</materials>
+
+	<transformations>
+	</transformations>
+
+	<primitives>
+	</primitives>
+
+	<components>
+	</components>
+
+</yas>
