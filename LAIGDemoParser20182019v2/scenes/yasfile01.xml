@@ -6,24 +6,88 @@
 	</views>
 
 	<ambient>
+		<ambient r="0.0" g="0.0" b="0.0" a="1.0" />
+		<background r="0.1" g="0.1" b="0.1" a="0.1" />
 	</ambient>
 
 	<lights>
 	</lights>
 
 	<textures>
+		<texture id="text0" file="../scenes/images/bank.jpg"/>
+		<texture id="text1" file="../scenes/images/leaves.jpg"/>
+		<texture id="text2" file="../scenes/images/rocks.jpg"/>
+		<texture id="text3" file="../scenes/images/trunk-image.jpg"/>
+		<texture id="text4" file="../scenes/images/vidral.jpg"/>
 	</textures>
 
 	<materials>
 	</materials>
 
 	<transformations>
+		<transformation id="transf0">
+			<translate x="0.0" y="0.0" z="0.5" />
+			<rotate axis="x" angle="0.0" />
+			<scale x="0.0" y="0.0" z="0.0" />
+		</transformation>
+
+		<transformation id="transf1">
+			<translate x="0.0" y="0.0" z="-0.5" />
+			<rotate axis="x" angle="0.0" />
+			<scale x="0.0" y="0.0" z="0.0" />
+		</transformation>
+
+		<transformation id="transf2">
+			<translate x="0.0" y="0.5" z="0.0" />
+			<rotate axis="x" angle="0.0" />
+			<scale x="0.0" y="0.0" z="0.0" />
+		</transformation>
+
+		<transformation id="transf3">
+			<translate x="0.0" y="-0.5" z="0.0" />
+			<rotate axis="x" angle="0.0" />
+			<scale x="0.0" y="0.0" z="0.0" />
+		</transformation>
+
+		<transformation id="transf4">
+			<translate x="0.5" y="0.0" z="0.0" />
+			<rotate axis="x" angle="0.0" />
+			<scale x="0.0" y="0.0" z="0.0" />
+		</transformation>
+
+		<transformation id="transf5">
+			<translate x="-0.5" y="0.0" z="0.0" />
+			<rotate axis="x" angle="0.0" />
+			<scale x="0.0" y="0.0" z="0.0" />
+		</transformation>
 	</transformations>
+
 
 	<primitives>
 	</primitives>
 
 	<components>
+		<component id="comp0">
+			<transformation>
+				<transformationref id="transf0" />
+				<transformationref id="transf1" />
+				<transformationref id="transf2" />
+				<transformationref id="transf3" />
+				<transformationref id="transf4" />
+				<transformationref id="transf5" />
+			</transformation>
+
+			<materials>
+				<material id="mat0" />
+				<material id="mat1" />
+			</materials>
+
+			<texture id="text1" length_s="1.0" length_t="1.0" />
+
+			<children>
+				<primitiveref id="prim0" />
+			</children>
+		</component>
 	</components>
 
 </yas>
