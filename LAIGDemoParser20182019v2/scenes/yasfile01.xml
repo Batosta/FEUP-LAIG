@@ -3,91 +3,197 @@
 	<scene root="SCENE" axis_length="1" />
 
 	<views default="perspective">
+
+		<perspective id="perspective0" near="0.1" far="500" angle="0.5">
+			<from x="15" y="15" z="15" />
+			<to x="0" y="0" z="0" />
+		</perspective>
+
+		<ortho id="ortho0" near="0.1" left="15" right="15" top="15" bottom="15" />
+
 	</views>
 
-	<ambient>
-		<ambient r="0.0" g="0.0" b="0.0" a="1.0" />
-		<background r="0.1" g="0.1" b="0.1" a="0.1" />
-	</ambient>
+	<ambient> 
+		<ambient r="0.0" g="0.0" b="0.0" a="1.0" /> 
+		<background r="0.1" g="0.1" b="0.1" a="0.1" /> 
+	</ambient> 
 
 	<lights>
+
+		<omni id="light0" enabled="0">
+			<location x="4.0" y="6.0" z="1.0" w="1.0"/>
+			<ambient r="0.0" g="0.0" b="0.0" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
+		</omni>
+
+		<omni id="light1" enabled="0">
+			<location x="10.5" y="6.0" z="1.0" w="1.0"/>
+			<ambient r="0.0" g="0.0" b="0.0" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="0.0" g="0.0" b="0.0" a="0.0" />
+		</omni>
+
+		<omni id="light2" enabled="0">
+			<location x="8.0" y="7.0" z="1.0" w="1.0"/>
+			<ambient r="0.0" g="0.0" b="0.0" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
+		</omni>
+
+		<omni id="light3" enabled="0">
+			<location x="4.0" y="6.0" z="5.0" w="1.0"/>
+			<ambient r="0.0" g="0.0" b="0.0" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
+		</omni>
+
+		<!-- Luzes spot vao ser para candeeiros -->
+		<spot id="light4" enabled="0" angle="0.5" exponent="2.0" >
+			<location x="0" y="0" z="0" w="0" /> <!-- a definir pois ainda nao arranjamos candeeiros -->
+			<ambient r="0.1" g="0.1" b="0.1" a="0.1" />
+			<diffuse r="0.1" g="0.1" b="0.1" a="0.1" />
+			<specular r="0.1" g="0.1" b="0.1" a="0.1" />
+		</spot>
+
+		<spot id="light5" enabled="0" angle="0.5" exponent="2.0" >
+			<location x="0" y="0" z="0" w="0" /> <!-- a definir pois ainda nao arranjamos candeeiros -->
+			<ambient r="0.1" g="0.1" b="0.1" a="0.1" />
+			<diffuse r="0.1" g="0.1" b="0.1" a="0.1" />
+			<specular r="0.1" g="0.1" b="0.1" a="0.1" />
+		</spot>
 	</lights>
 
-	<textures>
-		<texture id="text0" file="../scenes/images/bank.jpg"/>
-		<texture id="text1" file="../scenes/images/leaves.jpg"/>
-		<texture id="text2" file="../scenes/images/rocks.jpg"/>
-		<texture id="text3" file="../scenes/images/trunk-image.jpg"/>
-		<texture id="text4" file="../scenes/images/vidral.jpg"/>
-	</textures>
+	<textures> 
+		<texture id="text0" file="../scenes/images/bank.jpg"/> 
+		<texture id="text1" file="../scenes/images/leaves.jpg"/> 
+		<texture id="text2" file="../scenes/images/rocks.jpg"/> 
+		<texture id="text3" file="../scenes/images/trunk-image.jpg"/> 
+		<texture id="text4" file="../scenes/images/vidral.jpg"/> 
+	</textures> 
 
 	<materials>
+		<material id="mat0" shininess="100.0">
+			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
+			<ambient r="0.6" g="0.6" b="0.6" a="1.0" />
+			<diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
+		</material>
+
+		<material id="mat1" shininess="120.0">
+			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
+			<ambient r="0.5" g="0.5" b="0.5" a="1.0" />
+			<diffuse r="0.4" g="1.0" b="0.8" a="1.0" />
+			<specular r="0.1" g="0.1" b="0.1" a="1.0" />
+		</material>
+
+		<material id="mat2" shininess="120.0">
+			<emission r="0.3" g="0.3" b="0." a="1.0" />
+			<ambient r="0.6" g="0.6" b="0.9" a="1.0" />
+			<diffuse r="0.8" g="0.8" b="0.9" a="1.0" />
+			<specular r="0.1" g="0.1" b="0.1" a="1.0" />
+		</material>
+
+		<material id="mat3" shininess="120.0">
+			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
+			<ambient r="0.6" g="0.6" b="0.6" a="1.0" />
+			<diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
+		</material>
+
+		<material id="mat4" shininess="120.0">
+			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
+			<ambient r="0.6" g="0.6" b="0.6" a="1.0" />
+			<diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
+		</material>
 	</materials>
 
-	<transformations>
-		<transformation id="transf0">
-			<translate x="0.0" y="0.0" z="0.5" />
-			<rotate axis="x" angle="0.0" />
-			<scale x="0.0" y="0.0" z="0.0" />
-		</transformation>
-
-		<transformation id="transf1">
-			<translate x="0.0" y="0.0" z="-0.5" />
-			<rotate axis="x" angle="0.0" />
-			<scale x="0.0" y="0.0" z="0.0" />
-		</transformation>
-
-		<transformation id="transf2">
-			<translate x="0.0" y="0.5" z="0.0" />
-			<rotate axis="x" angle="0.0" />
-			<scale x="0.0" y="0.0" z="0.0" />
-		</transformation>
-
-		<transformation id="transf3">
-			<translate x="0.0" y="-0.5" z="0.0" />
-			<rotate axis="x" angle="0.0" />
-			<scale x="0.0" y="0.0" z="0.0" />
-		</transformation>
-
-		<transformation id="transf4">
-			<translate x="0.5" y="0.0" z="0.0" />
-			<rotate axis="x" angle="0.0" />
-			<scale x="0.0" y="0.0" z="0.0" />
-		</transformation>
-
-		<transformation id="transf5">
-			<translate x="-0.5" y="0.0" z="0.0" />
-			<rotate axis="x" angle="0.0" />
-			<scale x="0.0" y="0.0" z="0.0" />
-		</transformation>
-	</transformations>
-
+	<transformations> 
+		<transformation id="transf0"> 
+			<translate x="0.0" y="0.0" z="0.5" /> 
+			<rotate axis="x" angle="0.0" /> 
+			<scale x="0.0" y="0.0" z="0.0" /> 
+		</transformation> 
+ 
+		<transformation id="transf1"> 
+			<translate x="0.0" y="0.0" z="-0.5" /> 
+			<rotate axis="x" angle="0.0" /> 
+			<scale x="0.0" y="0.0" z="0.0" /> 
+		</transformation> 
+ 
+		<transformation id="transf2"> 
+			<translate x="0.0" y="0.5" z="0.0" /> 
+			<rotate axis="x" angle="0.0" /> 
+			<scale x="0.0" y="0.0" z="0.0" /> 
+		</transformation> 
+ 
+		<transformation id="transf3"> 
+			<translate x="0.0" y="-0.5" z="0.0" /> 
+			<rotate axis="x" angle="0.0" /> 
+			<scale x="0.0" y="0.0" z="0.0" /> 
+		</transformation> 
+ 
+		<transformation id="transf4"> 
+			<translate x="0.5" y="0.0" z="0.0" /> 
+			<rotate axis="x" angle="0.0" /> 
+			<scale x="0.0" y="0.0" z="0.0" /> 
+		</transformation> 
+ 
+		<transformation id="transf5"> 
+			<translate x="-0.5" y="0.0" z="0.0" /> 
+			<rotate axis="x" angle="0.0" /> 
+			<scale x="0.0" y="0.0" z="0.0" /> 
+		</transformation> 
+	</transformations> 
 
 	<primitives>
+
+		<primitive id="prim0">
+			<rectangle x1="0.5" y1="0.5" x2="0.5" y2="0.5" />
+		</primitive>
+
+		<primitive id="prim1">
+			<triangle x1="0.5" y1="0.0" z1="0.0" x2="-0.5" y2="0.0" z2="0.0" x3="0.0" y3="0.0" z3="1.0" />
+		</primitive>
+		
+		<primitive id="prim2">
+			<cylinder base="1.0" top="1.0" height="1.0" slices="20" stacks="20" />
+		</primitive>
+		
+		<primitive id="prim3">
+			<sphere radius="1.0" slices="20" stacks="20" />
+		</primitive>
+		
+		<primitive id="prim4">
+			<torus inner="0.5" outer="0.5" slices="20" loops="20" />
+		</primitive>
+
 	</primitives>
 
-	<components>
-		<component id="comp0">
-			<transformation>
-				<transformationref id="transf0" />
-				<transformationref id="transf1" />
-				<transformationref id="transf2" />
-				<transformationref id="transf3" />
-				<transformationref id="transf4" />
-				<transformationref id="transf5" />
-			</transformation>
-
-			<materials>
-				<material id="mat0" />
-				<material id="mat1" />
-			</materials>
-
-			<texture id="text1" length_s="1.0" length_t="1.0" />
-
-			<children>
-				<primitiveref id="prim0" />
-			</children>
-		</component>
-	</components>
-
+	<components> 
+		<component id="comp0"> 
+			<transformation> 
+				<transformationref id="transf0" /> 
+				<transformationref id="transf1" /> 
+				<transformationref id="transf2" /> 
+				<transformationref id="transf3" /> 
+				<transformationref id="transf4" /> 
+				<transformationref id="transf5" /> 
+			</transformation> 
+ 
+			<materials> 
+				<material id="mat0" /> 
+				<material id="mat1" /> 
+			</materials> 
+ 
+			<texture id="text1" length_s="1.0" length_t="1.0" /> 
+ 
+			<children> 
+				<primitiveref id="prim0" /> 
+			</children> 
+		</component> 
+	</components> 
+ 
+<!-- João Nuno gay -->
 </yas>
