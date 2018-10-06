@@ -12,7 +12,7 @@
 		<ortho id="ortho0" near="0.1" left="15" right="15" top="15" bottom="15" />
 
 	</views>
-	
+
 	<ambient> 
 		<ambient r="0.0" g="0.0" b="0.0" a="1.0" /> 
 		<background r="0.1" g="0.1" b="0.1" a="0.1" /> 
@@ -195,5 +195,5 @@
 		</component> 
 	</components> 
  
-
+<!-- João Nuno gay -->
 </yas>
