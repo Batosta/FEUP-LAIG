@@ -49,14 +49,14 @@
 		</omni>
 
 		<!-- Luzes spot vao ser para candeeiros -->
-		<spot id="light4" enabled="0" angle="0.5" exponent="2.0" >
+		<spot id="light4" enabled="0" angle="0.5" exponent="1.0" >
 			<location x="0" y="0" z="0" w="0" /> <!-- a definir pois ainda nao arranjamos candeeiros -->
 			<ambient r="0.1" g="0.1" b="0.1" a="0.1" />
 			<diffuse r="0.1" g="0.1" b="0.1" a="0.1" />
 			<specular r="0.1" g="0.1" b="0.1" a="0.1" />
 		</spot>
 
-		<spot id="light5" enabled="0" angle="0.5" exponent="2.0" >
+		<spot id="light5" enabled="0" angle="0.5" exponent="1.0" >
 			<location x="0" y="0" z="0" w="0" /> <!-- a definir pois ainda nao arranjamos candeeiros -->
 			<ambient r="0.1" g="0.1" b="0.1" a="0.1" />
 			<diffuse r="0.1" g="0.1" b="0.1" a="0.1" />
@@ -174,17 +174,11 @@
 	<components> 
 		<component id="comp0"> 
 			<transformation> 
-				<transformationref id="transf0" /> 
-				<transformationref id="transf1" /> 
-				<transformationref id="transf2" /> 
-				<transformationref id="transf3" /> 
-				<transformationref id="transf4" /> 
-				<transformationref id="transf5" /> 
+				<transformationref id="transf0" />
 			</transformation> 
  
 			<materials> 
-				<material id="mat0" /> 
-				<material id="mat1" /> 
+				<material id="mat0" />
 			</materials> 
  
 			<texture id="text1" length_s="1.0" length_t="1.0" /> 
@@ -192,8 +186,107 @@
 			<children> 
 				<primitiveref id="prim0" /> 
 			</children> 
-		</component> 
+		</component>
+
+		<component id="comp1"> 
+			<transformation> 
+				<transformationref id="transf1" />
+			</transformation> 
+ 
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="text1" length_s="1.0" length_t="1.0" /> 
+ 
+			<children> 
+				<primitiveref id="prim0" /> 
+			</children> 
+		</component>
+
+		<component id="comp2"> 
+			<transformation> 
+				<transformationref id="transf2" />
+			</transformation> 
+ 
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="text1" length_s="1.0" length_t="1.0" /> 
+ 
+			<children> 
+				<primitiveref id="prim0" /> 
+			</children> 
+		</component>
+
+		<component id="comp3"> 
+			<transformation> 
+				<transformationref id="transf3" />
+			</transformation> 
+ 
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="text1" length_s="1.0" length_t="1.0" /> 
+ 
+			<children> 
+				<primitiveref id="prim0" /> 
+			</children> 
+		</component>
+
+		<component id="comp4"> 
+			<transformation> 
+				<transformationref id="transf4" />
+			</transformation> 
+ 
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="text1" length_s="1.0" length_t="1.0" /> 
+ 
+			<children> 
+				<primitiveref id="prim0" /> 
+			</children> 
+		</component>
+
+		<component id="comp5"> 
+			<transformation> 
+				<transformationref id="transf5" />
+			</transformation> 
+ 
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="text1" length_s="1.0" length_t="1.0" /> 
+ 
+			<children> 
+				<primitiveref id="prim0" /> 
+			</children> 
+		</component>
+
+		<component id="cube"> 
+			<transformation> 
+			</transformation> 
+ 
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="text1" length_s="1.0" length_t="1.0" /> 
+ 
+			<children> 
+				<componentref id="comp0" />
+				<componentref id="comp1" />
+				<componentref id="comp2" />
+				<componentref id="comp3" />
+				<componentref id="comp4" />
+				<componentref id="comp5" />
+			</children> 
+		</component>
 	</components> 
  
-<!-- João Nuno gay -->
 </yas>

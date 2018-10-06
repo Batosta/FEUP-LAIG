@@ -1017,7 +1017,7 @@ class MySceneGraph {
             } 
             else
                 return "translation undefined for ID = " + transformationId;
-
+    
 
             // Retrieves the rotation components
             if(grandChildren[1].nodeName == "rotate"){
