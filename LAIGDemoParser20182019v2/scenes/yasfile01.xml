@@ -1,10 +1,10 @@
 <yas>
 
-	<scene root="SCENE" axis_length="1" />
+	<scene root="SCENE" axis_length="5" />
 
-	<views default="perspective">
+	<views default="view0">
 
-		<perspective id="perspective0" near="0.1" far="500" angle="0.5">
+		<perspective id="view0" near="0.1" far="500" angle="0.4">
 			<from x="15" y="15" z="15" />
 			<to x="0" y="0" z="0" />
 		</perspective>

@@ -415,27 +415,27 @@ class MySceneGraph {
                 if (!(x != null && !isNaN(x)))
                     return "unable to parse x-coordinate of the light location for ID = " + lightId;
                 else
-                    this.lights[lightId][1][0] = x;
+                    this.lights[lightId][1].push(x);
                 // y
                 var y = this.reader.getFloat(grandChildren[locationIndex], 'y');
                 if (!(y != null && !isNaN(y)))
                     return "unable to parse y-coordinate of the light location for ID = " + lightId;
                 else
-                    this.lights[lightId][1][1] = y;
+                    this.lights[lightId][1].push(y);
 
                 // z
                 var z = this.reader.getFloat(grandChildren[locationIndex], 'z');
                 if (!(z != null && !isNaN(z)))
                     return "unable to parse z-coordinate of the light location for ID = " + lightId;
                 else
-                    this.lights[lightId][1][2] = z;
+                    this.lights[lightId][1].push(z);
 
                 // w
                 var w = this.reader.getFloat(grandChildren[locationIndex], 'w');
                 if (!(w != null && !isNaN(w) && w >= 0 && w <= 1))
                     return "unable to parse w-coordinate of the light location for ID = " + lightId;
                 else
-                    this.lights[lightId][1][3] = w;
+                    this.lights[lightId][1].push(w);
             }
             else
                 return "light location undefined for ID = " + lightId;
@@ -449,28 +449,28 @@ class MySceneGraph {
                 if (!(r != null && !isNaN(r) && r >= 0 && r <= 1))
                     return "unable to parse R component of the ambient illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][2][0] = r;
+                    this.lights[lightId][2].push(r);
 
                 // G
                 var g = this.reader.getFloat(grandChildren[ambientIndex], 'g');
                 if (!(g != null && !isNaN(g) && g >= 0 && g <= 1))
                     return "unable to parse G component of the ambient illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][2][1] = g;
+                    this.lights[lightId][2].push(g);
 
                 // B
                 var b = this.reader.getFloat(grandChildren[ambientIndex], 'b');
                 if (!(b != null && !isNaN(b) && b >= 0 && b <= 1))
                     return "unable to parse B component of the ambient illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][2][2] = b;
+                    this.lights[lightId][2].push(b);
 
                 // A
                 var a = this.reader.getFloat(grandChildren[ambientIndex], 'a');
                 if (!(a != null && !isNaN(a) && a >= 0 && a <= 1))
                     return "unable to parse A component of the ambient illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][2][3] = a;
+                    this.lights[lightId][2].push(a);
             }
             else
                 return "ambient component undefined for ID = " + lightId;
@@ -485,28 +485,28 @@ class MySceneGraph {
                 if (!(r != null && !isNaN(r) && r >= 0 && r <= 1))
                     return "unable to parse R component of the difuse illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][3][0] = r;
+                    this.lights[lightId][3].push(r);
 
                 // G
                 var g = this.reader.getFloat(grandChildren[diffuseIndex], 'g');
                 if (!(g != null && !isNaN(g) && g >= 0 && g <= 1))
                     return "unable to parse G component of the difuse illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][3][1] = g;
+                    this.lights[lightId][3].push(g);
 
                 // B
                 var b = this.reader.getFloat(grandChildren[diffuseIndex], 'b');
                 if (!(b != null && !isNaN(b) && b >= 0 && b <= 1))
                     return "unable to parse B component of the difuse illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][3][2] = b;
+                    this.lights[lightId][3].push(b);
 
                 // A
                 var a = this.reader.getFloat(grandChildren[diffuseIndex], 'a');
                 if (!(a != null && !isNaN(a) && a >= 0 && a <= 1))
                     return "unable to parse A component of the difuse illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][3][3] = a;
+                    this.lights[lightId][3].push(a);
             }
             else
                 return "difuse component undefined for ID = " + lightId;
@@ -521,28 +521,29 @@ class MySceneGraph {
                 if (!(r != null && !isNaN(r) && r >= 0 && r <= 1))
                     return "unable to parse R component of the specular illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][4][0] = r;
+                    this.lights[lightId][4].push(r);
 
                 // G
                 var g = this.reader.getFloat(grandChildren[specularIndex], 'g');
                 if (!(g != null && !isNaN(g) && g >= 0 && g <= 1))
                     return "unable to parse G component of the specular illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][4][1] = g;
+                    this.lights[lightId][4].push(g);
 
                 // B
                 var b = this.reader.getFloat(grandChildren[specularIndex], 'b');
                 if (!(b != null && !isNaN(b) && b >= 0 && b <= 1))
                     return "unable to parse B component of the specular illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][4][2] = b;
+                    this.lights[lightId][4].push(b);
 
                 // A
                 var a = this.reader.getFloat(grandChildren[specularIndex], 'a');
                 if (!(a != null && !isNaN(a) && a >= 0 && a <= 1))
                     return "unable to parse A component of the specular illumination for ID = " + lightId;
                 else
-                    this.lights[lightId][4][3] = a;
+                    this.lights[lightId][4].push(a);
+
             }
             else
                 return "specular component undefined for ID = " + lightId;
@@ -1094,6 +1095,7 @@ class MySceneGraph {
     parseViews(viewsNode){
 
         this.defaultView = this.reader.getString(viewsNode, 'default');
+        this.fromTo = [];
     
         var children = viewsNode.children;
         var nodesName = [];
@@ -1102,51 +1104,52 @@ class MySceneGraph {
             nodesName.push(children[i].nodeName);
         }
 
-        if(this.defaultView == "perspective"){
-
-            var perspectiveIndex = nodesName.indexOf("perspective");
-            this.idPerspective = this.reader.getString(children[perspectiveIndex], 'id');
-           
-            if(this.idPerspective == null)
-                this.onXMLError("ID missing");
-
-            this.nearPerspective = this.reader.getFloat(children[perspectiveIndex], 'near');
-            this.farPerspective = this.reader.getFloat(children[perspectiveIndex], 'far');
-            this.anglePerspective = this.reader.getFloat(children[perspectiveIndex], 'angle');
+        for(var i = 0; i < children.length; i++){
             
-            var grandchildren = children[perspectiveIndex].children;
-            var nodesName2 = []; 
-            for(var j = 0; j < grandchildren.length; j++){
-                nodesName2.push(grandchildren[j].nodeName);
+            var id = this.reader.getString(children[i], 'id');
+            
+            if(id == this.defaultView){
+
+                var type = children[i].nodeName;
+
+                if(type == "perspective"){
+                    this.near = this.reader.getFloat(children[i], 'near');
+                    this.far = this.reader.getFloat(children[i], 'far');
+                    this.angle = this.reader.getFloat(children[i], 'angle');
+
+                    var grandchildren = children[i].children;
+                    var nodesName2 = [];
+                    for(var j = 0; j < grandchildren.length; j++){
+                        nodesName2.push(grandchildren[j].nodeName);
+                    }
+
+                    var fromIndex = nodesName2.indexOf("from");
+                    var toIndex = nodesName2.indexOf("to");
+
+                    this.x = this.reader.getFloat(grandchildren[fromIndex], 'x');
+                    this.y = this.reader.getFloat(grandchildren[fromIndex], 'y');
+                    this.z = this.reader.getFloat(grandchildren[fromIndex], 'z');
+                    this.fromTo.push(this.x); this.fromTo.push(this.y); this.fromTo.push(this.z);
+
+                    this.x = this.reader.getFloat(grandchildren[toIndex], 'x');
+                    this.y = this.reader.getFloat(grandchildren[toIndex], 'y');
+                    this.z = this.reader.getFloat(grandchildren[toIndex], 'z');
+                    this.fromTo.push(this.x); this.fromTo.push(this.y); this.fromTo.push(this.z);
+                
+                }else if(type == "ortho"){
+
+                    this.idOrtho = this.reader.getString(children[i], 'id');
+                    this.nearOrtho = this.reader.getFloat(children[i], 'near');
+                    this.leftOrtho = this.reader.getFloat(children[i], 'left');
+                    this.rightOrtho = this.reader.getFloat(children[i], 'right');
+                    this.topOrtho = this.reader.getFloat(children[i], 'top');
+                    this.bottomOrtho = this.reader.getFloat(children[i], 'bottom');  
+                }
+
+            }else{
+                continue;
             }
-
-            var fromIndex = nodesName2.indexOf("from");
-            var toIndex = nodesName2.indexOf("to");
-            this.fromTo = [];
-
-            this.x = this.reader.getFloat(grandchildren[fromIndex], 'x');
-            this.y = this.reader.getFloat(grandchildren[fromIndex], 'y');
-            this.z = this.reader.getFloat(grandchildren[fromIndex], 'z');
-            this.fromTo.push(this.x); this.fromTo.push(this.y); this.fromTo.push(this.z);
-
-            this.x = this.reader.getFloat(grandchildren[toIndex], 'x');
-            this.y = this.reader.getFloat(grandchildren[toIndex], 'y');
-            this.z = this.reader.getFloat(grandchildren[toIndex], 'z');
-            this.fromTo.push(this.x); this.fromTo.push(this.y); this.fromTo.push(this.z);
         }
-        
-        if(this.defaultView == "ortho"){
-            
-            var orthoIndex = nodesName.indexOf("ortho");
-            this.idOrtho = this.reader.getString(children[orthoIndex], 'id');
-            this.nearOrtho = this.reader.getString(children[orthoIndex], 'near');
-            this.leftOrtho = this.reader.getString(children[orthoIndex], 'left');
-            this.rightOrtho = this.reader.getString(children[orthoIndex], 'right');
-            this.topOrtho = this.reader.getString(children[orthoIndex], 'top');
-            this.bottomOrtho =this.reader.getString(children[orthoIndex], 'bottom');
-        }
-        
-
         this.log("Parsed Views");
 }
 
@@ -1266,6 +1269,7 @@ parseComponents(componentsNode){
     this.log("Parsed Components");
     return null;
 }
+
 
 
     /*
