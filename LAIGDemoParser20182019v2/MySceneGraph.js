@@ -344,8 +344,19 @@ class MySceneGraph {
             if (this.lights[lightId] != null)
                 return "ID must be unique for each light (conflict: ID = " + lightId + ")";
 
+            // Light enable/disable
+            var enableLight = true;
+            var enableIndex = this.reader.getString(children[i], 'enabled');
+            if (enableIndex == -1) {
+                this.onXMLMinorError("enable value missing for ID = " + lightId + "; assuming 'value = 1'");
+            }
+            else {
+                enableLight = enableIndex == 0 ? false : true;
+            }
+                
             //Initialization
             this.lights[lightId] = [];
+            this.lights[lightId][0] = enableLight;
             this.lights[lightId][1] = [];
             this.lights[lightId][2] = [];
             this.lights[lightId][3] = [];
@@ -359,20 +370,10 @@ class MySceneGraph {
             }
 
             // Gets indices of each element for both types of lights.
-            var enableIndex = this.reader.getString(children[i], 'enabled');
             var locationIndex = nodeNames.indexOf("location");
             var ambientIndex = nodeNames.indexOf("ambient");
             var diffuseIndex = nodeNames.indexOf("diffuse");
             var specularIndex = nodeNames.indexOf("specular");
-
-            // Light enable/disable
-            var enableLight = true;
-            if (enableIndex == -1) {
-                this.onXMLMinorError("enable value missing for ID = " + lightId + "; assuming 'value = 1'");
-            }
-            else {
-                enableLight = enableIndex == 0 ? false : true;
-            }
 
             // Retrieves "spot" lights extra components
             var angles = [];
