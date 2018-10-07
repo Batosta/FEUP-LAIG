@@ -813,6 +813,7 @@ class MySceneGraph {
      * Parses the <TRANSFORMATIONS> node.
      * @param {transformations block element} transformationsNode
      */
+
     parseTransformations(transformationsNode) {
 
         var children = transformationsNode.children;
@@ -832,90 +833,86 @@ class MySceneGraph {
                 return "no ID defined for transformation";
 
             var grandChildren = children[i].children;
-
+            
+            for(var j = 0; j < grandChildren.length; j++){
             
             // Retrieves the translation components
-            if(grandChildren[0].nodeName == "translate"){
+                if(grandChildren[j].nodeName == "translate"){
 
-                // x
-                var x = this.reader.getFloat(grandChildren[0], 'x');
-                if (!(x != null && !isNaN(x)))
-                    return "unable to parse x component of the translation for ID = " + transformationId;
-                else
-                    this.translates.push(x);
+                    // x
+                    var x = this.reader.getFloat(grandChildren[j], 'x');
+                    if (!(x != null && !isNaN(x)))
+                        return "unable to parse x component of the translation for ID = " + transformationId;
+                    else
+                        this.translates.push(x);
                 
-                // y
-                var y = this.reader.getFloat(grandChildren[0], 'y');
-                if (!(y != null && !isNaN(y)))
-                    return "unable to parse y component of the translation for ID = " + transformationId;
-                else
-                    this.translates.push(y);
+                    // y
+                    var y = this.reader.getFloat(grandChildren[j], 'y');
+                    if (!(y != null && !isNaN(y)))
+                        return "unable to parse y component of the translation for ID = " + transformationId;
+                    else
+                        this.translates.push(y);
                 
-                // z
-                var z = this.reader.getFloat(grandChildren[0], 'z');
-                if (!(z != null && !isNaN(z)))
-                    return "unable to parse z component of the translation for ID = " + transformationId;
-                else
-                    this.translates.push(z);
-            } 
-            else
-                return "translation undefined for ID = " + transformationId;
-    
+                    // z
+                    var z = this.reader.getFloat(grandChildren[j], 'z');
+                    if (!(z != null && !isNaN(z)))
+                        return "unable to parse z component of the translation for ID = " + transformationId;
+                    else
+                        this.translates.push(z);
+                }    
 
-            // Retrieves the rotation components
-            if(grandChildren[1].nodeName == "rotate"){
+                // Retrieves the rotation components
+                if(grandChildren[j].nodeName == "rotate"){
 
-                // axis
-                var axis = this.reader.getString(grandChildren[1], 'axis');
-                if (axis == null)
-                    return "unable to parse the axis of the rotation for ID = " + transformationId;
-                else
-                    this.rotates.push(axis);
+                    // axis
+                    var axis = this.reader.getString(grandChildren[j], 'axis');
+                    if (axis == null)
+                        return "unable to parse the axis of the rotation for ID = " + transformationId;
+                    else
+                        this.rotates.push(axis);
                 
-                // angle
-                var angle = this.reader.getFloat(grandChildren[1], 'angle');
-                if (!(angle != null && !isNaN(angle)))
-                    return "unable to parse angle component of the rotation for ID = " + transformationId;
-                else
-                    this.rotates.push(angle);
-            } 
-            else
-                return "rotation undefined for ID = " + transformationId;
+                    // angle
+                    var angle = this.reader.getFloat(grandChildren[j], 'angle');
+                    if (!(angle != null && !isNaN(angle)))
+                        return "unable to parse angle component of the rotation for ID = " + transformationId;
+                    else
+                        this.rotates.push(angle);
+                }
 
 
-            // Retrieves the scale components
-            if(grandChildren[2].nodeName == "scale"){
+                // Retrieves the scale components
+                if(grandChildren[j].nodeName == "scale"){
 
-                // x
-                var x = this.reader.getFloat(grandChildren[2], 'x');
-                if (!(x != null && !isNaN(x)))
-                    return "unable to parse x component of the scale for ID = " + transformationId;
-                else
-                    this.scales.push(x);
+                    // x
+                    var x = this.reader.getFloat(grandChildren[j], 'x');
+                    if (!(x != null && !isNaN(x)))
+                        return "unable to parse x component of the scale for ID = " + transformationId;
+                    else
+                        this.scales.push(x);
                 
-                // y
-                var y = this.reader.getFloat(grandChildren[2], 'y');
-                if (!(y != null && !isNaN(y)))
-                    return "unable to parse y component of the scale for ID = " + transformationId;
-                else
-                    this.scales.push(y);
+                    // y
+                    var y = this.reader.getFloat(grandChildren[j], 'y');
+                    if (!(y != null && !isNaN(y)))
+                        return "unable to parse y component of the scale for ID = " + transformationId;
+                    else
+                        this.scales.push(y);
                 
-                // z
-                var z = this.reader.getFloat(grandChildren[2], 'z');
-                if (!(z != null && !isNaN(z)))
-                    return "unable to parse z component of the scale for ID = " + transformationId;
-                else
-                    this.scales.push(z);
-            } 
-            else
-                return "scale undefined for ID = " + transformationId;
+                    // z
+                    var z = this.reader.getFloat(grandChildren[j], 'z');
+                    if (!(z != null && !isNaN(z)))
+                        return "unable to parse z component of the scale for ID = " + transformationId;
+                    else
+                        this.scales.push(z);
+                } 
 
-            numTransformations++;
+                numTransformations++;
+            }
         }
     
         console.log("Parsed Transformations");
 
         return null;
+   
     }
 
     /**
