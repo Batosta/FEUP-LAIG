@@ -1153,6 +1153,24 @@ class MySceneGraph {
 
 parseComponents(componentsNode){
 
+    this.componentsArray = [];
+
+    var compStruct = {
+
+       transformationIDs: [],
+       translateCoords: [],
+       rotateData: [],
+       scaleCoords: [],
+
+       materialID: [],
+       textureID: [],
+       textureS: null,
+       textureT: null,
+
+       primitiveIDs: [],
+       componentIDs: []      
+    }
+
     var children = componentsNode.children;
     var idC;
     this.componentsID = [];
