@@ -264,11 +264,11 @@ class MySceneGraph {
                 this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
             }
         }
-        this.ambient = [];
-        this.ambient.push(this.r); 
-        this.ambient.push(this.g); 
-        this.ambient.push(this.b); 
-        this.ambient.push(this.a);
+        this.ambientIllumination = [];
+        this.ambientIllumination.push(this.r); 
+        this.ambientIllumination.push(this.g); 
+        this.ambientIllumination.push(this.b); 
+        this.ambientIllumination.push(this.a);
 
         //background
         //default values
