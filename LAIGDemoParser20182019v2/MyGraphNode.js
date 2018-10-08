@@ -6,7 +6,4 @@ class Node{
 		this.mat = mat; // matriz 4.4
 		this.children = children;
 	}
-	push(nodeName){
-		this.children.push(nodeName);
-	}
 }

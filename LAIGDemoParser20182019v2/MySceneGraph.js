@@ -899,6 +899,7 @@ class MySceneGraph {
             transformMap.set(transformationId, transformArray);
         }
         console.log("Parsed Transformations");
+        console.log(transformMap);
         return null;
     }
 
@@ -1154,7 +1155,7 @@ class MySceneGraph {
     */
     parseComponents(componentsNode){
 
-    this.componentsArray = [];
+    this.components = [];
 
     var children = componentsNode.children;
     var idC;
@@ -1272,11 +1273,12 @@ class MySceneGraph {
                     }
                 }
             }
+
+            //this.components[componentID] = new Node(componentID, materialID, texturesArray, , )
         }
     }
 
-    //this.graph = new MyGraphNode;
-    //this.graph(componentID, idMaterial, texturesArray, ,componentrefArray, primitiverefArray)
+
 
     this.log("Parsed Components");
     return null;
