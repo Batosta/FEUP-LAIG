@@ -1148,7 +1148,11 @@ class MySceneGraph {
         this.log("Parsed Views");
 }
 
-parseComponents(componentsNode){
+    /**
+    *Parses the <COMPONENTS> block
+    *@param {views components element} componentsNode
+    */
+    parseComponents(componentsNode){
 
     this.componentsArray = [];
 
