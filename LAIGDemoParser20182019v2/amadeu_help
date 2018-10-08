@@ -1,0 +1,18 @@
+display() {
+	procurar root no array
+	display1(this.root)
+}
+
+display1(node) {
+	this.scene.multMatrix(node.transformation)
+
+	for(node.filhos...) {
+		this.scene.pushMatrix();
+		display1(node.filhos[i]);
+		this.scene.popMatrix();
+	}
+
+	for(node.primitivas) {
+		node.primitivas[i].display();
+	}
+}
