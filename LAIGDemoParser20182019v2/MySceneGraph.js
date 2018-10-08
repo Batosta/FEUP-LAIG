@@ -32,6 +32,12 @@ class MySceneGraph {
 
         this.nodes = [];
 
+        this.rectangle = null;
+        this.triangle = null;
+        this.cylinder = null;
+        this.sphere = null;
+        this.torus = null;
+
         this.idRoot = null;                    // The id of the root element.
 
         this.axisCoords = [];
@@ -618,6 +624,8 @@ class MySceneGraph {
                     return "unable to parse second y-coordinate of the rectangle for ID = " + primitiveId;
                 else
                     values.push(y2);
+
+                this.rectangle = new MyRectangle(this.scene, x1, x2, y1, y2);
             } 
             else if(grandChildren[0].nodeName == "triangle"){             // Retrieves the triangle specifications
 
@@ -683,6 +691,9 @@ class MySceneGraph {
                     return "unable to parse third z-coordinate of the triangle for ID = " + primitiveId;
                 else
                     values.push(z3);
+
+                console.log("oi");
+                this.triangle = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
             } 
             else if(grandChildren[0].nodeName == "cylinder"){            // Retrieves the cylinder specifications
 
@@ -720,6 +731,8 @@ class MySceneGraph {
                     return "unable to parse stacks of the cylinder for ID = " + primitiveId;
                 else
                     values.push(stacks);
+
+                this.cylinder = new MyCylinder(this.scene, base, top, height, slices, stacks);
             } 
             else if(grandChildren[0].nodeName == "sphere"){            // Retrieves the sphere specifications
             
@@ -785,7 +798,6 @@ class MySceneGraph {
         }
     
         console.log("Parsed Primitives");
-        console.log(primitiveMap);
 
         return null;
     }
@@ -811,7 +823,6 @@ class MySceneGraph {
             
             textureMap.set(tID, path);
         }
-        console.log(textureMap);
         this.log("Parsed Textures");
     }
 
@@ -899,7 +910,6 @@ class MySceneGraph {
             transformMap.set(transformationId, transformArray);
         }
         console.log("Parsed Transformations");
-        console.log(transformMap);
         return null;
     }
 
@@ -1155,130 +1165,91 @@ class MySceneGraph {
     */
     parseComponents(componentsNode){
 
-    this.components = [];
-
     var children = componentsNode.children;
-    var idC;
-    var componentID;
+    var nodes = [];
 
-    for(var i = 0; i < children.length; i++){
-        
-        idC = this.reader.getString(children[i], 'id');
-        if(idC == null){
-            this.onXMLError("ID for component missing");
+    for(let i = 0; i < children.length; i++){
+
+        var componentId = this.reader.getString(children[i], "id");
+        if (componentId == null) {   
+            this.onXMLMinorError("unable to parse value for componentId");
         }
+        
 
-        componentID = idC;
+        var transformationrefs = [];
+        var material;
+        var textures = [];  // order: [textID, length_s, length_t, ...]
+        var primitives = [];
+        var components = [];
 
         var grandchildren = children[i].children;
 
-        for(var j = 0; j < grandchildren.length; j++){
+        for(let k = 0; k < grandchildren.length; k++){
 
-            if(grandchildren[j].nodeName == "transformation"){
+            if(grandchildren[k].nodeName == "transformation"){
+
+                var grandgrandchildren = grandchildren[k].children;
                 
-                var transformationref; 
-                var transformations = [];
+                for(let j = 0; j < grandgrandchildren.length; j++){
 
-                var axis, angle;
-                var x, y, z;
+                    var transformationId = this.reader.getString(grandgrandchildren[j], "id");
+                    transformationrefs.push(transformationId);
+                }
+            }
 
-                var translateArray = []; //de 3 em 3 ;
-                var rotateArray = []; //2 em 2 
-                var scaleArray = []; // 3 em 3
+            if(grandchildren[k].nodeName == "materials"){
 
-                var grandgrandchildren = grandchildren[j].children;
+                var grandgrandchildren = grandchildren[k].children;
+                var material = this.reader.getString(grandgrandchildren[0], "id");
+            }
 
-                for(var b = 0; b < grandgrandchildren.length; b++){
+            if(grandchildren[k].nodeName == "texture"){
 
-                    if(grandgrandchildren[b].nodeName == "transformationref"){
+                var textID = this.reader.getString(grandchildren[k], "id");
+                var length_s = this.reader.getFloat(grandchildren[k], "length_s");
+                var length_t = this.reader.getFloat(grandchildren[k], "length_t");
+                textures.push(textID, length_s, length_t);
+            }
 
-                        transformationref = this.reader.getString(grandgrandchildren[b], 'id');
-                        transformations.push(transformationref);
+            if(grandchildren[k].nodeName == "children"){
 
-                    }else if(grandgrandchildren[b].nodeName == "translate"){
+                var grandgrandchildren = grandchildren[k].children;
 
-                        x = this.reader.getFloat(grandgrandchildren[b], 'x');
-                        y = this.reader.getFloat(grandgrandchildren[b], 'y');
-                        z = this.reader.getFloat(grandgrandchildren[b], 'z');
+                for(var z = 0; z < grandgrandchildren.length; z++){
+                    if(grandgrandchildren[z].nodeName == "primitiveref"){
 
-                        translateArray.push(x); translateArray.push(y); translateArray.push(z);
+                        var primitiveID = this.reader.getString(grandgrandchildren[z], "id");
+                        primitives.push(primitiveID);
+                    }
+                    else {  // grandgrandchildren[z].nodeName == "componentref"
 
-                    }else if(grandgrandchildren[b].nodeName == "rotate"){
-
-                        axis = this.reader.getString(grandgrandchildren[b], 'axis');
-                        angle = this.reader.getFloat(grandgrandchildren[b],'angle');
-
-                        rotateArray.push(axis); rotateArray.push(angle);
-
-                    }else if(grandgrandchildren[b].nodeName == "scale"){
-
-                        
-                        x = this.reader.getFloat(grandgrandchildren[b], 'x');
-                        y = this.reader.getFloat(grandgrandchildren[b], 'y');
-                        z = this.reader.getFloat(grandgrandchildren[b], 'z');
-
-                        scaleArray.push(x); scaleArray.push(y); scaleArray.push(z)                        
-
+                        var componentID = this.reader.getString(grandgrandchildren[z], "id");
+                        components.push(componentID);
                     }
                 }
             }
-
-            if(grandchildren[j].nodeName == "materials"){
- 
-                var grandgrandchildren = grandchildren[j].children;
-                var idMaterial;
-
-                if(grandgrandchildren.length > 1){
-                    this.log("More than one material, assuming the first.");
-                }
-                
-                idMaterial = this.reader.getString(grandgrandchildren[0], 'id');
-                if(idMaterial == null){
-                    this.onXMLError("No material bounded");
-                }
-               
-            }
-
-            if(grandchildren[j].nodeName == "texture"){
-
-                var idT = this.reader.getString(grandchildren[j], 'id');
-                var length_s = this.reader.getFloat(grandchildren[j], 'length_s');
-                var length_t = this.reader.getFloat(grandchildren[j], 'length_t');
-
-                var texturesArray = [];
-                texturesArray.push(idT); texturesArray.push(length_s); texturesArray.push(length_t);
-
-            }
-
-            if(grandchildren[j].nodeName == "children"){
-
-                var componentrefArray = [];
-                var primitiverefArray = [];
-                var componentID;
-                var primitiveID;
-
-                var grandgrandchildren = grandchildren[j].children;
-
-                for(var a = 0; a < grandgrandchildren.length; a++){
-                    if(grandgrandchildren[a].nodeName == "componentref"){
-
-                        componentID = this.reader.getString(grandgrandchildren[a], 'id');
-                        componentrefArray.push(componentID);
-
-                    }else if(grandgrandchildren[a].nodeName == "primitiveref"){
-
-                        primitiveID = this.reader.getString(grandgrandchildren[a], 'id');
-                        primitiverefArray.push(primitiveID);
-
-                    }
-                }
-            }
-
-            //this.components[componentID] = new Node(componentID, materialID, texturesArray, , )
         }
+
+        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives);
+        nodes.push(node);
     }
 
+    for(var i = 0; i < nodes.length; i++){
 
+        var new_components = nodes[i].components;
+        nodes[i].components = [];
+
+        for(var k = 0; k < new_components.length; k++){
+
+            for(var j = 0; j < nodes.length; j++){
+
+                if(nodes[j].ID == new_components[k]){
+
+                    nodes[i].components.push(nodes[j]);
+                }
+            }
+        }
+    }
 
     this.log("Parsed Components");
     return null;

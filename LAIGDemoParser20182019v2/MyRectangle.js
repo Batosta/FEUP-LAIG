@@ -1,6 +1,6 @@
-class MyRectangle{
+class MyRectangle extends CGFobject{
 
-	constructor(scene, x1, x2, y1, y2) extends CGFobject{
+	constructor(scene, x1, x2, y1, y2){
 
 		super(scene);
 
@@ -14,10 +14,10 @@ class MyRectangle{
 
 	initBuffers(){
 
-		this.vertices = [-x1, -y1, 0,
-						x2, -y1, 0,
-						-x1, y2, 0,
-						x2, y2, 0
+		this.vertices = [this.x1, this.y1, 0,
+						this.x2, this.y1, 0,
+						this.x1, this.y2, 0,
+						this.x2, this.y2, 0
 		];
 
 		this.indices = [0, 1, 2,
@@ -25,6 +25,6 @@ class MyRectangle{
 		];
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initBuffers();
+		this.initGLBuffers();
 	}
 }

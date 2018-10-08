@@ -1,9 +1,10 @@
-class Node{
-	constructor(ID, material, texture, mat, children){
+class MyGraphNode{
+	constructor(ID, material, texture, transformations, components, primitives){
 		this.ID = ID;
 		this.material = material;
 		this.texture = texture;
-		this.mat = mat; // matriz 4.4
-		this.children = children;
+		this.transformations = transformations; // matriz 4.4
+		this.components = components;
+		this.primitives = primitives;
 	}
 }
