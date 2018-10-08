@@ -11,6 +11,9 @@ var TRANSFORMATIONS_INDEX = 6;
 var PRIMITIVES_INDEX = 7;
 var COMPONENTS_INDEX = 8;
 
+var transformMap = new Map();
+var textureMap = new Map();
+
 /**
  * MySceneGraph class, representing the scene graph.
  */
@@ -793,7 +796,7 @@ class MySceneGraph {
 
         var children = texturesNode.children;
 
-        this.pathTexture = [];
+        var pathTexture = [];
 
         for(var i = 0; i < children.length; i++){
 
@@ -802,11 +805,11 @@ class MySceneGraph {
 
             if(tID == null || path == null){
                 this.onXMLMinorError("Error on ID or pathname");
-                continue;
-            }else{
-                this.pathTexture.push(path);
             }
+            
+            textureMap.set(tID, path);
         }
+        console.log(textureMap);
         this.log("Parsed Textures");
     }
 
@@ -819,17 +822,14 @@ class MySceneGraph {
 
         var children = transformationsNode.children;
 
-        this.translates = []; //ex [x, y, z, ...]
-        this.rotates = []; //ex [axis, angle, ...]
-        this.scales = []; //ex [x, y, z, ...]
-
-        var numTransformations = 0;
-
         // Any number of transformations
         for(var i = 0; i < children.length; i++){
 
+            var transformArray = mat4.create();
+
             // Get id of the current transformations
             var transformationId = this.reader.getString(children[i], 'id');
+
             if(transformationId == null)
                 return "no ID defined for transformation";
 
@@ -839,81 +839,65 @@ class MySceneGraph {
             
             // Retrieves the translation components
                 if(grandChildren[j].nodeName == "translate"){
-
                     // x
                     var x = this.reader.getFloat(grandChildren[j], 'x');
                     if (!(x != null && !isNaN(x)))
                         return "unable to parse x component of the translation for ID = " + transformationId;
-                    else
-                        this.translates.push(x);
-                
                     // y
                     var y = this.reader.getFloat(grandChildren[j], 'y');
                     if (!(y != null && !isNaN(y)))
                         return "unable to parse y component of the translation for ID = " + transformationId;
-                    else
-                        this.translates.push(y);
-                
                     // z
                     var z = this.reader.getFloat(grandChildren[j], 'z');
                     if (!(z != null && !isNaN(z)))
-                        return "unable to parse z component of the translation for ID = " + transformationId;
-                    else
-                        this.translates.push(z);
+                        return "unable to parse z component of the translation for ID = " + transformationId;  
+                    //Matriz
+                    mat4.translate(transformArray, transformArray, [x, y, z]);
                 }    
 
                 // Retrieves the rotation components
                 if(grandChildren[j].nodeName == "rotate"){
-
                     // axis
                     var axis = this.reader.getString(grandChildren[j], 'axis');
                     if (axis == null)
                         return "unable to parse the axis of the rotation for ID = " + transformationId;
-                    else
-                        this.rotates.push(axis);
-                
                     // angle
                     var angle = this.reader.getFloat(grandChildren[j], 'angle');
                     if (!(angle != null && !isNaN(angle)))
                         return "unable to parse angle component of the rotation for ID = " + transformationId;
-                    else
-                        this.rotates.push(angle);
+                    //Matriz
+                    if(axis == "x"){
+                        mat4.rotateX(transformArray, transformArray, angle*DEGREE_TO_RAD);
+
+                    }else if(axis == "y"){
+                        mat4.rotateY(transformArray, transformArray, angle*DEGREE_TO_RAD);
+
+                    }else if(axis == "z"){
+                        mat4.rotateZ(transformArray, transformArray, angle*DEGREE_TO_RAD);
+                    }
                 }
-
-
                 // Retrieves the scale components
                 if(grandChildren[j].nodeName == "scale"){
-
                     // x
                     var x = this.reader.getFloat(grandChildren[j], 'x');
                     if (!(x != null && !isNaN(x)))
                         return "unable to parse x component of the scale for ID = " + transformationId;
-                    else
-                        this.scales.push(x);
-                
                     // y
                     var y = this.reader.getFloat(grandChildren[j], 'y');
                     if (!(y != null && !isNaN(y)))
                         return "unable to parse y component of the scale for ID = " + transformationId;
-                    else
-                        this.scales.push(y);
-                
                     // z
                     var z = this.reader.getFloat(grandChildren[j], 'z');
                     if (!(z != null && !isNaN(z)))
                         return "unable to parse z component of the scale for ID = " + transformationId;
-                    else
-                        this.scales.push(z);
-                } 
-
-                numTransformations++;
+                    
+                    mat4.scale(transformArray, transformArray, [x, y, z]);
+                }
             }
+            transformMap.set(transformationId, transformArray);
         }
-    
         console.log("Parsed Transformations");
-
         return null;
-   
     }
 
     /**
@@ -1157,7 +1141,7 @@ parseComponents(componentsNode){
 
     var children = componentsNode.children;
     var idC;
-    this.componentsID = [];
+    var componentID;
 
     for(var i = 0; i < children.length; i++){
         
@@ -1166,7 +1150,7 @@ parseComponents(componentsNode){
             this.onXMLError("ID for component missing");
         }
 
-        this.componentsID.push(idC);
+        componentID = idC;
 
         var grandchildren = children[i].children;
 
@@ -1185,6 +1169,7 @@ parseComponents(componentsNode){
                 var scaleArray = []; // 3 em 3
 
                 var grandgrandchildren = grandchildren[j].children;
+
                 for(var b = 0; b < grandgrandchildren.length; b++){
 
                     if(grandgrandchildren[b].nodeName == "transformationref"){
@@ -1221,21 +1206,19 @@ parseComponents(componentsNode){
             }
 
             if(grandchildren[j].nodeName == "materials"){
-
-                var materialsArray = []; 
+ 
                 var grandgrandchildren = grandchildren[j].children;
                 var idMaterial;
 
                 if(grandgrandchildren.length > 1){
                     this.log("More than one material, assuming the first.");
                 }
-
-                for(var k = 0; k < grandgrandchildren.length; k++){
-
-                    idMaterial = this.reader.getString(grandgrandchildren[k], 'id');
-                    materialsArray.push(idMaterial);
-
+                
+                idMaterial = this.reader.getString(grandgrandchildren[0], 'id');
+                if(idMaterial == null){
+                    this.onXMLError("No material bounded");
                 }
+               
             }
 
             if(grandchildren[j].nodeName == "texture"){
@@ -1243,6 +1226,9 @@ parseComponents(componentsNode){
                 var idT = this.reader.getString(grandchildren[j], 'id');
                 var length_s = this.reader.getFloat(grandchildren[j], 'length_s');
                 var length_t = this.reader.getFloat(grandchildren[j], 'length_t');
+
+                var texturesArray = [];
+                texturesArray.push(idT); texturesArray.push(length_s); texturesArray.push(length_t);
 
             }
 
@@ -1254,18 +1240,27 @@ parseComponents(componentsNode){
                 var primitiveID;
 
                 var grandgrandchildren = grandchildren[j].children;
+
                 for(var a = 0; a < grandgrandchildren.length; a++){
                     if(grandgrandchildren[a].nodeName == "componentref"){
+
                         componentID = this.reader.getString(grandgrandchildren[a], 'id');
                         componentrefArray.push(componentID);
+
                     }else if(grandgrandchildren[a].nodeName == "primitiveref"){
+
                         primitiveID = this.reader.getString(grandgrandchildren[a], 'id');
                         primitiverefArray.push(primitiveID);
+
                     }
                 }
             }
         }
     }
+
+    //this.graph = new MyGraphNode;
+    //this.graph(componentID, idMaterial, texturesArray, ,componentrefArray, primitiverefArray)
+
     this.log("Parsed Components");
     return null;
 }

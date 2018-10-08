@@ -1,9 +1,11 @@
 class Node{
-	constructor(material, texture, mat, children){
+	constructor(ID, material, texture, mat, children, leaf){
+		this.ID = ID;
 		this.material = material;
 		this.texture = texture;
 		this.mat = mat; // matriz 4.4
-		this.children = children;
+		this.childrenNode = children;
+		this.childrenLeaf = leaf;
 	}
 	push(nodeName){
 		this.children.push(nodeName);
