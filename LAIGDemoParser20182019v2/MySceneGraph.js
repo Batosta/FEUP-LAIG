@@ -31,6 +31,10 @@ class MySceneGraph {
         scene.graph = this;
 
         this.nodes = [];
+        this.primitiveArray = [];
+        
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        //console.log(this.primitiveArray.length);
 
         this.rectangle = null;
         this.triangle = null;
@@ -625,7 +629,8 @@ class MySceneGraph {
                 else
                     values.push(y2);
 
-                this.rectangle = new MyRectangle(this.scene, x1, x2, y1, y2);
+                this.primitiveArray[primitiveId] = new MyRectangle(this.scene, x1, x2, y1, y2);
+                console.log(this.primitiveArray[primitiveId]);
             } 
             else if(grandChildren[0].nodeName == "triangle"){             // Retrieves the triangle specifications
 
@@ -692,8 +697,8 @@ class MySceneGraph {
                 else
                     values.push(z3);
 
-                console.log("oi");
-                this.triangle = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
+                this.primitiveArray[primitiveId] = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
+                console.log(this.primitiveArray[primitiveId]);
             } 
             else if(grandChildren[0].nodeName == "cylinder"){            // Retrieves the cylinder specifications
 
@@ -732,7 +737,8 @@ class MySceneGraph {
                 else
                     values.push(stacks);
 
-                this.cylinder = new MyCylinder(this.scene, base, top, height, slices, stacks);
+                this.primitiveArray[primitiveId] = new MyCylinder(this.scene, base, top, height, slices, stacks);
+                console.log(this.primitiveArray[primitiveId]);
             } 
             else if(grandChildren[0].nodeName == "sphere"){            // Retrieves the sphere specifications
             
@@ -794,9 +800,8 @@ class MySceneGraph {
             numPrimitives++;
 
             primitiveMap.set(primitiveId, values);
-
         }
-    
+
         console.log("Parsed Primitives");
 
         return null;
@@ -1231,21 +1236,21 @@ class MySceneGraph {
         }
 
         var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives);
-        nodes.push(node);
+        this.nodes.push(node);
     }
 
-    for(var i = 0; i < nodes.length; i++){
+    for(var i = 0; i < this.nodes.length; i++){
 
-        var new_components = nodes[i].components;
-        nodes[i].components = [];
+        var new_components = this.nodes[i].components;
+        this.nodes[i].components = [];
 
         for(var k = 0; k < new_components.length; k++){
 
-            for(var j = 0; j < nodes.length; j++){
+            for(var j = 0; j < this.nodes.length; j++){
 
-                if(nodes[j].ID == new_components[k]){
+                if(this.nodes[j].ID == new_components[k]){
 
-                    nodes[i].components.push(nodes[j]);
+                    this.nodes[i].components.push(this.nodes[j]);
                 }
             }
         }
@@ -1284,9 +1289,47 @@ class MySceneGraph {
     }
 
     /**
-     * Displays the scene, processing each node, starting in the root node.
+     * Finds the the root node for the start of the display.
      */
     displayScene() {
+        
+        //this.primitiveArray["rectangle"].display();
+        
+        var root_node;
+        for(var i = 0; i < this.nodes.length; i++){
 
+            if(this.nodes[i].ID == "table"){
+                root_node = this.nodes[i];
+                break;
+            }
+        }
+        this.recursiveDisplayNode(root_node);
+        
     }
+
+    /**
+     * Displays the scene, processing each node, starting in the root node.
+     */
+	recursiveDisplayNode(node){
+
+        
+		/*for(var i = 0; i < node.transformations.length; i++){
+            this.scene.multMatrix(node.transformations[i]);
+        }*/
+        
+        for(var i = 0; i < node.components.length; i++){
+
+            this.scene.pushMatrix();
+
+                this.recursiveDisplayNode(node.components[i]);
+
+            this.scene.popMatrix();
+        }
+
+        for(var i = 0; i < node.primitives.length; i++){
+
+            this.primitiveArray[node.primitives[i]].display();
+
+        }
+	}
 }
