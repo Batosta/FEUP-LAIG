@@ -843,8 +843,6 @@ class MySceneGraph {
         // Any number of transformations
         for(var i = 0; i < children.length; i++){
 
-            var transformArray = mat4.create();
-
             // Get id of the current transformations
             var transformationId = this.reader.getString(children[i], 'id');
 
@@ -856,8 +854,6 @@ class MySceneGraph {
             this.scene.loadIdentity();
 
             for(var j = 0; j < grandChildren.length; j++){
-
-               
             
             // Retrieves the translation components
                 if(grandChildren[j].nodeName == "translate"){
@@ -895,7 +891,7 @@ class MySceneGraph {
                         this.scene.rotate(angle*DEGREE_TO_RAD, 0, 1, 0);
 
                     }else if(axis == "z"){
-                        mthis.scene.rotate(angle*DEGREE_TO_RAD, 0, 0, 1)
+                        this.scene.rotate(angle*DEGREE_TO_RAD, 0, 0, 1)
                     }
                 }
                 // Retrieves the scale components
