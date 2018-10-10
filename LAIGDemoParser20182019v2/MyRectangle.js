@@ -8,7 +8,11 @@ class MyRectangle extends CGFobject{
 		this.x2 = x2;
 		this.y1 = y1;
 		this.y2 = y2;
-		
+		this.minS = 0;
+		this.maxS = 1;
+		this.minT = 0;
+		this.maxT = 1;
+
 		this.initBuffers();
 	}
 
@@ -25,6 +29,20 @@ class MyRectangle extends CGFobject{
 		];
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
+
+		this.normals = [0, 0, 1,
+						0, 0, 1,
+						0, 0, 1,
+						0, 0, 1
+		];
+
+		this.textCoords = 	[this.minS, this.maxT,
+							this.maxS, this.maxT,
+							this.minS, this.minT,
+							this.maxS, this.minT,
+
+		]
+
 		this.initGLBuffers();
 	}
 }

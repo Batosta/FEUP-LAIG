@@ -32,10 +32,7 @@ class MySceneGraph {
 
         this.nodes = [];
         this.primitiveArray = [];
-        
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        //console.log(this.primitiveArray.length);
-
+       
         this.rectangle = null;
         this.triangle = null;
         this.cylinder = null;
@@ -1314,6 +1311,8 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
 	recursiveDisplayNode(node){
+       
+		for(var i = 0; i < node.transformations.length; i++){
 
         if(node.transformations != null)
            this.scene.multMatrix(transformMap.get(node.transformations));
