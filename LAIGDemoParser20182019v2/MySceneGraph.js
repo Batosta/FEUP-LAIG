@@ -852,8 +852,12 @@ class MySceneGraph {
                 return "no ID defined for transformation";
 
             var grandChildren = children[i].children;
-            
+               
+            this.scene.loadIdentity();
+
             for(var j = 0; j < grandChildren.length; j++){
+
+               
             
             // Retrieves the translation components
                 if(grandChildren[j].nodeName == "translate"){
@@ -870,7 +874,7 @@ class MySceneGraph {
                     if (!(z != null && !isNaN(z)))
                         return "unable to parse z component of the translation for ID = " + transformationId;  
                     //Matriz
-                    mat4.translate(transformArray, transformArray, [x, y, z]);
+                    this.scene.translate(x, y, z);
                 }    
 
                 // Retrieves the rotation components
@@ -885,13 +889,13 @@ class MySceneGraph {
                         return "unable to parse angle component of the rotation for ID = " + transformationId;
                     //Matriz
                     if(axis == "x"){
-                        mat4.rotateX(transformArray, transformArray, angle*DEGREE_TO_RAD);
+                        this.scene.rotate(angle*DEGREE_TO_RAD, 1, 0, 0);
 
                     }else if(axis == "y"){
-                        mat4.rotateY(transformArray, transformArray, angle*DEGREE_TO_RAD);
+                        this.scene.rotate(angle*DEGREE_TO_RAD, 0, 1, 0);
 
                     }else if(axis == "z"){
-                        mat4.rotateZ(transformArray, transformArray, angle*DEGREE_TO_RAD);
+                        mthis.scene.rotate(angle*DEGREE_TO_RAD, 0, 0, 1)
                     }
                 }
                 // Retrieves the scale components
@@ -909,10 +913,10 @@ class MySceneGraph {
                     if (!(z != null && !isNaN(z)))
                         return "unable to parse z component of the scale for ID = " + transformationId;
                     
-                    mat4.scale(transformArray, transformArray, [x, y, z]);
+                    this.scene.scale(x, y, z);
                 }
             }
-            transformMap.set(transformationId, transformArray);
+            transformMap.set(transformationId, this.scene.getMatrix());
         }
         console.log("Parsed Transformations");
         return null;
@@ -1181,7 +1185,7 @@ class MySceneGraph {
         }
         
 
-        var transformationrefs = [];
+        var transformationrefs = null;
         var material;
         var textures = [];  // order: [textID, length_s, length_t, ...]
         var primitives = [];
@@ -1194,12 +1198,11 @@ class MySceneGraph {
             if(grandchildren[k].nodeName == "transformation"){
 
                 var grandgrandchildren = grandchildren[k].children;
-                
-                for(let j = 0; j < grandgrandchildren.length; j++){
 
-                    var transformationId = this.reader.getString(grandgrandchildren[j], "id");
-                    transformationrefs.push(transformationId);
-                }
+                    if(grandgrandchildren.length != 0){
+                        var transformationId = this.reader.getString(grandgrandchildren[0], "id");
+                        transformationrefs = transformationId;
+                    }
             }
 
             if(grandchildren[k].nodeName == "materials"){
@@ -1222,7 +1225,7 @@ class MySceneGraph {
 
                 for(var z = 0; z < grandgrandchildren.length; z++){
                     if(grandgrandchildren[z].nodeName == "primitiveref"){
-
+                        
                         var primitiveID = this.reader.getString(grandgrandchildren[z], "id");
                         primitives.push(primitiveID);
                     }
@@ -1257,6 +1260,8 @@ class MySceneGraph {
     }
 
     this.log("Parsed Components");
+    console.log(this.nodes);
+    console.log(transformMap);
     return null;
 }
 
@@ -1303,7 +1308,9 @@ class MySceneGraph {
                 break;
             }
         }
+
         this.recursiveDisplayNode(root_node);
+
         
     }
 
@@ -1312,15 +1319,13 @@ class MySceneGraph {
      */
 	recursiveDisplayNode(node){
 
-        
-		/*for(var i = 0; i < node.transformations.length; i++){
-            this.scene.multMatrix(node.transformations[i]);
-        }*/
-        
+        if(node.transformations != null)
+           this.scene.multMatrix(transformMap.get(node.transformations));
+
         for(var i = 0; i < node.components.length; i++){
 
             this.scene.pushMatrix();
-
+                   
                 this.recursiveDisplayNode(node.components[i]);
 
             this.scene.popMatrix();
