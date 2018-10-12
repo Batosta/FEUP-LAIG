@@ -32,7 +32,8 @@ class MySceneGraph {
 
         this.nodes = [];
         this.primitiveArray = [];
-       
+    
+
         this.rectangle = null;
         this.triangle = null;
         this.cylinder = null;
@@ -627,7 +628,6 @@ class MySceneGraph {
                     values.push(y2);
 
                 this.primitiveArray[primitiveId] = new MyRectangle(this.scene, x1, x2, y1, y2);
-                console.log(this.primitiveArray[primitiveId]);
             } 
             else if(grandChildren[0].nodeName == "triangle"){             // Retrieves the triangle specifications
 
@@ -695,7 +695,6 @@ class MySceneGraph {
                     values.push(z3);
 
                 this.primitiveArray[primitiveId] = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
-                console.log(this.primitiveArray[primitiveId]);
             } 
             else if(grandChildren[0].nodeName == "cylinder"){            // Retrieves the cylinder specifications
 
@@ -735,7 +734,6 @@ class MySceneGraph {
                     values.push(stacks);
 
                 this.primitiveArray[primitiveId] = new MyCylinder(this.scene, base, top, height, slices, stacks);
-                console.log(this.primitiveArray[primitiveId]);
             } 
             else if(grandChildren[0].nodeName == "sphere"){            // Retrieves the sphere specifications
             
@@ -1253,8 +1251,6 @@ class MySceneGraph {
     }
 
     this.log("Parsed Components");
-    console.log(this.nodes);
-    console.log(transformMap);
     return null;
 }
 
@@ -1296,7 +1292,7 @@ class MySceneGraph {
         var root_node;
         for(var i = 0; i < this.nodes.length; i++){
 
-            if(this.nodes[i].ID == "table"){
+            if(this.nodes[i].ID == "child_room"){
                 root_node = this.nodes[i];
                 break;
             }
@@ -1311,8 +1307,6 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
 	recursiveDisplayNode(node){
-       
-		for(var i = 0; i < node.transformations.length; i++){
 
         if(node.transformations != null)
            this.scene.multMatrix(transformMap.get(node.transformations));
