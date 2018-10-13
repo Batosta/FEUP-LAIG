@@ -1302,6 +1302,9 @@ class MySceneGraph {
      */
 	recursiveDisplayNode(node){
 
+        if(node.texture[0] != "inherit")
+            textureMap.get(node.texture[0]).apply();
+
         if(node.transformations != null)
            this.scene.multMatrix(transformMap.get(node.transformations));
 
@@ -1316,7 +1319,6 @@ class MySceneGraph {
 
         for(var i = 0; i < node.primitives.length; i++){
 
-            textureMap.get(node.texture[0]).apply();
             this.primitiveArray[node.primitives[i]].display();
         }
 	}
