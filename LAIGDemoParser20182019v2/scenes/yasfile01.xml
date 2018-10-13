@@ -217,6 +217,11 @@
 			<scale x="3.0" y="0.5" z="1.5" />
 			<translate x="0.85" y="3.5" z="0.7" />
 		</transformation>
+
+		<transformation id="cylinder">
+			<rotate axis="x" angle="-90.0" />
+			<translate x="5.0" y="-14.0" z="0.0" />
+		</transformation>
 	</transformations> 
 
 	<primitives>
@@ -230,7 +235,7 @@
 		</primitive>
 		
 		<primitive id="cylinder">
-			<cylinder base="1.0" top="1.0" height="1.0" slices="20" stacks="20" />
+			<cylinder base="2.0" top="1.0" height="4.0" slices="20" stacks="20" />
 		</primitive>
 		
 		<primitive id="sphere">
@@ -244,6 +249,23 @@
 	</primitives>
 
 	<components> 
+
+		<!-- cylinder Attempt -->
+		<component id="cylinder"> 
+			<transformation> 
+				<transformationref id="cylinder" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" /> 
+			</children> 
+		</component>
 
 		<!-- Wall -->
 		<component id="wall0"> 
@@ -600,6 +622,7 @@
 				<componentref id="table" />
 				<componentref id="walls" />
 				<componentref id="bed" />
+				<componentref id="cylinder" />
 			</children> 
 		</component>
 	</components> 
