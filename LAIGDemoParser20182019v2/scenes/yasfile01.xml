@@ -104,18 +104,11 @@
 			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
 		</material>
 
-		<material id="mat4" shininess="0.1">
-			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
-			<ambient r="0.0" g="0.0" b="0.0" a="1.0" />
-			<diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
-			<specular r="0.0" g="0.0" b="0.0" a="1.0" />
-		</material>
-
-		<material id="shiny" shininess="120">
-			<emission r="1.0" g="1.0" b="1.0" a="1.0" />
-			<ambient r="1.0" g="1.0" b="1.0" a="1.0" />
-			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
-			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
+		<material id="mat4" shininess="120.0">
+			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
+			<ambient r="0.6" g="0.6" b="0.6" a="1.0" />
+			<diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
 		</material>
 	</materials>
 
@@ -205,13 +198,6 @@
 			<scale x="20.0" y="10.0" z="1.0" />
 		</transformation>
 
-		<!-- Floor -->
-		<transformation id="floor">
-			<rotate axis="x" angle="-90.0" /> 
-			<translate x="10.0" y="-10.0" z="0.0" />
-			<scale x="20.0" y="20.0" z="1.0" />
-		</transformation>
-
 		<transformation id="bed0">
 			<scale x="4.0" y="1.5" z="8.0" />
 			<translate x="0.625" y="0.6" z="0.525" />
@@ -290,35 +276,19 @@
 				<primitiveref id="rectangle" /> 
 			</children> 
 		</component>
-		<component id="floor"> 
-			<transformation> 
-				<transformationref id="floor" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="rectangle" /> 
-			</children> 
-		</component>
 		<component id="walls"> 
 			<transformation>
 			</transformation>
 
 			<materials> 
-				<material id="inherit" />
+				<material id="mat0" />
 			</materials> 
  
-			<texture id="bank" length_s="1.0" length_t="1.0" />
+			<texture id="rocks" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="wall0" />
 				<componentref id="wall1" />
-				<componentref id="floor" />
 			</children> 
 		</component>
 
@@ -420,7 +390,7 @@
 			</transformation>
 
 			<materials> 
-				<material id="inherit" />
+				<material id="leaves" />
 			</materials> 
  
 			<texture id="inherit" length_s="1.0" length_t="1.0" />
@@ -447,7 +417,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="vidral" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -519,10 +489,10 @@
 			</transformation>
 
 			<materials> 
-				<material id="inherit" />
+				<material id="mat0" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="table0" />
@@ -560,7 +530,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -575,7 +545,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -590,7 +560,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="leaves" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -601,10 +571,10 @@
 			</transformation>
 
 			<materials> 
-				<material id="mat4" />
+				<material id="mat0" />
 			</materials> 
  
-			<texture id="leaves" length_s="1.0" length_t="1.0" />
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="bed0" />
@@ -621,7 +591,7 @@
 			</transformations>
 
 			<materials>
-				<material id="shiny" />
+				<material id="mat0" />
 			</materials>
 
 			<texture id="leaves" length_s="1.0" length_t="1.0" />
