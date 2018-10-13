@@ -817,8 +817,8 @@ class MySceneGraph {
                 this.onXMLMinorError("Error on ID or pathname");
             }
             
-            var newTexture = new CGFappearance(this.scene);
-            newTexture.loadTexture(path);
+           
+            var newTexture = path;
             textureMap.set(tID, newTexture);
         }
         this.log("Parsed Textures");
@@ -1081,7 +1081,6 @@ class MySceneGraph {
 
         }
         this.log("Parsed Materials");
-        console.log(materialMap);
         
         return null;
     }
@@ -1360,9 +1359,6 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
 	recursiveDisplayNode(node){
-    
-        if(node.texture[0] != "inherit")
-	       textureMap.get(node.texture[0]).apply();
 
         if(node.transformations != null)
            this.scene.multMatrix(transformMap.get(node.transformations));
