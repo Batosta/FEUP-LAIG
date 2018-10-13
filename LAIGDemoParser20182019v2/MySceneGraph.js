@@ -922,14 +922,11 @@ class MySceneGraph {
         for(var i = 0; i < children.length; i++){
 
             var materials = [];
-            var shininess = [];
-            var emission = []; 
-            var ambient = []; 
-            var diffuse = []; 
-            var specular = [];
 
             var materialID = this.reader.getString(children[i], 'id');
-            var shine = this.reader.getFloat(children[i], 'shininess');
+            var shininess = this.reader.getFloat(children[i], 'shininess');
+
+            var newMaterial = new CGFappearance(this.scene);
 
             if(materialID == null)
                 return "Error, ID missing";
@@ -938,7 +935,7 @@ class MySceneGraph {
                 this.onXMLMinorError("shininess missing, assuming default value");
                 shininess = 0.1;
             }
-            shininess.push(shine);
+            newMaterial.setShininess(shininess);
 
             var grandchildren = children[i].children;
             var nodesName = [];
@@ -981,7 +978,7 @@ class MySceneGraph {
                 }
             }
             
-            emission.push(this.r); emission.push(this.g); emission.push(this.b); emission.push(this.a);
+            newMaterial.setEmission(this.r, this.g, this.b, this.a);
 
             this.r = 0.1; this.g = 0.1; this.b = 0.1; this.a = 0.1;
 
@@ -1013,7 +1010,7 @@ class MySceneGraph {
                 }
             }
             
-            ambient.push(this.r); ambient.push(this.g); ambient.push(this.b); ambient.push(this.a);
+            newMaterial.setAmbient(this.r, this.g, this.b, this.a);
 
             this.r = 0.1; this.g = 0.1; this.b = 0.1; this.a = 0.1;
 
@@ -1045,7 +1042,7 @@ class MySceneGraph {
                 }
             }
             
-            diffuse.push(this.r); diffuse.push(this.g); diffuse.push(this.b); diffuse.push(this.a);
+            newMaterial.setDiffuse(this.r, this.g, this.b, this.a);
 
             this.r = 0.1; this.g = 0.1; this.b = 0.1; this.a = 0.1;
 
@@ -1076,18 +1073,15 @@ class MySceneGraph {
                     this.onXMLMinorError("unable to parse value for a; assuming 'a = 0.1'");
                 }
             }
-            specular.push(this.r); specular.push(this.g); specular.push(this.b); specular.push(this.a);
+            newMaterial.setSpecular(this.r, this.g, this.b, this.a);
 
-            materials.push(shininess); 
-            materials.push(emission);
-            materials.push(ambient);
-            materials.push(diffuse);
-            materials.push(specular);
+            materials.push(newMaterial);
             materialMap.set(materialID, materials);
 
 
         }
         this.log("Parsed Materials");
+        console.log(materialMap);
         
         return null;
     }
@@ -1301,6 +1295,9 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
 	recursiveDisplayNode(node){
+    
+        if(node.texture[0] != "inherit")
+	       textureMap.get(node.texture[0]).apply();
 
         if(node.texture[0] != "inherit")
             textureMap.get(node.texture[0]).apply();
