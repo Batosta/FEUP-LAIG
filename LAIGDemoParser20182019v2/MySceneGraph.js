@@ -1364,9 +1364,6 @@ class MySceneGraph {
         if(node.texture[0] != "inherit")
 	       textureMap.get(node.texture[0]).apply();
 
-        if(node.texture[0] != "inherit")
-            textureMap.get(node.texture[0]).apply();
-
         if(node.transformations != null)
            this.scene.multMatrix(transformMap.get(node.transformations));
 
