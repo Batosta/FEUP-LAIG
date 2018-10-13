@@ -820,10 +820,6 @@ class MySceneGraph {
             var newTexture = new CGFappearance(this.scene);
             newTexture.loadTexture(path);
             textureMap.set(tID, newTexture);
-
-            console.log("aaaaaaaaaa");
-            console.log(newTexture);
-            console.log(textureMap.get(tID));
         }
         this.log("Parsed Textures");
     }
@@ -1320,9 +1316,7 @@ class MySceneGraph {
 
         for(var i = 0; i < node.primitives.length; i++){
 
-            //this.texture.apply();
-            console.log("bbbbbbbbbb");
-            console.log(node.texture[0]); // node.texture = [text0, 1, 1]    node.texture[0] = text0
+            textureMap.get(node.texture[0]).apply();
             this.primitiveArray[node.primitives[i]].display();
         }
 	}

@@ -68,11 +68,11 @@
 	</lights>
 
 	<textures> 
-		<texture id="text0" file="scenes/images/bank.jpg"/> 
-		<!--<texture id="text1" file="scenes/images/leaves.jpg"/> 
-		<texture id="text2" file="scenes/images/rocks.jpg"/> 
-		<texture id="text3" file="scenes/images/trunk-image.jpg"/> 
-		<texture id="text4" file="scenes/images/vidral.jpg"/>-->
+		<texture id="bank" file="scenes/images/bank.jpg"/>
+		<texture id="leaves" file="scenes/images/leaves.jpg"/> 
+		<texture id="rocks" file="scenes/images/rocks.jpg"/> 
+		<texture id="trunk" file="scenes/images/trunk-image.jpg"/> 
+		<texture id="vidral" file="scenes/images/vidral.jpg"/>
 	</textures> 
 
 	<materials>
@@ -255,7 +255,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -270,7 +270,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -284,7 +284,7 @@
 				<material id="mat0" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="wall0" />
@@ -304,7 +304,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -319,7 +319,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -334,7 +334,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -349,7 +349,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -364,7 +364,7 @@
 				<material id="inherit" />
 			</materials>
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
 			
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -379,7 +379,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -390,10 +390,10 @@
 			</transformation>
 
 			<materials> 
-				<material id="mat0" />
+				<material id="leaves" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube0" />
@@ -417,7 +417,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -432,7 +432,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -447,7 +447,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -462,7 +462,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -477,7 +477,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -492,7 +492,7 @@
 				<material id="mat0" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="table0" />
@@ -515,7 +515,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -530,7 +530,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -545,7 +545,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -560,7 +560,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -574,7 +574,7 @@
 				<material id="mat0" />
 			</materials> 
  
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="bed0" />
@@ -594,7 +594,7 @@
 				<material id="mat0" />
 			</materials>
 
-			<texture id="text1" length_s="1.0" length_t="1.0" />
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
 
 			<children> 
 				<componentref id="table" />
