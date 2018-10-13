@@ -12,9 +12,8 @@ var PRIMITIVES_INDEX = 7;
 var COMPONENTS_INDEX = 8;
 
 var transformMap = new Map();
-var textureMap = new Map();
 var materialMap = new Map();
-var primitiveMap = new Map();
+var textureMap = new Map();
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -32,7 +31,6 @@ class MySceneGraph {
 
         this.nodes = [];
         this.primitiveArray = [];
-    
 
         this.rectangle = null;
         this.triangle = null;
@@ -793,8 +791,6 @@ class MySceneGraph {
 
 
             numPrimitives++;
-
-            primitiveMap.set(primitiveId, values);
         }
 
         console.log("Parsed Primitives");
@@ -810,7 +806,7 @@ class MySceneGraph {
 
         var children = texturesNode.children;
 
-        var pathTexture = [];
+        var pathTexture = [];           // retirar isto?
 
         for(var i = 0; i < children.length; i++){
 
@@ -821,7 +817,13 @@ class MySceneGraph {
                 this.onXMLMinorError("Error on ID or pathname");
             }
             
-            textureMap.set(tID, path);
+            var newTexture = new CGFappearance(this.scene);
+            newTexture.loadTexture(path);
+            textureMap.set(tID, newTexture);
+
+            console.log("aaaaaaaaaa");
+            console.log(newTexture);
+            console.log(textureMap.get(tID));
         }
         this.log("Parsed Textures");
     }
@@ -1287,8 +1289,6 @@ class MySceneGraph {
      */
     displayScene() {
         
-        //this.primitiveArray["rectangle"].display();
-        
         var root_node;
         for(var i = 0; i < this.nodes.length; i++){
 
@@ -1299,8 +1299,6 @@ class MySceneGraph {
         }
 
         this.recursiveDisplayNode(root_node);
-
-        
     }
 
     /**
@@ -1322,8 +1320,10 @@ class MySceneGraph {
 
         for(var i = 0; i < node.primitives.length; i++){
 
+            //this.texture.apply();
+            console.log("bbbbbbbbbb");
+            console.log(node.texture[0]); // node.texture = [text0, 1, 1]    node.texture[0] = text0
             this.primitiveArray[node.primitives[i]].display();
-
         }
 	}
 }

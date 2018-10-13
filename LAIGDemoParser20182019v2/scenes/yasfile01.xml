@@ -68,11 +68,11 @@
 	</lights>
 
 	<textures> 
-		<texture id="text0" file="../scenes/images/bank.jpg"/> 
-		<texture id="text1" file="../scenes/images/leaves.jpg"/> 
-		<texture id="text2" file="../scenes/images/rocks.jpg"/> 
-		<texture id="text3" file="../scenes/images/trunk-image.jpg"/> 
-		<texture id="text4" file="../scenes/images/vidral.jpg"/> 
+		<texture id="text0" file="scenes/images/bank.jpg"/> 
+		<!--<texture id="text1" file="scenes/images/leaves.jpg"/> 
+		<texture id="text2" file="scenes/images/rocks.jpg"/> 
+		<texture id="text3" file="scenes/images/trunk-image.jpg"/> 
+		<texture id="text4" file="scenes/images/vidral.jpg"/>-->
 	</textures> 
 
 	<materials>
@@ -181,7 +181,7 @@
 
 		<!-- Table transform -->
 		<transformation id="total_table">
-			<translate x="2.0" y="0.0" z="8.0" />
+			<translate x="8.0" y="0.0" z="8.0" />
 		</transformation>
 
 		<!-- XY axis Wall -->
@@ -588,7 +588,6 @@
 		<!-- Root Component -->
 		<component id="child_room">
 			<transformations>
-				<transformationref id="root_scale" />
 			</transformations>
 
 			<materials>
@@ -598,8 +597,8 @@
 			<texture id="text1" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<!--<componentref id="table" />-->
-				<!--<componentref id="walls" />-->
+				<componentref id="table" />
+				<componentref id="walls" />
 				<componentref id="bed" />
 			</children> 
 		</component>
