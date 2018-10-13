@@ -921,7 +921,7 @@ class MySceneGraph {
 
         for(var i = 0; i < children.length; i++){
 
-            var materials = [];
+            var materials = null;
 
             var materialID = this.reader.getString(children[i], 'id');
             var shininess = this.reader.getFloat(children[i], 'shininess');
@@ -1075,7 +1075,7 @@ class MySceneGraph {
             }
             newMaterial.setSpecular(this.r, this.g, this.b, this.a);
 
-            materials.push(newMaterial);
+            materials = newMaterial;
             materialMap.set(materialID, materials);
 
 
@@ -1182,10 +1182,75 @@ class MySceneGraph {
 
                 var grandgrandchildren = grandchildren[k].children;
 
-                    if(grandgrandchildren.length != 0){
-                        var transformationId = this.reader.getString(grandgrandchildren[0], "id");
-                        transformationrefs = transformationId;
+                if(grandgrandchildren.length != 0){
+
+                    for(var j = 0; j < grandgrandchildren.length; j++){
+
+                            this.scene.loadIdentity(); 
+                               
+                            if(grandgrandchildren[j].nodeName == "transformationref"){
+                                    var transformationId = this.reader.getString(grandgrandchildren[0], "id");
+                                    transformationrefs = transformationId;
+                            }
+
+                            if(grandgrandchildren[j].nodeName == "translate"){
+                               
+                                var x = this.reader.getFloat(grandgrandchildren[j], 'x');
+                                if (!(x != null && !isNaN(x)))
+                                return "unable to parse x component of the translation";
+                                // y
+                                var y = this.reader.getFloat(grandgrandchildren[j], 'y');
+                                if (!(y != null && !isNaN(y)))
+                                return "unable to parse y component of the translation";
+                                // z
+                                var z = this.reader.getFloat(grandgrandchildren[j], 'z');
+                                if (!(z != null && !isNaN(z)))
+                                return "unable to parse z component of the translation";  
+                                //Matriz
+                                this.scene.translate(x, y, z);
+                                
+                            }
+
+                            if(grandgrandchildren[j].nodeName == "rotate"){
+                                var axis = this.reader.getString(grandgrandchildren[j], 'axis');
+                                if (axis == null)
+                                    return "unable to parse the axis of the rotation";
+                                // angle
+                                var angle = this.reader.getFloat(grandgrandchildren[j], 'angle');
+                                if (!(angle != null && !isNaN(angle)))
+                                    return "unable to parse angle component of the rotation";
+                                //Matriz
+                                if(axis == "x"){
+                                    this.scene.rotate(angle*DEGREE_TO_RAD, 1, 0, 0);
+
+                                }else if(axis == "y"){
+                                    this.scene.rotate(angle*DEGREE_TO_RAD, 0, 1, 0);
+
+                                }else if(axis == "z"){
+                                    this.scene.rotate(angle*DEGREE_TO_RAD, 0, 0, 1)
+                                }
+                            }
+
+                            if(grandgrandchildren[j].nodeName == "scale"){
+                                
+                                var x = this.reader.getFloat(grandgrandchildren[j], 'x');
+                                if (!(x != null && !isNaN(x)))
+                                    return "unable to parse x component of the scale";
+                                // y
+                                var y = this.reader.getFloat(grandgrandchildren[j], 'y');
+                                if (!(y != null && !isNaN(y)))
+                                    return "unable to parse y component of the scale";
+                                // z
+                                var z = this.reader.getFloat(grandgrandchildren[j], 'z');
+                                if (!(z != null && !isNaN(z)))
+                                    return "unable to parse z component of the scale";
+                    
+                                this.scene.scale(x, y, z);
+                            }
+
                     }
+                    var extraTransf = this.scene.getMatrix();
+                }
             }
 
             if(grandchildren[k].nodeName == "materials"){
@@ -1221,7 +1286,7 @@ class MySceneGraph {
             }
         }
 
-        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives);
+        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives, extraTransf);
         this.nodes.push(node);
     }
 
@@ -1304,6 +1369,9 @@ class MySceneGraph {
 
         if(node.transformations != null)
            this.scene.multMatrix(transformMap.get(node.transformations));
+
+        if(node.extraTransf != null)
+            this.scene.multMatrix(node.extraTransf);
 
         for(var i = 0; i < node.components.length; i++){
 
