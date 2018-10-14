@@ -1081,7 +1081,6 @@ class MySceneGraph {
 
         }
         this.log("Parsed Materials");
-        console.log(materialMap);
         
         return null;
     }

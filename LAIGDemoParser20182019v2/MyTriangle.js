@@ -13,6 +13,10 @@ class MyTriangle extends CGFobject{
 		this.z1 = z1;
 		this.z2 = z2;
 		this.z3 = z3;
+		this.minS = 0;
+		this.maxS = 1;
+		this.minT = 0;
+		this.maxT = 1;
 		
 		this.initBuffers();
 	}
@@ -27,6 +31,20 @@ class MyTriangle extends CGFobject{
 		this.indices = [0, 1, 2];
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
+
+		this.normals = [0, 0, 1,
+						0, 0, 1,
+						0, 0, 1	
+		];
+
+		this.texCoords = [this.minS, this.maxT,
+						 this.maxS, this.maxT,
+						 this.minS, this.minT,
+						 this.maxS, this.minT
+		];
+
+		
+
 		this.initGLBuffers();
 	}
 }
