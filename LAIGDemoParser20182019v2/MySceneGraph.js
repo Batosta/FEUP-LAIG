@@ -766,6 +766,8 @@ class MySceneGraph {
                     return "unable to parse stacks of the sphere for ID = " + primitiveId;
                 else
                     values.push(stacks);
+
+                this.primitiveArray[primitiveId] = new MySphere(this.scene, radius, slices, stacks);
             } 
             else if(grandChildren[0].nodeName == "torus"){            // Retrieves the torus specifications
 
@@ -827,10 +829,9 @@ class MySceneGraph {
             if(tID == null || path == null){
                 this.onXMLMinorError("Error on ID or pathname");
             }
+            var newText = new CGFtexture(this.scene, path);
             
-            var newTexture = new CGFappearance(this.scene);
-            newTexture.loadTexture(path);
-            textureMap.set(tID, newTexture);
+            textureMap.set(tID, newText);
         }
         this.log("Parsed Textures");
     }
@@ -1159,7 +1160,7 @@ class MySceneGraph {
             }
         }
         this.log("Parsed Views");
-}
+    }
 
     /**
     *Parses the <COMPONENTS> block
@@ -1323,7 +1324,7 @@ class MySceneGraph {
 
     this.log("Parsed Components");
     return null;
-}
+    }
 
 
 
@@ -1367,19 +1368,32 @@ class MySceneGraph {
             }
         }
 
-        this.recursiveDisplayNode(root_node, null, null);
+        var default_text = "leaves";
+        var default_mat = "mat0";
+        this.recursiveDisplayNode(root_node, default_text, default_mat);
     }
 
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
-	recursiveDisplayNode(node, texIni, matIni){
+	recursiveDisplayNode(node, textIni, matIni){
 
         var material = matIni;
-        var texture = texIni;
+        var texture = textIni;
     
-        if(node.texture[0] != "inherit")
-	       textureMap.get(node.texture[0]).apply();
+        if(node.material != "inherit")
+            material = node.material;
+
+        if(node.texture[0] != "inherit"){
+
+            texture = node.texture[0];
+        }
+        //console.log(materialMap.get(material));
+
+        materialMap.get(material).setTexture(textureMap.get(texture));
+        //console.log(materialMap.get(material));
+        materialMap.get(material).apply();
+
 
         if(node.transformations != null)
            this.scene.multMatrix(transformMap.get(node.transformations));
@@ -1391,7 +1405,7 @@ class MySceneGraph {
 
             this.scene.pushMatrix();
                    
-                this.recursiveDisplayNode(node.components[i], material, texture);
+                this.recursiveDisplayNode(node.components[i], texture, material);
 
             this.scene.popMatrix();
         }

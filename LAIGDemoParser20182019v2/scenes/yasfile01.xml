@@ -48,7 +48,7 @@
 		</omni>
 
 		<omni id="light3" enabled="1">
-			<location x="4.0" y="6.0" z="5.0" w="1.0"/>
+			<location x="4.0" y="6.0" z="5.0" w="0.3"/>
 			<ambient r="0.0" g="0.0" b="0.0" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
@@ -238,6 +238,11 @@
 			<translate x="10.0" y="0.0" z="10.0" />
 			<scale x="20.0" y="1.0" z="20.0" />
 			<rotate axis="x" angle="-90.0" />
+		</transformation>
+		<transformation id="ceiling">
+			<translate x="10.0" y="10.0" z="10.0" />
+			<scale x="20.0" y="1.0" z="20.0" />
+			<rotate axis="x" angle="90.0" />
 		</transformation>
 
 
@@ -466,6 +471,57 @@
 			<scale x="0.20" y="0.20" z="0.20" />
 		</transformation>
 
+		<!-- Planet -->
+		<transformation id="planetSphere0">
+			<scale x="0.75" y="0.75" z="0.75" />
+		</transformation>
+		<transformation id="planetString0">
+			<translate x="0.0" y="1.5" z="0.0" />
+			<scale x="0.25" y="3.0" z="0.25" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="planet0">
+			<translate x="0.0" y="-7.5" z="0.0" />
+		</transformation>
+		<transformation id="planetSphere1">
+			<scale x="0.15" y="0.15" z="0.15" />
+		</transformation>
+		<transformation id="planetString1">
+			<translate x="0.0" y="0.0" z="0.0" />
+			<scale x="0.25" y="3.75" z="0.25" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="planet1">
+			<translate x="3.5" y="-7.5" z="0.0" />
+		</transformation>
+		<transformation id="planetSphere2">
+			<scale x="0.25" y="0.25" z="0.25" />
+		</transformation>
+		<transformation id="planetString2">
+			<translate x="0.0" y="0.5" z="0.0" />
+			<scale x="0.25" y="3.5" z="0.25" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="planet2">
+			<translate x="-5.0" y="-7.5" z="0.0" />
+		</transformation>
+		<transformation id="planetSphere3">
+			<scale x="0.4" y="0.4" z="0.4" />
+		</transformation>
+		<transformation id="planetString3">
+			<translate x="0.0" y="0.5" z="0.0" />
+			<scale x="0.25" y="3.5" z="0.25" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="planet3">
+			<translate x="4.95" y="-7.5" z="4.95" />
+		</transformation>
+		<transformation id="planets">
+			<translate x="12.5" y="10.0" z="5.0" />
+			<scale x="0.5" y="0.5" z="0.5" />
+		</transformation>
+
+
 	</transformations> 
 
 
@@ -502,7 +558,7 @@
 		</primitive>
 		
 		<primitive id="sphere">
-			<sphere radius="1.0" slices="20" stacks="20" />
+			<sphere radius="2.0" slices="50" stacks="20" />
 		</primitive>
 		
 		<primitive id="torus">
@@ -613,7 +669,7 @@
 			</transformation>
 
 			<materials> 
-				<material id="leaves" />
+				<material id="mat0" />
 			</materials> 
  
 			<texture id="inherit" length_s="1.0" length_t="1.0" />
@@ -628,6 +684,211 @@
 			</children> 
 		</component>
 
+
+
+		<!-- Planets -->
+		<component id="planetSphere0"> 
+			<transformation>
+				<transformationref id="planetSphere0" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="sphere" />
+			</children> 
+		</component>
+		<component id="planetString0"> 
+			<transformation>
+				<transformationref id="planetString0" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="planet0"> 
+			<transformation>
+				<transformationref id="planet0" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="planetSphere0" />
+				<componentref id="planetString0" />
+			</children> 
+		</component>
+		<component id="planetSphere1"> 
+			<transformation>
+				<transformationref id="planetSphere1" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="sphere" />
+			</children> 
+		</component>
+		<component id="planetString1"> 
+			<transformation>
+				<transformationref id="planetString1" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="planet1"> 
+			<transformation>
+				<transformationref id="planet1" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="planetSphere1" />
+				<componentref id="planetString1" />
+			</children> 
+		</component>
+		<component id="planetSphere2"> 
+			<transformation>
+				<transformationref id="planetSphere2" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="sphere" />
+			</children> 
+		</component>
+		<component id="planetString2"> 
+			<transformation>
+				<transformationref id="planetString2" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="planet2"> 
+			<transformation>
+				<transformationref id="planet2" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="planetSphere2" />
+				<componentref id="planetString2" />
+			</children> 
+		</component>
+		<component id="planetSphere3"> 
+			<transformation>
+				<transformationref id="planetSphere3" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="sphere" />
+			</children> 
+		</component>
+		<component id="planetString3"> 
+			<transformation>
+				<transformationref id="planetString3" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="planet3"> 
+			<transformation>
+				<transformationref id="planet3" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="planetSphere3" />
+				<componentref id="planetString3" />
+			</children> 
+		</component>
+		<component id="planets"> 
+			<transformation>
+				<transformationref id="planets" />
+			</transformation>
+
+			<materials> 
+				<material id="mat0" />
+			</materials> 
+ 
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="planet0" />
+				<componentref id="planet1" />
+				<componentref id="planet2" />
+				<componentref id="planet3" />
+			</children> 
+		</component>
 
 
 		<!-- Train Front-->
@@ -815,7 +1076,6 @@
 				<primitiveref id="circle" />
 			</children> 
 		</component>
-
 
 		<!-- Train -->
 		<component id="train_front"> 
@@ -1579,6 +1839,21 @@
 				<primitiveref id="rectangle" /> 
 			</children> 
 		</component>
+		<component id="ceiling"> 
+			<transformation> 
+				<transformationref id="ceiling" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="rectangle" /> 
+			</children> 
+		</component>
 		<component id="walls"> 
 			<transformation>
 			</transformation>
@@ -1593,6 +1868,7 @@
 				<componentref id="wall0" />
 				<componentref id="wall1" />
 				<componentref id="floor" />
+				<componentref id="ceiling" />
 			</children> 
 		</component>
 
@@ -1856,12 +2132,13 @@
 			<children> 
 				<componentref id="table" />
 				<componentref id="chair" />
-				<componentref id="walls" />
 				<componentref id="bed" />
 				<componentref id="train" />
 				<componentref id="rocket" />
+				<componentref id="walls" />
+				<componentref id="planets" />
 			</children> 
 		</component>
 	</components> 
  			
-</yas>//
+</yas>

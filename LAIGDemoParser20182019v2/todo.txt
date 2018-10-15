@@ -1,6 +1,9 @@
+URGENTES
 torus
-esfera
-materiais
-por mais cenas (planetas + janela + pista + cortinados)
+length_t lenght_s
+api views
+
+
+por mais cenas (janela + pista + cortinados)
 compor as imagens das texturas
 compor parsers
