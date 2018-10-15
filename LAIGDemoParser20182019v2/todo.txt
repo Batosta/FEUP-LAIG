@@ -1,0 +1,6 @@
+torus
+esfera
+materiais
+por mais cenas (planetas + janela + pista + cortinados)
+compor as imagens das texturas
+compor parsers
