@@ -377,9 +377,95 @@
 			<translate x="0.0" y="0.0" z="0.0" />
 			<rotate axis="x" angle="-90" />
 		</transformation>
+		<transformation id="rocket_circle0">
+			<translate  x="0.0" y="0.5" z="0.0" />
+			<scale x="0.75" y="1.0" z="0.75" />
+			<rotate axis="x" angle="90" />
+		</transformation>
+		<transformation id="rocket_circle1">
+			<scale x="0.6" y="1.0" z="0.6" />
+			<rotate axis="x" angle="90" />
+		</transformation>
 		<transformation id="full_rocket">
 			<translate x="15.0" y="0.0" z="2.0" />
 		</transformation>
+
+		<!-- Train Front -->
+		<transformation id="train_front_rectangle">
+			<scale x="2.0" y="2.0" z="3.0" />
+			<rotate axis="z" angle="45" />
+			<rotate axis="y" angle="90" />
+		</transformation>
+		<transformation id="train_front_triangle0">
+			<translate x="-0.70" y="0.70" z="1.5" />
+			<scale x="1.44" y="1.44" z="1.0" />
+			<rotate axis="y" angle="90" />
+		</transformation>
+		<transformation id="train_front_triangle1">
+			<translate x="0.70" y="-0.70" z="-1.5" />
+			<scale x="1.44" y="1.44" z="1.0" />
+			<rotate axis="y" angle="-90" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="train_front">
+			<translate x="6.0" y="0.05" z="0.0" />
+			<scale x="1.5" y="1.44" z="1.0" />
+		</transformation>
+
+		<!-- Train body -->
+		<transformation id="train_body0">
+			<scale x="10.0" y="2.0" z="3.0" />
+		</transformation>
+		<transformation id="train_body1">
+			<translate x="-2.0" y="2.0" z="0.0" />
+			<scale x="3.25" y="12.5" z="12.5" />
+			<rotate axis="y" angle="90" />
+		</transformation>
+		<transformation id="train_body2">
+			<translate x="-3.0" y="3.0" z="0.0" />
+			<scale x="3.0" y="4.0" z="3.0" />
+		</transformation>
+		<transformation id="train_body3">
+			<translate x="-3.0" y="5.0" z="0.0" />
+			<scale x="3.5" y="0.25" z="3.5" />
+		</transformation>
+		<transformation id="train_body4">
+			<translate x="4.5" y="2.0" z="0.0" />
+			<scale x="1.0" y="1.25" z="1.25" />
+			<rotate axis="y" angle="90" />
+		</transformation>
+
+		<!-- Train chimney -->
+		<transformation id="train_chimney0">
+			<scale x="7.5" y="1.5" z="7.5" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="train_chimney1">
+			<translate x="0.0" y="3.6" z="0.0" />
+			<scale x="1.9" y="1.0" z="1.9" />
+			<rotate axis="x" angle="90" />
+		</transformation>
+		<transformation id="train_chimney2">
+			<translate x="0.0" y="3.6" z="0.0" />
+			<scale x="1.9" y="1.0" z="1.9" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="train_chimney3">
+			<translate x="0.0" y="4.2" z="0.0" />
+			<scale x="0.8" y="1.0" z="0.8" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		<transformation id="train_chimney">
+			<translate x="3.5" y="3.0" z="0.0" />
+		</transformation>
+
+		<!-- Train -->
+		<transformation id="train">
+			<translate x="15.0" y="0.2" z="15.0" />
+			<rotate axis="y" angle="45" />
+			<scale x="0.20" y="0.20" z="0.20" />
+		</transformation>
+
 	</transformations> 
 
 
@@ -397,6 +483,10 @@
 			<triangle x1="0.0" y1="0.0" z1="0.0" 
 				x2="0.0" y2="-1.0" z2="0.0" 
 				x3="0.0" y3="0.0" z3="1.0" />
+		</primitive>
+
+		<primitive id="circle">
+			<circle slices="20" />
 		</primitive>
 		
 		<primitive id="cylinder">
@@ -540,6 +630,267 @@
 
 
 
+		<!-- Train Front-->
+		<component id="train_front_rectangle"> 
+			<transformation>
+				<transformationref id="train_front_rectangle" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="rectangle" />
+			</children> 
+		</component>
+		<component id="train_front_triangle0"> 
+			<transformation>
+				<transformationref id="train_front_triangle0" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="triangle" />
+			</children> 
+		</component>
+		<component id="train_front_triangle1"> 
+			<transformation>
+				<transformationref id="train_front_triangle1" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="triangle" />
+			</children> 
+		</component>
+
+		<!-- Train body -->
+		<component id="train_body0"> 
+			<transformation>
+				<transformationref id="train_body0" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="rocks" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_body1"> 
+			<transformation>
+				<transformationref id="train_body1" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="vidral" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="train_body2"> 
+			<transformation>
+				<transformationref id="train_body2" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_body3"> 
+			<transformation>
+				<transformationref id="train_body3" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_body4"> 
+			<transformation>
+				<transformationref id="train_body4" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="circle" />
+			</children> 
+		</component>
+
+		<!-- Train chimney -->
+		<component id="train_chimney0"> 
+			<transformation>
+				<transformationref id="train_chimney0" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="vidral" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="train_chimney1"> 
+			<transformation>
+				<transformationref id="train_chimney1" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="rocket_propulsion" />
+			</children> 
+		</component>
+		<component id="train_chimney2"> 
+			<transformation>
+				<transformationref id="train_chimney2" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="rocket_propulsion" />
+			</children> 
+		</component>
+		<component id="train_chimney3"> 
+			<transformation>
+				<transformationref id="train_chimney3" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="circle" />
+			</children> 
+		</component>
+
+
+		<!-- Train -->
+		<component id="train_front"> 
+			<transformation>
+				<transformationref id="train_front" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="train_front_rectangle" />
+				<componentref id="train_front_triangle0" />
+				<componentref id="train_front_triangle1" /> 
+			</children> 
+		</component>
+		<component id="train_body"> 
+			<transformation>
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="train_body0" />
+				<componentref id="train_body1" />
+				<componentref id="train_body2" />
+				<componentref id="train_body3" />
+				<componentref id="train_body4" />
+			</children> 
+		</component>
+		<component id="train_chimney"> 
+			<transformation>
+				<transformationref id="train_chimney" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="leaves" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="train_chimney0" />
+				<componentref id="train_chimney1" />
+				<componentref id="train_chimney2" />
+				<componentref id="train_chimney3" />
+			</children> 
+		</component>
+		<component id="train"> 
+			<transformation>
+				<transformationref id="train" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="train_front" />
+				<componentref id="train_body" />
+				<componentref id="train_chimney" />
+			</children> 
+		</component>
+
+
+
 		<!-- Rocket bases -->
 		<component id="triangle0"> 
 			<transformation>
@@ -646,6 +997,23 @@
 				<componentref id="triangle" />
 			</children> 
 		</component>
+		<component id="triangles"> 
+			<transformation>
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="triangleA" />
+				<componentref id="triangleB" />
+				<componentref id="triangleC" />
+				<componentref id="triangleD" />
+			</children> 
+		</component>
 
 		<!-- Rocket -->
 		<component id="rocket_body"> 
@@ -693,6 +1061,36 @@
 				<primitiveref id="rocket_propulsion" />
 			</children> 
 		</component>
+		<component id="rocket_circle0"> 
+			<transformation>
+				<transformationref id="rocket_circle0" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="circle" />
+			</children> 
+		</component>
+		<component id="rocket_circle1"> 
+			<transformation>
+				<transformationref id="rocket_circle1" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="circle" />
+			</children> 
+		</component>
 		<component id="rocket"> 
 			<transformation>
 				<transformationref id="full_rocket" />
@@ -708,10 +1106,9 @@
 				<componentref id="rocket_body" />
 				<componentref id="rocket_nose" />
 				<componentref id="rocket_propulsion" />
-				<componentref id="triangleA" />
-				<componentref id="triangleB" />
-				<componentref id="triangleC" />
-				<componentref id="triangleD" />
+				<componentref id="rocket_circle0" />
+				<componentref id="rocket_circle1" />
+				<componentref id="triangles" />
 			</children> 
 		</component>
 
@@ -1457,12 +1854,13 @@
 
 			<children> 
 				<componentref id="table" />
+				<componentref id="chair" />
 				<componentref id="walls" />
 				<componentref id="bed" />
+				<componentref id="train" />
 				<componentref id="rocket" />
-				<componentref id="chair" />
 			</children> 
 		</component>
 	</components> 
  			
-</yas>
+</yas>//

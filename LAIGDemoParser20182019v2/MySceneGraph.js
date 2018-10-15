@@ -694,6 +694,17 @@ class MySceneGraph {
 
                 this.primitiveArray[primitiveId] = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
             } 
+            else if(grandChildren[0].nodeName == "circle"){             // Retrieves the circle specifications
+
+                // slices
+                var slices = this.reader.getFloat(grandChildren[0], 'slices');
+                if (!(slices != null && !isNaN(slices)))
+                    return "unable to parse slices of the circle for ID = " + primitiveId;
+                else
+                    values.push(slices);
+
+                this.primitiveArray[primitiveId] = new MyCircle(this.scene, slices);
+            } 
             else if(grandChildren[0].nodeName == "cylinder"){            // Retrieves the cylinder specifications
 
                 // base
