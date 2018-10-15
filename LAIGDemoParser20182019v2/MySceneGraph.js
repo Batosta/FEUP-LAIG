@@ -1186,24 +1186,27 @@ class MySceneGraph {
 
         var grandchildren = children[i].children;
 
+        var extraT = mat4.create();
+
         for(let k = 0; k < grandchildren.length; k++){
+
+            
 
             if(grandchildren[k].nodeName == "transformation"){
 
                 var grandgrandchildren = grandchildren[k].children;
 
                 if(grandgrandchildren.length != 0){
-
                     for(var j = 0; j < grandgrandchildren.length; j++){
 
-                            this.scene.loadIdentity(); 
+                             
                                
                             if(grandgrandchildren[j].nodeName == "transformationref"){
                                     var transformationId = this.reader.getString(grandgrandchildren[0], "id");
                                     transformationrefs = transformationId;
                             }
 
-                            if(grandgrandchildren[j].nodeName == "translate"){
+                            else if(grandgrandchildren[j].nodeName == "translate"){
                                
                                 var x = this.reader.getFloat(grandgrandchildren[j], 'x');
                                 if (!(x != null && !isNaN(x)))
@@ -1217,11 +1220,11 @@ class MySceneGraph {
                                 if (!(z != null && !isNaN(z)))
                                 return "unable to parse z component of the translation";  
                                 //Matriz
-                                this.scene.translate(x, y, z);
+                                mat4.translate(extraT, extraT, [x,y,z]);
                                 
                             }
 
-                            if(grandgrandchildren[j].nodeName == "rotate"){
+                            else if(grandgrandchildren[j].nodeName == "rotate"){
                                 var axis = this.reader.getString(grandgrandchildren[j], 'axis');
                                 if (axis == null)
                                     return "unable to parse the axis of the rotation";
@@ -1231,17 +1234,17 @@ class MySceneGraph {
                                     return "unable to parse angle component of the rotation";
                                 //Matriz
                                 if(axis == "x"){
-                                    this.scene.rotate(angle*DEGREE_TO_RAD, 1, 0, 0);
+                                    mat4.rotateX(extraT, extraT, angle*DEGREE_TO_RAD);
 
                                 }else if(axis == "y"){
-                                    this.scene.rotate(angle*DEGREE_TO_RAD, 0, 1, 0);
+                                    mat4.rotateY(extraT, extraT, angle*DEGREE_TO_RAD);
 
                                 }else if(axis == "z"){
-                                    this.scene.rotate(angle*DEGREE_TO_RAD, 0, 0, 1)
+                                    mat4.rotateZ(extraT, extraT, angle*DEGREE_TO_RAD)
                                 }
                             }
 
-                            if(grandgrandchildren[j].nodeName == "scale"){
+                            else if(grandgrandchildren[j].nodeName == "scale"){
                                 
                                 var x = this.reader.getFloat(grandgrandchildren[j], 'x');
                                 if (!(x != null && !isNaN(x)))
@@ -1255,11 +1258,11 @@ class MySceneGraph {
                                 if (!(z != null && !isNaN(z)))
                                     return "unable to parse z component of the scale";
                     
-                                this.scene.scale(x, y, z);
+                                mat4.scale(extraT, extraT, [x, y, z]);
                             }
 
                     }
-                    var extraTransf = this.scene.getMatrix();
+                    //var extraTransf = mat4.clone(extraT);
                 }
             }
 
@@ -1296,8 +1299,9 @@ class MySceneGraph {
             }
         }
 
-        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives, extraTransf);
+        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives,  mat4.clone(extraT));
         this.nodes.push(node);
+
     }
 
     for(var i = 0; i < this.nodes.length; i++){
@@ -1363,13 +1367,16 @@ class MySceneGraph {
             }
         }
 
-        this.recursiveDisplayNode(root_node);
+        this.recursiveDisplayNode(root_node, null, null);
     }
 
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
-	recursiveDisplayNode(node){
+	recursiveDisplayNode(node, texIni, matIni){
+
+        var material = matIni;
+        var texture = texIni;
     
         if(node.texture[0] != "inherit")
 	       textureMap.get(node.texture[0]).apply();
@@ -1384,7 +1391,7 @@ class MySceneGraph {
 
             this.scene.pushMatrix();
                    
-                this.recursiveDisplayNode(node.components[i]);
+                this.recursiveDisplayNode(node.components[i], material, texture);
 
             this.scene.popMatrix();
         }

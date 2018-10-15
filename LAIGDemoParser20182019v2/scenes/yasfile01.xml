@@ -1841,6 +1841,7 @@
 		</component>
 
 
+
 		<!-- Root Component -->
 		<component id="child_room">
 			<transformations>
