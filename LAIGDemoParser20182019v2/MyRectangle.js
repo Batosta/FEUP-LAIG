@@ -1,3 +1,7 @@
+/**
+ * MyRectangle
+ * @constructor
+ */
 class MyRectangle extends CGFobject{
 
 	constructor(scene, x1, x2, y1, y2){

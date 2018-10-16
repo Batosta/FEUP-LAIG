@@ -798,6 +798,8 @@ class MySceneGraph {
                     return "unable to parse loops of the torus for ID = " + primitiveId;
                 else
                     values.push(loops);
+
+                this.primitiveArray[primitiveId] = new MyTorus(this.scene, inner, outer, slices, loops);
             } 
             else
                 return "primitive undefined for ID = " + primitiveId;
@@ -1376,7 +1378,7 @@ class MySceneGraph {
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
-	recursiveDisplayNode(node, textIni, matIni){
+    recursiveDisplayNode(node, textIni, matIni){
 
         var material = matIni;
         var texture = textIni;
@@ -1414,5 +1416,5 @@ class MySceneGraph {
 
             this.primitiveArray[node.primitives[i]].display();
         }
-	}
+    }
 }

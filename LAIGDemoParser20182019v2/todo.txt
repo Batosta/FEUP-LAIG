@@ -1,9 +1,11 @@
-URGENTES
-torus
-length_t lenght_s
-api views
+URGENTES:
+	1. Torus
+	2. Length_t + Lenght_s
+	3. Api
+	4. Textura nos triangulos (está no moodle)
+	5. Checkar se o resto das primitivas estão de acordo com o que está no moodle
 
-
-por mais cenas (janela + pista + cortinados)
-compor as imagens das texturas
-compor parsers
+CENAS:
+	1. Completar a cena (pista)
+	2. Compor as imagens das texturas
+	3. Completar parsers (tratamentos de erros)
