@@ -91,7 +91,7 @@
 		<texture id="pillow" file="scenes/images/pillow.jpg"/>
 		<texture id="wood" file="scenes/images/wood.jpg"/>
 		<texture id="curtain" file="scenes/images/curtain.jpg"/>
-		<texture id="rails" file="scenes/images/rails.jpg"/>
+		<texture id="black" file="scenes/images/black.jpg"/>
 	</textures> 
 
 
@@ -444,19 +444,23 @@
 			<rotate axis="y" angle="180" />
 		</transformation>
 		<transformation id="train_wheels6">
-			<translate x="-9.0" y="-0.75" z="1.5" />
+			<translate x="-8.5" y="-0.25" z="0.0" />
+			<rotate axis="y" angle="-15" />
 			<scale x="0.3" y="0.3" z="0.3" />
 		</transformation>
 		<transformation id="train_wheels7">
-			<translate x="-9.0" y="-0.75" z="-1.5" />
+			<translate x="-13.5" y="-0.25" z="-1.25" />
+			<rotate axis="y" angle="-15" />
 			<scale x="0.3" y="0.3" z="0.3" />
 		</transformation>
 		<transformation id="train_wheels8">
-			<translate x="-15.0" y="-0.75" z="1.5" />
+			<translate x="-8.0" y="-0.25" z="-2.75" />
+			<rotate axis="y" angle="-15" />
 			<scale x="0.3" y="0.3" z="0.3" />
 		</transformation>
 		<transformation id="train_wheels9">
-			<translate x="-15.0" y="-0.75" z="-1.5" />
+			<translate x="-13.0" y="-0.25" z="-4.25" />
+			<rotate axis="y" angle="-15" />
 			<scale x="0.3" y="0.3" z="0.3" />
 		</transformation>
 		<!-- Train Carriage -->
@@ -486,7 +490,8 @@
 			<rotate axis="y" angle="90" />
 		</transformation>
 		<transformation id="train_carriage">
-			<translate x="-12.0" y="0.5" z="0.0" />
+			<translate x="-10.5" y="0.5" z="-2.0" />
+			<rotate axis="y" angle="-15" />
 		</transformation>
 		<!-- Train Front -->
 		<transformation id="train_front_rectangle">
@@ -556,7 +561,7 @@
 		</transformation>
 		<!-- Train -->
 		<transformation id="train">
-			<translate x="17.5" y="0.45" z="15.0" />
+			<translate x="18.0" y="0.45" z="12.5" />
 			<rotate axis="y" angle="90" />
 			<scale x="0.20" y="0.20" z="0.30" />
 		</transformation>
@@ -654,53 +659,82 @@
 		</transformation>
 
 
-
 		<!-- Rail -->
-		<transformation id="rail1">
-			<translate x="4.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail2">
-			<translate x="8.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail3">
-			<translate x="12.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail4">
-			<translate x="16.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail5">
-			<translate x="20.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail6">
-			<translate x="24.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail7">
-			<translate x="28.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail8">
-			<translate x="32.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="rail9">
-			<translate x="36.0" y="0.0" z="0.0" />
-		</transformation>
-		<transformation id="railA">
-			<rotate axis="z" angle="-90" />
-		</transformation>
-		<transformation id="left_rail">
-			<translate x="10.0" y="0.05" z="0.05" />
-			<scale x="0.5" y="0.5" z="0.485" />
-			<rotate axis="y" angle="-90" />
-		</transformation>
-		<transformation id="right_rail">
-			<translate x="18.0" y="0.05" z="0.05" />
-			<scale x="0.5" y="0.5" z="0.485" />
-			<rotate axis="y" angle="-90" />
-		</transformation>
-
-		<transformation id="trail_test">
-			<translate x="10.0" y="0.0" z="10.0" />
-			<scale x="1.0" y="0.01" z="1.0" />
+		<transformation id="trailA">
+			<scale x="3.0" y="1.0" z="3.0" />
 			<rotate axis="x" angle="90" />
+		</transformation>
+		<transformation id="trailB">
+			<scale x="2.5" y="1.0" z="2.5" />
+			<rotate axis="x" angle="90" />
+		</transformation>
+		<transformation id="trailC">
+			<scale x="0.5" y="0.1" z="2.0" />
+			<translate x="0.0" y="0.0" z="-5.5" />
+		</transformation>
+		<transformation id="trail0">
+			<rotate axis="y" angle="36" />
+		</transformation>
+		<transformation id="trail1">
+			<rotate axis="y" angle="72" />
+		</transformation>
+		<transformation id="trail2">
+			<rotate axis="y" angle="108" />
+		</transformation>
+		<transformation id="trail3">
+			<rotate axis="y" angle="144" />
+		</transformation>
+		<transformation id="trail4">
+			<rotate axis="y" angle="180" />
+		</transformation>
+		<transformation id="trail5">
+			<rotate axis="y" angle="216" />
+		</transformation>
+		<transformation id="trail6">
+			<rotate axis="y" angle="252" />
+		</transformation>
+		<transformation id="trail7">
+			<rotate axis="y" angle="288" />
+		</transformation>
+		<transformation id="trail8">
+			<rotate axis="y" angle="324" />
+		</transformation>
+		<transformation id="trail9">
+			<rotate axis="y" angle="360" />
+		</transformation>
+		<transformation id="trail10">
+			<rotate axis="y" angle="18" />
+		</transformation>
+		<transformation id="trail11">
+			<rotate axis="y" angle="54" />
+		</transformation>
+		<transformation id="trail12">
+			<rotate axis="y" angle="90" />
+		</transformation>
+		<transformation id="trail13">
+			<rotate axis="y" angle="126" />
+		</transformation>
+		<transformation id="trail14">
+			<rotate axis="y" angle="162" />
+		</transformation>
+		<transformation id="trail15">
+			<rotate axis="y" angle="198" />
+		</transformation>
+		<transformation id="trail16">
+			<rotate axis="y" angle="234" />
+		</transformation>
+		<transformation id="trail17">
+			<rotate axis="y" angle="270" />
+		</transformation>
+		<transformation id="trail18">
+			<rotate axis="y" angle="306" />
+		</transformation>
+		<transformation id="trail19">
+			<rotate axis="y" angle="342" />
+		</transformation>
+		<transformation id="trail">
+			<translate x="12.5" y="0.0" z="12.5" />
+			<scale x="0.5" y="0.5" z="0.5" />
 		</transformation>
 
 	</transformations> 
@@ -744,6 +778,9 @@
 		
 		<primitive id="torus">
 			<torus inner="1.75" outer="4.0" slices="30" loops="30" />
+		</primitive>
+		<primitive id="trail_torus">
+			<torus inner="0.1" outer="4.0" slices="30" loops="30" />
 		</primitive>
 	</primitives>
 
@@ -2786,239 +2823,389 @@
 
 
 		<!-- Rail -->
-		<component id="railA"> 
+		<component id="trailA"> 
 			<transformation>
-				<transformationref id="railA" />
+				<transformationref id="trailA" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="black" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="ladder0" />
-				<componentref id="ladder1" />
-				<componentref id="ladder2" />
-				<componentref id="ladder3" />
-				<componentref id="ladder4" />
-				<componentref id="ladder5" />
+				<primitiveref id="trail_torus" />
 			</children> 
 		</component>
-		<component id="rail0"> 
+		<component id="trailB"> 
 			<transformation>
+				<transformationref id="trailB" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="black" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<primitiveref id="trail_torus" />
 			</children> 
 		</component>
-		<component id="rail1"> 
+		<component id="trailC"> 
 			<transformation>
-				<transformationref id="rail1" />
+				<transformationref id="trailC" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="wood" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="cube" />
 			</children> 
 		</component>
-		<component id="rail2"> 
+		<component id="trail0"> 
 			<transformation>
-				<transformationref id="rail2" />
+				<transformationref id="trail0" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="rail3"> 
+		<component id="trail1"> 
 			<transformation>
-				<transformationref id="rail3" />
+				<transformationref id="trail1" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="rail4"> 
+		<component id="trail2"> 
 			<transformation>
-				<transformationref id="rail4" />
+				<transformationref id="trail2" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="rail5"> 
+		<component id="trail3"> 
 			<transformation>
-				<transformationref id="rail5" />
+				<transformationref id="trail3" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="rail6"> 
+		<component id="trail4"> 
 			<transformation>
-				<transformationref id="rail6" />
+				<transformationref id="trail4" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="rail7"> 
+		<component id="trail5"> 
 			<transformation>
-				<transformationref id="rail7" />
+				<transformationref id="trail5" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="rail8"> 
+		<component id="trail6"> 
 			<transformation>
-				<transformationref id="rail8" />
+				<transformationref id="trail6" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="rail9"> 
+		<component id="trail7"> 
 			<transformation>
-				<transformationref id="rail9" />
+				<transformationref id="trail7" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="railA" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="left_rail"> 
+		<component id="trail8"> 
 			<transformation>
-				<transformationref id="left_rail" />
+				<transformationref id="trail8" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="rail0" />
-				<componentref id="rail1" />
-				<componentref id="rail2" />
-				<componentref id="rail3" />
-				<componentref id="rail4" />
-				<componentref id="rail5" />
-				<componentref id="rail6" />
-				<componentref id="rail7" />
-				<componentref id="rail8" />
-				<componentref id="rail9" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-		<component id="right_rail"> 
+		<component id="trail9"> 
 			<transformation>
-				<transformationref id="right_rail" />
+				<transformationref id="trail9" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<componentref id="rail0" />
-				<componentref id="rail1" />
-				<componentref id="rail2" />
-				<componentref id="rail3" />
-				<componentref id="rail4" />
-				<componentref id="rail5" />
-				<componentref id="rail6" />
-				<componentref id="rail7" />
-				<componentref id="rail8" />
-				<componentref id="rail9" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
-
-		<component id="trail_test"> 
+		<component id="trail10"> 
 			<transformation>
-				<transformationref id="trail_test" />
+				<transformationref id="trail10" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="rails" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
-				<primitiveref id="torus" />
+				<componentref id="trailC" />
 			</children> 
 		</component>
+		<component id="trail11"> 
+			<transformation>
+				<transformationref id="trail11" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail12"> 
+			<transformation>
+				<transformationref id="trail12" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail13"> 
+			<transformation>
+				<transformationref id="trail13" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail14"> 
+			<transformation>
+				<transformationref id="trail14" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail15"> 
+			<transformation>
+				<transformationref id="trail15" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail16"> 
+			<transformation>
+				<transformationref id="trail16" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail17"> 
+			<transformation>
+				<transformationref id="trail17" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail18"> 
+			<transformation>
+				<transformationref id="trail18" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail19"> 
+			<transformation>
+				<transformationref id="trail19" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailC" />
+			</children> 
+		</component>
+		<component id="trail"> 
+			<transformation>
+				<transformationref id="trail" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="wood" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="trailA" />
+				<componentref id="trailB" />
+				<componentref id="trail0" />
+				<componentref id="trail1" />
+				<componentref id="trail2" />
+				<componentref id="trail3" />
+				<componentref id="trail4" />
+				<componentref id="trail5" />
+				<componentref id="trail6" />
+				<componentref id="trail7" />
+				<componentref id="trail8" />
+				<componentref id="trail9" />
+				<componentref id="trail10" />
+				<componentref id="trail11" />
+				<componentref id="trail12" />
+				<componentref id="trail13" />
+				<componentref id="trail14" />
+				<componentref id="trail15" />
+				<componentref id="trail16" />
+				<componentref id="trail17" />
+				<componentref id="trail18" />
+				<componentref id="trail19" />
+			</children> 
+		</component>
+
+
 
 		<!-- Root Component -->
 		<component id="child_room">
@@ -3043,7 +3230,7 @@
 				<componentref id="left_rail" />
 				<componentref id="right_rail" />
 				<componentref id="train" />
-				<componentref id="trail_test" />
+				<componentref id="trail" />
 			</children> 
 		</component>
 	</components> 
