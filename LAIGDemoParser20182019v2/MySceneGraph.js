@@ -1413,7 +1413,7 @@ class MySceneGraph {
         }
 
         for(var i = 0; i < node.primitives.length; i++){
-
+            //console.log(this.primitiveArray[node.primitives[i]]);
             this.primitiveArray[node.primitives[i]].display();
         }
     }

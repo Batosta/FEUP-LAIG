@@ -83,6 +83,14 @@
 		<texture id="red" file="scenes/images/red.jpg"/>
 		<texture id="metal" file="scenes/images/metal.jpg"/>
 		<texture id="window" file="scenes/images/window.jpg"/>
+		<texture id="sun" file="scenes/images/sun.jpg"/>
+		<texture id="mars" file="scenes/images/mars.jpg"/>
+		<texture id="earth" file="scenes/images/earth.jpg"/>
+		<texture id="green_planet" file="scenes/images/green_planet.jpg"/>
+		<texture id="bed" file="scenes/images/bed.jpg"/>
+		<texture id="pillow" file="scenes/images/pillow.jpg"/>
+		<texture id="wood" file="scenes/images/wood.jpg"/>
+		<texture id="curtain" file="scenes/images/curtain.jpg"/>
 	</textures> 
 
 
@@ -225,6 +233,7 @@
 		</transformation>
 
 
+
 		<!-- Walls and Floor -->
 		<transformation id="wall0">
 			<translate x="10.0" y="5.0" z="0.0" />
@@ -275,7 +284,6 @@
 			<scale x="1.0" y="1.2" z="1.0" />
 			<translate x="3.1" y="-1.1" z="-3.5" />
 		</transformation>
-
 		<!-- Bed -->
 		<transformation id="bed0">
             <scale x="4.0" y="1.5" z="8.0" />
@@ -307,7 +315,6 @@
 		<transformation id="full_bed">
 			<translate x="2.2" y="0.7" z="4.1" />
 		</transformation>
-
 		<!-- Pillows -->
 		<transformation id="pillow0">
 			<translate x="0.0" y="5.3" z="-2.8" />
@@ -317,7 +324,6 @@
 			<translate x="0.0" y="0.8" z="-2.8" />
 			<scale x="3.0" y="0.3" z="1.5" />
 		</transformation>
-
 		<!-- Bed protections -->
 		<transformation id="bedprotection0">
 			<scale x="0.2" y="0.8" z="4.0" />
@@ -379,7 +385,6 @@
 		<transformation id="triangleC">
 			<rotate axis="y" angle="180" />
 		</transformation>
-
 		<!-- Rocket -->
 		<transformation id="rocket_body">
 			<translate x="0.0" y="0.5" z="0.0" />
@@ -404,9 +409,39 @@
 			<rotate axis="x" angle="90" />
 		</transformation>
 		<transformation id="full_rocket">
-			<translate x="15.0" y="0.0" z="2.0" />
+			<translate x="14.0" y="0.0" z="2.0" />
 		</transformation>
 
+
+		<!-- Train Carriage -->
+		<transformation id="train_carriage0">
+			<scale x="10.0" y="3.0" z="3.0" />
+		</transformation>
+		<transformation id="train_carriage1">
+			<translate x="0.0" y="2.0" z="1.375" /> 
+			<scale x="10.0" y="1.0" z="0.25" />
+		</transformation>
+		<transformation id="train_carriage2">
+			<translate x="0.0" y="2.0" z="-1.375" /> 
+			<scale x="10.0" y="1.0" z="0.25" />
+		</transformation>
+		<transformation id="train_carriage3">
+			<translate x="4.875" y="2.0" z="0.0" />
+			<rotate axis="y" angle="90" /> 
+			<scale x="3.0" y="1.0" z="0.25" />
+		</transformation>
+		<transformation id="train_carriage4">
+			<translate x="-4.875" y="2.0" z="0.0" />
+			<rotate axis="y" angle="90" /> 
+			<scale x="3.0" y="1.0" z="0.25" />
+		</transformation>
+		<transformation id="train_carriage5">
+			<translate x="5.0" y="-1.0" z="0.0" />
+			<rotate axis="y" angle="90" />
+		</transformation>
+		<transformation id="train_carriage">
+			<translate x="-12.0" y="0.5" z="0.0" />
+		</transformation>
 		<!-- Train Front -->
 		<transformation id="train_front_rectangle">
 			<scale x="2.0" y="2.0" z="3.0" />
@@ -428,7 +463,6 @@
 			<translate x="6.0" y="0.05" z="0.0" />
 			<scale x="1.5" y="1.44" z="1.0" />
 		</transformation>
-
 		<!-- Train body -->
 		<transformation id="train_body0">
 			<scale x="10.0" y="2.0" z="3.0" />
@@ -451,7 +485,6 @@
 			<scale x="1.0" y="1.25" z="1.25" />
 			<rotate axis="y" angle="90" />
 		</transformation>
-
 		<!-- Train chimney -->
 		<transformation id="train_chimney0">
 			<scale x="7.5" y="1.5" z="7.5" />
@@ -475,13 +508,14 @@
 		<transformation id="train_chimney">
 			<translate x="3.5" y="3.0" z="0.0" />
 		</transformation>
-
 		<!-- Train -->
 		<transformation id="train">
-			<translate x="15.0" y="0.2" z="15.0" />
-			<rotate axis="y" angle="45" />
-			<scale x="0.20" y="0.20" z="0.20" />
+			<translate x="17.5" y="0.4" z="15.0" />
+			<rotate axis="y" angle="90" />
+			<scale x="0.20" y="0.20" z="0.30" />
 		</transformation>
+
+
 
 		<!-- Planet -->
 		<transformation id="planetSphere0">
@@ -533,6 +567,8 @@
 			<scale x="0.5" y="0.5" z="0.5" />
 		</transformation>
 
+
+
 		<!-- Curtain Holder -->
 		<transformation id="holderA">
 			<scale x="0.5" y="1.0" z="1.0" />
@@ -553,14 +589,12 @@
 			<translate x="0.75" y="0.0" z="0.0" />
 			<scale x="3.0" y="3.0" z="12.5" />
 		</transformation>
-
 		<!-- Curtain -->
 		<transformation id="curtain">
 			<translate x="1.0" y="-15.0" z="12.5" />
 			<scale x="1.0" y="30.0" z="22.5" />
 			<rotate axis="y" angle="90" />
 		</transformation>
-
 		<!-- Window -->
 		<transformation id="window">
 			<translate x="0.0" y="-15.0" z="12.5" />
@@ -573,43 +607,48 @@
 			<rotate axis="y" angle="90" />
 		</transformation>
 
+
+
 		<!-- Rail -->
-		<transformation id="rail0">
-			<translate x="0.0" y="5.5" z="0.3" />
-			<rotate axis="x" angle="36" />
-		</transformation>
 		<transformation id="rail1">
-			<translate x="0.0" y="10.0" z="4.0" />
-			<rotate axis="x" angle="72" />
+			<translate x="4.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail2">
-			<translate x="0.0" y="14.0" z="5.0" />
-			<rotate axis="x" angle="108" />
+			<translate x="8.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail3">
-			<rotate axis="x" angle="144" />
+			<translate x="12.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail4">
-			<rotate axis="x" angle="180" />
+			<translate x="16.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail5">
-			<rotate axis="x" angle="216" />
+			<translate x="20.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail6">
-			<rotate axis="x" angle="252" />
+			<translate x="24.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail7">
-			<rotate axis="x" angle="288" />
+			<translate x="28.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail8">
-			<rotate axis="x" angle="324" />
+			<translate x="32.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="rail9">
-			<rotate axis="x" angle="360" />
+			<translate x="36.0" y="0.0" z="0.0" />
 		</transformation>
 		<transformation id="railA">
+			<rotate axis="z" angle="-90" />
 		</transformation>
-		<transformation id="rail">
+		<transformation id="left_rail">
+			<translate x="10.0" y="0.0" z="0.05" />
+			<scale x="0.5" y="0.5" z="0.485" />
+			<rotate axis="y" angle="-90" />
+		</transformation>
+		<transformation id="right_rail">
+			<translate x="18.0" y="0.0" z="0.05" />
+			<scale x="0.5" y="0.5" z="0.485" />
+			<rotate axis="y" angle="-90" />
 		</transformation>
 
 	</transformations> 
@@ -652,7 +691,7 @@
 		</primitive>
 		
 		<primitive id="torus">
-			<torus inner="0.5" outer="0.5" slices="20" loops="20" />
+			<torus inner="1.0" outer="4.0" slices="30" loops="30" />
 		</primitive>
 	</primitives>
 
@@ -786,7 +825,7 @@
 				<material id="mat0" />
 			</materials> 
  
-			<texture id="red" length_s="1.0" length_t="1.0" />
+			<texture id="sun" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="sphere" />
@@ -832,7 +871,7 @@
 				<material id="mat0" />
 			</materials> 
  
-			<texture id="red" length_s="1.0" length_t="1.0" />
+			<texture id="mars" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="sphere" />
@@ -878,7 +917,7 @@
 				<material id="mat0" />
 			</materials> 
  
-			<texture id="red" length_s="1.0" length_t="1.0" />
+			<texture id="earth" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="sphere" />
@@ -924,7 +963,7 @@
 				<material id="mat0" />
 			</materials> 
  
-			<texture id="red" length_s="1.0" length_t="1.0" />
+			<texture id="green_planet" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="sphere" />
@@ -980,6 +1019,118 @@
 			</children> 
 		</component>
 
+
+		<!-- Train Carriage -->
+		<component id="train_carriage0"> 
+			<transformation>
+				<transformationref id="train_carriage0" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_carriage1"> 
+			<transformation>
+				<transformationref id="train_carriage1" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_carriage2"> 
+			<transformation>
+				<transformationref id="train_carriage2" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_carriage3"> 
+			<transformation>
+				<transformationref id="train_carriage3" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_carriage4"> 
+			<transformation>
+				<transformationref id="train_carriage4" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="train_carriage5"> 
+			<transformation>
+				<transformationref id="train_carriage5" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="train_carriage"> 
+			<transformation>
+				<transformationref id="train_carriage" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="train_carriage0" />
+				<componentref id="train_carriage1" />
+				<componentref id="train_carriage2" />
+				<componentref id="train_carriage3" />
+				<componentref id="train_carriage4" />
+				<componentref id="train_carriage5" />
+			</children> 
+		</component>
 
 		<!-- Train Front-->
 		<component id="train_front_rectangle"> 
@@ -1236,6 +1387,7 @@
 				<componentref id="train_front" />
 				<componentref id="train_body" />
 				<componentref id="train_chimney" />
+				<componentref id="train_carriage" />
 			</children> 
 		</component>
 
@@ -1564,7 +1716,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="wood" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="ladder0" />
@@ -1586,7 +1738,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="leaves" length_s="1.0" length_t="1.0" />
+			<texture id="bed" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -1601,7 +1753,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="leaves" length_s="1.0" length_t="1.0" />
+			<texture id="bed" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -1676,7 +1828,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="red" length_s="1.0" length_t="1.0" />
+			<texture id="pillow" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -1691,7 +1843,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="red" length_s="1.0" length_t="1.0" />
+			<texture id="pillow" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -1707,7 +1859,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="wood" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -1723,7 +1875,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="wood" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -1843,7 +1995,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="metal" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="cylinder" /> 
@@ -2006,7 +2158,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="wood" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -2164,7 +2316,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="wood" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -2209,7 +2361,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="wood" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="cube" />
@@ -2361,7 +2513,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="red" length_s="1.0" length_t="1.0" />
+			<texture id="curtain" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" />
@@ -2407,6 +2559,7 @@
 		<!-- Rail -->
 		<component id="railA"> 
 			<transformation>
+				<transformationref id="railA" />
 			</transformation>
 
 			<materials> 
@@ -2426,7 +2579,6 @@
 		</component>
 		<component id="rail0"> 
 			<transformation>
-				<transformationref id="rail0" />
 			</transformation>
 
 			<materials> 
@@ -2574,9 +2726,33 @@
 				<componentref id="railA" />
 			</children> 
 		</component>
-		<component id="rail"> 
+		<component id="left_rail"> 
 			<transformation>
-				<transformationref id="rail" />
+				<transformationref id="left_rail" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="rail0" />
+				<componentref id="rail1" />
+				<componentref id="rail2" />
+				<componentref id="rail3" />
+				<componentref id="rail4" />
+				<componentref id="rail5" />
+				<componentref id="rail6" />
+				<componentref id="rail7" />
+				<componentref id="rail8" />
+				<componentref id="rail9" />
+			</children> 
+		</component>
+		<component id="right_rail"> 
+			<transformation>
+				<transformationref id="right_rail" />
 			</transformation>
 
 			<materials> 
@@ -2600,6 +2776,20 @@
 		</component>
 
 
+		<component id="torus_test"> 
+			<transformation>
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
 
 		<!-- Root Component -->
 		<component id="child_room">
@@ -2613,15 +2803,18 @@
 			<texture id="leaves" length_s="1.0" length_t="1.0" />
 
 			<children> 
-<!--				<componentref id="table" />
+				<!--<componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="bed" />
 				<componentref id="train" />
 				<componentref id="rocket" />
 				<componentref id="walls" />
 				<componentref id="planets" />
-				<componentref id="full_window" />-->
-				<componentref id="rail" />
+				<componentref id="full_window" />
+				<componentref id="left_rail" />
+				<componentref id="right_rail" />
+				<componentref id="train" />-->
+				<componentref id="torus_test" />
 			</children> 
 		</component>
 	</components> 
