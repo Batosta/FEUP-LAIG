@@ -4,4 +4,3 @@ URGENTES:
 
 CENAS:
 	1. Completar parsers (tratamentos de erros)
-	2. Rodas no coise
