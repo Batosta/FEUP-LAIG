@@ -93,6 +93,9 @@ class XMLscene extends CGFscene {
 
         this.interface.addLightsGroup(this.graph.lights);
 
+        //Não sei se é suposto colocar aqui
+        this.interface.addViewsGroup(this.graph.views);
+
         this.sceneInited = true;
     }
 
