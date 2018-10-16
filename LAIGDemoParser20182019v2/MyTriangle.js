@@ -13,15 +13,22 @@ class MyTriangle extends CGFobject{
 		this.z1 = z1;
 		this.z2 = z2;
 		this.z3 = z3;
-		this.minS = 0;
-		this.maxS = 1;
-		this.minT = 0;
-		this.maxT = 1;
+		this.lenght_t = 1;
+		this.lenght_s = 1;
 		
 		this.initBuffers();
 	}
 
 	initBuffers(){
+
+		//Distancias
+		var a = Math.sqrt(Math.pow(this.x1-this.x3, 2) + Math.pow(this.y1-this.y3, 2) + Math.pow(this.z1-this.z3, 2));
+		var b = Math.sqrt(Math.pow(this.x2-this.x1, 2) + Math.pow(this.y2-this.y1, 2) + Math.pow(this.z2-this.z1, 2));
+		var c = Math.sqrt(Math.pow(this.x3-this.x2, 2) + Math.pow(this.y3-this.y2, 2) + Math.pow(this.z3-this.z2, 2));
+
+		//Angulo interno
+		var value = (Math.pow(a, 2) - Math.pow(b, 2) + Math.pow(c, 2)) / (2*a*c);
+		var beta = Math.acos(value);
 
 		this.vertices = [this.x1, this.y1, this.z1,
 						this.x2, this.y2, this.z2,
@@ -30,21 +37,17 @@ class MyTriangle extends CGFobject{
 
 		this.indices = [0, 1, 2];
 
-		this.primitiveType = this.scene.gl.TRIANGLES;
-
 		this.normals = [0, 0, 1,
 						0, 0, 1,
 						0, 0, 1	
 		];
-
-		this.texCoords = [this.minS, this.maxT,
-						 this.maxS, this.maxT,
-						 this.minS, this.minT,
-						 this.maxS, this.minT
+		
+		this.texCoords = [c - a*value, a*Math.sin(beta),
+						   0, this.lenght_t,
+						   c, this.lenght_t
 		];
 
-		
-
+		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
 }

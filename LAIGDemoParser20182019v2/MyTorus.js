@@ -37,8 +37,6 @@ class MyTorus extends CGFobject {
 
           this.vertices.push((this.outer + this.inner*Math.cos(v))*Math.cos(u), (this.outer + this.inner*Math.cos(v))*Math.sin(u), this.inner * Math.sin(v));
 
-          //this.indices.push(i+j*this.slices, (i+1)%this.slices+j*this.slices, i+(j+1)%this.loops*this.slices);
-          //this.indices.push(i+(j+1)%this.loops*this.slices, (i+1)%this.slices+j*this.slices, (i+1)%this.slices+(j+1)%this.loops*this.slices);
           this.indices.push(i+j*this.slices, i+(j+1)%this.loops*this.slices, (i+1)%this.slices+j*this.slices);
           this.indices.push(i+(j+1)%this.loops*this.slices, (i+1)%this.slices+(j+1)%this.loops*this.slices, (i+1)%this.slices+j*this.slices);
 
@@ -46,7 +44,6 @@ class MyTorus extends CGFobject {
           this.texCoords.push(i*1/this.slices, j*1/this.loops);
         }
       }
-      console.log(this);
       this.primitiveType = this.scene.gl.TRIANGLES;
 
       this.initGLBuffers();

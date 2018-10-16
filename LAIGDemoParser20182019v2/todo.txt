@@ -1,10 +1,7 @@
 URGENTES:
 	1. Length_t + Lenght_s
 	2. Api
-	3. Textura nos triangulos (está no moodle)
-	4. Checkar se o resto das primitivas estão de acordo com o que está no moodle
 
 CENAS:
-	1. Completar a cena (pista)
-	2. Compor as imagens das texturas
-	3. Completar parsers (tratamentos de erros)
+	1. Completar parsers (tratamentos de erros)
+	2. Rodas no coise

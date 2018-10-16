@@ -91,6 +91,7 @@
 		<texture id="pillow" file="scenes/images/pillow.jpg"/>
 		<texture id="wood" file="scenes/images/wood.jpg"/>
 		<texture id="curtain" file="scenes/images/curtain.jpg"/>
+		<texture id="rails" file="scenes/images/rails.jpg"/>
 	</textures> 
 
 
@@ -413,6 +414,51 @@
 		</transformation>
 
 
+
+		<!-- Train Wheels -->
+		<transformation id="train_wheels0">
+			<translate x="3.5" y="-0.75" z="1.5" />
+			<scale x="0.25" y="0.25" z="0.25" />
+		</transformation>
+		<transformation id="train_wheels1">
+			<translate x="3.5" y="-0.75" z="-1.5" />
+			<scale x="0.25" y="0.25" z="0.25" />
+			<rotate axis="y" angle="180" />
+		</transformation>
+		<transformation id="train_wheels2">
+			<translate x="0.5" y="-0.75" z="1.5" />
+			<scale x="0.25" y="0.25" z="0.25" />
+		</transformation>
+		<transformation id="train_wheels3">
+			<translate x="0.5" y="-0.75" z="-1.5" />
+			<scale x="0.25" y="0.25" z="0.25" />
+			<rotate axis="y" angle="180" />
+		</transformation>
+		<transformation id="train_wheels4">
+			<translate x="-3.0" y="-0.25" z="1.5" />
+			<scale x="0.35" y="0.35" z="0.35" />
+		</transformation>
+		<transformation id="train_wheels5">
+			<translate x="-3.0" y="-0.25" z="-1.5" />
+			<scale x="0.35" y="0.35" z="0.35" />
+			<rotate axis="y" angle="180" />
+		</transformation>
+		<transformation id="train_wheels6">
+			<translate x="-9.0" y="-0.75" z="1.5" />
+			<scale x="0.3" y="0.3" z="0.3" />
+		</transformation>
+		<transformation id="train_wheels7">
+			<translate x="-9.0" y="-0.75" z="-1.5" />
+			<scale x="0.3" y="0.3" z="0.3" />
+		</transformation>
+		<transformation id="train_wheels8">
+			<translate x="-15.0" y="-0.75" z="1.5" />
+			<scale x="0.3" y="0.3" z="0.3" />
+		</transformation>
+		<transformation id="train_wheels9">
+			<translate x="-15.0" y="-0.75" z="-1.5" />
+			<scale x="0.3" y="0.3" z="0.3" />
+		</transformation>
 		<!-- Train Carriage -->
 		<transformation id="train_carriage0">
 			<scale x="10.0" y="3.0" z="3.0" />
@@ -510,7 +556,7 @@
 		</transformation>
 		<!-- Train -->
 		<transformation id="train">
-			<translate x="17.5" y="0.4" z="15.0" />
+			<translate x="17.5" y="0.45" z="15.0" />
 			<rotate axis="y" angle="90" />
 			<scale x="0.20" y="0.20" z="0.30" />
 		</transformation>
@@ -641,14 +687,20 @@
 			<rotate axis="z" angle="-90" />
 		</transformation>
 		<transformation id="left_rail">
-			<translate x="10.0" y="0.0" z="0.05" />
+			<translate x="10.0" y="0.05" z="0.05" />
 			<scale x="0.5" y="0.5" z="0.485" />
 			<rotate axis="y" angle="-90" />
 		</transformation>
 		<transformation id="right_rail">
-			<translate x="18.0" y="0.0" z="0.05" />
+			<translate x="18.0" y="0.05" z="0.05" />
 			<scale x="0.5" y="0.5" z="0.485" />
 			<rotate axis="y" angle="-90" />
+		</transformation>
+
+		<transformation id="trail_test">
+			<translate x="10.0" y="0.0" z="10.0" />
+			<scale x="1.0" y="0.01" z="1.0" />
+			<rotate axis="x" angle="90" />
 		</transformation>
 
 	</transformations> 
@@ -691,7 +743,7 @@
 		</primitive>
 		
 		<primitive id="torus">
-			<torus inner="1.0" outer="4.0" slices="30" loops="30" />
+			<torus inner="1.75" outer="4.0" slices="30" loops="30" />
 		</primitive>
 	</primitives>
 
@@ -1019,6 +1071,182 @@
 			</children> 
 		</component>
 
+
+
+		<!-- Train Wheel -->
+		<component id="train_wheels0"> 
+			<transformation>
+				<transformationref id="train_wheels0" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels1"> 
+			<transformation>
+				<transformationref id="train_wheels1" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels2"> 
+			<transformation>
+				<transformationref id="train_wheels2" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels3"> 
+			<transformation>
+				<transformationref id="train_wheels3" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels4"> 
+			<transformation>
+				<transformationref id="train_wheels4" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels5"> 
+			<transformation>
+				<transformationref id="train_wheels5" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels6"> 
+			<transformation>
+				<transformationref id="train_wheels6" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels7"> 
+			<transformation>
+				<transformationref id="train_wheels7" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels8"> 
+			<transformation>
+				<transformationref id="train_wheels8" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels9"> 
+			<transformation>
+				<transformationref id="train_wheels9" />
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="torus" />
+			</children> 
+		</component>
+		<component id="train_wheels"> 
+			<transformation>
+			</transformation> 
+
+			<materials>
+				<material id="inherit" />
+			</materials>
+
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="train_wheels0" />
+				<componentref id="train_wheels1" />
+				<componentref id="train_wheels2" />
+				<componentref id="train_wheels3" />
+				<componentref id="train_wheels4" />
+				<componentref id="train_wheels5" />
+				<componentref id="train_wheels6" />
+				<componentref id="train_wheels7" />
+				<componentref id="train_wheels8" />
+				<componentref id="train_wheels9" />
+			</children> 
+		</component>
 
 		<!-- Train Carriage -->
 		<component id="train_carriage0"> 
@@ -1388,6 +1616,7 @@
 				<componentref id="train_body" />
 				<componentref id="train_chimney" />
 				<componentref id="train_carriage" />
+				<componentref id="train_wheels" />
 			</children> 
 		</component>
 
@@ -2775,16 +3004,16 @@
 			</children> 
 		</component>
 
-
-		<component id="torus_test"> 
+		<component id="trail_test"> 
 			<transformation>
+				<transformationref id="trail_test" />
 			</transformation>
 
 			<materials> 
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="rails" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="torus" />
@@ -2803,7 +3032,7 @@
 			<texture id="leaves" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<!--<componentref id="table" />
+				<componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="bed" />
 				<componentref id="train" />
@@ -2813,8 +3042,8 @@
 				<componentref id="full_window" />
 				<componentref id="left_rail" />
 				<componentref id="right_rail" />
-				<componentref id="train" />-->
-				<componentref id="torus_test" />
+				<componentref id="train" />
+				<componentref id="trail_test" />
 			</children> 
 		</component>
 	</components> 

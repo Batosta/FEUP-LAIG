@@ -1390,10 +1390,8 @@ class MySceneGraph {
 
             texture = node.texture[0];
         }
-        //console.log(materialMap.get(material));
 
         materialMap.get(material).setTexture(textureMap.get(texture));
-        //console.log(materialMap.get(material));
         materialMap.get(material).apply();
 
 
@@ -1413,7 +1411,6 @@ class MySceneGraph {
         }
 
         for(var i = 0; i < node.primitives.length; i++){
-            //console.log(this.primitiveArray[node.primitives[i]]);
             this.primitiveArray[node.primitives[i]].display();
         }
     }
