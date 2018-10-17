@@ -14,7 +14,8 @@ var COMPONENTS_INDEX = 8;
 var transformMap = new Map();
 var materialMap = new Map();
 var textureMap = new Map();
-var views = new Map();
+var viewMap = new Map();
+var defaultView;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -1082,6 +1083,7 @@ class MySceneGraph {
     parseViews(viewsNode){//Preparei tudo para colocar num array mas precisamos de mudar para aceitar ambas as views
 
         var children = viewsNode.children;
+        defaultView = this.reader.getString(viewsNode, 'default');
 
         for(var i = 0; i < children.length; i++){
 
@@ -1091,11 +1093,75 @@ class MySceneGraph {
                 if(ID == null)
                     this.onXMLError("ID missing");
 
-                var near = this.reader
+                var near = this.reader.getString(children[i], 'near');
+                if(near == null){
+                    this.onXMLMinorError("Near component missing, assuming near = 0.1");
+                    near = 0.1;
+                }  
+                
+                var far = this.reader.getString(children[i], 'far');
+                if(far == null){
+                    this.onXMLMinorError("Far component missing, assuming far = 500");
+                    far = 500;
+                }
+                
+                var angle = this.reader.getString(children[i], 'angle');
+                if(angle == null){
+                    this.onXMLMinorError("Angle component missing, assuming angle = 0.4");
+                    angle = 0.4;
+                }
+
+                var grandchildren = children[i].children;
+                var nodesName = [];
+
+                for(var j = 0; j < grandchildren.length; j++)
+                    nodesName.push(grandchildren[j].nodeName);
+
+                var fromIndex = nodesName.indexOf("from");
+                var toIndex = nodesName.indexOf("to");
+
+                var xf = this.reader.getFloat(grandchildren[fromIndex], 'x');
+                var yf = this.reader.getFloat(grandchildren[fromIndex], 'y');
+                var zf = this.reader.getFloat(grandchildren[fromIndex], 'z');
+
+                var xt = this.reader.getFloat(grandchildren[toIndex], 'x');
+                var yt = this.reader.getFloat(grandchildren[toIndex], 'y');
+                var zt = this.reader.getFloat(grandchildren[toIndex], 'z');
+
+                var newPcamera = new CGFcamera(angle, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt));
+                viewMap.set(ID, newPcamera);
+
             }
 
             if(children[i].nodeName == "ortho"){
 
+                var ID = this.reader.getString(children[i], 'id');
+                var near = this.reader.getFloat(children[i], 'near');
+                var far = this.reader.getFloat(children[i], 'far');
+                var left = this.reader.getFloat(children[i], 'left');
+                var right = this.reader.getFloat(children[i], 'right');
+                var top = this.reader.getFloat(children[i], 'top');
+                var bottom = this.reader.getFloat(children[i], 'bottom');
+
+                var granchildren = children.children;
+                var nodesName = [];
+
+                for(var j = 0; j < grandchildren.length; j++)
+                    nodesName.push(grandchildren[j].nodeName);
+
+                var fromIndex = nodesName.indexOf("from");
+                var toIndex = nodesName.indexOf("to");
+
+                var xf = this.reader.getFloat(grandchildren[fromIndex], 'x');
+                var yf = this.reader.getFloat(grandchildren[fromIndex], 'y');
+                var zf = this.reader.getFloat(grandchildren[fromIndex], 'z');
+
+                var xt = this.reader.getFloat(grandchildren[toIndex], 'x');
+                var yt = this.reader.getFloat(grandchildren[toIndex], 'y');
+                var zt = this.reader.getFloat(grandchildren[toIndex], 'z');
+
+                var newOcamera = new CGFcameraOrtho(left, right, bottom, top, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt), vec3.fromValues(0,1,0));
+                viewMap.set(ID, newOcamera);
             }
         }
         this.log("Parsed Views");

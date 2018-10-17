@@ -86,6 +86,8 @@ class XMLscene extends CGFscene {
 
         this.axis = new CGFaxis(this, this.graph.axis_length);
 
+        console.log(this.graph.ambientIllumination);
+
         this.setGlobalAmbientLight(this.graph.ambientIllumination[0], this.graph.ambientIllumination[2], this.graph.ambientIllumination[3], this.graph.ambientIllumination[4]);
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
 
@@ -94,7 +96,7 @@ class XMLscene extends CGFscene {
         this.interface.addLightsGroup(this.graph.lights);
 
         //Não sei se é suposto colocar aqui
-        this.interface.addViewsGroup(this.graph.views);
+        //this.interface.addViewsGroup(this.graph.views);
 
         this.sceneInited = true;
     }
