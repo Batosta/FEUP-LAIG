@@ -584,6 +584,8 @@ class MySceneGraph {
             if(primitiveId == null)
                 return "No ID defined for primitive";
 
+            console.log("aaaaa");
+            console.log(primitiveId);
             var grandChildren = children[i].children;
 
             if(grandChildren[0].nodeName == "rectangle"){          
@@ -617,6 +619,38 @@ class MySceneGraph {
                 }
 
                 this.primitiveArray[primitiveId] = new MyRectangle(this.scene, x1, x2, y1, y2);
+            }
+            else if(grandChildren[0].nodeName == "rectangle21"){          
+
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1))){
+                    this.onXMLMinorError("Unable to parse first x1-coordinate of the rectangle21 for ID = " + primitiveId + "Assuming x1 = -0.5");
+                    x1 = -0.5;
+                }
+                
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1))){
+                    this.onXMLMinorError("Unable to parse first y1-coordinate of the rectangle21 for ID = " + primitiveId + "Assuming y1 = -0.5");
+                    y1 = -0.5;
+                }
+                
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2))){
+                    this.onXMLMinorError("Unable to parse first x2-coordinate of the rectangle21 for ID = " + primitiveId + "Assuming x2 = 0.5");
+                    x2 = 0.5;
+                }
+                
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2))){
+                    this.onXMLMinorError("Unable to parse first y2-coordinate of the rectangle21 for ID = " + primitiveId + "Assuming y2 = 0.5");
+                    y2 = 0.5
+                }
+
+                this.primitiveArray[primitiveId] = new MyRectangle21(this.scene, x1, x2, y1, y2);
             } 
             else if(grandChildren[0].nodeName == "triangle"){             // Retrieves the triangle specifications
 
