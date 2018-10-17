@@ -3226,7 +3226,7 @@
 			<texture id="leaves" length_s="1.0" length_t="1.0" />
 
 			<children> 
-<!--				<componentref id="table" />
+				<componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="bed" />
 				<componentref id="train" />
@@ -3237,8 +3237,7 @@
 				<componentref id="left_rail" />
 				<componentref id="right_rail" />
 				<componentref id="train" />
-				<componentref id="trail" />-->
-				<primitiveref id="rectangle21" -->
+				<componentref id="trail" />
 			</children> 
 		</component>
 	</components> 
