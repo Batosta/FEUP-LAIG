@@ -14,7 +14,7 @@ var COMPONENTS_INDEX = 8;
 var transformMap = new Map();
 var materialMap = new Map();
 var textureMap = new Map();
-var views = [];
+var views = new Map();
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -1082,153 +1082,22 @@ class MySceneGraph {
     parseViews(viewsNode){//Preparei tudo para colocar num array mas precisamos de mudar para aceitar ambas as views
 
         var children = viewsNode.children;
-        var nodesName = [];
-        this.perspective = [];
-        this.ortho = []; 
-
-        this.defaultView = this.reader.getString(viewsNode, 'default');
-        if(this.defaultView == null){
-            this.onXMLMinorError("No default view, assuming first one");
-            this.defaultView = this.reader.getString(children[0], 'id');
-        }
-
-        this.from = [];
-        this.to = [];
 
         for(var i = 0; i < children.length; i++){
-            
-            var id = this.reader.getString(children[i], 'id');
-            
-            if(id == this.defaultView){
 
-                var type = children[i].nodeName;
+            if(children[i].nodeName == "perspective"){
 
-                if(type == "perspective"){
+                var ID = this.reader.getString(children[i], 'id');
+                if(ID == null)
+                    this.onXMLError("ID missing");
 
-                    this.near = this.reader.getFloat(children[i], 'near');
-                    if (!(this.near != null && !isNaN(this.near))) {
-                        this.near = 0.1;
-                        this.onXMLMinorError("unable to parse value for near; assuming 'near = 0.1'");
-                    }
-                    this.perspective.push(this.near);
+                var near = this.reader
+            }
 
-                    this.far = this.reader.getFloat(children[i], 'far');
-                    if (!(this.far != null && !isNaN(this.far))) {
-                        this.far = 500.0;
-                        this.onXMLMinorError("unable to parse value for far; assuming 'far = 500.0'");
-                    }
-                    this.perspective.push(this.far);
+            if(children[i].nodeName == "ortho"){
 
-                    this.angle = this.reader.getFloat(children[i], 'angle');
-                    if (!(this.angle != null && !isNaN(this.angle))) {
-                        this.angle = 0.4;
-                        this.onXMLMinorError("unable to parse value for angle; assuming 'angle = 0.4'");
-                    }
-                    this.perspective.push(this.angle);
-
-                    var grandchildren = children[i].children;
-                    var nodesName = [];
-
-                    for(var j = 0; j < grandchildren.length; j++){
-                        nodesName.push(grandchildren[j].nodeName);
-                    }
-
-                    var fromIndex = nodesName.indexOf("from");
-                    var toIndex = nodesName.indexOf("to");
-
-                    this.x = this.reader.getFloat(grandchildren[fromIndex], 'x');
-                    if (!(this.x != null && !isNaN(this.x))) {
-                        this.x = 15;
-                        this.onXMLMinorError("unable to parse value for x; assuming 'x = 15'");
-                    }
-                    this.y = this.reader.getFloat(grandchildren[fromIndex], 'y');
-                    if (!(this.y != null && !isNaN(this.y))) {
-                        this.y = 15;
-                        this.onXMLMinorError("unable to parse value for y; assuming 'y = 15'");
-                    }
-                    this.z = this.reader.getFloat(grandchildren[fromIndex], 'z');
-                    if (!(this.z != null && !isNaN(this.z))) {
-                        this.z = 15;
-                        this.onXMLMinorError("unable to parse value for z; assuming 'z = 15'");
-                    }
-                    
-                    this.from.push(this.x); this.from.push(this.y); this.from.push(this.z);
-                    this.perspective.push(this.from);
-
-
-
-                    this.x = this.reader.getFloat(grandchildren[toIndex], 'x');
-                    if (!(this.x != null && !isNaN(this.x))) {
-                        this.x = 0;
-                        this.onXMLMinorError("unable to parse value for x; assuming 'x = 0'");
-                    }
-                    
-                    this.y = this.reader.getFloat(grandchildren[toIndex], 'y');
-                    if (!(this.y != null && !isNaN(this.y))) {
-                        this.y = 0;
-                        this.onXMLMinorError("unable to parse value for y; assuming 'y = 0'");
-                    }
-                    
-                    this.z = this.reader.getFloat(grandchildren[toIndex], 'z');
-                    if (!(this.z != null && !isNaN(this.z))) {
-                        this.z = 0;
-                        this.onXMLMinorError("unable to parse value for z; assuming 'z = 0'");
-                    }
-
-                    this.to.push(this.x); this.to.push(this.y); this.to.push(this.z);
-                    this.perspective.push(this.to);
-                
-                }else if(type == "ortho"){
-
-                    this.idOrtho = this.reader.getString(children[i], 'id');
-                    if(this.idOrtho == null){
-                        this.onXMLError("ID for ortho view not defined");
-                    }
-
-                    this.nearOrtho = this.reader.getFloat(children[i], 'near');
-                    if (!(this.nearOrtho != null && !isNaN(this.nearOrtho))) {
-                        this.nearOrtho = 0.1;
-                        this.onXMLMinorError("unable to parse value for nearOrtho; assuming 'nearOrtho = 0.1'");
-                    }
-                    this.ortho.push(this.nearOrtho);
-                    
-                    this.leftOrtho = this.reader.getFloat(children[i], 'left');
-                    if (!(this.leftOrtho != null && !isNaN(this.leftOrtho))) {
-                        this.leftOrtho = 15;
-                        this.onXMLMinorError("unable to parse value for leftOrtho; assuming 'leftOrtho = 15'");
-                    }
-                    this.ortho.push(this.leftOrtho);
-                    
-                    this.rightOrtho = this.reader.getFloat(children[i], 'right');
-                    if (!(this.rightOrtho != null && !isNaN(this.rightOrtho))) {
-                        this.rightOrtho = 15;
-                        this.onXMLMinorError("unable to parse value for rightOrtho; assuming 'rightOrtho = 15'");
-                    }
-                    this.ortho.push(this.rightOrtho);
-                    
-                    this.topOrtho = this.reader.getFloat(children[i], 'top');
-                    if (!(this.topOrtho != null && !isNaN(this.topOrtho))) {
-                        this.topOrtho = 15;
-                        this.onXMLMinorError("unable to parse value for topOrtho; assuming 'topOrtho = 15'");
-                    }
-                    this.ortho.push(this.topOrtho);
-                    
-                    this.bottomOrtho = this.reader.getFloat(children[i], 'bottom');
-                    if (!(this.bottomOrtho != null && !isNaN(this.bottomOrtho))) {
-                        this.bottomOrtho = 15;
-                        this.onXMLMinorError("unable to parse value for bottomOrtho; assuming 'bottomOrtho = 15'");
-                    }
-                    this.ortho.push(this.bottomOrtho);
-                }
-
-            }else{
-                continue;
             }
         }
-        views.push(this.perspective);
-        views.push(this.ortho);
-        console.log(views);
-        console.log(this.ortho);
         this.log("Parsed Views");
     }
 
