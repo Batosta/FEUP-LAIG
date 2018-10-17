@@ -753,6 +753,10 @@
 			<rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
 		</primitive>
 
+		<primitive id="rectangle21">
+			<rectangle21 x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+		</primitive>
+
 		<primitive id="triangle">
 			<triangle x1="0.0" y1="0.0" z1="0.0" 
 				x2="0.0" y2="-1.0" z2="0.0" 
@@ -3222,7 +3226,7 @@
 			<texture id="leaves" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<componentref id="table" />
+<!--				<componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="bed" />
 				<componentref id="train" />
@@ -3233,7 +3237,8 @@
 				<componentref id="left_rail" />
 				<componentref id="right_rail" />
 				<componentref id="train" />
-				<componentref id="trail" />
+				<componentref id="trail" />-->
+				<primitiveref id="rectangle21" -->
 			</children> 
 		</component>
 	</components> 
