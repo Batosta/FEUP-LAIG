@@ -41,7 +41,6 @@ class XMLscene extends CGFscene {
      */
     initCameras() {
         this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(40, 25, 40), vec3.fromValues(0, 0, 0));
-        console.log(this.camera);
     }
     /**
      * Initializes the scene lights with the values read from the XML file.
@@ -94,8 +93,9 @@ class XMLscene extends CGFscene {
 
         this.interface.addLightsGroup(this.graph.lights);
 
-        //Não sei se é suposto colocar aqui
-        //this.interface.addViewsGroup(this.graph.views);
+        this.currentView = this.graph.defaultView;
+        
+        this.interface.addViewsGroup(this, this.graph.currentView);
 
         this.sceneInited = true;
     }
@@ -111,7 +111,6 @@ class XMLscene extends CGFscene {
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 
-        // Initialize Model-View matrix as identity (no transformation
         this.updateProjectionMatrix();
         this.loadIdentity();
 
@@ -139,6 +138,9 @@ class XMLscene extends CGFscene {
                     i++;
                 }
             }
+
+            this.camera = this.graph.viewMap.get(this.currentView);
+            this.interface.setActiveCamera(this.camera);
 
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();

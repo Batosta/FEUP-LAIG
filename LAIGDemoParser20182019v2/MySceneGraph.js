@@ -25,7 +25,6 @@ class MySceneGraph {
     constructor(filename, scene) {
         this.loadedOk = null;
 
-        // Establish bidirectional references between scene and graph.
         this.scene = scene;
         scene.graph = this;
 
@@ -38,7 +37,7 @@ class MySceneGraph {
         this.sphere = null;
         this.torus = null;
 
-        this.idRoot = null;                    // The id of the root element.
+        this.idRoot = null;                    
 
         this.axisCoords = [];
         this.axisCoords['x'] = [1, 0, 0];
@@ -57,7 +56,9 @@ class MySceneGraph {
         this.reader.open('scenes/' + filename, this);
 
         this.viewMap = new Map();
-        this.defaultView;
+        this.defaultView = null;
+        
+        this.currentView = [];
     }
 
 
@@ -1080,6 +1081,8 @@ class MySceneGraph {
             if(ID == null)
                 this.onXMLError("ID missing");
 
+            this.currentView.push(ID);
+
             var near = this.reader.getFloat(children[i], 'near');
             if(near == null){
                 this.onXMLMinorError("Near component missing, assuming near = 0.1");
@@ -1118,7 +1121,9 @@ class MySceneGraph {
                 }
 
                 var newPcamera = new CGFcamera(angle, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt));
+                console.log(newPcamera);
                 this.viewMap.set(ID, newPcamera);
+                
             }
 
             if(children[i].nodeName == "ortho"){
@@ -1129,7 +1134,9 @@ class MySceneGraph {
                 var bottom = this.reader.getFloat(children[i], 'bottom');
 
                 var newOcamera = new CGFcameraOrtho(left, right, bottom, top, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt), vec3.fromValues(0,1,0));
+                console.log(newOcamera);
                 this.viewMap.set(ID, newOcamera);
+
             }
         }
         this.log("Parsed Views");
