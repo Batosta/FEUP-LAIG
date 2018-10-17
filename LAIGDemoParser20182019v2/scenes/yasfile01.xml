@@ -11,9 +11,9 @@
 			<to x="0" y="0" z="0" />
 		</perspective>
 
-		<ortho id="ortho0" near="0.1" far="500.0" left="15" right="15" top="15" bottom="15" >
-			<from x="15" y="15" z="15" />
-			<to x="0" y="0" z="0" />
+		<ortho id="ortho0" near="0.1" far="500.0" left="-15" right="15" top="15" bottom="-15" >
+			<from x="15" y="5" z="10" />
+			<to x="10" y="5" z="10" />
 		</ortho>
 	</views>
 

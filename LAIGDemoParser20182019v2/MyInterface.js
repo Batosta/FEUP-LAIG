@@ -46,11 +46,7 @@ class MyInterface extends CGFinterface {
     }
 
 //Vamos adicionar aqui as views
-    addViewsGroup(views){
-        var group = this.gui.addFolder("Views");
-        group.open();
-        
-
-        //this.gui.add(this.gui.text, 'Views', [ 'Perspective', 'Ortho'] );
+    addViewsGroup(scene, views){
+        this.gui.add(scene, 'currentView', views);
     }
 }
