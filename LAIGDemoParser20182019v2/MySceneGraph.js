@@ -1084,14 +1084,14 @@ class MySceneGraph {
             this.currentView.push(ID);
 
             var near = this.reader.getFloat(children[i], 'near');
-            if(near == null){
-                this.onXMLMinorError("Near component missing, assuming near = 0.1");
+            if (!(near != null && !isNaN(near))) {
+                this.onXMLMinorError("unable to parse value for near; assuming 'near = 0.1'");
                 near = 0.1;
             }  
                 
             var far = this.reader.getFloat(children[i], 'far');
-            if(far == null){
-                this.onXMLMinorError("Far component missing, assuming far = 500");
+            if (!(far != null && !isNaN(far))) {
+                this.onXMLMinorError("unable to parse value for far; assuming 'far = 500'");
                 far = 500;
             }
 
@@ -1105,23 +1105,51 @@ class MySceneGraph {
             var toIndex = nodesName.indexOf("to");
 
             var xf = this.reader.getFloat(grandchildren[fromIndex], 'x');
+            if (!(xf != null && !isNaN(xf))) {
+                xf = 20;
+                this.onXMLMinorError("unable to parse value for xf on From; assuming 'xf = 20'");
+            }
+
             var yf = this.reader.getFloat(grandchildren[fromIndex], 'y');
+            if (!(yf != null && !isNaN(yf))) {
+                yf = 20;
+                this.onXMLMinorError("unable to parse value for yf on From; assuming 'yf = 20'");
+            }
+
             var zf = this.reader.getFloat(grandchildren[fromIndex], 'z');
+            if (!(zf != null && !isNaN(zf))) {
+                zf = 20;
+                this.onXMLMinorError("unable to parse value for zf on From; assuming 'zf = 20'");
+            }
+
 
             var xt = this.reader.getFloat(grandchildren[toIndex], 'x');
+            if (!(xt != null && !isNaN(xt))) {
+                xt = 10;
+                this.onXMLMinorError("unable to parse value for xt on To; assuming 'xt = 10'");
+            }
+
             var yt = this.reader.getFloat(grandchildren[toIndex], 'y');
+            if (!(yt != null && !isNaN(yt))) {
+                yt = 10;
+                this.onXMLMinorError("unable to parse value for yt on To; assuming 'yt = 10'");
+            }
+
             var zt = this.reader.getFloat(grandchildren[toIndex], 'z');
+            if (!(zt != null && !isNaN(zt))) {
+                zt = 10;
+                this.onXMLMinorError("unable to parse value for zt on To; assuming 'zt = 10'");
+            }
 
             if(children[i].nodeName == "perspective"){
                 
                 var angle = this.reader.getFloat(children[i], 'angle');
-                if(angle == null){
-                    this.onXMLMinorError("Angle component missing, assuming angle = 0.4");
+                if (!(angle != null && !isNaN(angle))) {
                     angle = 0.4;
+                    this.onXMLMinorError("unable to parse value for angle; assuming 'angle = 0.4'");
                 }
 
                 var newPcamera = new CGFcamera(angle, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt));
-                console.log(newPcamera);
                 this.viewMap.set(ID, newPcamera);
                 
             }
@@ -1129,12 +1157,27 @@ class MySceneGraph {
             if(children[i].nodeName == "ortho"){
 
                 var left = this.reader.getFloat(children[i], 'left');
+                if (!(left != null && !isNaN(left))) {
+                    left = -15;
+                    this.onXMLMinorError("unable to parse value for left; assuming 'left = -15'");
+                }
                 var right = this.reader.getFloat(children[i], 'right');
+                if (!(right != null && !isNaN(right))) {
+                    right = 15;
+                    this.onXMLMinorError("unable to parse value for right; assuming 'right = 15'");
+                }
                 var top = this.reader.getFloat(children[i], 'top');
+                if (!(top != null && !isNaN(top))) {
+                    top = 15;
+                    this.onXMLMinorError("unable to parse value for top; assuming 'top = 15'");
+                }
                 var bottom = this.reader.getFloat(children[i], 'bottom');
+                if (!(bottom != null && !isNaN(bottom))) {
+                    bottom = 0.4;
+                    this.onXMLMinorError("unable to parse value for bottom; assuming 'left = -15'");
+                }
 
                 var newOcamera = new CGFcameraOrtho(left, right, bottom, top, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt), vec3.fromValues(0,1,0));
-                console.log(newOcamera);
                 this.viewMap.set(ID, newOcamera);
 
             }
