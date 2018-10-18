@@ -1384,13 +1384,6 @@ class MySceneGraph {
             }
         }
     }
-/*
-    for(var i = 0; i < this.nodes.length; i++){
-        for(var j = 0; j < this.nodes[i].primitives.length; j++){
-            this.primitiveArray[this.nodes[i].primitives[j]].updateTex(this.nodes[i].texture[1], this.nodes[i].texture[2]);
-        }
-    }*/
-
     this.log("Parsed Components");
     return null;
     }
@@ -1446,8 +1439,6 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
     recursiveDisplayNode(node, textIni, matIni){
-
-        this.scene.pushMatrix();
         
         var material = matIni;
         var texture = textIni;
@@ -1472,19 +1463,20 @@ class MySceneGraph {
 
         for(var i = 0; i < node.components.length; i++){
 
-           // this.scene.pushMatrix();
+           this.scene.pushMatrix();
                    
                 this.recursiveDisplayNode(node.components[i], texture, material);
 
-            // this.scene.popMatrix();
+            this.scene.popMatrix();
         }
 
         for(var i = 0; i < node.primitives.length; i++){
             
-            //this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
+            if(node.texture[0] != "inherit"){
+                this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
+            }
             this.primitiveArray[node.primitives[i]].display();
         }
-        this.scene.popMatrix();
     }
 
 }

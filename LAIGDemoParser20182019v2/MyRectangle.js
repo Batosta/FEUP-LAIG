@@ -17,8 +17,6 @@ class MyRectangle extends CGFobject{
 		this.minT = 0;
 		this.maxT = y2-y1;
 
-		this.texCoordsAux = [];
-
 		this.initBuffers();
 
 	}
