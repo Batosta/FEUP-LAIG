@@ -47,18 +47,28 @@ class MyTriangle extends CGFobject{
 						   c, this.lenght_t
 		];
 
+		this.texCoordsAux = [];
+
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	};
 
 	updateTex(length_s, length_t){
+		
 		for(var i = 0; i < this.texCoords.length; i++){
-			if(i % 2 == 0)
+			if(i % 2 == 0){
+				//this.texCoordsAux[i] = (this.texCoords[i]/length_s);
 				this.texCoords[i] = this.texCoords[i]/length_s;
-			else
+			}else{
+				//this.texCoordsAux[i] = (this.texCoords[i]/length_t);
 				this.texCoords[i] = this.texCoords[i]/length_t;
+			}
 		}
-		this.initGLBuffers();
-		//console.log("texCoords for triangle updated correctly!");
+
+		/*for(var i = 0; i < this.texCoords.length; i++){
+			this.texCoords[i] = this.texCoordsAux[i];
+		}*/
+
+		this.updateTexCoordsGLBuffers();
 	};
 };

@@ -12,6 +12,8 @@ class MyTorus extends CGFobject {
     	 this.slices = slices;  //  Number of vertexes on each loop
     	 this.loops = loops;    //  Number of "circles" in the torus
 
+       this.texCoordsAux = [];
+
     	 this.initBuffers();
   	};
 
@@ -41,7 +43,7 @@ class MyTorus extends CGFobject {
           this.indices.push(i+(j+1)%this.loops*this.slices, (i+1)%this.slices+(j+1)%this.loops*this.slices, (i+1)%this.slices+j*this.slices);
 
           this.normals.push(ang1, ang2, 0);
-          this.texCoords.push(i*1/this.slices, j*1/this.loops);
+          this.texCoords.push(i/this.slices, j/this.loops);
         }
       }
       this.primitiveType = this.scene.gl.TRIANGLES;
@@ -49,14 +51,5 @@ class MyTorus extends CGFobject {
       this.initGLBuffers();
     };
 
-    updateTex(length_s, length_t){
-      for(var i = 0; i < this.texCoords.length; i++){
-        if(i % 2 == 0)
-          this.texCoords[i] = this.texCoords[i]/length_s;
-        else
-          this.texCoords[i] = this.texCoords[i]/length_t;
-      }
-      this.initGLBuffers();
-      //console.log("texCoords for torus updated correctly!");
-  };
+    updateTex(length_s, length_t){};
 };

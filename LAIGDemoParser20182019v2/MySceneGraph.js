@@ -1447,6 +1447,8 @@ class MySceneGraph {
      */
     recursiveDisplayNode(node, textIni, matIni){
 
+        this.scene.pushMatrix();
+        
         var material = matIni;
         var texture = textIni;
     
@@ -1470,16 +1472,19 @@ class MySceneGraph {
 
         for(var i = 0; i < node.components.length; i++){
 
-            this.scene.pushMatrix();
+           // this.scene.pushMatrix();
                    
                 this.recursiveDisplayNode(node.components[i], texture, material);
 
-            this.scene.popMatrix();
+            // this.scene.popMatrix();
         }
 
         for(var i = 0; i < node.primitives.length; i++){
+            
             //this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
             this.primitiveArray[node.primitives[i]].display();
         }
+        this.scene.popMatrix();
     }
+
 }

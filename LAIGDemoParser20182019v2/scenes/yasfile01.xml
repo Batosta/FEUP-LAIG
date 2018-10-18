@@ -71,10 +71,7 @@
 	<!--													TEXTURES 															-->
 	<textures> 
 		<texture id="bank" file="scenes/images/bank.jpg"/>
-		<texture id="leaves" file="scenes/images/leaves.jpg"/> 
-		<texture id="rocks" file="scenes/images/rocks.jpg"/> 
 		<texture id="trunk" file="scenes/images/trunk-image.jpg"/> 
-		<texture id="vidral" file="scenes/images/vidral.jpg"/>
 		<texture id="red" file="scenes/images/red.jpg"/>
 		<texture id="metal" file="scenes/images/metal.jpg"/>
 		<texture id="window" file="scenes/images/window.jpg"/>
@@ -771,7 +768,7 @@
 		</primitive>
 		
 		<primitive id="sphere">
-			<sphere radius="2.0" slices="50" stacks="20" />
+			<sphere radius="2.0" slices="30" stacks="20" />
 		</primitive>
 		
 		<primitive id="torus">
@@ -1611,7 +1608,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="leaves" length_s="1.0" length_t="1.0" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<componentref id="train_chimney0" />
@@ -2044,7 +2041,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="pillow" length_s="5.0" length_t="5.0" />
+			<texture id="pillow" length_s="10" length_t="10" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -2059,7 +2056,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="pillow" length_s="5.0" length_t="5.0" />
+			<texture id="pillow" length_s="10" length_t="10" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -2746,7 +2743,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="window" length_s="1.0" length_t="1.0" />
+			<texture id="window" length_s="0.5" length_t="0.5" />
  
 			<children> 
 				<primitiveref id="rectangle" />
@@ -2761,7 +2758,7 @@
 				<material id="inherit" />
 			</materials> 
  
-			<texture id="trunk" length_s="1.0" length_t="1.0" />
+			<texture id="trunk" length_s="0.5" length_t="0.5" />
  
 			<children> 
 				<componentref id="holder" />
@@ -3166,7 +3163,7 @@
 				<material id="mat0" />
 			</materials>
 
-			<texture id="leaves" length_s="1.0" length_t="1.0" />
+			<texture id="bank" length_s="1.0" length_t="1.0" />
 
 			<children> 
 				<componentref id="table" />

@@ -12,6 +12,8 @@ class MyTube extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
 
+        this.texCoordsAux = [];
+
         this.initBuffers();
     };
 
@@ -61,16 +63,5 @@ class MyTube extends CGFobject {
         this.primitiveType = this.scene.gl.TRIANGLES;
 
         this.initGLBuffers();
-    };
-
-    updateTex(length_s, length_t){
-        for(var i = 0; i < this.texCoords.length; i++){
-            if(i % 2 == 0)
-                this.texCoords[i] = this.texCoords[i]/length_s;
-            else
-                this.texCoords[i] = this.texCoords[i]/length_t;
-        }
-        this.initGLBuffers();
-        //console.log("texCoords for Tube updated correctly!");
     };
 };

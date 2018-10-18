@@ -13,15 +13,14 @@ class MyRectangle extends CGFobject{
 		this.y1 = y1;
 		this.y2 = y2;
 		this.minS = 0;
-		this.maxS = 1;
+		this.maxS = x2-x1;
 		this.minT = 0;
-		this.maxT = 1;
-
-		this.initBuffers();
+		this.maxT = y2-y1;
 
 		this.texCoordsAux = [];
 
-		//this.updateTex(length_s, length_t);
+		this.initBuffers();
+
 	}
 
 	initBuffers(){
@@ -36,8 +35,6 @@ class MyRectangle extends CGFobject{
 						3, 2, 1
 		];
 
-		this.primitiveType = this.scene.gl.TRIANGLES;
-
 		this.normals = [0, 0, 1,
 						0, 0, 1,
 						0, 0, 1,
@@ -50,25 +47,23 @@ class MyRectangle extends CGFobject{
 						 this.maxS, this.minT
 		];
 
+		this.origTex = this.texCoords.slice();
+
+		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
 
 	updateTex(length_s, length_t){
 		
 		for(var i = 0; i < this.texCoords.length; i++){
-			if(i % 2 == 0)
-				this.texCoordsAux[i] = (this.texCoords[i]/length_s);
-				//this.texCoords[i] = this.texCoords[i]/length_s;
-			else
-				this.texCoordsAux[i] = (this.texCoords[i]/length_t);
-				//this.texCoords[i] = this.texCoords[i]/length_t;	
-		}
+			if(i % 2 == 0){
 
-		for(var j = 0; j < this.texCoordsAux.length; j++){
-			this.texCoords[j] = this.texCoordsAux[j];
-		}
+				this.texCoords[i] = this.origTex[i]/length_s;
+			}else{
 
-		this.initGLBuffers();
-		//console.log("texCoords for rectangle updated correctly");
+				this.texCoords[i] = this.origTex[i]/length_t;
+			}
+		}
+		this.updateTexCoordsGLBuffers();
 	};
 };
