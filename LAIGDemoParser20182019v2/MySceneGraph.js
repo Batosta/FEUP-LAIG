@@ -1384,6 +1384,12 @@ class MySceneGraph {
             }
         }
     }
+/*
+    for(var i = 0; i < this.nodes.length; i++){
+        for(var j = 0; j < this.nodes[i].primitives.length; j++){
+            this.primitiveArray[this.nodes[i].primitives[j]].updateTex(this.nodes[i].texture[1], this.nodes[i].texture[2]);
+        }
+    }*/
 
     this.log("Parsed Components");
     return null;

@@ -7,7 +7,7 @@
 	<!--													VIEWS 															-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="0.7">
-			<from x="30" y="20" z="30" />
+			<from x="15" y="15" z="15" />
 			<to x="0" y="0" z="0" />
 		</perspective>
 
@@ -2044,7 +2044,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="pillow" length_s="1.0" length_t="1.0" />
+			<texture id="pillow" length_s="5.0" length_t="5.0" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -2059,7 +2059,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="pillow" length_s="1.0" length_t="1.0" />
+			<texture id="pillow" length_s="5.0" length_t="5.0" />
  
 			<children> 
 				<componentref id="cube" /> 
