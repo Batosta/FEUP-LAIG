@@ -620,6 +620,9 @@ class MySceneGraph {
                 }
 
                 this.primitiveArray[primitiveId] = new MyRectangle(this.scene, x1, x2, y1, y2);
+                //console.log(this.primitiveArray[primitiveId]);
+                //this.primitiveArray[primitiveId].updateTex(0.5, 0.5);
+
             } 
             else if(grandChildren[0].nodeName == "triangle"){             // Retrieves the triangle specifications
 
@@ -738,6 +741,7 @@ class MySceneGraph {
                 }
 
                 this.primitiveArray[primitiveId] = new MySphere(this.scene, radius, slices, stacks);
+
             } 
             else if(grandChildren[0].nodeName == "torus"){            // Retrieves the torus specifications
 
@@ -1468,6 +1472,7 @@ class MySceneGraph {
         }
 
         for(var i = 0; i < node.primitives.length; i++){
+            //this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
             this.primitiveArray[node.primitives[i]].display();
         }
     }

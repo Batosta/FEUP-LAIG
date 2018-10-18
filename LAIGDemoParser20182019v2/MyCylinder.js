@@ -37,4 +37,14 @@ class MyCylinder extends CGFobject {
             this.circle1.display();
         this.scene.popMatrix();
     };
+
+    updateTex(length_s, length_t){
+
+        this.tube.updateTex(length_s, length_t);
+        this.circle0.updateTex(length_s, length_t);
+        this.circle1.updateTex(length_s, length_t);
+
+        //this.initGLBuffers();
+        //console.log("texCoords for cylinder updated correctly!");
+    }
 };

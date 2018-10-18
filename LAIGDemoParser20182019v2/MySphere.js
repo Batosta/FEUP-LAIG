@@ -32,4 +32,12 @@ class MySphere extends CGFobject
 			this.semiSphere0.display();
 		this.scene.popMatrix();		
 	};
+
+	updateTex(length_s, length_t){
+		this.semiSphere0.updateTex(length_s, length_t);
+		this.semiSphere1.updateTex(length_s, length_t);
+
+		//this.initGLBuffers();
+		//console.log("texCoords for sphere updated correctly!");
+	}
 };
