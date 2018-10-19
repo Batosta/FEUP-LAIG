@@ -2041,7 +2041,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="pillow" length_s="1.0" length_t="1.0" />
+			<texture id="pillow" length_s="0.5" length_t="0.5" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -2056,7 +2056,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="pillow" length_s="1.0" length_t="1.0" />
+			<texture id="pillow" length_s="0.5" length_t="0.5" />
  
 			<children> 
 				<componentref id="cube" /> 
@@ -3163,7 +3163,7 @@
 				<material id="mat0" />
 			</materials>
 
-			<texture id="bank" length_s="5.0" length_t="5.0" />
+			<texture id="bank" length_s="1.0" length_t="1.0" />
 
 			<children> 
 				<componentref id="table" />

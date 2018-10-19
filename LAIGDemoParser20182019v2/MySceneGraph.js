@@ -358,7 +358,7 @@ class MySceneGraph {
             // Light enable/disable
             var enableLight = true;
             var enableIndex = this.reader.getString(children[i], 'enabled');
-            if (enableIndex == -1) {
+            if (enableIndex == null) {
                 this.onXMLMinorError("enable value missing for ID = " + lightId + "; assuming 'value = 1'");
             }
             else {
@@ -372,6 +372,7 @@ class MySceneGraph {
             this.lights[lightId][2] = [];
             this.lights[lightId][3] = [];
             this.lights[lightId][4] = [];
+            this.lights[lightId][5] = [];
             grandChildren = children[i].children;
             
             // Specifications for the current light.
@@ -391,33 +392,15 @@ class MySceneGraph {
             var exponents = [];
             if(children[i].nodeName == "spot"){
 
-                // Gets indices of each element for the "spot" type of light.
-                var angleIndex = this.reader.getString(children[i], 'angle');
-                var exponentIndex = this.reader.getString(children[i], 'exponent');
+            // Gets indices of each element for the "spot" type of light.
+            var angle = this.reader.getFloat(children[i], 'angle');
+            var exponent = this.reader.getFloat(children[i], 'exponent');
 
-                // Light angle
-                if (angleIndex != -1) {
+            this.lights[lightId][5].push(angle);
+            this.lights[lightId][5].push(exponent);
 
-                    if (!(angleIndex != null && !isNaN(angleIndex) && angleIndex >= 0 && angleIndex <= 1))
-                        return "unable to parse the angle for ID = " + lightId;
-                    else
-                        angles.push(angleIndex);
-                }
-                else
-                    return "angle undefined for ID = " + lightId;
 
-                // Light exponent
-                if (exponentIndex != -1) {
-
-                    if (!(exponentIndex != null && !isNaN(exponentIndex) && exponentIndex >= 0 && exponentIndex <= 1))
-                        return "unable to parse the exponent for ID = " + lightId;
-                    else
-                        exponents.push(exponentIndex);
-                }
-                else
-                    return "exponent undefined for ID = " + lightId;
-            }
-
+        }
 
             // Retrieves the light location.
             var locationLight = [];
@@ -1440,6 +1423,8 @@ class MySceneGraph {
      */
     recursiveDisplayNode(node, textIni, matIni){
         
+        this.scene.pushMatrix();
+        
         var material = matIni;
         var texture = textIni;
     
@@ -1463,20 +1448,20 @@ class MySceneGraph {
 
         for(var i = 0; i < node.components.length; i++){
 
-           this.scene.pushMatrix();
                    
                 this.recursiveDisplayNode(node.components[i], texture, material);
 
-            this.scene.popMatrix();
+
         }
 
         for(var i = 0; i < node.primitives.length; i++){
             
-            if(node.texture[0] != "inherit"){
-                this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
-            }
+            //if(node.texture[0] != "inherit"){
+                //this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
+            //}
             this.primitiveArray[node.primitives[i]].display();
         }
+        this.scene.popMatrix();
     }
 
 }

@@ -52,7 +52,7 @@ class XMLscene extends CGFscene {
         // Reads the lights from the scene graph.
         for (var key in this.graph.lights) {
             if (i >= 8)
-                break;              // Only eight lights allowed by WebGL.
+                break;            
 
             if (this.graph.lights.hasOwnProperty(key)) {
                 var light = this.graph.lights[key];
@@ -62,6 +62,11 @@ class XMLscene extends CGFscene {
                 this.lights[i].setAmbient(light[2][0], light[2][1], light[2][2], light[2][3]);
                 this.lights[i].setDiffuse(light[3][0], light[3][1], light[3][2], light[3][3]);
                 this.lights[i].setSpecular(light[4][0], light[4][1], light[4][2], light[4][3]);
+
+                if(light[5].length != 0){
+                    this.lights[i].setSpotCutOff(light[5][0]);
+                    this.lights[i].setSpotExponent(light[5][1]);
+                }
 
                 this.lights[i].setVisible(true);
                 if (light[0])
