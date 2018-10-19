@@ -14,6 +14,7 @@ var COMPONENTS_INDEX = 8;
 var transformMap = new Map();
 var materialMap = new Map();
 var textureMap = new Map();
+var primitiveMap = new Map();
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -29,20 +30,12 @@ class MySceneGraph {
         scene.graph = this;
 
         this.nodes = [];
-        this.primitiveArray = [];
 
         this.rectangle = null;
         this.triangle = null;
         this.cylinder = null;
         this.sphere = null;
-        this.torus = null;
-
-        this.idRoot = null;                    
-
-        this.axisCoords = [];
-        this.axisCoords['x'] = [1, 0, 0];
-        this.axisCoords['y'] = [0, 1, 0];
-        this.axisCoords['z'] = [0, 0, 1];
+        this.torus = null;                    
 
         // File reading 
         this.reader = new CGFXMLreader();
@@ -55,7 +48,9 @@ class MySceneGraph {
 
         this.reader.open('scenes/' + filename, this);
 
+        //View map definido aqui pois necessitamos de aceder ás views no XMLScene
         this.viewMap = new Map();
+
         this.defaultView = null;
         
         this.currentView = [];
@@ -67,6 +62,7 @@ class MySceneGraph {
      */
     onXMLReady() {
         this.log("XML Loading finished.");
+
         var rootElement = this.reader.xmlDoc.documentElement;
 
         var error = this.parseXMLFile(rootElement);
@@ -357,12 +353,12 @@ class MySceneGraph {
 
             // Light enable/disable
             var enableLight = true;
-            var enableIndex = this.reader.getString(children[i], 'enabled');
-            if (enableIndex == null) {
+            var enable = this.reader.getString(children[i], 'enabled');
+            if (enable == null) {
                 this.onXMLMinorError("enable value missing for ID = " + lightId + "; assuming 'value = 1'");
             }
             else {
-                enableLight = enableIndex == 0 ? false : true;
+                enableLight = enable == 0 ? false : true;
             }
                 
             //Initialization
@@ -373,37 +369,22 @@ class MySceneGraph {
             this.lights[lightId][3] = [];
             this.lights[lightId][4] = [];
             this.lights[lightId][5] = [];
+            this.lights[lightId][6] = [];
+
+
             grandChildren = children[i].children;
             
-            // Specifications for the current light.
             nodeNames = [];
             for (var j = 0; j < grandChildren.length; j++) {
                 nodeNames.push(grandChildren[j].nodeName);
             }
 
-            // Gets indices of each element for both types of lights.
             var locationIndex = nodeNames.indexOf("location");
             var ambientIndex = nodeNames.indexOf("ambient");
             var diffuseIndex = nodeNames.indexOf("diffuse");
             var specularIndex = nodeNames.indexOf("specular");
 
-            // Retrieves "spot" lights extra components
-            var angles = [];
-            var exponents = [];
-            if(children[i].nodeName == "spot"){
-
-            // Gets indices of each element for the "spot" type of light.
-            var angle = this.reader.getFloat(children[i], 'angle');
-            var exponent = this.reader.getFloat(children[i], 'exponent');
-
-            this.lights[lightId][5].push(angle);
-            this.lights[lightId][5].push(exponent);
-
-
-        }
-
             // Retrieves the light location.
-            var locationLight = [];
             if (locationIndex != -1) {
                 // x
                 var x = this.reader.getFloat(grandChildren[locationIndex], 'x');
@@ -437,7 +418,7 @@ class MySceneGraph {
 
 
             // Retrieves the ambient component.
-            var ambientIllumination = [];
+
             if (ambientIndex != -1) {
                 // R
                 var r = this.reader.getFloat(grandChildren[ambientIndex], 'r');
@@ -472,7 +453,7 @@ class MySceneGraph {
 
 
             // Retrieves the diffuse component
-            var diffuseIllumination = [];
+
             if (diffuseIndex != -1) {
 
                 // R
@@ -508,7 +489,7 @@ class MySceneGraph {
 
 
             // Retrieves the specular component
-            var specularIllumination = [];
+
             if (specularIndex != -1) {
 
                 // R
@@ -543,6 +524,40 @@ class MySceneGraph {
             else
                 return "specular component undefined for ID = " + lightId;
 
+            if(children[i].nodeName == "spot"){
+
+                var angle = this.reader.getFloat(children[i], 'angle');
+                var exponent = this.reader.getFloat(children[i], 'exponent');
+                var targetIndex = nodeNames.indexOf("target");
+
+                this.lights[lightId][5].push(angle);
+                this.lights[lightId][5].push(exponent);
+
+                if (targetIndex != -1) {
+                // x
+                    var x = this.reader.getFloat(grandChildren[targetIndex], 'x');
+                    if (!(x != null && !isNaN(x)))
+                        return "unable to parse x-coordinate of the light target for ID = " + lightId;
+                    else
+                        this.lights[lightId][6].push(x);
+                    // y
+                    var y = this.reader.getFloat(grandChildren[targetIndex], 'y');
+                    if (!(y != null && !isNaN(y)))
+                        return "unable to parse y-coordinate of the light target for ID = " + lightId;
+                    else
+                        this.lights[lightId][6].push(y);
+
+                    // z
+                    var z = this.reader.getFloat(grandChildren[targetIndex], 'z');
+                    if (!(z != null && !isNaN(z)))
+                        return "unable to parse z-coordinate of the light target for ID = " + lightId;
+                    else
+                        this.lights[lightId][6].push(z);;
+                }
+                else
+                    return "light target undefined for ID = " + lightId;
+            }
+
             numLights++;
         }
 
@@ -568,7 +583,7 @@ class MySceneGraph {
 
             var primitiveId = this.reader.getString(children[i], 'id');
             if(primitiveId == null)
-                return "No ID defined for primitive";
+                 this.onXMLError("No ID defined for primitive");
 
             var grandChildren = children[i].children;
 
@@ -602,12 +617,11 @@ class MySceneGraph {
                     y2 = 0.5
                 }
 
-                this.primitiveArray[primitiveId] = new MyRectangle(this.scene, x1, x2, y1, y2);
-                //console.log(this.primitiveArray[primitiveId]);
-                //this.primitiveArray[primitiveId].updateTex(0.5, 0.5);
+                var newPrimitive = new MyRectangle(this.scene, x1, x2, y1, y2);
+                primitiveMap.set(primitiveId, newPrimitive);
 
             } 
-            else if(grandChildren[0].nodeName == "triangle"){             // Retrieves the triangle specifications
+            else if(grandChildren[0].nodeName == "triangle"){           
 
                 // x1
                 var x1 = this.reader.getFloat(grandChildren[0], 'x1');
@@ -664,7 +678,8 @@ class MySceneGraph {
                     z3 = 1.0;
                 }
 
-                this.primitiveArray[primitiveId] = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
+                var newPrimitive = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
+                primitiveMap.set(primitiveId, newPrimitive);
             } 
             else if(grandChildren[0].nodeName == "cylinder"){            // Retrieves the cylinder specifications
 
@@ -700,7 +715,9 @@ class MySceneGraph {
                     stacks = 1.0;
                 }
 
-                this.primitiveArray[primitiveId] = new MyCylinder(this.scene, base, top, height, slices, stacks);
+                var newPrimitive = new MyCylinder(this.scene, base, top, height, slices, stacks);
+                primitiveMap.set(primitiveId, newPrimitive);
+
             } 
             else if(grandChildren[0].nodeName == "sphere"){            // Retrieves the sphere specifications
             
@@ -723,7 +740,8 @@ class MySceneGraph {
                     stacks = 1.0;
                 }
 
-                this.primitiveArray[primitiveId] = new MySphere(this.scene, radius, slices, stacks);
+                var newPrimitive = new MySphere(this.scene, radius, slices, stacks);
+                primitiveMap.set(primitiveId, newPrimitive);
 
             } 
             else if(grandChildren[0].nodeName == "torus"){            // Retrieves the torus specifications
@@ -753,7 +771,8 @@ class MySceneGraph {
                     loops = 20;
                 } 
 
-                this.primitiveArray[primitiveId] = new MyTorus(this.scene, inner, outer, slices, loops);
+                var newPrimitive = new MyTorus(this.scene, inner, outer, slices, loops);
+                primitiveMap.set(primitiveId, newPrimitive);
             } 
             else
                 return "primitive undefined for ID = " + primitiveId;
@@ -895,7 +914,7 @@ class MySceneGraph {
             var shininess = this.reader.getFloat(children[i], 'shininess');
 
             if(materialID == null)
-                return "Error, ID missing for a material";
+                this.onXMLError("Error, ID missing for a material");
 
             if(shininess == null){
                 this.onXMLMinorError("Shininess missing, assuming Shininess = 120");
@@ -1423,8 +1442,6 @@ class MySceneGraph {
      */
     recursiveDisplayNode(node, textIni, matIni){
         
-        this.scene.pushMatrix();
-        
         var material = matIni;
         var texture = textIni;
 
@@ -1448,18 +1465,18 @@ class MySceneGraph {
 
         for(var i = 0; i < node.components.length; i++){
 
-                   
+            this.scene.pushMatrix();           
+            
                 this.recursiveDisplayNode(node.components[i], texture, material);
 
-
+            this.scene.popMatrix();
         }
 
         for(var i = 0; i < node.primitives.length; i++){
             
-            this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
-            this.primitiveArray[node.primitives[i]].display();
+            primitiveMap.get(node.primitives[i]).updateTex(node.texture[1], node.texture[2]);
+            primitiveMap.get(node.primitives[i]).display();
         }
-        this.scene.popMatrix();
     }
 
 }

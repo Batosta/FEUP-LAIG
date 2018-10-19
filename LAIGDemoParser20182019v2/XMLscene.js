@@ -67,6 +67,11 @@ class XMLscene extends CGFscene {
                     this.lights[i].setSpotCutOff(light[5][0]);
                     this.lights[i].setSpotExponent(light[5][1]);
                 }
+                if(light[6].length != 0){//Não sei se é esta a função
+                    this.lights[i].setSpotDirection(light[6][0]);
+                    this.lights[i].setSpotDirection(light[6][1]);
+                    this.lights[i].setSpotDirection(light[6][2]);
+                }
 
                 this.lights[i].setVisible(true);
                 if (light[0])
