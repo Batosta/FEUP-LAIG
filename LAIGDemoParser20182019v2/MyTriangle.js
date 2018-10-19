@@ -55,6 +55,8 @@ class MyTriangle extends CGFobject{
 
 	updateTex(length_s, length_t){
 		
+		if(length_s != this.sLast || length_t != this.tLast){
+
 		for(var i = 0; i < this.texCoords.length; i++){
 			if(i % 2 == 0){
 
@@ -65,5 +67,8 @@ class MyTriangle extends CGFobject{
 			}
 		}
 		this.updateTexCoordsGLBuffers();
+		this.sLast = length_s;
+		this.tLast = length_t;
+		}
 	};
 };

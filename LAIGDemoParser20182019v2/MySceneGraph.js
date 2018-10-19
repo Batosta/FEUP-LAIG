@@ -1457,7 +1457,7 @@ class MySceneGraph {
         for(var i = 0; i < node.primitives.length; i++){
             
             //if(node.texture[0] != "inherit"){
-                //this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
+                this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
             //}
             this.primitiveArray[node.primitives[i]].display();
         }

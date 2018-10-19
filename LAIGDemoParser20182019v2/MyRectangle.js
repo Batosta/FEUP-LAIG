@@ -17,8 +17,10 @@ class MyRectangle extends CGFobject{
 		this.minT = 0;
 		this.maxT = y2-y1;
 
-		this.initBuffers();
+		this.sLast = null;
+		this.tLast = null;
 
+		this.initBuffers();
 	}
 
 	initBuffers(){
@@ -53,6 +55,8 @@ class MyRectangle extends CGFobject{
 
 	updateTex(length_s, length_t){
 		
+		if(length_s != this.sLast || length_t != this.tLast){
+
 		for(var i = 0; i < this.texCoords.length; i++){
 			if(i % 2 == 0){
 
@@ -63,5 +67,8 @@ class MyRectangle extends CGFobject{
 			}
 		}
 		this.updateTexCoordsGLBuffers();
+		this.sLast = length_s;
+		this.tLast = length_t;
+		}
 	};
 };
