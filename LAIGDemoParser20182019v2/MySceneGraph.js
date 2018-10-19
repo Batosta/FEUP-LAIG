@@ -1334,7 +1334,7 @@ class MySceneGraph {
                         }
                         primitives.push(primitiveID);
                     }
-                    else {  // grandgrandchildren[z].nodeName == "componentref"
+                    else { 
 
                         var componentID = this.reader.getString(grandgrandchildren[z], "id");
                         if(componentID == null){
@@ -1407,14 +1407,14 @@ class MySceneGraph {
         var root_node;
         for(var i = 0; i < this.nodes.length; i++){
 
-            if(this.nodes[i].ID == "child_room"){
+            if(this.nodes[i].ID == this.root){
                 root_node = this.nodes[i];
                 break;
             }
         }
 
-        var default_text = "leaves";
-        var default_mat = "mat0";
+        var default_text = null;
+        var default_mat = null;
         this.recursiveDisplayNode(root_node, default_text, default_mat);
     }
 
@@ -1427,7 +1427,7 @@ class MySceneGraph {
         
         var material = matIni;
         var texture = textIni;
-    
+
         if(node.material != "inherit")
             material = node.material;
 
@@ -1456,9 +1456,7 @@ class MySceneGraph {
 
         for(var i = 0; i < node.primitives.length; i++){
             
-            //if(node.texture[0] != "inherit"){
-                this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
-            //}
+            this.primitiveArray[node.primitives[i]].updateTex(node.texture[1], node.texture[2]);
             this.primitiveArray[node.primitives[i]].display();
         }
         this.scene.popMatrix();
