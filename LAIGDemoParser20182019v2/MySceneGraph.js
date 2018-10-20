@@ -37,7 +37,6 @@ class MySceneGraph {
         this.sphere = null;
         this.torus = null;                    
 
-        // File reading 
         this.reader = new CGFXMLreader();
 
         /*
@@ -1313,12 +1312,21 @@ class MySceneGraph {
 
             if(grandchildren[k].nodeName == "materials"){
 
+                var material = [];
+
                 var grandgrandchildren = grandchildren[k].children;
-                var material = this.reader.getString(grandgrandchildren[0], "id");
-                if(material == null){
-                    onXMLMinorError("Unable to parse the material ID, assuming default material");
-                    material ="mat0";
+
+                for(var m = 0; m < grandgrandchildren.length; m++){
+
+                    var materials = this.reader.getString(grandgrandchildren[m], "id");
+
+                    if(materials == null)
+                        onXMLError("Unable to parse the material ID, assuming default material");
+                    else
+                        material.push(materials);
+
                 }
+                
             }
 
             if(grandchildren[k].nodeName == "texture"){
@@ -1450,8 +1458,10 @@ class MySceneGraph {
         var length_s = iniS;
         var length_t = iniT;
 
-        if(node.material != "inherit")
-            material = node.material;
+        var index = this.counterMaterial % node.material.length;
+
+        if(node.material[index] != "inherit")
+            material = node.material[index];
 
         if(node.texture[0] != "inherit"){
 

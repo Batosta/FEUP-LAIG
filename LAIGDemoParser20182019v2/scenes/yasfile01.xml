@@ -92,38 +92,38 @@
 	<!--													MATERIALS 															-->
 	<materials>
 		<material id="mat0" shininess="100.0">
-			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
-			<ambient r="0.6" g="0.6" b="0.6" a="1.0" />
-			<diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
-			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
+			<ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
 		</material>
 
 		<material id="mat1" shininess="120.0">
-			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
 			<ambient r="0.5" g="0.5" b="0.5" a="1.0" />
-			<diffuse r="0.4" g="1.0" b="0.8" a="1.0" />
-			<specular r="0.1" g="0.1" b="0.1" a="1.0" />
+			<diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
+			<specular r="0.5" g="0.5" b="0.5" a="1.0" />
 		</material>
 
 		<material id="mat2" shininess="120.0">
-			<emission r="0.3" g="0.3" b="0." a="1.0" />
-			<ambient r="0.6" g="0.6" b="0.9" a="1.0" />
-			<diffuse r="0.8" g="0.8" b="0.9" a="1.0" />
-			<specular r="0.1" g="0.1" b="0.1" a="1.0" />
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
+			<ambient r="0.0" g="0.0" b="0.0" a="1.0" />
+			<diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
+			<specular r="0.0" g="0.0" b="0.0" a="1.0" />
 		</material>
 
 		<material id="mat3" shininess="120.0">
-			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
-			<ambient r="0.6" g="0.6" b="0.6" a="1.0" />
-			<diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
-			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
+			<ambient r="0.8" g="0.8" b="0.8" a="1.0" />
+			<diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+			<specular r="0.2" g="0.2" b="0.2" a="1.0" />
 		</material>
 
 		<material id="mat4" shininess="120.0">
-			<emission r="0.3" g="0.3" b="0.3" a="1.0" />
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
 			<ambient r="0.6" g="0.6" b="0.6" a="1.0" />
-			<diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
-			<specular r="0.8" g="0.8" b="0.8" a="1.0" />
+			<diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+			<specular r="0.1" g="0.1" b="0.1" a="1.0" />
 		</material>
 	</materials>
 
@@ -1092,6 +1092,9 @@
 
 			<materials> 
 				<material id="inherit" />
+				<material id="mat1" />
+				<material id="mat2" />
+				<material id="mat3" />
 			</materials> 
  
 			<texture id="metal" length_s="1.0" length_t="1.0" />
@@ -1624,6 +1627,9 @@
 
 			<materials>
 				<material id="inherit" />
+				<material id="mat1" />
+				<material id="mat2" />
+				<material id="mat3" />
 			</materials>
 
 			<texture id="red" length_s="1.0" length_t="1.0" />
@@ -1816,6 +1822,9 @@
 
 			<materials>
 				<material id="inherit" />
+				<material id="mat1" />
+				<material id="mat2" />
+				<material id="mat3" />
 			</materials>
 
 			<texture id="red" length_s="1.0" length_t="1.0" />
@@ -2222,6 +2231,9 @@
 
 			<materials>
 				<material id="inherit" />
+				<material id="mat1" />
+				<material id="mat2" />
+				<material id="mat3" />
 			</materials>
 
 			<texture id="wood" length_s="1.0" length_t="1.0" />
@@ -2445,6 +2457,9 @@
 
 			<materials> 
 				<material id="inherit" />
+				<material id="mat1" />
+				<material id="mat2" />
+				<material id="mat3" />
 			</materials> 
  
 			<texture id="metal" length_s="1.0" length_t="1.0" />
@@ -2588,6 +2603,9 @@
 
 			<materials> 
 				<material id="inherit" />
+				<material id="mat1" />
+				<material id="mat2" />
+				<material id="mat3" />
 			</materials> 
  
 			<texture id="metal" length_s="1.0" length_t="1.0" />
@@ -3123,6 +3141,9 @@
 
 			<materials> 
 				<material id="inherit" />
+				<material id="mat1" />
+				<material id="mat2" />
+				<material id="mat3" />
 			</materials> 
  
 			<texture id="wood" length_s="1.0" length_t="1.0" />
