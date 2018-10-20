@@ -1323,8 +1323,7 @@ class MySceneGraph {
 
                 var textID = this.reader.getString(grandchildren[k], "id");
                 if(textID == null){
-                    onXMLMinorError("Unable to parse the texture, assuming default texture");
-                    textID = "red";
+                    onXMLError("Unable to parse the texture, assuming default texture");
                 }
                 var length_s = this.reader.getFloat(grandchildren[k], "length_s");
                 if (!(length_s != null && !isNaN(length_s))){
@@ -1434,16 +1433,20 @@ class MySceneGraph {
 
         var default_text = null;
         var default_mat = null;
-        this.recursiveDisplayNode(root_node, default_text, default_mat);
+        var default_S = null;
+        var default_T = null;
+        this.recursiveDisplayNode(root_node, default_text, default_mat, default_S, default_T);
     }
 
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
-    recursiveDisplayNode(node, textIni, matIni){
+    recursiveDisplayNode(node, textIni, matIni, iniS, iniT){
         
         var material = matIni;
         var texture = textIni;
+        var length_s = iniS;
+        var length_t = iniT;
 
         if(node.material != "inherit")
             material = node.material;
@@ -1451,9 +1454,16 @@ class MySceneGraph {
         if(node.texture[0] != "inherit"){
 
             texture = node.texture[0];
+
+            if(node.texture[1] != "null" && node.texture[2] != "null")
+
+                length_s = node.texture[1];
+                length_t = node.texture[2];
         }
 
-        materialMap.get(material).setTexture(textureMap.get(texture));
+        if(texture != null)
+            materialMap.get(material).setTexture(textureMap.get(texture));
+        
         materialMap.get(material).apply();
 
 
@@ -1467,14 +1477,16 @@ class MySceneGraph {
 
             this.scene.pushMatrix();           
             
-                this.recursiveDisplayNode(node.components[i], texture, material);
+                this.recursiveDisplayNode(node.components[i], texture, material, length_s, length_t);
 
             this.scene.popMatrix();
         }
 
         for(var i = 0; i < node.primitives.length; i++){
             
-            primitiveMap.get(node.primitives[i]).updateTex(node.texture[1], node.texture[2]);
+            if(texture != null)
+                primitiveMap.get(node.primitives[i]).updateTex(length_s, length_t);
+      
             primitiveMap.get(node.primitives[i]).display();
         }
     }
