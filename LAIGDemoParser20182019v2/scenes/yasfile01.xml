@@ -129,8 +129,6 @@
 
 
 
-
-
 	<!--													TRANSFORMATIONS 															-->
 	<transformations>
 		<!-- Unit Cube -->
@@ -757,8 +755,6 @@
 
 
 
-
-
 	<!--													PRIMITIVES 															-->
 	<primitives>
 
@@ -798,8 +794,6 @@
 			<torus inner="0.1" outer="4.0" slices="30" loops="30" />
 		</primitive>
 	</primitives>
-
-
 
 
 
