@@ -54,6 +54,8 @@ class MySceneGraph {
         this.defaultView = null;
         
         this.currentView = [];
+
+        this.counterMaterial = 0;
     }
 
 

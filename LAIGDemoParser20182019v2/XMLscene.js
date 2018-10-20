@@ -1,5 +1,6 @@
 var DEGREE_TO_RAD = Math.PI / 180;
 
+
 /**
  * XMLscene class, representing the scene that is to be rendered.
  */
@@ -34,6 +35,8 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
+
+        this.keyMPressed = false;
     }
 
     /**
@@ -133,6 +136,9 @@ class XMLscene extends CGFscene {
         this.pushMatrix();
 
         if (this.sceneInited) {
+
+            this.checkKeys();
+
             var i = 0;
             for (var key in this.lightValues) {
                 if (this.lightValues.hasOwnProperty(key)) {
@@ -152,11 +158,21 @@ class XMLscene extends CGFscene {
             this.camera = this.graph.viewMap.get(this.currentView);
             this.interface.setActiveCamera(this.camera);
 
-            // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
         }
 
         this.popMatrix();
-        // ---- END Background, camera and axis setup
+    }
+
+    checkKeys(){
+
+        if(this.gui.isKeyPressed("KeyM") && this.keyMPressed == false){
+            this.keyMPressed = true;
+        }
+        if(this.gui.isKeyReleased("KeyM") && this.keyMPressed == true){
+            console.log("m");
+            this.graph.counterMaterial++;
+            this.keyMPressed = false;
+        }
     }
 }
