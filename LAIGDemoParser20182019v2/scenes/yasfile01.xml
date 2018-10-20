@@ -30,28 +30,28 @@
 
 		<!-- Omni Lights -->
 		<omni id="Omni0" enabled="0">
-			<location x="19.0" y="9.0" z="1.0" w="1.0"/>
+			<location x="9.0" y="9.0" z="-9.0" w="1.0"/>
 			<ambient r="0.5" g="0.5" b="0.5" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
 		</omni>
 
 		<omni id="Omni1" enabled="0">
-			<location x="1.0" y="9.0" z="19.0" w="1.0"/>
+			<location x="-9.0" y="9.0" z="9.0" w="1.0"/>
 			<ambient r="0.5" g="0.5" b="0.5" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="0.0" g="0.0" b="0.0" a="0.0" />
 		</omni>
 
 		<omni id="Omni2" enabled="0">
-			<location x="1.0" y="9.0" z="1.0" w="1.0"/>
+			<location x="-9.0" y="9.0" z="-9.0" w="1.0"/>
 			<ambient r="0.5" g="0.5" b="0.5" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
 		</omni>
 
 		<omni id="Omni3" enabled="0">
-			<location x="19.0" y="9.0" z="19.0" w="1.0"/>
+			<location x="9.0" y="9.0" z="9.0" w="1.0"/>
 			<ambient r="0.5" g="0.5" b="0.5" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
@@ -59,7 +59,7 @@
 
 		<!-- Spot Lights -->
 		<spot id="Spot0" enabled="1" angle="0.5" exponent="1.0" >
-			<location x="10.0" y="9.0" z="10.0" w="1.0"/>
+			<location x="0.0" y="9.0" z="0.0" w="1.0"/>
 			<target x="5" y="5" z="5" />
 			<ambient r="0.5" g="0.5" b="0.5" a="0.1" />
 			<diffuse r="0.1" g="0.1" b="0.1" a="0.1" />
@@ -293,6 +293,7 @@
 			<scale x="1.0" y="1.2" z="1.0" />
 			<translate x="3.1" y="-1.1" z="-3.5" />
 		</transformation>
+
 		<!-- Bed -->
 		<transformation id="bed0">
             <scale x="4.0" y="1.5" z="8.0" />
@@ -324,6 +325,7 @@
 		<transformation id="full_bed">
 			<translate x="2.2" y="0.75" z="4.2" />
 		</transformation>
+
 		<!-- Pillows -->
 		<transformation id="pillow0">
 			<translate x="0.0" y="5.3" z="-2.8" />
@@ -333,6 +335,7 @@
 			<translate x="0.0" y="0.8" z="-2.8" />
 			<scale x="3.0" y="0.3" z="1.5" />
 		</transformation>
+
 		<!-- Bed protections -->
 		<transformation id="bedprotection0">
 			<scale x="0.2" y="0.8" z="4.0" />
@@ -394,6 +397,7 @@
 		<transformation id="triangleC">
 			<rotate axis="y" angle="180" />
 		</transformation>
+
 		<!-- Rocket -->
 		<transformation id="rocket_body">
 			<translate x="0.0" y="0.5" z="0.0" />
@@ -462,6 +466,7 @@
 			<rotate axis="y" angle="-15" />
 			<scale x="0.3" y="0.3" z="0.3" />
 		</transformation>
+
 		<!-- Train Carriage -->
 		<transformation id="train_carriage0">
 			<scale x="10.0" y="3.0" z="3.0" />
@@ -498,6 +503,7 @@
 			<translate x="-10.5" y="0.5" z="-2.0" />
 			<rotate axis="y" angle="-15" />
 		</transformation>
+
 		<!-- Train Front -->
 		<transformation id="train_front_rectangle">
 			<scale x="2.0" y="2.0" z="3.0" />
@@ -519,6 +525,7 @@
 			<translate x="6.0" y="0.05" z="0.0" />
 			<scale x="1.5" y="1.44" z="1.0" />
 		</transformation>
+
 		<!-- Train body -->
 		<transformation id="train_body0">
 			<scale x="10.0" y="2.0" z="3.0" />
@@ -541,6 +548,7 @@
 			<scale x="1.0" y="1.25" z="1.25" />
 			<rotate axis="y" angle="90" />
 		</transformation>
+
 		<!-- Train chimney -->
 		<transformation id="train_chimney0">
 			<scale x="0.3" y="0.6" z="0.3" />
@@ -641,12 +649,14 @@
 			<translate x="0.75" y="0.0" z="0.0" />
 			<scale x="0.125" y="0.125" z="5.0" />
 		</transformation>
+
 		<!-- Curtain -->
 		<transformation id="curtain">
 			<translate x="1.0" y="-15.0" z="12.5" />
 			<scale x="1.0" y="30.0" z="22.5" />
 			<rotate axis="y" angle="90" />
 		</transformation>
+
 		<!-- Window -->
 		<transformation id="window">
 			<translate x="0.0" y="-15.0" z="12.5" />
@@ -737,6 +747,12 @@
 			<translate x="12.5" y="0.0" z="12.5" />
 			<scale x="0.5" y="0.5" z="0.5" />
 		</transformation>
+
+
+		<!-- Child Room -->
+		<transformation id="child_room">
+			<translate x="-10.0" y="0.0" z="-10.0" />
+		</transformation>
 	</transformations> 
 
 
@@ -746,32 +762,35 @@
 	<!--													PRIMITIVES 															-->
 	<primitives>
 
+		<!-- Rectangles -->
 		<primitive id="rectangle">
 			<rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
 		</primitive>
 
+		<!-- Triangles -->
 		<primitive id="triangle">
 			<triangle x1="0.0" y1="0.0" z1="0.0" 
 				x2="0.0" y2="-1.0" z2="0.0" 
 				x3="0.0" y3="0.0" z3="1.0" />
 		</primitive>
 		
+		<!-- Cylinders -->
 		<primitive id="cylinder">
 			<cylinder base="2.5" top="2.5" height="5.0" slices="20" stacks="20" />
 		</primitive>
-
 		<primitive id="rocket_nose">
 			<cylinder base="0.75" top="0.001" height="2.0" slices="20" stacks="20" />
 		</primitive>
-
 		<primitive id="rocket_propulsion">
 			<cylinder base="0.6" top="0.4" height="0.6" slices="20" stacks="20" />
 		</primitive>
-		
+
+		<!-- Spheres -->
 		<primitive id="sphere">
 			<sphere radius="2.0" slices="30" stacks="20" />
 		</primitive>
 		
+		<!-- Torus -->
 		<primitive id="torus">
 			<torus inner="1.75" outer="4.0" slices="30" loops="30" />
 		</primitive>
@@ -2072,6 +2091,7 @@
 				<componentref id="cube" /> 
 			</children> 
 		</component>
+
 		<!-- Smaller Protection -->
 		<component id="bedprotection0">
 			<transformation>
@@ -2088,6 +2108,7 @@
 				<componentref id="cube" /> 
 			</children> 
 		</component>
+
 		<!-- Bigger Protection -->
 		<component id="bedprotection1">
 			<transformation>
@@ -2218,7 +2239,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="metal" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="cylinder" /> 
@@ -2261,7 +2282,7 @@
 
 
 
-		<!-- Wall -->
+		<!-- Walls -->
 		<component id="wall0"> 
 			<transformation> 
 				<transformationref id="wall0" />
@@ -3177,10 +3198,11 @@
 
 
 		<!-- Root Component -->
-		<!-- This texture is the wall's texture -->
+		<!-- The root texture is the wall's texture -->
 		<component id="child_room">
-			<transformations>
-			</transformations>
+			<transformation>
+				<transformationref id="child_room" />
+			</transformation>
 
 			<materials>
 				<material id="mat0" />
@@ -3192,8 +3214,6 @@
 				<componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="walls" />
-				<componentref id="left_rail" />
-				<componentref id="right_rail" />
 				<componentref id="trail" />
 				<componentref id="bed" />
 				<componentref id="train" />

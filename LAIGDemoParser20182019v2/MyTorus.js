@@ -1,32 +1,52 @@
 /**
- * MyTorus
- * @constructor
+ * MyTorus class - Represents the primitive torus
  */
 class MyTorus extends CGFobject {
+
+    /**
+     * @constructor of the torus
+     *
+     * @param scene - The global scene
+     * @param inner - Radius of the torus
+     * @param outer - Radius of each loop
+     * @param slices - Number of slices (vertices) for each loop of the torus
+     * @param loops - Number of loops of the sphere
+     */
   	constructor(scene, inner, outer, slices, loops) {
 
     	 super(scene);
 
-    	 this.inner = inner;    //  The "tube" radius
-    	 this.outer = outer;    //  Radius of the the "circular axis" of the torus
-    	 this.slices = slices;  //  Number of vertexes on each loop
-    	 this.loops = loops;    //  Number of "circles" in the torus
+    	 this.inner = inner;
+    	 this.outer = outer;
+    	 this.slices = slices;
+    	 this.loops = loops;
 
        this.texCoordsAux = [];
 
     	 this.initBuffers();
   	};
 
+    /**
+     * Function that determines each vertice position, indices, normals and texture coordinates
+     */
   	initBuffers() {
 
-      this.vertices = [];
-      this.normals = [];
-      this.indices = [];
-      this.texCoords = [];
+      //Arrays that contain the values needed to the construction of the torus
+      this.vertices = [
+      ];
+      this.indices = [
+      ];
+      this.normals = [
+      ];
+      this.texCoords = [
+      ];
 
+      // Angle difference between each vertex in each loop
       var angle = (2 * Math.PI) / this.slices;
+      // Angle difference between loops
       var angle1 = (2 * Math.PI) / this.loops; 
       
+      // for that determines the vertices, indices, normals and texture coordinates values
       for(let j = 0; j < this.loops; j++){
         for(let i = 0; i < this.slices; i++){
 
@@ -51,5 +71,10 @@ class MyTorus extends CGFobject {
       this.initGLBuffers();
     };
 
+    /**
+     * Function that updates the texture coordinates
+     * @length_s - The length of the s component on each texture
+     * @length_t - The length of the t component on each texture
+     */
     updateTex(length_s, length_t){};
 };

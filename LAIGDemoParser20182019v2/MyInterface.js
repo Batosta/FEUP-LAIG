@@ -45,28 +45,52 @@ class MyInterface extends CGFinterface {
         }
     }
 
+    /**
+     * Function that adds the views
+     * @param scene - Global scene
+     * @param views - Views to be added
+     */
     addViewsGroup(scene, views){
         this.gui.add(scene, 'currentView', views);
     }
 
+    /**
+     * Function that initializes the keyboard keys
+     */
     initKeys(){
         this.scene.gui = this;
         this.processKeyboard = function(){};
         this.activeKeys={};
     }
 
+    /**
+     * Function that checks if a certain key is being pressed
+     * @param event - The event to be checked
+     */
     processKeyDown(event){
         this.activeKeys[event.code]=true;
     }
 
+    /**
+     * Function that checks if a certain key is not being pressed
+     * @param event - The event to be checked
+     */
     processKeyUp(event){
         this.activeKeys[event.code]=false;
     }
 
+    /**
+     * Function that checks if a certain key has been pressed
+     * @param keyCode - The code of a certain key
+     */
     isKeyPressed(keyCode){
         return this.activeKeys[keyCode] || false;
     }
 
+    /**
+     * Function that checks if a certain key has been released
+     * @param keyCode - The code of a certain key
+     */
     isKeyReleased(keyCode){
         if(this.activeKeys[keyCode])
             return false;

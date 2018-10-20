@@ -45,6 +45,7 @@ class XMLscene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(40, 25, 40), vec3.fromValues(0, 0, 0));
     }
+    
     /**
      * Initializes the scene lights with the values read from the XML file.
      */
@@ -164,6 +165,9 @@ class XMLscene extends CGFscene {
         this.popMatrix();
     }
 
+     /**
+     * Function that takes care of the response to the M key being pressed.
+     */
     checkKeys(){
 
         if(this.gui.isKeyPressed("KeyM") && this.keyMPressed == false){

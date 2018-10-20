@@ -1,15 +1,18 @@
 /**
- * MyCircle
- *
- * @param gl {WebGLRenderingContext}
- * @constructor
+ * MyCircle class - Represents a circle
  */
-
 class MyCircle extends CGFobject
 {
-	constructor(scene, slices, minS = 0, maxS = 1, minT = 0, maxT = 1)
+	/**
+     * @constructor of the circle
+     *
+     * @param scene - The global scene
+     * @param slices - Number of slices (vertices) on the circle
+     */
+	constructor(scene, slices)
     {
     	super(scene);
+
     	this.slices = slices;
 
     	this.texCoordsAux = [];
@@ -17,30 +20,33 @@ class MyCircle extends CGFobject
     	this.initBuffers();
     };
 
+    /**
+     * Function that determines each vertice position, indices, normals and texture coordinates
+     */
 	initBuffers() 
 	{
 		
+		//Arrays that contain the values needed to the construction of the circle
 		this.vertices = [
 		];
-
 		this.indices = [
 		];
-		
 		this.normals = [
 		];
-
 		this.texCoords = [
 		];
 
-
-		var rotAngle = 0;
+		// Angle difference between each vertex
 		var ang = 2 * Math.PI / this.slices;
+		// Variable to be incremented by the ang
+		var rotAngle = 0;
 
-
+		//Initial values
 		this.vertices.push(0, 0, 0);
 		this.normals.push(0, 0, 1);
 		this.texCoords.push(0.5, 0.5);
 		
+		// for that determines the vertices, normals and indices values
 		for(var i = 1; i <= this.slices; i++){
 
 			this.vertices.push(Math.cos(rotAngle), Math.sin(rotAngle), 0);
@@ -56,17 +62,14 @@ class MyCircle extends CGFobject
 			rotAngle += ang;
 		}
 
-
-
         rotAngle = 0;
+        // for that determines the texture coordinates
 		for(var i = 0; i < this.slices; i++){
 
 		    this.texCoords.push(0.5 + Math.cos(rotAngle)/2.0, 0.5 - Math.sin(rotAngle)/2.0);
 		    rotAngle += ang;
 		}
 
-
-	    
 		this.primitiveType=this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	};

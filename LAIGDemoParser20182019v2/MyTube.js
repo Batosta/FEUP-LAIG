@@ -1,8 +1,18 @@
 /**
- * MyTube
- * @constructor
+ * MyTube class - Represents a tube (cylinder without bases)
  */
 class MyTube extends CGFobject {
+
+    /**
+     * @constructor of the cylinder
+     *
+     * @param scene - The global scene
+     * @param base - Radius of the tube's base
+     * @param top - Radius of the tube's top
+     * @param height - Height of the tube
+     * @param slices - Number of slices (vertices) for each stack of the tube
+     * @param stacks - Number of stacks of the tube
+     */
     constructor(scene, base, top, height, slices, stacks) {
         super(scene);
 
@@ -17,20 +27,35 @@ class MyTube extends CGFobject {
         this.initBuffers();
     };
 
+    /**
+     * Function that determines each vertice position, indices, normals and texture coordinates
+     */
     initBuffers() {
 
-        this.vertices = [];
-        this.normals = [];
-        this.indices = [];
-        this.texCoords = [];
+        //Arrays that contain the values needed to the construction of the circle
+        this.vertices = [
+        ];
+        this.indices = [
+        ];
+        this.normals = [
+        ];
+        this.texCoords = [
+        ];
 
+        // Angle difference between each vertex
         var angle = (2 * Math.PI) / this.slices;
+        // Difference between each stack
         var stackSize = this.height / this.stacks;
+        // Difference between top and base's radius
         var topBase = this.top-this.base;
-        var diff = topBase/this.stacks; //Difference from Base to Top for Each Stack
+        // Difference between top and base's radius for each stack
+        var diff = topBase/this.stacks;
+        // Normal angle
         var theta = Math.atan(topBase/this.height);
+        // A multiplier
         var mult = this.base;
 
+        // for that determines the vertices, normals and texture coordinates values
         for (let k = 0; k <= this.stacks; k++) {
             for (let i = 0; i <= this.slices; i++) {
 
@@ -44,6 +69,7 @@ class MyTube extends CGFobject {
             mult = (k+1) * diff + this.base;
         }
 
+        // for that determines the indices
         for (let k = 0; k <= this.stacks; k++) {
             for (let i = 0; i <= this.slices; i++) {
 

@@ -1,5 +1,22 @@
+/**
+ * MyTriangle class - Represents the primitive triangle
+ */
 class MyTriangle extends CGFobject{
 
+	/**
+     * @constructor of the triangle
+     *
+     * @param scene - The global scene
+     * @param x1 - The X coordinate of the first point
+     * @param x2 - The X coordinate of the second point
+     * @param x3 - The X coordinate of the third point
+     * @param y1 - The Y coordinate of the first point
+     * @param y2 - The Y coordinate of the second point
+     * @param y3 - The Y coordinate of the third point
+     * @param z1 - The Z coordinate of the first point
+     * @param z2 - The Z coordinate of the second point
+     * @param z3 - The Z coordinate of the third point
+     */
 	constructor(scene, x1, x2, x3, y1, y2, y3, z1, z2, z3){
 
 		super(scene);
@@ -19,29 +36,30 @@ class MyTriangle extends CGFobject{
 		this.initBuffers();
 	}
 
+	/**
+     * Function that determines each vertice position, indices, normals and texture coordinates
+     */
 	initBuffers(){
 
-		//Distancias
+		//Distances between each point
 		var a = Math.sqrt(Math.pow(this.x1-this.x3, 2) + Math.pow(this.y1-this.y3, 2) + Math.pow(this.z1-this.z3, 2));
 		var b = Math.sqrt(Math.pow(this.x2-this.x1, 2) + Math.pow(this.y2-this.y1, 2) + Math.pow(this.z2-this.z1, 2));
 		var c = Math.sqrt(Math.pow(this.x3-this.x2, 2) + Math.pow(this.y3-this.y2, 2) + Math.pow(this.z3-this.z2, 2));
 
-		//Angulo interno
+		//Inner angle
 		var value = (Math.pow(a, 2) - Math.pow(b, 2) + Math.pow(c, 2)) / (2*a*c);
 		var beta = Math.acos(value);
 
+		//Arrays that contain the values needed to the construction of the triangle
 		this.vertices = [this.x1, this.y1, this.z1,
 						this.x2, this.y2, this.z2,
 						this.x3, this.y2, this.z3
 		];
-
 		this.indices = [0, 1, 2];
-
 		this.normals = [0, 0, 1,
 						0, 0, 1,
 						0, 0, 1	
 		];
-		
 		this.texCoords = [c - a*value, a*Math.sin(beta),
 						   0, this.lenght_t,
 						   c, this.lenght_t
@@ -53,6 +71,11 @@ class MyTriangle extends CGFobject{
 		this.initGLBuffers();
 	};
 
+	/**
+     * Function that updates the texture coordinates
+     * @length_s - The length of the s component on each texture
+     * @length_t - The length of the t component on each texture
+     */
 	updateTex(length_s, length_t){
 		
 		if(length_s != this.sLast || length_t != this.tLast){
