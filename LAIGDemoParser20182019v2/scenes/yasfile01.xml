@@ -6,7 +6,7 @@
 
 	<!--													VIEWS 															-->
 	<views default="Perspective">
-		<perspective id="Perspective" near="0.1" far="500" angle="0.9">
+		<perspective id="Perspective" near="0.1" far="500" angle="51">
 			<from x="30" y="20" z="30" />
 			<to x="0" y="0" z="0" />
 		</perspective>

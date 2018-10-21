@@ -1243,11 +1243,11 @@ class MySceneGraph {
                 // angle
                 var angle = this.reader.getFloat(children[i], 'angle');
                 if (!(angle != null && !isNaN(angle))) {
-                    angle = 0.4;
-                    this.onXMLMinorError("unable to parse value for angle; assuming 'angle = 0.4'");
+                    angle = 50;
+                    this.onXMLMinorError("unable to parse value for angle; assuming 'angle = 50'");
                 }
 
-                var newPcamera = new CGFcamera(angle, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt));
+                var newPcamera = new CGFcamera(angle*DEGREE_TO_RAD, near, far, vec3.fromValues(xf, yf, zf), vec3.fromValues(xt, yt, zt));
                 this.viewMap.set(ID, newPcamera);
                 
             }
