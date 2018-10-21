@@ -7,11 +7,11 @@
 	<!--													VIEWS 															-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="51">
-			<from x="30" y="20" z="30" />
+			<from x="20" y="20" z="20" />
 			<to x="0" y="0" z="0" />
 		</perspective>
 
-		<ortho id="Orthogonal" near="0.1" far="500.0" left="-15" right="15" top="15" bottom="-15" >
+		<ortho id="Orthogonal" near="0.1" far="500.0" left="-2.5" right="22.5" top="7.5" bottom="-7.5" >
 			<from x="15" y="5" z="10" />
 			<to x="10" y="5" z="10" />
 		</ortho>
