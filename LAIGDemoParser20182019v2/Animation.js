@@ -1,0 +1,3 @@
+class Animation extends CGFobject{
+
+};
