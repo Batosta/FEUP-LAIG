@@ -8,9 +8,10 @@ var AMBIENT_INDEX = 2;
 var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
 var MATERIALS_INDEX = 5;
-var TRANSFORMATIONS_INDEX = 6;
-var PRIMITIVES_INDEX = 7;
-var COMPONENTS_INDEX = 8;
+var ANIMATIONS_INDEX = 6;
+var TRANSFORMATIONS_INDEX = 7;
+var PRIMITIVES_INDEX = 8;
+var COMPONENTS_INDEX = 9;
 
 // Map that contains all the transformations
 var transformMap = new Map();
@@ -23,6 +24,9 @@ var textureMap = new Map();
 
 // Map that contains all the primitives
 var primitiveMap = new Map();
+
+// Map that contains all the animations
+var animationsMap = new Map();
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -173,6 +177,18 @@ class MySceneGraph {
 
             //Parse MATERIALS block
             if ((error = this.parseMaterials(nodes[index])) != null)
+                return error;
+        }
+
+        // <ANIMATIONS>
+        if ((index = nodeNames.indexOf("animations")) == -1)
+            return this.onXMLError("tag <animations> missing");
+        else {
+            if (index != ANIMATIONS_INDEX)
+                this.onXMLMinorError("tag <animations> out of order");
+
+            //Parse ANIMATIONS block
+            if ((error = this.parseAnimations(nodes[index])) != null)
                 return error;
         }
 
@@ -1151,11 +1167,143 @@ class MySceneGraph {
         return null;
     }
 
+
+    /**
+     * Parses the <ANIMATIONS> node.
+     * @param {animations block element} animationsNode
+     */
+    parseAnimations(animationsNode){
+
+        // linear or circular
+        var children = animationsNode.children;
+
+        // Any number of animations
+        for(var i = 0; i < children.length; i++){
+
+            // Checks if it is a valid ID
+            var ID = this.reader.getString(children[i], 'id');
+            if(ID == null)
+                this.onXMLError("ID missing");
+
+            // Checks if it is a valid time
+            var time = this.reader.getFloat(children[i], 'time');
+            if (!(time != null && !isNaN(time))) {
+                this.onXMLMinorError("unable to parse time; assuming 'time = 10.0'");
+                time = 10.0;
+            }
+
+            // linear
+            if(children[i].nodeName == "linear"){
+
+                // point
+                var grandchildren = children[i].children;
+
+                // Array of arrays that has all the control points
+                var points = [];
+
+                // Any number of control points
+                for(var k = 0; k < grandchildren.length; k++){
+
+                    // Array that has each control point
+                    var auxPoints = [];
+
+                    // x
+                    var x = this.reader.getFloat(grandchildren[k], 'x');
+                    if (!(x != null && !isNaN(x))) {
+                        this.onXMLMinorError("unable to parse x; assuming 'x = 0.0'");
+                        x = 0.0;
+                    }
+
+                    // y
+                    var y = this.reader.getFloat(grandchildren[k], 'y');
+                    if (!(y != null && !isNaN(y))) {
+                        this.onXMLMinorError("unable to parse y; assuming 'y = 0.0'");
+                        y = 0.0;
+                    }
+
+                    // z
+                    var z = this.reader.getFloat(grandchildren[k], 'z');
+                    if (!(z != null && !isNaN(z))) {
+                        this.onXMLMinorError("unable to parse z; assuming 'z = 0.0'");
+                        z = 0.0;
+                    }
+
+                    auxPoints.push(x, y, z);
+                    points.push(auxPoints);
+                }
+
+                var newLinear = new LinearAnimation(this, time, points);
+                animationsMap.set(ID, newLinear);
+            }
+            // circular
+            else if(children[i].nodeName == "circular"){
+
+                // Checks if it is a valid radius
+                var radius = this.reader.getFloat(children[i], 'radius');
+                if (!(radius != null && !isNaN(radius))) {
+                    this.onXMLMinorError("unable to parse radius; assuming 'radius = 5.0'");
+                    radius = 5.0;
+                }
+
+                // center and angle
+                var grandchildren = children[i].children;
+
+                // Arrays that will hold the center coordinates and the values of the angles
+                var center = [];
+                var angle = [];
+
+                // center x
+                var x = this.reader.getFloat(grandchildren[0], 'x');
+                if (!(x != null && !isNaN(x))) {
+                    this.onXMLMinorError("unable to parse x; assuming 'x = 0.0'");
+                    x = 0.0;
+                }
+
+                // center y
+                var y = this.reader.getFloat(grandchildren[0], 'y');
+                if (!(y != null && !isNaN(y))) {
+                    this.onXMLMinorError("unable to parse y; assuming 'y = 0.0'");
+                    y = 0.0;
+                }
+
+                // center z
+                var z = this.reader.getFloat(grandchildren[0], 'z');
+                if (!(z != null && !isNaN(z))) {
+                    this.onXMLMinorError("unable to parse z; assuming 'z = 0.0'");
+                    z = 0.0;
+                }
+
+                // angle init
+                var init = this.reader.getFloat(grandchildren[1], 'init');
+                if (!(init != null && !isNaN(init))) {
+                    this.onXMLMinorError("unable to parse init; assuming 'init = 0.0'");
+                    init = 0.0;
+                }
+
+                // angle rot
+                var rot = this.reader.getFloat(grandchildren[1], 'rot');
+                if (!(rot != null && !isNaN(rot))) {
+                    this.onXMLMinorError("unable to parse rot; assuming 'rot = 360.0'");
+                    rot = 360.0;
+                }
+
+                center.push(x, y, z);
+                angle.push(init, rot);
+
+                var newCircular = new CircularAnimation(this, time, radius, center, angle);
+                animationsMap.set(ID, newCircular);
+            }
+        }
+
+        console.log(animationsMap);
+    }
+
+
     /**
     *Parses the <VIEWS> block
     *@param {views block element} viewsNode
     */
-    parseViews(viewsNode){//Preparei tudo para colocar num array mas precisamos de mudar para aceitar ambas as views
+    parseViews(viewsNode){
 
         // perspective or ortho
         var children = viewsNode.children;
