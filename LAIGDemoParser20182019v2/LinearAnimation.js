@@ -7,14 +7,14 @@ class LinearAnimation extends Animation{
      * @constructor of the semi-sphere
      *
      * @param scene - Global scene
-     * @param time - The time the animation will be active
+     * @param span - The time the animation will be active
      * @param controlPoints - Array of arrays that contain all the control points of the linear animation
      */
-	constructor(scene, time, controlPoints){
+	constructor(scene, span, controlPoints){
 
-		super(scene, time);
+		super(scene, span);
 
-		this.time = time;
+		this.span = span;
 		this.controlPoints = controlPoints;
 		this.lastCurrTime = -1;
 	}
@@ -67,9 +67,6 @@ class LinearAnimation extends Animation{
 			this.lastCurrTime = currTime;
 		}
 		this.lastCurrTime = currTime;
-
-		
-		
 		
 	};
 };

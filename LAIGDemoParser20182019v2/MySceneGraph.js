@@ -8,8 +8,8 @@ var AMBIENT_INDEX = 2;
 var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
 var MATERIALS_INDEX = 5;
-var ANIMATIONS_INDEX = 6;
-var TRANSFORMATIONS_INDEX = 7;
+var TRANSFORMATIONS_INDEX = 6;
+var ANIMATIONS_INDEX = 7;
 var PRIMITIVES_INDEX = 8;
 var COMPONENTS_INDEX = 9;
 
@@ -179,6 +179,17 @@ class MySceneGraph {
             if ((error = this.parseMaterials(nodes[index])) != null)
                 return error;
         }
+        // <TRANSFORMATIONS>
+        if ((index = nodeNames.indexOf("transformations")) == -1)
+            return this.onXMLError("tag <transformations> missing");
+        else {
+            if (index != TRANSFORMATIONS_INDEX)
+                this.onXMLMinorError("tag <transformations> out of order");
+
+            //Parse NODES block
+            if ((error = this.parseTransformations(nodes[index])) != null)
+                return error;
+        }
 
         // <ANIMATIONS>
         if ((index = nodeNames.indexOf("animations")) == -1)
@@ -189,18 +200,6 @@ class MySceneGraph {
 
             //Parse ANIMATIONS block
             if ((error = this.parseAnimations(nodes[index])) != null)
-                return error;
-        }
-
-        // <TRANSFORMATIONS>
-        if ((index = nodeNames.indexOf("transformations")) == -1)
-            return this.onXMLError("tag <transformations> missing");
-        else {
-            if (index != TRANSFORMATIONS_INDEX)
-                this.onXMLMinorError("tag <transformations> out of order");
-
-            //Parse NODES block
-            if ((error = this.parseTransformations(nodes[index])) != null)
                 return error;
         }
 
@@ -826,7 +825,11 @@ class MySceneGraph {
                 // Places this torus in the Primitive's Map
                 var newPrimitive = new MyTorus(this.scene, inner, outer, slices, loops);
                 primitiveMap.set(primitiveId, newPrimitive);
-            } 
+            }
+            //Retrieving the project2 specifications
+            else if(grandChildren[0].nodeName == "plane"){
+                console.log("Não sei o que fazer neste parser");
+            }
             else
                 return "primitive undefined for ID = " + primitiveId;
 
@@ -1185,11 +1188,11 @@ class MySceneGraph {
             if(ID == null)
                 this.onXMLError("ID missing");
 
-            // Checks if it is a valid time
-            var time = this.reader.getFloat(children[i], 'time');
-            if (!(time != null && !isNaN(time))) {
-                this.onXMLMinorError("unable to parse time; assuming 'time = 10.0'");
-                time = 10.0;
+            // Checks if it is a valid span
+            var span = this.reader.getFloat(children[i], 'span');
+            if (!(span != null && !isNaN(span))) {
+                this.onXMLMinorError("unable to parse span; assuming 'span = 10.0'");
+                span = 10.0;
             }
 
             // linear
@@ -1232,7 +1235,7 @@ class MySceneGraph {
                     points.push(auxPoints);
                 }
 
-                var newLinear = new LinearAnimation(this, time, points);
+                var newLinear = new LinearAnimation(this, span, points);
                 animationsMap.set(ID, newLinear);
             }
             // circular
@@ -1246,55 +1249,51 @@ class MySceneGraph {
                 }
 
                 // center and angle
-                var grandchildren = children[i].children;
+                var x; var y; var z;
+                var centerArray;
+                var center = this.reader.getString(children[i], 'center');
+
+                if(center == null){
+                    this.onXMLMinorError("unable to parse center; assuming 'x = 5; y = 5; z = 5'");
+                    x = 5.0; 
+                    y = 5.0;
+                    z = 5.0;
+                    centerArray.push(x);
+                    centerArray.push(y);
+                    centerArray.push(z);
+                }else{
+                    centerArray = center.split(' ');
+                    centerArray[0] = parseFloat(centerArray[0]);
+                    centerArray[1] = parseFloat(centerArray[1]);
+                    centerArray[2] = parseFloat(centerArray[2]);
+                }
+
+                console.log(centerArray);
 
                 // Arrays that will hold the center coordinates and the values of the angles
-                var center = [];
                 var angle = [];
 
-                // center x
-                var x = this.reader.getFloat(grandchildren[0], 'x');
-                if (!(x != null && !isNaN(x))) {
-                    this.onXMLMinorError("unable to parse x; assuming 'x = 0.0'");
-                    x = 0.0;
-                }
-
-                // center y
-                var y = this.reader.getFloat(grandchildren[0], 'y');
-                if (!(y != null && !isNaN(y))) {
-                    this.onXMLMinorError("unable to parse y; assuming 'y = 0.0'");
-                    y = 0.0;
-                }
-
-                // center z
-                var z = this.reader.getFloat(grandchildren[0], 'z');
-                if (!(z != null && !isNaN(z))) {
-                    this.onXMLMinorError("unable to parse z; assuming 'z = 0.0'");
-                    z = 0.0;
-                }
-
                 // angle init
-                var init = this.reader.getFloat(grandchildren[1], 'init');
-                if (!(init != null && !isNaN(init))) {
-                    this.onXMLMinorError("unable to parse init; assuming 'init = 0.0'");
-                    init = 0.0;
+                var startang = this.reader.getFloat(children[i], 'startang');
+                if (!(startang != null && !isNaN(startang))) {
+                    this.onXMLMinorError("unable to parse startang; assuming 'startang = 0.0'");
+                    startang = 0.0;
                 }
 
                 // angle rot
-                var rot = this.reader.getFloat(grandchildren[1], 'rot');
-                if (!(rot != null && !isNaN(rot))) {
-                    this.onXMLMinorError("unable to parse rot; assuming 'rot = 360.0'");
-                    rot = 360.0;
+                var rotang = this.reader.getFloat(children[i], 'rotang');
+                if (!(rotang != null && !isNaN(rotang))) {
+                    this.onXMLMinorError("unable to parse rotang; assuming 'rotang = 360.0'");
+                    rotang = 360.0;
                 }
 
-                center.push(x, y, z);
-                angle.push(init, rot);
+                angle.push(startang, rotang);
 
-                var newCircular = new CircularAnimation(this, time, radius, center, angle);
+                var newCircular = new CircularAnimation(this, span, radius, centerArray, angle);
                 animationsMap.set(ID, newCircular);
             }
         }
-
+        console.log(animationsMap);
         this.log("Parsed Animations");
 
         return null;
@@ -1466,6 +1465,7 @@ class MySceneGraph {
         var textures = [];  // order: [textID, length_s, length_t, ...]
         var primitives = [];
         var components = [];
+        var animations = [];
 
         // transformation, materials, texture and children
         var grandchildren = children[i].children;
@@ -1624,6 +1624,25 @@ class MySceneGraph {
                 textures.push(textID, length_s, length_t);
             }
 
+            // animations
+            if(grandchildren[k].nodeName == "animations"){
+                
+                // animation
+                var grandgrandchildren = grandchildren[k].children;
+
+                // Any number of animations
+                for(var m = 0; m < grandgrandchildren.length; m++){
+
+                    var animationID = this.reader.getString(grandgrandchildren[m], "id");
+
+                    if(animationID == null)
+                        onXMLError("Unable to parse the animation ID");
+                    else
+                        animations.push(animationID);
+                }
+                
+            }
+
             // children
             if(grandchildren[k].nodeName == "children"){
 
@@ -1659,7 +1678,7 @@ class MySceneGraph {
         }
 
         // Creates a new node and places it in the nodes array
-        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives,  mat4.clone(extraT));
+        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives,  mat4.clone(extraT), animations);
         this.nodes.push(node);
     }
 

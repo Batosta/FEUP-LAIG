@@ -801,7 +801,7 @@
 			<torus inner="0.1" outer="4.0" slices="30" loops="30" />
 		</primitive>
 
-		<primitive id="projetoParte2">
+		<primitive id="plane">
 			
 			<!-- Nova primitiva: plano, gerado por NURBS -->
 			<plane npartsU="10" npartsV="10"/>
@@ -814,7 +814,7 @@
 			</patch>
 
 			<!-- Nova primitiva: Vehicle: corresponde a um veículo voador. Inclui pelo menos uma superficie nao plana gerada utilizando NURBS e javascrips-->
-			<vehicle /> <!-- Ainda nao se sabe o que por aqui-->
+			<vehicle/> <!-- Ainda nao se sabe o que por aqui-->
 
 			<!-- Nova primitiva: cilindro baseado em NURBS -->
 			<cylinder2 base="2.5" top="2.5" height="5.0" slices="20" stacks="20" />

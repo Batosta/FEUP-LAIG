@@ -10,16 +10,16 @@ class CircularAnimation extends Animation{
      * @constructor of the semi-sphere
      *
      * @param scene - Global scene
-     * @param time - The time the animation will be active
+     * @param span - The time the animation will be active
      * @param radius - Radius of the circle the object will take
      * @param center - Array with the points that describe the center of the circle the object will take
      * @param angle - Array with the initial angle and the whole rotation angle the object will take
      */
-	constructor(scene, time, radius, center, angle){
+	constructor(scene, span, radius, center, angle){
 
-		super(scene, time);
+		super(scene, span);
 
-		this.time = time;
+		this.span = span;
 		this.radius = radius;
 		this.center = center;
 		this.angle = angle;

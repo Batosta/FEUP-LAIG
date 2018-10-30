@@ -13,14 +13,16 @@ class MyGraphNode {
      * @param components - Chldren of this node (other components)
      * @param primitives - Primitives of this node (primitiveref)
      * @param extraTransf - Transformations to be applied to this node and it's children (translate/rotate/scale)
+     * @param animations - animations to be applied to this node
      */
-	constructor(ID, material, texture, transformations, components, primitives, extraTransf){
+	constructor(ID, material, texture, transformations, components, primitives, extraTransf, animations){
 		this.ID = ID;
 		this.material = material;
 		this.texture = texture;
 		this.transformations = transformations;
 		this.components = components;
 		this.primitives = primitives;
-		this.extraTransf = extraTransf;	
+        this.extraTransf = extraTransf;	
+        this.animations = animations;
 	}
 }

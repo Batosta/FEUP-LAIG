@@ -7,7 +7,7 @@ class Animation{
      * @constructor of the animation
      *
      */
-	constructor(scene, time){
+	constructor(scene, span){
 
 		this.scene = scene;
 
