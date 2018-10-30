@@ -1295,7 +1295,9 @@ class MySceneGraph {
             }
         }
 
-        console.log(animationsMap);
+        this.log("Parsed Animations");
+
+        return null;
     }
 
 
