@@ -67,7 +67,7 @@ class MySceneGraph {
 
         this.counterMaterial = 0;
 
-        //Speed que vai ser utilizada para as animacoes
+        //Speed que vai ser utilizado para as animacoes
         this.speed = 1;
     }
 
@@ -911,10 +911,10 @@ class MySceneGraph {
 
                 this.vehicle = [];
                 this.vehicle.push("vehicles");
-                if(grandChildren[2].nodeName == "vehicle"){
+                // if(grandChildren[2].nodeName == "vehicle"){
 
-                    console.log("vehicle");
-                }
+                //     console.log("vehicle");
+                // }
 
                 this.cylinder2 = [];
                 if(grandChildren[3].nodeName == "cylinder2"){
@@ -1997,6 +1997,8 @@ class MySceneGraph {
        // Applies the node's transformations (translate, scale or rotate)
         if(node.extraTransf != null)
             this.scene.multMatrix(node.extraTransf);
+
+
 
         // Recursively takes care of the the node's children
         for(var i = 0; i < node.components.length; i++){

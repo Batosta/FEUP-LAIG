@@ -22,15 +22,11 @@ class Animation{
 		this.lastTime = this.lastTime || 0;
 		this.deltaTime = currTime - this.lastTime;
 		this.lastTime = currTime;
-
-		//Idfk what to put here
-
 	}
 
 	// Aplicar a transformação sobre a matriz de transformações da cena quando adequado.
 	apply(){
 
 		this.scene.multMatrix(this.animationMatrix);
-
 	}
 };
