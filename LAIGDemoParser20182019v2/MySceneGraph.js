@@ -66,6 +66,9 @@ class MySceneGraph {
         this.currentView = [];
 
         this.counterMaterial = 0;
+
+        //Speed que vai ser utilizada para as animacoes
+        this.speed = 1;
     }
 
 
