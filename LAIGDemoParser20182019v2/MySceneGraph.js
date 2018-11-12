@@ -795,7 +795,6 @@ class MySceneGraph {
                 // Places this sphere in the Primitive's Map
                 var newPrimitive = new MySphere(this.scene, radius, slices, stacks);
                 primitiveMap.set(primitiveId, newPrimitive);
-
             } 
             // Retrieves the torus specifications
             else if(grandChildren[0].nodeName == "torus"){
@@ -829,10 +828,9 @@ class MySceneGraph {
                 var newPrimitive = new MyTorus(this.scene, inner, outer, slices, loops);
                 primitiveMap.set(primitiveId, newPrimitive);
             }
-            //Retrieving the project2 specifications
+            //Retrieves the plane specifications
             else if(grandChildren[0].nodeName == "plane"){
 
-                this.plane = [];
                 // npartsU
                 var npartsU = this.reader.getFloat(grandChildren[0], 'npartsU');
                 if (!(npartsU != null && !isNaN(npartsU))){
@@ -845,196 +843,190 @@ class MySceneGraph {
                     this.onXMLMinorError("Unable to parse npartsV of the plane for ID = " + primitiveId + "Assuming npartsV = 10");
                     npartsV = 10;
                 }
-                this.plane.push(npartsU, npartsV);
-
-
-                this.patch = [];
-                if(grandChildren[1].nodeName == "patch"){
-
-                    // npointsU
-                    var npointsU = this.reader.getFloat(grandChildren[1], 'npointsU');
-                    if (!(npointsU != null && !isNaN(npointsU))){
-                        this.onXMLMinorError("Unable to parse npointsU of the patch for ID = " + primitiveId + "Assuming npointsU = 1.0");
-                        npointsU = 1.0;
-                    }
-                    // npointsV
-                    var npointsV = this.reader.getFloat(grandChildren[1], 'npointsV');
-                    if (!(npointsV != null && !isNaN(npointsV))){
-                        this.onXMLMinorError("Unable to parse npointsV of the patch for ID = " + primitiveId + "Assuming npointsV = 1.0");
-                        npointsV = 1.0;
-                    }
-                    // npartsU
-                    var npartsU = this.reader.getFloat(grandChildren[1], 'npartsU');
-                    if (!(npartsU != null && !isNaN(npartsU))){
-                        this.onXMLMinorError("Unable to parse npartsU of the patch for ID = " + primitiveId + "Assuming npartsU = 5.0");
-                        npartsU = 5.0;
-                    }
-                    // npartsV
-                    var npartsV = this.reader.getFloat(grandChildren[1], 'npartsV');
-                    if (!(npartsV != null && !isNaN(npartsV))){
-                        this.onXMLMinorError("Unable to parse npartsV of the patch for ID = " + primitiveId + "Assuming npartsV = 5.0");
-                        npartsV = 5.0;
-                    }
                 
-                    // controlpoint
-                    var grandgrandChildren = grandChildren[1].children;
-
-                    
-                    this.controlpoints = [];
-                    // Any number of controlpoints
-                    for(var k = 0; k < grandgrandChildren.length; k++){
-
-                        // x
-                        var x = this.reader.getFloat(grandgrandChildren[k], 'x');
-                        if (!(x != null && !isNaN(x))){
-                            this.onXMLMinorError("Unable to parse x of the patch for ID = " + primitiveId + "Assuming x = 5.0");
-                            x = 5.0;
-                        }
-                        // y
-                        var y = this.reader.getFloat(grandgrandChildren[k], 'y');
-                        if (!(y != null && !isNaN(y))){
-                            this.onXMLMinorError("Unable to parse y of the patch for ID = " + primitiveId + "Assuming y = 0.0");
-                            y = 0.0;
-                        }
-                        // z
-                        var z = this.reader.getFloat(grandgrandChildren[k], 'z');
-                        if (!(z != null && !isNaN(z))){
-                            this.onXMLMinorError("Unable to parse z of the patch for ID = " + primitiveId + "Assuming z = 5.0");
-                            z = 5.0;
-                        }
-
-                        this.controlpoints.push(x, y, z);
-                    }
-
-                    this.patch.push(npointsU, npointsV, npartsU, npartsV, this.controlpoints);
-                }
-
-                this.vehicle = [];
-                this.vehicle.push("vehicles");
-                // if(grandChildren[2].nodeName == "vehicle"){
-
-                //     console.log("vehicle");
-                // }
-
-                this.cylinder2 = [];
-                if(grandChildren[3].nodeName == "cylinder2"){
-
-                    // base
-                    var base = this.reader.getFloat(grandChildren[3], 'base');
-                    if (!(base != null && !isNaN(base))){
-                        this.onXMLMinorError("Unable to parse base of the cylinder2 for ID = " + primitiveId + "Assuming base = 2.5");
-                        base = 2.5;
-                    }
-                
-                    // top
-                    var top = this.reader.getFloat(grandChildren[3], 'top');
-                    if (!(top != null && !isNaN(top))){
-                        this.onXMLMinorError("Unable to parse top of the cylinder2 for ID = " + primitiveId + "Assuming top = 2.5");
-                        top = 2.5;
-                    }
-                    // height
-                    var height = this.reader.getFloat(grandChildren[3], 'height');
-                    if (!(height != null && !isNaN(height))){
-                        this.onXMLMinorError("Unable to parse height of the cylinder2 for ID = " + primitiveId + "Assuming height = 5.0");
-                        height = 5.0;
-                    }
-                    // slices
-                    var slices = this.reader.getFloat(grandChildren[3], 'slices');
-                    if (!(slices != null && !isNaN(slices))){
-                        this.onXMLMinorError("Unable to parse slices of the cylinder2 for ID = " + primitiveId + "Assuming slices = 20");
-                        slices = 20.0;
-                    }
-                    // stacks
-                    var stacks = this.reader.getFloat(grandChildren[3], 'stacks');
-                    if (!(stacks != null && !isNaN(stacks))){
-                        this.onXMLMinorError("Unable to parse stacks of the cylinder2 for ID = " + primitiveId + "Assuming stacks = 20");
-                        stacks = 20.0;
-                    }
-
-                    this.cylinder2.push(base, top, height, slices, stacks);
-                }
-
-                this.terrain = [];
-                if(grandChildren[4].nodeName == "terrain"){
-
-                    // idtexture
-                    var idtexture = this.reader.getString(grandChildren[4], 'idtexture');
-                    if (idtexture == null){
-                        this.onXMLMinorError("Unable to parse idtexture of the terrain for ID = " + primitiveId + "Assuming idtexture = wood");
-                        idtexture = "wood";
-                    }
-                    // idheightmap
-                    var idheightmap = this.reader.getString(grandChildren[4], 'idheightmap');
-                    if (idheightmap == null){
-                        this.onXMLMinorError("Unable to parse idheightmap of the terrain for ID = " + primitiveId + "Assuming idheightmap = wood");
-                        idheightmap = "wood";
-                    }
-                    // parts
-                    var parts = this.reader.getFloat(grandChildren[4], 'parts');
-                    if (!(parts != null && !isNaN(parts))){
-                        this.onXMLMinorError("Unable to parse parts of the terrain for ID = " + primitiveId + "Assuming parts = 5.0");
-                        parts = 5.0;
-                    }
-                    // heightscale
-                    var heightscale = this.reader.getFloat(grandChildren[4], 'heightscale');
-                    if (!(heightscale != null && !isNaN(heightscale))){
-                        this.onXMLMinorError("Unable to parse heightscale of the terrain for ID = " + primitiveId + "Assuming heightscale = 5.0");
-                        heightscale = 5.0;
-                    }
-
-                    this.terrain.push(idtexture, idheightmap, parts, heightscale);
-                }
-
-                this.water = [];
-                if(grandChildren[5].nodeName == "water"){
-                    
-                    // idtexture
-                    var idtexture = this.reader.getString(grandChildren[5], 'idtexture');
-                    if (idtexture == null){
-                        this.onXMLMinorError("Unable to parse idtexture of the water for ID = " + primitiveId + "Assuming idtexture = water");
-                        idtexture = "water";
-                    }
-                    // idwavemap
-                    var idwavemap = this.reader.getString(grandChildren[5], 'idwavemap');
-                    if (idwavemap == null){
-                        this.onXMLMinorError("Unable to parse idwavemap of the water for ID = " + primitiveId + "Assuming idwavemap = waves");
-                        idwavemap = "waves";
-                    }
-                    // parts
-                    var parts = this.reader.getFloat(grandChildren[5], 'parts');
-                    if (!(parts != null && !isNaN(parts))){
-                        this.onXMLMinorError("Unable to parse parts of the water for ID = " + primitiveId + "Assuming parts = 5.0");
-                        parts = 5.0;
-                    }
-                    // heightscale
-                    var heightscale = this.reader.getFloat(grandChildren[5], 'heightscale');
-                    if (!(heightscale != null && !isNaN(heightscale))){
-                        this.onXMLMinorError("Unable to parse heightscale of the water for ID = " + primitiveId + "Assuming heightscale = 0.25");
-                        heightscale = 0.25;
-                    }
-                    // texscale
-                    var texscale = this.reader.getFloat(grandChildren[5], 'texscale');
-                    if (!(texscale != null && !isNaN(parts))){
-                        this.onXMLMinorError("Unable to parse texscale of the water for ID = " + primitiveId + "Assuming texscale = 0.25");
-                    texscale = 0.25;
-                    }
-
-                    this.water.push(idtexture, idwavemap, parts, heightscale, texscale);
-                }
-
-                else{
-                     this.onXMLMinorError("Error in the plane primitive.");
-                }
-
                 // Places this plane in the Primitive's Map
-                var newPrimitive = new MyPlane(this.scene, this.plane, this.patch, this.vehicle, this.cylinder2, this.terrain, this.water);
+                var newPrimitive = new MyPlane(this.scene, npartsU, npartsV);
+                primitiveMap.set(primitiveId, newPrimitive);
+            }
+            // Retrieves the patch specifications
+            else if(grandChildren[0].nodeName == "patch"){
+
+                //npointsU
+                var npointsU = this.reader.getFloat(grandChildren[0], 'npointsU');
+                if (!(npointsU != null && !isNaN(npointsU))){
+                    this.onXMLMinorError("Unable to parse npointsU of the patch for ID = " + primitiveId + "Assuming npointsU = 1.0");
+                    npointsU = 1.0;
+                }
+                // npointsV
+                var npointsV = this.reader.getFloat(grandChildren[0], 'npointsV');
+                if (!(npointsV != null && !isNaN(npointsV))){
+                    this.onXMLMinorError("Unable to parse npointsV of the patch for ID = " + primitiveId + "Assuming npointsV = 1.0");
+                    npointsV = 1.0;
+                }
+                // npartsU
+                var npartsU = this.reader.getFloat(grandChildren[0], 'npartsU');
+                if (!(npartsU != null && !isNaN(npartsU))){
+                    this.onXMLMinorError("Unable to parse npartsU of the patch for ID = " + primitiveId + "Assuming npartsU = 5.0");
+                    npartsU = 5.0;
+                }
+                // npartsV
+                var npartsV = this.reader.getFloat(grandChildren[0], 'npartsV');
+                if (!(npartsV != null && !isNaN(npartsV))){
+                    this.onXMLMinorError("Unable to parse npartsV of the patch for ID = " + primitiveId + "Assuming npartsV = 5.0");
+                    npartsV = 5.0;
+                }
+                
+                // controlpoint
+                var grandgrandChildren = grandChildren[0].children;
+                var controlpoints = [];
+                // Any number of controlpoints
+                for(var k = 0; k < grandgrandChildren.length; k++){
+
+                    this.controlpoint = [];
+                    // x
+                    var x = this.reader.getFloat(grandgrandChildren[k], 'x');
+                    if (!(x != null && !isNaN(x))){
+                        this.onXMLMinorError("Unable to parse x of the patch for ID = " + primitiveId + "Assuming x = 5.0");
+                    x = 5.0;
+                    }
+                    // y
+                    var y = this.reader.getFloat(grandgrandChildren[k], 'y');
+                    if (!(y != null && !isNaN(y))){
+                        this.onXMLMinorError("Unable to parse y of the patch for ID = " + primitiveId + "Assuming y = 0.0");
+                        y = 0.0;
+                    }
+                    // z
+                    var z = this.reader.getFloat(grandgrandChildren[k], 'z');
+                    if (!(z != null && !isNaN(z))){
+                        this.onXMLMinorError("Unable to parse z of the patch for ID = " + primitiveId + "Assuming z = 5.0");
+                        z = 5.0;
+                    }
+
+                    this.controlpoint.push(x, y, z);
+                    controlpoints.push(this.controlpoint);
+                }
+
+                // Places this patch in the Primitive's Map
+                var newPrimitive = new MyPatch(this.scene, npointsU, npointsV, npartsU, npartsV, controlpoints);
+                primitiveMap.set(primitiveId, newPrimitive);
+            }
+            //Retrieves the vehicle specifications
+            else if(grandChildren[0].nodeName == "vehicle"){
+
+                console.log("vehicle");
+            }
+            //Retrieves the cylinder2 specifications
+            else if(grandChildren[0].nodeName == "cylinder2"){
+
+                // base
+                var base = this.reader.getFloat(grandChildren[0], 'base');
+                if (!(base != null && !isNaN(base))){
+                    this.onXMLMinorError("Unable to parse base of the cylinder2 for ID = " + primitiveId + "Assuming base = 2.5");
+                    base = 2.5;
+                }                
+                   // top
+                var top = this.reader.getFloat(grandChildren[0], 'top');
+                if (!(top != null && !isNaN(top))){
+                    this.onXMLMinorError("Unable to parse top of the cylinder2 for ID = " + primitiveId + "Assuming top = 2.5");
+                    top = 2.5;
+                }
+                // height
+                var height = this.reader.getFloat(grandChildren[0], 'height');
+                if (!(height != null && !isNaN(height))){
+                    this.onXMLMinorError("Unable to parse height of the cylinder2 for ID = " + primitiveId + "Assuming height = 5.0");
+                    height = 5.0;
+                }
+                // slices
+                var slices = this.reader.getFloat(grandChildren[0], 'slices');
+                if (!(slices != null && !isNaN(slices))){
+                    this.onXMLMinorError("Unable to parse slices of the cylinder2 for ID = " + primitiveId + "Assuming slices = 20");
+                    slices = 20.0;
+                }
+                // stacks
+                var stacks = this.reader.getFloat(grandChildren[0], 'stacks');
+                if (!(stacks != null && !isNaN(stacks))){
+                    this.onXMLMinorError("Unable to parse stacks of the cylinder2 for ID = " + primitiveId + "Assuming stacks = 20");
+                    stacks = 20.0;
+                }
+                
+                // Places this plane in the Primitive's Map
+                var newPrimitive = new MyCylinder2(this.scene, base, top, height, slices, stacks);
+                primitiveMap.set(primitiveId, newPrimitive);
+            }
+            //Retrieves the terrain specifications
+            else if(grandChildren[0].nodeName == "terrain"){
+
+                // idtexture
+                var idtexture = this.reader.getString(grandChildren[0], 'idtexture');
+                if (idtexture == null){
+                    this.onXMLMinorError("Unable to parse idtexture of the terrain for ID = " + primitiveId + "Assuming idtexture = wood");
+                    idtexture = "wood";
+                }
+                // idheightmap
+                var idheightmap = this.reader.getString(grandChildren[0], 'idheightmap');
+                if (idheightmap == null){
+                    this.onXMLMinorError("Unable to parse idheightmap of the terrain for ID = " + primitiveId + "Assuming idheightmap = wood");
+                    idheightmap = "wood";
+                }
+                // parts
+                var parts = this.reader.getFloat(grandChildren[0], 'parts');
+                if (!(parts != null && !isNaN(parts))){
+                    this.onXMLMinorError("Unable to parse parts of the terrain for ID = " + primitiveId + "Assuming parts = 5.0");
+                    parts = 5.0;
+                }
+                // heightscale
+                var heightscale = this.reader.getFloat(grandChildren[0], 'heightscale');
+                if (!(heightscale != null && !isNaN(heightscale))){
+                    this.onXMLMinorError("Unable to parse heightscale of the terrain for ID = " + primitiveId + "Assuming heightscale = 5.0");
+                    heightscale = 5.0;
+                }
+                
+                // Places this plane in the Primitive's Map
+                var newPrimitive = new MyTerrain(this.scene, idtexture, idheightmap, parts, heightscale);
+                primitiveMap.set(primitiveId, newPrimitive);
+            }
+            //Retrieves the water specifications
+            else if(grandChildren[0].nodeName == "water"){
+
+                // idtexture
+                var idtexture = this.reader.getString(grandChildren[0], 'idtexture');
+                if (idtexture == null){
+                    this.onXMLMinorError("Unable to parse idtexture of the water for ID = " + primitiveId + "Assuming idtexture = water");
+                    idtexture = "water";
+                }
+                // idwavemap
+                var idwavemap = this.reader.getString(grandChildren[0], 'idwavemap');
+                if (idwavemap == null){
+                    this.onXMLMinorError("Unable to parse idwavemap of the water for ID = " + primitiveId + "Assuming idwavemap = waves");
+                    idwavemap = "waves";
+                }
+                // parts
+                var parts = this.reader.getFloat(grandChildren[0], 'parts');
+                if (!(parts != null && !isNaN(parts))){
+                    this.onXMLMinorError("Unable to parse parts of the water for ID = " + primitiveId + "Assuming parts = 5.0");
+                    parts = 5.0;
+                }
+                // heightscale
+                var heightscale = this.reader.getFloat(grandChildren[0], 'heightscale');
+                if (!(heightscale != null && !isNaN(heightscale))){
+                    this.onXMLMinorError("Unable to parse heightscale of the water for ID = " + primitiveId + "Assuming heightscale = 0.25");
+                    heightscale = 0.25;
+                }
+                // texscale
+                var texscale = this.reader.getFloat(grandChildren[0], 'texscale');
+                if (!(texscale != null && !isNaN(parts))){
+                    this.onXMLMinorError("Unable to parse texscale of the water for ID = " + primitiveId + "Assuming texscale = 0.25");
+                texscale = 0.25;
+                }
+                
+                // Places this plane in the Primitive's Map
+                var newPrimitive = new MyWater(this.scene, idtexture, idwavemap, parts, heightscale, texscale);
                 primitiveMap.set(primitiveId, newPrimitive);
             }
             else
                 return "primitive undefined for ID = " + primitiveId;
-
         }
-
+        console.log(primitiveMap);
         this.log("Parsed Primitives");
 
         return null;
@@ -1643,51 +1635,50 @@ class MySceneGraph {
     */
     parseComponents(componentsNode){
 
-    // component
-    var children = componentsNode.children;
-    var nodes = [];
+        // component
+        var children = componentsNode.children;
+        var nodes = [];
 
-    // Any number of components
-    for(let i = 0; i < children.length; i++){
+        // Any number of components
+        for(let i = 0; i < children.length; i++){
 
-        // Checks if it a valid ID
-        var componentId = this.reader.getString(children[i], "id");
-        if (componentId == null) {   
-            this.onXMLError("unable to parse value for componentId");
-        }
+            // Checks if it a valid ID
+            var componentId = this.reader.getString(children[i], "id");
+            if (componentId == null)
+                this.onXMLError("unable to parse value for componentId");
         
 
-        var transformationrefs = null;
-        var material;
-        var textures = [];  // order: [textID, length_s, length_t, ...]
-        var primitives = [];
-        var components = [];
-        var animations = [];
+            var transformationrefs = null;
+            var material;
+            var textures = [];  // order: [textID, length_s, length_t, ...]
+            var primitives = [];
+            var components = [];
+            var animations = [];
 
-        // transformation, materials, texture and children
-        var grandchildren = children[i].children;
+            // transformation, materials, texture and children
+            var grandchildren = children[i].children;
 
-        var extraT = mat4.create();
+            var extraT = mat4.create();
 
-        for(let k = 0; k < grandchildren.length; k++){
+            for(let k = 0; k < grandchildren.length; k++){
 
-            // transformations
-            if(grandchildren[k].nodeName == "transformation"){
+                // transformations
+                if(grandchildren[k].nodeName == "transformation"){
 
-                // transformationref, translate, rotate, or scale
-                var grandgrandchildren = grandchildren[k].children;
+                    // transformationref, translate, rotate, or scale
+                    var grandgrandchildren = grandchildren[k].children;
 
-                if(grandgrandchildren.length != 0){
+                    if(grandgrandchildren.length != 0){
 
-                    // Any number of transformations
-                    for(var j = 0; j < grandgrandchildren.length; j++){
+                        // Any number of transformations
+                        for(var j = 0; j < grandgrandchildren.length; j++){
    
                             // transformationref
                             if(grandgrandchildren[j].nodeName == "transformationref"){
-                                    var transformationId = this.reader.getString(grandgrandchildren[0], "id");
-                                    if(transformationId == null)
-                                        onXMLError("No ID defined for transformation");
-                                    transformationrefs = transformationId;
+                                var transformationId = this.reader.getString(grandgrandchildren[0], "id");
+                                if(transformationId == null)
+                                    onXMLError("No ID defined for transformation");
+                                transformationrefs = transformationId;
                             }
 
                             // translate
@@ -1753,153 +1744,145 @@ class MySceneGraph {
                                     onXMLMinorError("Unable to parse x component of the scale, assuming x = 1.0");
                                     x = 1.0;
                                 }
-
                                 // y
                                 var y = this.reader.getFloat(grandgrandchildren[j], 'y');
                                 if (!(y != null && !isNaN(y))){
                                     onXMLMinorError("Unable to parse y component of the scale, assuming y = 1.0");
                                     y = 1.0;
                                 }
-
                                 // z
                                 var z = this.reader.getFloat(grandgrandchildren[j], 'z');
                                 if (!(z != null && !isNaN(z))){
                                     onXMLMinorError("Unable to parse z component of the scale, assuming z = 1.0");
                                     z = 1.0;
                                 }
+                                // Matrix
+                                mat4.scale(extraT, extraT, [x, y, z]);
+                            }
+                        }
+                    }
+                }
+
+                // materials
+                if(grandchildren[k].nodeName == "materials"){
+
+                    var material = [];
+
+                    // material
+                    var grandgrandchildren = grandchildren[k].children;
+
+                    // Any number of materials
+                    for(var m = 0; m < grandgrandchildren.length; m++){
+
+                        var materials = this.reader.getString(grandgrandchildren[m], "id");
+
+                        if(materials == null)
+                            onXMLError("Unable to parse the material ID, assuming default material");
+                        else
+                            material.push(materials);
+                    }
+                
+                }
+
+                // textures
+                if(grandchildren[k].nodeName == "texture"){
+
+                    // ID
+                    var textID = this.reader.getString(grandchildren[k], "id");
+                    if(textID == null){
+                        onXMLError("Unable to parse the texture, assuming default texture");
+                    }
+
+                    // length_s
+                    var length_s = this.reader.getFloat(grandchildren[k], "length_s");
+                    if (!(length_s != null && !isNaN(length_s))){
+                        this.onXMLMinorError("Unable to parse length_s, assuming length_s = 1.0");
+                        length_s = 1.0;
+                    } 
+
+                   // length_t
+                    var length_t = this.reader.getFloat(grandchildren[k], "length_t");
+                    if (!(length_t != null && !isNaN(length_t))){
+                        this.onXMLMinorError("Unable to parse length_t, assuming length_t = 1.0");
+                        length_t = 1.0;
+                    } 
+                    textures.push(textID, length_s, length_t);
+                }
+
+                // animations
+                if(grandchildren[k].nodeName == "animations"){
+                    
+                    // animation
+                    var grandgrandchildren = grandchildren[k].children;
+
+                    // Any number of animations
+                    for(var m = 0; m < grandgrandchildren.length; m++){
+
+                        var animationID = this.reader.getString(grandgrandchildren[m], "id");
+
+                        if(animationID == null)
+                            onXMLError("Unable to parse the animation ID");
+                        else
+                            animations.push(animationID);
+                    }
+                }
+
+                // children
+                if(grandchildren[k].nodeName == "children"){
+
+                    // primitiveref and/or componentref
+                    var grandgrandchildren = grandchildren[k].children;
+
+                    // Any number of primitiveref and/or componentref
+                    for(var z = 0; z < grandgrandchildren.length; z++){
+
+                        // primitiveref
+                        if(grandgrandchildren[z].nodeName == "primitiveref"){
                             
-                            // Matrix
-                            mat4.scale(extraT, extraT, [x, y, z]);
+                            // id
+                            var primitiveID = this.reader.getString(grandgrandchildren[z], "id");
+                            if(primitiveID == null){
+                                onXMLError("Primitive ID missing");
+                            }
+                            primitives.push(primitiveID);
+                        }
+                        // componentref
+                        else { 
+
+                            // id
+                            var componentID = this.reader.getString(grandgrandchildren[z], "id");
+                            if(componentID == null)
+                                onXMLError("Component ID missing");
+                            components.push(componentID);
                         }
                     }
                 }
             }
 
-            // materials
-            if(grandchildren[k].nodeName == "materials"){
+            // Creates a new node and places it in the nodes array
+            var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives,  mat4.clone(extraT), animations);
+            this.nodes.push(node);
+        }
 
-                var material = [];
+        // Any number of nodes in the graph. It is used so we do not have the problem of creating nodes which have children nodes
+        // that have not yet been created
+        for(var i = 0; i < this.nodes.length; i++){
 
-                // material
-                var grandgrandchildren = grandchildren[k].children;
+            var new_components = this.nodes[i].components;
+            this.nodes[i].components = [];
 
-                // Any number of materials
-                for(var m = 0; m < grandgrandchildren.length; m++){
+            for(var k = 0; k < new_components.length; k++){
 
-                    var materials = this.reader.getString(grandgrandchildren[m], "id");
+                for(var j = 0; j < this.nodes.length; j++){
 
-                    if(materials == null)
-                        onXMLError("Unable to parse the material ID, assuming default material");
-                    else
-                        material.push(materials);
-                }
-                
-            }
-
-            // textures
-            if(grandchildren[k].nodeName == "texture"){
-
-                // ID
-                var textID = this.reader.getString(grandchildren[k], "id");
-                if(textID == null){
-                    onXMLError("Unable to parse the texture, assuming default texture");
-                }
-
-                // length_s
-                var length_s = this.reader.getFloat(grandchildren[k], "length_s");
-                if (!(length_s != null && !isNaN(length_s))){
-                    this.onXMLMinorError("Unable to parse length_s, assuming length_s = 1.0");
-                    length_s = 1.0;
-                } 
-
-                // length_t
-                var length_t = this.reader.getFloat(grandchildren[k], "length_t");
-                if (!(length_t != null && !isNaN(length_t))){
-                    this.onXMLMinorError("Unable to parse length_t, assuming length_t = 1.0");
-                    length_t = 1.0;
-                } 
-                textures.push(textID, length_s, length_t);
-            }
-
-            // animations
-            if(grandchildren[k].nodeName == "animations"){
-                
-                // animation
-                var grandgrandchildren = grandchildren[k].children;
-
-                // Any number of animations
-                for(var m = 0; m < grandgrandchildren.length; m++){
-
-                    var animationID = this.reader.getString(grandgrandchildren[m], "id");
-
-                    if(animationID == null)
-                        onXMLError("Unable to parse the animation ID");
-                    else
-                        animations.push(animationID);
-                }
-                
-            }
-
-            // children
-            if(grandchildren[k].nodeName == "children"){
-
-                // primitiveref and/or componentref
-                var grandgrandchildren = grandchildren[k].children;
-
-                // Any number of primitiveref and/or componentref
-                for(var z = 0; z < grandgrandchildren.length; z++){
-
-                    // primitiveref
-                    if(grandgrandchildren[z].nodeName == "primitiveref"){
-                        
-                        // id
-                        var primitiveID = this.reader.getString(grandgrandchildren[z], "id");
-                        if(primitiveID == null){
-                            onXMLError("Primitive ID missing");
-                        }
-                        primitives.push(primitiveID);
-                    }
-
-                    // componentref
-                    else { 
-
-                        // id
-                        var componentID = this.reader.getString(grandgrandchildren[z], "id");
-                        if(componentID == null){
-                            onXMLError("Component ID missing");
-                        }
-                        components.push(componentID);
-                    }
+                    if(this.nodes[j].ID == new_components[k])
+                        this.nodes[i].components.push(this.nodes[j]);
                 }
             }
         }
 
-        // Creates a new node and places it in the nodes array
-        var node = new MyGraphNode(componentId, material, textures, transformationrefs, components, primitives,  mat4.clone(extraT), animations);
-        this.nodes.push(node);
-    }
-
-    // Any number of nodes in the graph. It is used so we do not have the problem of creating nodes which have children nodes
-    // that have not yet been created
-    for(var i = 0; i < this.nodes.length; i++){
-
-        var new_components = this.nodes[i].components;
-        this.nodes[i].components = [];
-
-        for(var k = 0; k < new_components.length; k++){
-
-            for(var j = 0; j < this.nodes.length; j++){
-
-                if(this.nodes[j].ID == new_components[k]){
-
-                    this.nodes[i].components.push(this.nodes[j]);
-                }
-            }
-        }
-    }
-
-    this.log("Parsed Components");
-    return null;
+        this.log("Parsed Components");
+        return null;
     }
 
 

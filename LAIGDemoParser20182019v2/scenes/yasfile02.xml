@@ -804,32 +804,40 @@
 			<torus inner="0.1" outer="4.0" slices="30" loops="30" />
 		</primitive>
 
+		<!-- Nova primitiva: plano, gerado por NURBS -->
 		<primitive id="plane">
-			
-			<!-- Nova primitiva: plano, gerado por NURBS -->
 			<plane npartsU="10" npartsV="10"/>
+		</primitive>
 
-			<!-- Nova primitiva: patch, gerada por NURBS -->
+		<!-- Nova primitiva: patch, gerada por NURBS -->
+		<primitive id="patch">
 			<patch npointsU="1" npointsV="1" npartsU="5" npartsV="5">
 				<!-- O número de controlPoints dentro da primitiva é dado por npointsU*npointsV-->
 				<controlpoint x="5.0" y="0.0" z="5.0"/>
 				<!-- ... -->
 			</patch>
-
-			<!-- Nova primitiva: Vehicle: corresponde a um veículo voador. Inclui pelo menos uma superficie nao plana gerada utilizando NURBS e javascrips-->
-			<vehicle/> <!-- Ainda nao se sabe o que por aqui-->
-
-			<!-- Nova primitiva: cilindro baseado em NURBS -->
-			<cylinder2 base="2.5" top="2.5" height="5.0" slices="20" stacks="20" />
-
-			<!--Nova primitiva: terreno baseado em shaders-->
-			<terrain idtexture="wood" idheightmap="wood" parts="5" heightscale="5.0"/>
-
-			<!--Nova primitiva: plano deagua baseado em shaders-->
-			<water idtexture="water" idwavemap="waves" parts="5" heightscale="0.25" texscale="0.25"/>
+		</primitive>
 		
+		<!-- Nova primitiva: Vehicle: corresponde a um veículo voador. Inclui pelo menos uma superficie nao plana gerada utilizando NURBS e javascrips-->
+		<primitive id="vehicle">
+			<vehicle/> <!-- Ainda nao se sabe o que por aqui-->
 		</primitive>
 
+		<!-- Nova primitiva: cilindro baseado em NURBS -->
+		<primitive id="cylinder2">
+			<cylinder2 base="2.5" top="2.5" height="5.0" slices="20" stacks="20" />
+		</primitive>
+
+		<!--Nova primitiva: terreno baseado em shaders-->
+		<primitive id="terrain">
+			<terrain idtexture="wood" idheightmap="wood" parts="5" heightscale="5.0"/>
+		</primitive>
+
+
+		<!--Nova primitiva: plano deagua baseado em shaders-->
+		<primitive id="water">
+			<water idtexture="water" idwavemap="waves" parts="5" heightscale="0.25" texscale="0.25"/>
+		</primitive>
 	</primitives>
 
 	<!---													COMPONENTS 															-->

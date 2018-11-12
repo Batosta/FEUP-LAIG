@@ -7,21 +7,13 @@ class MyPlane extends CGFobject {
      * @constructor of the plane
      *
      * @param scene - The global scene
-     * @param plane - 
-     * @param patch - 
-     * @param vehicle - 
-     * @param cylinder2 - 
-     * @param terrain - 
-     * @param water - 
+     * @param npartsU - 
+     * @param npartsV - 
      */
-    constructor(scene, plane, patch, vehicle, cylinder2, terrain, water) {
+    constructor(scene, npartsU, npartsV) {
         super(scene);
 
-        this.plane = plane;
-        this.patch = patch;
-        this.vehicle = vehicle;
-        this.cylinder2 = cylinder2;
-        this.terrain = terrain;
-        this.water = water;
+        this.npartsU = npartsU;
+        this.npartsV = npartsV;
     };
 };
