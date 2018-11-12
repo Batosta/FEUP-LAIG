@@ -1026,7 +1026,6 @@ class MySceneGraph {
             else
                 return "primitive undefined for ID = " + primitiveId;
         }
-        console.log(primitiveMap);
         this.log("Parsed Primitives");
 
         return null;
@@ -1427,7 +1426,7 @@ class MySceneGraph {
                     points.push(auxPoints);
                 }
 
-                var newLinear = new LinearAnimation(this, span, points);
+                var newLinear = new LinearAnimation(this.scene, span, points);
                 animationsMap.set(ID, newLinear);
             }
             // circular
@@ -1479,8 +1478,8 @@ class MySceneGraph {
 
                 angle.push(startang, rotang);
 
-                var newCircular = new CircularAnimation(this, span, radius, centerArray, angle);
-                animationsMap.set(ID, newCircular);
+                //var newCircular = new CircularAnimation(this, span, radius, centerArray, angle);
+                //animationsMap.set(ID, newCircular);
             }
         }
         this.log("Parsed Animations");
@@ -1822,8 +1821,9 @@ class MySceneGraph {
 
                         if(animationID == null)
                             onXMLError("Unable to parse the animation ID");
-                        else
-                            animations.push(animationID);
+                        else{
+                            animations.push(animationsMap.get(animationID));
+                        }
                     }
                 }
 
@@ -1981,7 +1981,11 @@ class MySceneGraph {
         if(node.extraTransf != null)
             this.scene.multMatrix(node.extraTransf);
 
+        //A TESTAR, DÁ erro estupido
 
+        for(var i = 0; i < node.animations.length; i++){
+            node.animations[i].apply();
+        }
 
         // Recursively takes care of the the node's children
         for(var i = 0; i < node.components.length; i++){

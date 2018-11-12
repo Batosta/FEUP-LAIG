@@ -15,7 +15,15 @@ class XMLscene extends CGFscene {
         this.interface = myinterface;
         this.lightValues = {};
 
-        this.setUpdatePeriod(30);
+        this.setUpdatePeriod(100);
+    }
+
+    update(currTime){
+
+        for(var i = 0; i < this.graph.nodes.length; i++){
+            this.graph.nodes[i].update(currTime);
+        }
+        
     }
 
     /**

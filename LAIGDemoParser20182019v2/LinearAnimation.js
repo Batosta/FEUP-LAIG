@@ -16,9 +16,9 @@ class LinearAnimation extends Animation{
 
 		this.span = span;
 
-		this.linearMatrix = mat4.create();
-
 		this.controlPoints = controlPoints;
+
+		this.linearMatrix = mat4.create();
 	};
 
 	// Returns the angle between 2 points
@@ -91,9 +91,15 @@ class LinearAnimation extends Animation{
 
 	};
 
-	update(currentTime){
+	update(currTime){
 
-		if(currentTime <= this.span){
+		currTime = currTime/1000;
+
+		this.lastTime = this.lastTime || 0;
+		this.deltaTime = currTime - this.lastTime;
+		this.lasTtime = currTime; 
+
+		if(this.deltaTime <= this.span){
 
 			var times = getAnimationTimes();
 
@@ -101,9 +107,9 @@ class LinearAnimation extends Animation{
 
 			for(var i = 0; i < times.length - 1; i++){
 
-				if(currentTime >= times[i] && currentTime < times[i+1]){
+				if(this.deltaTime >= times[i] && this.deltaTime < times[i+1]){
 
-					var percentage = currentTime/times[i];
+					var percentage = this.deltaTime/times[i];
 
 					console.log(percentage);
 
@@ -111,7 +117,7 @@ class LinearAnimation extends Animation{
 
 					console.log(P);
 					
-					mat4.translate(this.linearMatrix, this.linearMatrix, P);
+					mat4.translate(this.linearMatrix, this.linearMatrix, [P[0], P[1], P[2]]);
 
 					console.log(this.linearMatrix);
 
@@ -125,6 +131,6 @@ class LinearAnimation extends Animation{
 
 	apply(){
 		this.scene.multMatrix(this.linearMatrix);
-	}
+	};
 
 };

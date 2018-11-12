@@ -12,8 +12,6 @@ class Animation{
 		this.scene = scene;
 
 		this.span = span;
-
-		this.animationMatrix = mat4.create();
 	}
 
 	// Atualizar o estado em função do tempo

@@ -24,5 +24,11 @@ class MyGraphNode {
 		this.primitives = primitives;
         this.extraTransf = extraTransf;	
         this.animations = animations;
-	}
+    }
+    
+    update(currentTime){    
+        for(var i = 0;  i < this.animations.length; i++){
+            this.animations[i].update(currentTime);
+        }
+    }
 }
