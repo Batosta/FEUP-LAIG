@@ -73,7 +73,7 @@ class LinearAnimation extends Animation{
 		return times;
 	};
 
-	getCurrentMatrix(currentTime){
+	update(currentTime){
 
 		if(currentTime <= this.span){
 

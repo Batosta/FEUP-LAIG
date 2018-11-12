@@ -17,16 +17,10 @@ class Animation{
 	}
 
 	// Atualizar o estado em função do tempo
-	update(currTime){
-
-		this.lastTime = this.lastTime || 0;
-		this.deltaTime = currTime - this.lastTime;
-		this.lastTime = currTime;
-	}
+	update(currTime){}
 
 	// Aplicar a transformação sobre a matriz de transformações da cena quando adequado.
 	apply(){
-
 		this.scene.multMatrix(this.animationMatrix);
 	}
 };
