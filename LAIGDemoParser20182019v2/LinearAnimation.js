@@ -15,6 +15,9 @@ class LinearAnimation extends Animation{
 		super(scene, span);
 
 		this.span = span;
+
+		this.linearMatrix = mat4.create();
+
 		this.controlPoints = controlPoints;
 	};
 
@@ -51,9 +54,8 @@ class LinearAnimation extends Animation{
 
 	// Returns the speed of the animation
 	getSpeed(){
-
 		var dist = this.getTotalDistance();
-		var speed = dist / this.time();
+		var speed = dist / this.span;
 		return speed;
 	};
 
@@ -73,29 +75,56 @@ class LinearAnimation extends Animation{
 		return times;
 	};
 
+	interpolation(c1, c2, percentage){
+
+		//P = (P2 - P1)*(currTime/span) Interpolation
+
+		var interpol = [];
+
+		var x = (c2[0] - c1[0])*percentage;
+		var y = (c2[1] - c2[1])*percentage;
+		var z = (c2[2] - c2[2])*percentage;
+
+		interpol.push(x,y,z);
+		
+		return interpol;
+
+	};
+
 	update(currentTime){
 
 		if(currentTime <= this.span){
 
 			var times = getAnimationTimes();
+
 			console.log(times);
-			for(var k = 0; k < times.length - 1; k++){
+
+			for(var i = 0; i < times.length - 1; i++){
 
 				if(currentTime >= times[i] && currentTime < times[i+1]){
 
-					var vector = [];
-					vector.push(this.controlPoints[i+1][0] - this.controlPoints[i][0]);
-					vector.push(this.controlPoints[i+1][1] - this.controlPoints[i][1]);
-					vector.push(this.controlPoints[i+1][2] - this.controlPoints[i][2]);
-					vector *= (currentTime - times[i])/(times[i+1]-times[i]);
+					var percentage = currentTime/times[i];
 
-					//mat4.translate(this.animationMatrix, this.animationMatrix, vector);
+					console.log(percentage);
+
+					var P = interpolation(this.controlPoints[i], this.controlPoints[i+1], percentage);
+
+					console.log(P);
+					
+					mat4.translate(this.linearMatrix, this.linearMatrix, P);
+
+					console.log(this.linearMatrix);
+
 					break;
-				} else{
-
+				}else{
 					continue;
 				}
 			}
 		}
 	};
+
+	apply(){
+		this.scene.multMatrix(this.linearMatrix);
+	}
+
 };
