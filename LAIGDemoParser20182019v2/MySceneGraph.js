@@ -879,6 +879,7 @@ class MySceneGraph {
                 // controlpoint
                 var grandgrandChildren = grandChildren[0].children;
                 var controlpoints = [];
+                var controlpointsAux = [];
                 // Any number of controlpoints
                 for(var k = 0; k < grandgrandChildren.length; k++){
 
@@ -902,9 +903,23 @@ class MySceneGraph {
                         z = 5.0;
                     }
 
-                    this.controlpoint.push(x, y, z);
-                    controlpoints.push(this.controlpoint);
+                    this.controlpoint.push(x, y, z, 1.0);
+                    controlpointsAux.push(this.controlpoint);
+
+                    if((k%4) == 3){
+
+                        controlpoints.push(controlpointsAux);
+                        controlpointsAux = [];
+                    }
                 }
+
+                if(controlpoints.length != (npointsU*npointsV)){
+
+                    this.onXMLMinorError("The number of controlpoints is different from npointsU*npointsV for the patch for ID = " + primitiveId + "Assuming z = 5.0");
+                }
+                console.log(controlpoints.length);
+                console.log(npointsU);
+                console.log(npointsV);
 
                 // Places this patch in the Primitive's Map
                 var newPrimitive = new MyPatch(this.scene, npointsU, npointsV, npartsU, npartsV, controlpoints);
@@ -2000,7 +2015,7 @@ class MySceneGraph {
 
         // Displays all the primitives of the node
         for(var i = 0; i < node.primitives.length; i++){
-            
+
             if(texture != null)
                 primitiveMap.get(node.primitives[i]).updateTex(length_s, length_t);
       

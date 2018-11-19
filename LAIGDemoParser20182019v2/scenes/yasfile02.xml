@@ -85,6 +85,7 @@
 		<texture id="curtain" file="scenes/images/curtain.jpg"/>
 		<texture id="black" file="scenes/images/black.jpg"/>
 		<texture id="floor" file="scenes/images/floor.jpg"/>
+		<texture id="texture" file="scenes/images/texture.jpg"/>
 	</textures> 
 
 
@@ -809,10 +810,22 @@
 
 		<!-- Nova primitiva: patch, gerada por NURBS -->
 		<primitive id="patch">
-			<patch npointsU="1" npointsV="1" npartsU="5" npartsV="5">
+			<patch npointsU="3" npointsV="4" npartsU="20" npartsV="20">
 				<!-- O número de controlPoints dentro da primitiva é dado por npointsU*npointsV-->
-				<controlpoint x="5.0" y="0.0" z="5.0"/>
-				<!-- ... -->
+				<controlpoint x="-2.0" y="-2.0" z="1.0"/>
+				<controlpoint x="-2.0" y="-1.0" z="-2.0"/>
+				<controlpoint x="-2.0" y="1.0" z="5.0"/>
+				<controlpoint x="-2.0" y="2.0" z="-1.0"/>
+
+				<controlpoint x="0.0" y="-2.0" z="0.0"/>
+				<controlpoint x="0.0" y="-1.0" z="-1.0"/>
+				<controlpoint x="0.0" y="1.0" z="1.5"/>
+				<controlpoint x="0.0" y="2.0" z="0.0"/>
+
+				<controlpoint x="2.0" y="-2.0" z="-1.0"/>
+				<controlpoint x="2.0" y="-1.0" z="2.0"/>
+				<controlpoint x="2.0" y="1.0" z="-5.0"/>
+				<controlpoint x="2.0" y="2.0" z="1.0"/>
 			</patch>
 		</primitive>
 		
@@ -3659,7 +3672,7 @@
 		<!-- The root texture is the wall's texture -->
 		<component id="child_room">
 			<transformation>
-				<transformationref id="child_room" />
+				<!--<transformationref id="child_room" />-->
 			</transformation>
 
 			<animations>
@@ -3669,10 +3682,10 @@
 				<material id="mat0" />
 			</materials>
 
-			<texture id="bank" length_s="1.0" length_t="1.0" />
+			<texture id="curtain" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<componentref id="table" />
+				<!--<componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="walls" />
 				<componentref id="trail" />
@@ -3680,7 +3693,8 @@
 				<componentref id="train" />
 				<componentref id="rocket" />
 				<componentref id="full_window" />
-				<componentref id="planets" />
+				<componentref id="planets" />-->
+				<primitiveref id="patch" />
 			</children> 
 		</component>
 	</components>
