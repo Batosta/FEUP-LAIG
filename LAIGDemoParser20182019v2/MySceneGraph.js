@@ -1474,9 +1474,6 @@ class MySceneGraph {
                     centerArray[2] = parseFloat(centerArray[2]);
                 }
 
-                // Arrays that will hold the center coordinates and the values of the angles
-                var angle = [];
-
                 // angle init
                 var startang = this.reader.getFloat(children[i], 'startang');
                 if (!(startang != null && !isNaN(startang))) {
@@ -1491,13 +1488,12 @@ class MySceneGraph {
                     rotang = 360.0;
                 }
 
-                angle.push(startang, rotang);
-
-                //var newCircular = new CircularAnimation(this, span, radius, centerArray, angle);
-                //animationsMap.set(ID, newCircular);
+                var newCircular = new CircularAnimation(this.scene, span, radius, centerArray, startang, rotang);
+                animationsMap.set(ID, newCircular);
             }
         }
         this.log("Parsed Animations");
+        console.log(animationsMap);
 
         return null;
     }
@@ -1840,7 +1836,6 @@ class MySceneGraph {
                             animations.push(animationsMap.get(animationID));
                         }
                     }
-                   // console.log("PARSED ANIMATIONS");
                 }
 
                 // children
@@ -1997,10 +1992,8 @@ class MySceneGraph {
         if(node.extraTransf != null)
             this.scene.multMatrix(node.extraTransf);
 
-        //A TESTAR, DÁ erro estupido
-
         for(var i = 0; i < node.animations.length; i++){
-           // animationsMap.get(node.animations[i].apply());
+            node.animations[i].apply();
         }
 
         // Recursively takes care of the the node's children

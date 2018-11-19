@@ -18,5 +18,5 @@ class Animation{
 	update(currTime){}
 
 	// Aplicar a transformação sobre a matriz de transformações da cena quando adequado.
-	apply(){}
+	apply(currTime){}
 };

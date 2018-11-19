@@ -17,14 +17,6 @@ class XMLscene extends CGFscene {
 
     }
 
-    update(currTime){
-
-        for(var i = 0; i < this.graph.nodes.length; i++){
-            this.graph.nodes[i].update(currTime);
-        }
-        
-    }
-
     /**
      * Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
      * @param {CGFApplication} application
@@ -46,6 +38,32 @@ class XMLscene extends CGFscene {
         this.axis = new CGFaxis(this);
 
         this.keyMPressed = false;
+
+        this.startTime = 0; 
+
+        this.setUpdatePeriod(1000/60);
+    }
+
+    update(currTime){
+        var today = new Date();
+
+        currTime -= today.getTimezoneOffset()*60*1000;
+
+        this.lastTime = this.lastTime || 0;
+        this.deltaTime = currTime - this.lastTime;
+        this.lastTime = currTime;
+
+        if(this.sceneInited){
+            var components = this.graph.nodes;
+            for(var i = 0; i < components.length; i++){
+                for(var j = 0; j < components[i].animations.length; j++){
+                    if(components[i].animations[j].counter != components[i].animations[j].span){
+                        components[i].animations[j].update(this.deltaTime);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -119,8 +137,6 @@ class XMLscene extends CGFscene {
         this.currentView = this.graph.defaultView;
         
         this.interface.addViewsGroup(this, this.graph.currentView);
-        
-        this.setUpdatePeriod(100);
 
         this.sceneInited = true;
     }
