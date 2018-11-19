@@ -19,6 +19,8 @@ class LinearAnimation extends Animation{
 		this.controlPoints = controlPoints;
 
 		this.linearMatrix = mat4.create();
+		
+		//this.lastTime = 0;
 	};
 
 	// Returns the angle between 2 points
@@ -28,16 +30,16 @@ class LinearAnimation extends Animation{
 		var z = cp2[2] - cp1[2];
 		var x = cp2[0] - cp1[0];
 		var dir = z/x;
-		return atan(dir);
+		return Math.atan(dir);
 	};
 
 	// Returns the distance between 2 points
 	getDistancePoints(cp1, cp2){
 
-		var x = pow(cp1[0]-cp2[0], 2);
-		var y = pow(cp1[1]-cp2[1], 2);
-		var z = pow(cp1[2]-cp2[2], 2);
-		return sqrt(x+y+z);
+		var x = Math.pow(cp1[0]-cp2[0], 2);
+		var y = Math.pow(cp1[1]-cp2[1], 2);
+		var z = Math.pow(cp1[2]-cp2[2], 2);
+		return Math.sqrt(x+y+z);
 	};
 
 	// Returns the total distance of the whole animation
@@ -48,7 +50,6 @@ class LinearAnimation extends Animation{
 
 			distance += this.getDistancePoints(this.controlPoints[i], this.controlPoints[i+1]);
 		}
-
 		return distance;
 	};
 
@@ -65,13 +66,13 @@ class LinearAnimation extends Animation{
 		var counter = 0.0;
 		var times = [];
 		times.push(counter);
-		for(var i = 0; i < (this.controlPoints - 1); i++){
 
-			var time = (getDistancePoints(this.controlPoints[i], this.controlPoints[i+1])/getTotalDistance())*this.span;
+		for(var i = 0; i < (this.controlPoints.length-1); i++){
+
+			var time = (this.getDistancePoints(this.controlPoints[i], this.controlPoints[i+1])/this.getTotalDistance())*this.span;
 			counter += time;
 			times.push(counter);
 		}
-
 		return times;
 	};
 
@@ -99,34 +100,43 @@ class LinearAnimation extends Animation{
 		this.deltaTime = currTime - this.lastTime;
 		this.lasTtime = currTime; 
 
-		if(this.deltaTime <= this.span){
+		console.log("LASTTIME" + this.lasTtime + "   DELTATIME   " +this.deltaTime + "LASTTIME" + this.lasTtime);
 
-			var times = getAnimationTimes();
+		//if(this.deltaTime <= this.span){
 
-			console.log(times);
+			var times = this.getAnimationTimes();
 
-			for(var i = 0; i < times.length - 1; i++){
+			//console.log("TIMES:"); console.log(times);
 
-				if(this.deltaTime >= times[i] && this.deltaTime < times[i+1]){
+		for(var i = 0; i < times.length; i++){
+
+			if(i < 2){
+
+				//if(this.deltaTime >= times[i] && this.deltaTime < times[i+1]){
+
+					console.log("ENTREI CÁ DENTRO");
 
 					var percentage = this.deltaTime/times[i];
+					//console.log("PERCENTAGE" + percentage);
+	
+					console.log(this.controlPoints[i]);
 
-					console.log(percentage);
-
-					var P = interpolation(this.controlPoints[i], this.controlPoints[i+1], percentage);
-
+					var P = this.interpolation(this.controlPoints[i], this.controlPoints[i+1], percentage);
 					console.log(P);
+			
 					
-					mat4.translate(this.linearMatrix, this.linearMatrix, [P[0], P[1], P[2]]);
+					mat4.translate(this.linearMatrix, this.linearMatrix, vec3.fromValues(P[0], P[1], P[2]));
+					//console.log("MATRIX" + this.linearMatrix);
 
-					console.log(this.linearMatrix);
+					
 
-					break;
-				}else{
-					continue;
-				}
+				//	break;
+				//}else{
+				//	continue;
+				//}
 			}
 		}
+		//}
 	};
 
 	apply(){

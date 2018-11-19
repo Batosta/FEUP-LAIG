@@ -28,6 +28,10 @@ class MyGraphNode {
     
     update(currentTime){    
         for(var i = 0;  i < this.animations.length; i++){
+
+            //console.log("I AM UPDATING AN ANIMATION ON THE COMPONENTS");
+            //console.log(this.animations[i]);
+
             this.animations[i].update(currentTime);
         }
     }

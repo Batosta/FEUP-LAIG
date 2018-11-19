@@ -15,7 +15,6 @@ class XMLscene extends CGFscene {
         this.interface = myinterface;
         this.lightValues = {};
 
-        this.setUpdatePeriod(100);
     }
 
     update(currTime){
@@ -120,6 +119,8 @@ class XMLscene extends CGFscene {
         this.currentView = this.graph.defaultView;
         
         this.interface.addViewsGroup(this, this.graph.currentView);
+        
+        this.setUpdatePeriod(100);
 
         this.sceneInited = true;
     }

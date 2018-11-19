@@ -1825,6 +1825,7 @@ class MySceneGraph {
                             animations.push(animationsMap.get(animationID));
                         }
                     }
+                   // console.log("PARSED ANIMATIONS");
                 }
 
                 // children
@@ -1984,7 +1985,7 @@ class MySceneGraph {
         //A TESTAR, DÁ erro estupido
 
         for(var i = 0; i < node.animations.length; i++){
-            node.animations[i].apply();
+           // animationsMap.get(node.animations[i].apply());
         }
 
         // Recursively takes care of the the node's children
