@@ -7,7 +7,7 @@
 	<!--													VIEWS 															-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="51">
-			<from x="20" y="20" z="20" />
+			<from x="10" y="10" z="10" />
 			<to x="0" y="0" z="0" />
 		</perspective>
 
@@ -86,6 +86,8 @@
 		<texture id="black" file="scenes/images/black.jpg"/>
 		<texture id="floor" file="scenes/images/floor.jpg"/>
 		<texture id="texture" file="scenes/images/texture.jpg"/>
+		<texture id="heightmap" file="scenes/images/height.png"/>
+		<texture id="colormap" file="scenes/images/colorMap.png"/>
 	</textures> 
 
 
@@ -411,6 +413,7 @@
 		</transformation>
 		<transformation id="rocket">
 			<translate x="14.0" y="0.0" z="2.0" />
+			<scale x="0.5" y="0.5" z="0.5"/>
 		</transformation>
 
 
@@ -757,10 +760,16 @@
 		<linear id="linear1" span="5.0">
 			<controlpoint x="0.1" y="0.0" z="0.0" />
 			<controlpoint x="0.0" y="6.0" z="0.0" />
-			<controlpoint x="5.0" y="0.0" z="0.0" />
 		</linear>
 
-		<circular id="circular1" span="10.0" center="0 0 0" radius="0" startang="0" rotang="930"/>
+		<linear id="linear2" span="5.0">
+			<controlpoint x="0.1" y="6.0" z="0.0" />
+			<controlpoint x="5.0" y="0." z="0.0" />
+		</linear>
+
+
+
+		<circular id="circular1" span="30.0" center="0 0 0" radius="0" startang="0" rotang="930"/>
 
 	</animations>
 
@@ -839,9 +848,10 @@
 			<cylinder2 base="2.5" top="2.5" height="5.0" slices="20" stacks="20" />
 		</primitive>
 
+
 		<!--Nova primitiva: terreno baseado em shaders-->
 		<primitive id="terrain">
-			<terrain idtexture="wood" idheightmap="wood" parts="5" heightscale="5.0"/>
+			<terrain idtexture="colormap" idheightmap="heightmap" parts="5" heightscale="5.0"/>
 		</primitive>
 
 
@@ -2075,6 +2085,8 @@
 			</transformation> 
 
 			<animations>
+				<animationref id="linear1" />
+				<!--<animationref id="linear2" />-->
 			</animations>
 
 			<materials>
@@ -2994,7 +3006,6 @@
 			</transformation>
 
 			<animations>
-				<animationref id="linear1" />
 			</animations>
 
 			<materials> 
@@ -3694,7 +3705,7 @@
 				<componentref id="rocket" />
 				<componentref id="full_window" />
 				<componentref id="planets" />-->
-				<primitiveref id="patch" />
+				<primitiveref id="terrain"/>
 			</children> 
 		</component>
 	</components>

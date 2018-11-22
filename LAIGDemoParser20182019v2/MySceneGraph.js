@@ -997,8 +997,9 @@ class MySceneGraph {
                 }
                 
                 // Places this plane in the Primitive's Map
-                var newPrimitive = new MyTerrain(this.scene, idtexture, idheightmap, parts, heightscale);
+                var newPrimitive = new MyTerrain(this.scene, textureMap.get(idtexture), textureMap.get(idheightmap), parts, heightscale);
                 primitiveMap.set(primitiveId, newPrimitive);
+                console.log(newPrimitive);
             }
             //Retrieves the water specifications
             else if(grandChildren[0].nodeName == "water"){

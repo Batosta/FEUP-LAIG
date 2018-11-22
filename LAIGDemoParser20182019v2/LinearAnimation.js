@@ -20,62 +20,86 @@ class LinearAnimation extends Animation{
 
 		this.controlPoints = controlPoints;
 
+		//Total distance for the animation, begins at 0.
 		this.distance = 0;
 
+		//Distance that for each segment. Ex: Cp1 -> Cp2; Cp2 -> Cp3; Cpn -> Cpn+1
 		this.distancesSegment = [];
 
 		this.displacement;
+
 		this.angleRotation;
+		
 		this.p1;
+
 		this.p2;
 
+		//Calculates the total distance and places it on this.distance.
+		//While it calculates it, segment distances are pushed into distancesSegment
 		for(var i = 0; i < controlPoints.length - 1; i++){
-			this.distance += vec3.dist(vec3.fromValues(controlPoints[i][0], controlPoints[i][1], controlPoints[i][2]), vec3.fromValues(controlPoints[i+1][0], controlPoints[i+1][1], controlPoints[i+1][2]));
-			this.distancesSegment.push(this.distance);
-		}
-		this.speed = this.distance / this.span;
-		this.prevAngle = 0;
 
+			var vector1 = vec3.fromValues(controlPoints[i][0], controlPoints[i][1], controlPoints[i][2]);
+
+			var vector2 = vec3.fromValues(controlPoints[i+1][0], controlPoints[i+1][1], controlPoints[i+1][2])
+
+			this.distance += vec3.dist(vector1, vector2);
+			
+			this.distancesSegment.push(this.distance);
+		
+		}
+		
+		//speed of the animation. V = D/T
+		this.speed = this.distance / this.span;
+		
+		//Angle that will follow the animation
+		this.oldAngle = 0;
+
+		//Counter for the time that has past, everytime the scene gets updated it sums the deltaTime
 		this.counter = 0;
 		
 	};
 
-	update(time){
+	//Receives deltaTime from XMLScene
+	update(deltaTime){
 
-		this.counter += (time/1000);
+		this.counter += (deltaTime/1000);
 
+		//Verifies if the counter is still lower than span, if by some chance it goes higher, it will update
 		if(this.counter > this.span)
 			this.counter = this.span;
 
+		//Gets the current Distance of the object. D = V*T
 		this.currentDistance = this.speed * this.counter;
 
+		//Gets the Index for the controlPoints that represent the current situation of the current distance.
 		var i = 0; 
-		while(this.currentDistance > this.distancesSegment[i] && i < this.distancesSegment.length)
-			i++;
+		while(this.currentDistance > this.distancesSegment[i] && i < this.distancesSegment.length) i++;
 
 		this.p1 = this.controlPoints[i];
 		this.p2 = this.controlPoints[i+1];
 
+		var previousSegment;
 
-		var lastSegDist;
+		if(i==0) previousSegment = 0;
+		else previousSegment = this.distancesSegment[i - 1];
 
-		if(i==0)
-			lastSegDist = 0;
-		else
-			lastSegDist = this.distancesSegment[i - 1];
-
-		this.displacement = (this.currentDistance - lastSegDist) / (this.distancesSegment[i] - lastSegDist);		
+		this.displacement = (this.currentDistance - previousSegment) / (this.distancesSegment[i] - previousSegment);		
 		this.angleRotation = Math.atan((this.p2[0] - this.p1[0]) / (this.p2[2] - this.p1[2]));
 
 		if(this.p2[2] - this.p1[2] < 0)
 			this.angleRotation += Math.PI;
 		
-		this.prevAngle = this.angleRotation;
+		this.oldAngle = this.angleRotation;
 
 	}
 
 	apply(){
-		this.scene.translate((this.p2[0] - this.p1[0]) * this.displacement + this.p1[0], (this.p2[1] - this.p1[1]) * this.displacement + this.p1[1], (this.p2[2] - this.p1[2]) * this.displacement + this.p1[2]);
-		this.scene.rotate(this.prevAngle, 0, 1, 0);
+		
+		var x = (this.p2[0] - this.p1[0]) * this.displacement + this.p1[0];
+		var y = (this.p2[1] - this.p1[1]) * this.displacement + this.p1[1];
+		var z = (this.p2[2] - this.p1[2]) * this.displacement + this.p1[2];
+
+		this.scene.translate(x,y,z);
+		this.scene.rotate(this.oldAngle, 0, 1, 0);
 	}
 };
