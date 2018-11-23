@@ -994,7 +994,7 @@ class MySceneGraph {
                 }
                 
                 // Places this plane in the Primitive's Map
-                var newPrimitive = new MyTerrain(this.scene, textureMap.get(idtexture), textureMap.get(idheightmap), parts, heightscale);
+                var newPrimitive = new MyTerrain(this.scene, this.textureMap.get(idtexture), this.textureMap.get(idheightmap), parts, heightscale);
                 primitiveMap.set(primitiveId, newPrimitive);
                 console.log(newPrimitive);
             }
