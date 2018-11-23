@@ -1,7 +1,7 @@
 /**
  * MyWater class - Represents the primitive water
  */
-class MyWater extends CGFobject {
+class MyWater extends MyPlane {
 
     /**
      * @constructor of the water
@@ -14,7 +14,7 @@ class MyWater extends CGFobject {
      * @param texscale - 
      */
     constructor(scene, idtexture, idwavemap, parts, heightscale, texscale) {
-        super(scene);
+        super(scene, parts, parts);
 
         this.idtexture = idtexture;
         this.idwavemap = idwavemap;

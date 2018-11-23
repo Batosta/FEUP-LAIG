@@ -21,25 +21,23 @@ class MyTerrain extends MyPlane {
         this.parts = parts;
         this.heightscale = heightscale;
 
-        this.currentShader = new CGFshader(this.scene.gl, "Shaders/texture3.vert", "Shaders/texture3.frag");
+        this.currentShader = new CGFshader(this.scene.gl, "Shaders/test.vert", "Shaders/test.frag");
    
-        this.currentShader.setUniformsValues({uSampler2: 1});
-        
-        this.heightTexture = this.idheightmap;
-        this.colorTexture = this.idtexture;
-
+        this.currentShader.setUniformsValues({texture: 1});
+        this.currentShader.setUniformsValues({height: 2});
         this.currentShader.setUniformsValues({normScale: this.heightscale});
 
-        console.log(this.obj);
-
+        this.height = this.idheightmap;
+        this.texture = this.idtexture;
     };
 
     display(){
 
         this.scene.setActiveShader(this.currentShader);
         this.scene.pushMatrix();
-        this.colorTexture.bind(0);
-        this.scene.scale(5,5,5);
+        this.texture.bind(1);
+        this.height.bind(2);
+        this.scene.scale(10,10,10, 1);
         this.plane.display();
         this.scene.popMatrix();
         this.scene.setActiveShader(this.scene.defaultShader);

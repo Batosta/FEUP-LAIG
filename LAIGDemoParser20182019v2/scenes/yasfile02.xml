@@ -7,7 +7,7 @@
 	<!--													VIEWS 														-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="51">
-			<from x="10" y="10" z="10" />
+			<from x="30" y="30" z="30" />
 			<to x="0" y="0" z="0" />
 		</perspective>
 
@@ -763,9 +763,9 @@
 			<controlpoint x="0.0" y="6.0" z="0.0" />
 		</linear>
 
-		<linear id="linear2" span="5.0">
-			<controlpoint x="0.1" y="6.0" z="0.0" />
-			<controlpoint x="5.0" y="0." z="0.0" />
+		<linear id="linear2" span="10.0">
+			<controlpoint x="0.0" y="6.0" z="0.0" />
+			<controlpoint x="5.0" y="6.0" z="0.0" />
 		</linear>
 
 
@@ -852,7 +852,7 @@
 
 		<!--Nova primitiva: terreno baseado em shaders-->
 		<primitive id="terrain">
-			<terrain idtexture="colormap" idheightmap="heightmap" parts="5" heightscale="5.0"/>
+			<terrain idtexture="colormap" idheightmap="heightmap" parts="50" heightscale="2.0"/>
 		</primitive>
 
 
@@ -2087,7 +2087,6 @@
 
 			<animations>
 				<animationref id="linear1" />
-				<!--<animationref id="linear2" />-->
 			</animations>
 
 			<materials>
