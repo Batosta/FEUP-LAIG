@@ -88,6 +88,7 @@
 		<texture id="texture" file="scenes/images/texture.jpg"/>
 		<texture id="heightmap" file="scenes/images/height.png"/>
 		<texture id="colormap" file="scenes/images/colorMap.png"/>
+		<texture id="camuflage" file="scenes/images/camuflage.png"/>
 	</textures> 
 
 
@@ -3693,10 +3694,10 @@
 				<material id="mat0" />
 			</materials>
 
-			<texture id="bank" length_s="1.0" length_t="1.0" />
+			<texture id="camuflage" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<componentref id="table" />
+				<!-- <componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="walls" />
 				<componentref id="trail" />
@@ -3704,7 +3705,8 @@
 				<componentref id="train" />
 				<componentref id="rocket" />
 				<componentref id="full_window" />
-				<componentref id="planets" />
+				<componentref id="planets" /> -->
+				<primitiveref id="vehicle" />
 			</children> 
 		</component>
 	</components>
