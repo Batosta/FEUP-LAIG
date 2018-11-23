@@ -1,10 +1,10 @@
 <yas>
 
-	<!--													SCENE 															-->
+	<!--													SCENE 														-->
 	<scene root="child_room" axis_length="5" />
 
 
-	<!--													VIEWS 															-->
+	<!--													VIEWS 														-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="51">
 			<from x="10" y="10" z="10" />
@@ -18,14 +18,14 @@
 	</views>
 
 
-	<!--													AMBIENT 															-->
+	<!--													AMBIENT 													-->
 	<ambient> 
 		<ambient r="0.5" g="0.5" b="0.5" a="1.0" /> 
 		<background r="0" g="0" b="0" a="1" /> 
 	</ambient> 
 
 
-	<!--													LIGHTS 															-->
+	<!--													LIGHTS 														-->
 	<lights>
 
 		<!-- Omni Lights -->
@@ -68,7 +68,7 @@
 	</lights>
 
 
-	<!--													TEXTURES 															-->
+	<!--													TEXTURES 													-->
 	<textures> 
 		<texture id="bank" file="scenes/images/bank.jpg"/>
 		<texture id="trunk" file="scenes/images/trunk-image.jpg"/> 
@@ -92,7 +92,7 @@
 
 
 
-	<!--													MATERIALS 															-->
+	<!--													MATERIALS 													-->
 	<materials>
 		<material id="mat0" shininess="100.0">
 			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -130,7 +130,7 @@
 		</material>
 	</materials>
 
-	<!--													TRANSFORMATIONS 															-->
+	<!--													TRANSFORMATIONS 											-->
 	<transformations>
 		<!-- Unit Cube -->
 		<transformation id="front_cube"> 
@@ -755,7 +755,7 @@
 		</transformation>
 	</transformations> 
 
-	<!--													ANIMATIONS 															-->
+	<!--													ANIMATIONS 													-->
 	<animations>
 		<linear id="linear1" span="5.0">
 			<controlpoint x="0.1" y="0.0" z="0.0" />
@@ -773,7 +773,7 @@
 
 	</animations>
 
-	<!--													PRIMITIVES 															-->
+	<!--													PRIMITIVES 													-->
 	<primitives>
 
 		<!-- Rectangles -->
@@ -821,31 +821,31 @@
 		<primitive id="patch">
 			<patch npointsU="3" npointsV="4" npartsU="20" npartsV="20">
 				<!-- O número de controlPoints dentro da primitiva é dado por npointsU*npointsV-->
-				<controlpoint x="-2.0" y="-2.0" z="1.0"/>
-				<controlpoint x="-2.0" y="-1.0" z="-2.0"/>
-				<controlpoint x="-2.0" y="1.0" z="5.0"/>
-				<controlpoint x="-2.0" y="2.0" z="-1.0"/>
+				<controlpoint x="-2.0" y="-2.0" z="1.0" />
+				<controlpoint x="-2.0" y="-1.0" z="-2.0" />
+				<controlpoint x="-2.0" y="1.0" z="5.0" />
+				<controlpoint x="-2.0" y="2.0" z="-1.0" />
 
-				<controlpoint x="0.0" y="-2.0" z="0.0"/>
-				<controlpoint x="0.0" y="-1.0" z="-1.0"/>
-				<controlpoint x="0.0" y="1.0" z="1.5"/>
-				<controlpoint x="0.0" y="2.0" z="0.0"/>
+				<controlpoint x="0.0" y="-2.0" z="0.0" />
+				<controlpoint x="0.0" y="-1.0" z="-1.0" />
+				<controlpoint x="0.0" y="1.0" z="1.5" />
+				<controlpoint x="0.0" y="2.0" z="0.0" />
 
-				<controlpoint x="2.0" y="-2.0" z="-1.0"/>
-				<controlpoint x="2.0" y="-1.0" z="2.0"/>
-				<controlpoint x="2.0" y="1.0" z="-5.0"/>
-				<controlpoint x="2.0" y="2.0" z="1.0"/>
+				<controlpoint x="2.0" y="-2.0" z="-1.0" />
+				<controlpoint x="2.0" y="-1.0" z="2.0" />
+				<controlpoint x="2.0" y="1.0" z="-5.0" />
+				<controlpoint x="2.0" y="2.0" z="1.0" />
 			</patch>
 		</primitive>
 		
 		<!-- Nova primitiva: Vehicle: corresponde a um veículo voador. Inclui pelo menos uma superficie nao plana gerada utilizando NURBS e javascrips-->
 		<primitive id="vehicle">
-			<vehicle/> <!-- Ainda nao se sabe o que por aqui-->
+			<vehicle />
 		</primitive>
 
 		<!-- Nova primitiva: cilindro baseado em NURBS -->
 		<primitive id="cylinder2">
-			<cylinder2 base="2.5" top="2.5" height="5.0" slices="20" stacks="20" />
+			<cylinder2 base="0.0" top="5.0" height="20.0" slices="30" stacks="100" />
 		</primitive>
 
 
@@ -861,7 +861,7 @@
 		</primitive>
 	</primitives>
 
-	<!---													COMPONENTS 															-->
+	<!---													COMPONENTS 													-->
 	<components> 
 
 		<!-- Cube -->
@@ -3693,10 +3693,10 @@
 				<material id="mat0" />
 			</materials>
 
-			<texture id="curtain" length_s="1.0" length_t="1.0" />
+			<texture id="bank" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<!--<componentref id="table" />
+				<componentref id="table" />
 				<componentref id="chair" />
 				<componentref id="walls" />
 				<componentref id="trail" />
@@ -3704,8 +3704,7 @@
 				<componentref id="train" />
 				<componentref id="rocket" />
 				<componentref id="full_window" />
-				<componentref id="planets" />-->
-				<primitiveref id="terrain"/>
+				<componentref id="planets" />
 			</children> 
 		</component>
 	</components>

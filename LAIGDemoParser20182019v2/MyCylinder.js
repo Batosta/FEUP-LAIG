@@ -26,8 +26,6 @@ class MyCylinder extends CGFobject {
         this.tube = new MyTube(this.scene, this.base, this.top, this.height, this.slices, this.stacks);
         this.circle0 = new MyCircle(this.scene, this.slices);
         this.circle1 = new MyCircle(this.scene, this.slices);
-
-        this.initBuffers();
     };
 
     /**

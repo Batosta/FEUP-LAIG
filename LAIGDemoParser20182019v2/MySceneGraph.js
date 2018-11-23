@@ -19,9 +19,6 @@ var transformMap = new Map();
 // Map that contains all the materials
 var materialMap = new Map();
 
-// Map that contains all the textures
-var textureMap = new Map();
-
 // Map that contains all the primitives
 var primitiveMap = new Map();
 
@@ -67,8 +64,8 @@ class MySceneGraph {
 
         this.counterMaterial = 0;
 
-        //Speed que vai ser utilizado para as animacoes
-        this.speed = 1;
+        // Map that contains all the textures
+        this.textureMap = new Map();
     }
 
 
@@ -877,6 +874,7 @@ class MySceneGraph {
                 }
                 
                 // controlpoint
+                var counter = 0;
                 var grandgrandChildren = grandChildren[0].children;
                 var controlpoints = [];
                 var controlpointsAux = [];
@@ -903,6 +901,7 @@ class MySceneGraph {
                         z = 5.0;
                     }
 
+                    counter++;
                     this.controlpoint.push(x, y, z, 1.0);
                     controlpointsAux.push(this.controlpoint);
 
@@ -912,14 +911,11 @@ class MySceneGraph {
                         controlpointsAux = [];
                     }
                 }
+                
+                if(counter != (npointsU*npointsV)){
 
-                if(controlpoints.length != (npointsU*npointsV)){
-
-                    this.onXMLMinorError("The number of controlpoints is different from npointsU*npointsV for the patch for ID = " + primitiveId + "Assuming z = 5.0");
+                    this.onXMLMinorError("The number of controlpoints is different from npointsU*npointsV for the patch for ID = " + primitiveId);
                 }
-                console.log(controlpoints.length);
-                console.log(npointsU);
-                console.log(npointsV);
 
                 // Places this patch in the Primitive's Map
                 var newPrimitive = new MyPatch(this.scene, npointsU, npointsV, npartsU, npartsV, controlpoints);
@@ -928,7 +924,8 @@ class MySceneGraph {
             //Retrieves the vehicle specifications
             else if(grandChildren[0].nodeName == "vehicle"){
 
-                console.log("vehicle");
+                var newPrimitive = new MyVehicle(this.scene);
+                primitiveMap.set(primitiveId, newPrimitive);
             }
             //Retrieves the cylinder2 specifications
             else if(grandChildren[0].nodeName == "cylinder2"){
@@ -1070,7 +1067,7 @@ class MySceneGraph {
             }else if(tID != null && path != null){
 
                 var newText = new CGFtexture(this.scene, path);        
-                textureMap.set(tID, newText);
+                this.textureMap.set(tID, newText);
 
             }
         }
@@ -1494,7 +1491,6 @@ class MySceneGraph {
             }
         }
         this.log("Parsed Animations");
-        console.log(animationsMap);
 
         return null;
     }
@@ -1980,7 +1976,7 @@ class MySceneGraph {
 
         // Case where there is no texture
         if(texture != null)
-            materialMap.get(material).setTexture(textureMap.get(texture));
+            materialMap.get(material).setTexture(this.textureMap.get(texture));
         
         // Applies the material
         materialMap.get(material).apply();
