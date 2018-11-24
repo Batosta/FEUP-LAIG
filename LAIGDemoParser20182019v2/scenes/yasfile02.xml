@@ -1,7 +1,7 @@
 <yas>
 
 	<!--													SCENE 														-->
-	<scene root="child_room" axis_length="5" />
+	<scene root="scene" axis_length="5" />
 
 
 	<!--													VIEWS 														-->

@@ -44,7 +44,7 @@ class MyWater extends MyPlane {
     }
 
     update(time){
-        //var factor = (Math.sin((time * 3.0) % 3141 * 0.002) + 1.0)*0.5;
+        
         var distance = this.speed * time;
         this.factor += distance;
         this.shader.setUniformsValues({timeFactor: this.factor});
