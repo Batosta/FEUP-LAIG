@@ -28,6 +28,10 @@ class MyWater extends MyPlane {
 
         this.updateValues();
 
+        this.factor = 0;
+
+        this.speed = 0.005;
+
         this.wave = this.idwavemap;
         this.texture = this.idtexture;
     };
@@ -36,12 +40,14 @@ class MyWater extends MyPlane {
         this.shader.setUniformsValues({texture: 1});
         this.shader.setUniformsValues({height: 2});
         this.shader.setUniformsValues({normScale: this.heightscale});
+        this.shader.setUniformsValues({textScale: this.texscale});
     }
 
     update(time){
-        var factor = (Math.sin((time * 3.0) % 3141 * 0.002) + 1.0)*0.5;
-        console.log(factor);
-        this.shader.setUniformsValues({timeFactor: factor});
+        //var factor = (Math.sin((time * 3.0) % 3141 * 0.002) + 1.0)*0.5;
+        this.speed *= time;
+        this.factor += 0.01;
+        this.shader.setUniformsValues({timeFactor: this.factor});
     }
 
     display(){
@@ -50,7 +56,8 @@ class MyWater extends MyPlane {
         this.scene.pushMatrix();
         this.texture.bind(1);
         this.wave.bind(2);
-        this.scene.scale(20,20,20, 1);
+        this.scene.translate(0,-1.57,0);
+        this.scene.scale(15,15,15, 1);
         this.plane.display();
         this.scene.popMatrix();
         this.scene.setActiveShader(this.scene.defaultShader);

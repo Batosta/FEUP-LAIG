@@ -19,9 +19,13 @@ struct lightProperties{
 
 #define NUMBER_OF_LIGHTS 8
 uniform lightProperties uLight[NUMBER_OF_LIGHTS];
+
 varying vec2 vTextureCoord;
 uniform sampler2D texture;
+uniform float textScale;
+uniform float timeFactor;
 
 void main(){
-	gl_FragColor = texture2D(texture, vTextureCoord);
-}
+	vec4 textureColor = texture2D(texture, vTextureCoord * textScale + timeFactor);
+	gl_FragColor = textureColor;
+} 

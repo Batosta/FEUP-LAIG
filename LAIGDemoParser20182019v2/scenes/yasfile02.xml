@@ -90,6 +90,7 @@
 		<texture id="colormap" file="scenes/images/colorMap.jpg"/>
 		<texture id="camuflage" file="scenes/images/camuflage.png"/>
 		<texture id="water" file="scenes/images/water.jpg"/>
+		<texture id="water1" file="scenes/images/water1.jpg"/>
 		<texture id="waves1" file="scenes/images/wavesHeight1.jpg"/>
 		<texture id="waves2" file="scenes/images/wavesHeight2.png"/>
 	</textures> 
@@ -866,7 +867,7 @@
 
 		<!--Nova primitiva: plano deagua baseado em shaders-->
 		<primitive id="water">
-			<water idtexture="water" idwavemap="waves1" parts="5" heightscale="1" texscale="2"/>
+			<water idtexture="water1" idwavemap="waves1" parts="5" heightscale="1" texscale="1"/>
 		</primitive>
 	</primitives>
 
@@ -3714,6 +3715,7 @@
 				<componentref id="full_window" />
 				<componentref id="planets" /> -->
 				<primitiveref id="water"/>
+				<primitiveref id="terrain"/>
 			</children> 
 		</component>
 	</components>

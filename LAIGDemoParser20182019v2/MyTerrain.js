@@ -37,6 +37,7 @@ class MyTerrain extends MyPlane {
         this.scene.pushMatrix();
         this.texture.bind(1);
         this.height.bind(2);
+        this.scene.translate(0,-1,0);
         this.scene.scale(10,10,10, 1);
         this.plane.display();
         this.scene.popMatrix();
@@ -44,5 +45,4 @@ class MyTerrain extends MyPlane {
     };
 
     update(time){};
-
 };

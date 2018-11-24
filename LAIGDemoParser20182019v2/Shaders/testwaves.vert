@@ -18,9 +18,9 @@ void main(){
 
 	vTextureCoord = aTextureCoord;
 
-	vec3 newPos = vec3(aVertexPosition.x, aVertexPosition.y + texture2D(height, aTextureCoord)[1] * 0.2 * normScale, aVertexPosition.z);
+	vec3 newPos = vec3(aVertexPosition.x, aVertexPosition.y + texture2D(height, aTextureCoord + timeFactor)[1] * 0.2 * normScale, aVertexPosition.z);
 
-	gl_Position = uPMatrix * uMVMatrix * vec4(newPos, 1.0) * timeFactor;
+	gl_Position = uPMatrix * uMVMatrix * vec4(newPos, 1.0);
 
     normal = vec4(aVertexNormal, 1.0);
 
