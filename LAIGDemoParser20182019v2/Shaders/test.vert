@@ -5,6 +5,7 @@ attribute vec3 aVertexPosition;
 attribute vec2 aTextureCoord;
 varying vec2 vTextureCoord;
 
+
 uniform sampler2D height;
 
 uniform float normScale;

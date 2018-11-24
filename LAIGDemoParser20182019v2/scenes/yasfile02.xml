@@ -7,7 +7,7 @@
 	<!--													VIEWS 														-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="51">
-			<from x="30" y="30" z="30" />
+			<from x="15" y="15" z="15" />
 			<to x="0" y="0" z="0" />
 		</perspective>
 
@@ -86,9 +86,12 @@
 		<texture id="black" file="scenes/images/black.jpg"/>
 		<texture id="floor" file="scenes/images/floor.jpg"/>
 		<texture id="texture" file="scenes/images/texture.jpg"/>
-		<texture id="heightmap" file="scenes/images/height.png"/>
-		<texture id="colormap" file="scenes/images/colorMap.png"/>
+		<texture id="heightmap" file="scenes/images/height.jpg"/>
+		<texture id="colormap" file="scenes/images/colorMap.jpg"/>
 		<texture id="camuflage" file="scenes/images/camuflage.png"/>
+		<texture id="water" file="scenes/images/water.jpg"/>
+		<texture id="waves1" file="scenes/images/wavesHeight1.jpg"/>
+		<texture id="waves2" file="scenes/images/wavesHeight2.png"/>
 	</textures> 
 
 
@@ -758,7 +761,7 @@
 
 	<!--													ANIMATIONS 													-->
 	<animations>
-		<linear id="linear1" span="5.0">
+		<linear id="linear1" span="10.0">
 			<controlpoint x="0.1" y="0.0" z="0.0" />
 			<controlpoint x="0.0" y="6.0" z="0.0" />
 		</linear>
@@ -766,6 +769,11 @@
 		<linear id="linear2" span="10.0">
 			<controlpoint x="0.0" y="6.0" z="0.0" />
 			<controlpoint x="5.0" y="6.0" z="0.0" />
+		</linear>
+
+		<linear id="linear3" span="10.0">
+			<controlpoint x="0.0" y="6.0" z="0.0" />
+			<controlpoint x="5.0" y="30.0" z="0.0" />
 		</linear>
 
 
@@ -858,7 +866,7 @@
 
 		<!--Nova primitiva: plano deagua baseado em shaders-->
 		<primitive id="water">
-			<water idtexture="water" idwavemap="waves" parts="5" heightscale="0.25" texscale="0.25"/>
+			<water idtexture="water" idwavemap="waves1" parts="5" heightscale="1" texscale="2"/>
 		</primitive>
 	</primitives>
 
@@ -3705,7 +3713,7 @@
 				<componentref id="rocket" />
 				<componentref id="full_window" />
 				<componentref id="planets" /> -->
-				<primitiveref id="vehicle" />
+				<primitiveref id="water"/>
 			</children> 
 		</component>
 	</components>

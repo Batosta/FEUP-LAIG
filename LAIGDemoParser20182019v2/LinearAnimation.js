@@ -30,9 +30,9 @@ class LinearAnimation extends Animation{
 
 		this.angleRotation;
 		
-		this.p1;
+		this.p1 = [0,0,0];
 
-		this.p2;
+		this.p2= [0,0,0];
 
 		//Calculates the total distance and places it on this.distance.
 		//While it calculates it, segment distances are pushed into distancesSegment

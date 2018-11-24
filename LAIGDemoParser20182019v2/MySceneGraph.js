@@ -1033,7 +1033,7 @@ class MySceneGraph {
                 }
                 
                 // Places this plane in the Primitive's Map
-                var newPrimitive = new MyWater(this.scene, idtexture, idwavemap, parts, heightscale, texscale);
+                var newPrimitive = new MyWater(this.scene, this.textureMap.get(idtexture), this.textureMap.get(idwavemap), parts, heightscale, texscale);
                 primitiveMap.set(primitiveId, newPrimitive);
             }
             else
@@ -1990,7 +1990,13 @@ class MySceneGraph {
             this.scene.multMatrix(node.extraTransf);
 
         for(var i = 0; i < node.animations.length; i++){
-            node.animations[i].apply();
+            if(node.animations[i].counter != node.animations[i].span){
+                node.animations[i].apply();
+                break;
+            }
+        
+            if(i == (node.animations.length - 1))
+                node.animations[i].apply();
         }
 
         // Recursively takes care of the the node's children
