@@ -43,4 +43,6 @@ class MyTerrain extends MyPlane {
         this.scene.setActiveShader(this.scene.defaultShader);
     };
 
+    update(time){};
+
 };

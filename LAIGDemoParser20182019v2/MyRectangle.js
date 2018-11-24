@@ -86,4 +86,6 @@ class MyRectangle extends CGFobject{
 			this.tLast = length_t;
 		}
 	};
+
+	update(time){};
 };

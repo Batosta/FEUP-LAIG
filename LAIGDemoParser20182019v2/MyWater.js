@@ -18,16 +18,13 @@ class MyWater extends MyPlane {
         super(scene, parts, parts);
 
         this.idtexture = idtexture;
-
         this.idwavemap = idwavemap;
 
         this.parts = parts;
-
         this.heightscale = heightscale;
-
         this.texscale = texscale;
 
-        this.shader = new CGFshader(this.scene.gl, "Shaders/waves.vert", "Shaders/waves.frag");
+        this.shader = new CGFshader(this.scene.gl, "Shaders/testwaves.vert", "Shaders/testwaves.frag");
 
         this.updateValues();
 
@@ -43,6 +40,7 @@ class MyWater extends MyPlane {
 
     update(time){
         var factor = (Math.sin((time * 3.0) % 3141 * 0.002) + 1.0)*0.5;
+        console.log(factor);
         this.shader.setUniformsValues({timeFactor: factor});
     }
 

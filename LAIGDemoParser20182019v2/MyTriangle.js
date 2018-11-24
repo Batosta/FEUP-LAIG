@@ -94,4 +94,6 @@ class MyTriangle extends CGFobject{
 		this.tLast = length_t;
 		}
 	};
+
+	update(time){};
 };

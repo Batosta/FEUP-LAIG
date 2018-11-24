@@ -237,4 +237,6 @@ class MyVehicle extends CGFobject {
             this.circle.display();
         this.scene.popMatrix();
     };
+
+    update(time){};
 };

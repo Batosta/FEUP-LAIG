@@ -62,6 +62,9 @@ class XMLscene extends CGFscene {
                         break;
                     }
                 }
+                for(var j = 0; j < components[i].primitives.length; j++){
+                    this.graph.primitiveMap.get(components[i].primitives[j]).update(this.deltaTime);
+                }
             }
         }
     }

@@ -76,4 +76,6 @@ class MyCylinder2 extends CGFobject {
 
         this.cylinder2.display();
     };
+
+    update(time){};
 };

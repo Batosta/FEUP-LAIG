@@ -62,4 +62,6 @@ class MyPlane extends CGFobject {
 
         this.plane.display();
     };
+
+    update(time){};
 };

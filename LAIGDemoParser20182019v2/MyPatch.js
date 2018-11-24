@@ -51,4 +51,6 @@ class MyPatch extends CGFobject {
 
         this.patch.display();
     };
+
+    update(time){};
 };

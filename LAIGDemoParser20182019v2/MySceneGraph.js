@@ -19,9 +19,6 @@ var transformMap = new Map();
 // Map that contains all the materials
 var materialMap = new Map();
 
-// Map that contains all the primitives
-var primitiveMap = new Map();
-
 // Map that contains all the animations
 var animationsMap = new Map();
 
@@ -66,6 +63,10 @@ class MySceneGraph {
 
         // Map that contains all the textures
         this.textureMap = new Map();
+
+        // Map that contains all the primitives
+        this.primitiveMap = new Map();
+
     }
 
 
@@ -664,7 +665,7 @@ class MySceneGraph {
 
                 // Places this rectangle in the Primitive's Map
                 var newPrimitive = new MyRectangle(this.scene, x1, x2, y1, y2);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             } 
             // Retrieves the triangle specifications
             else if(grandChildren[0].nodeName == "triangle"){           
@@ -726,7 +727,7 @@ class MySceneGraph {
 
                 // Places this triangle in the Primitive's Map
                 var newPrimitive = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             } 
             // Retrieves the cylinder specifications
             else if(grandChildren[0].nodeName == "cylinder"){
@@ -765,7 +766,7 @@ class MySceneGraph {
 
                 // Places this cylinder in the Primitive's Map
                 var newPrimitive = new MyCylinder(this.scene, base, top, height, slices, stacks);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             } 
             // Retrieves the sphere specifications
             else if(grandChildren[0].nodeName == "sphere"){
@@ -791,7 +792,7 @@ class MySceneGraph {
 
                 // Places this sphere in the Primitive's Map
                 var newPrimitive = new MySphere(this.scene, radius, slices, stacks);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             } 
             // Retrieves the torus specifications
             else if(grandChildren[0].nodeName == "torus"){
@@ -823,7 +824,7 @@ class MySceneGraph {
 
                 // Places this torus in the Primitive's Map
                 var newPrimitive = new MyTorus(this.scene, inner, outer, slices, loops);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             }
             //Retrieves the plane specifications
             else if(grandChildren[0].nodeName == "plane"){
@@ -843,7 +844,7 @@ class MySceneGraph {
                 
                 // Places this plane in the Primitive's Map
                 var newPrimitive = new MyPlane(this.scene, npartsU, npartsV);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             }
             // Retrieves the patch specifications
             else if(grandChildren[0].nodeName == "patch"){
@@ -919,13 +920,13 @@ class MySceneGraph {
 
                 // Places this patch in the Primitive's Map
                 var newPrimitive = new MyPatch(this.scene, npointsU, npointsV, npartsU, npartsV, controlpoints);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             }
             //Retrieves the vehicle specifications
             else if(grandChildren[0].nodeName == "vehicle"){
 
                 var newPrimitive = new MyVehicle(this.scene);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             }
             //Retrieves the cylinder2 specifications
             else if(grandChildren[0].nodeName == "cylinder2"){
@@ -963,7 +964,7 @@ class MySceneGraph {
                 
                 // Places this plane in the Primitive's Map
                 var newPrimitive = new MyCylinder2(this.scene, base, top, height, slices, stacks);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             }
             //Retrieves the terrain specifications
             else if(grandChildren[0].nodeName == "terrain"){
@@ -995,8 +996,7 @@ class MySceneGraph {
                 
                 // Places this plane in the Primitive's Map
                 var newPrimitive = new MyTerrain(this.scene, this.textureMap.get(idtexture), this.textureMap.get(idheightmap), parts, heightscale);
-                primitiveMap.set(primitiveId, newPrimitive);
-                console.log(newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             }
             //Retrieves the water specifications
             else if(grandChildren[0].nodeName == "water"){
@@ -1034,7 +1034,7 @@ class MySceneGraph {
                 
                 // Places this plane in the Primitive's Map
                 var newPrimitive = new MyWater(this.scene, this.textureMap.get(idtexture), this.textureMap.get(idwavemap), parts, heightscale, texscale);
-                primitiveMap.set(primitiveId, newPrimitive);
+                this.primitiveMap.set(primitiveId, newPrimitive);
             }
             else
                 return "primitive undefined for ID = " + primitiveId;
@@ -2013,9 +2013,9 @@ class MySceneGraph {
         for(var i = 0; i < node.primitives.length; i++){
 
             if(texture != null)
-                primitiveMap.get(node.primitives[i]).updateTex(length_s, length_t);
+                this.primitiveMap.get(node.primitives[i]).updateTex(length_s, length_t);
       
-            primitiveMap.get(node.primitives[i]).display();
+            this.primitiveMap.get(node.primitives[i]).display();
         }
     }
 

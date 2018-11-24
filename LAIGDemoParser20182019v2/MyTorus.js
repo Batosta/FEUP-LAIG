@@ -77,4 +77,6 @@ class MyTorus extends CGFobject {
      * @length_t - The length of the t component on each texture
      */
     updateTex(length_s, length_t){};
+
+    update(time){};
 };
