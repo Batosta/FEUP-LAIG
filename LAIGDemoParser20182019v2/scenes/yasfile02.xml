@@ -7,7 +7,7 @@
 	<!--													VIEWS 														-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="51">
-			<from x="20" y="20" z="20" />
+			<from x="30" y="30" z="30" />
 			<to x="0" y="0" z="0" />
 		</perspective>
 
@@ -99,59 +99,45 @@
 
 		<!-- Water -->
 		<transformation id="water">
+			<scale x="2.0" y="1.0" z="2.0" />
 			<translate x="0.0" y="1.3" z="0.0" />
 		</transformation>
 
 		<!-- Vehicle -->
 		<transformation id="vehicle">
-			<translate x="5.0" y="0.575" z="6" />
+			<translate x="10.0" y="0.575" z="10.0" />
 			<scale x="0.075" y="0.075" z="0.075" />
 		</transformation>
 	</transformations> 
 
 	<!--													ANIMATIONS 													-->
 	<animations>
-		<linear id="linear1" span="5.0">
-			<controlpoint x="0.1" y="0.0" z="0.0" />
-			<controlpoint x="-40.0" y="0.0" z="0.0" />
+		<linear id="linear1" span="5.0"> 	<!--5, 2.5, 2.5, -3745-->
+			<controlpoint x="0.0" y="0.0" z="0.0" />
+			<controlpoint x="-50.0" y="0.0" z="0.0" />
 		</linear>
 
 		<linear id="linear2" span="2.5">
-			<controlpoint x="-40.0" y="0.0" z="0.0" />
-			<controlpoint x="-100.0" y="0.0" z="0.0" />
+			<controlpoint x="-50.0" y="0.0" z="0.0" />
+			<controlpoint x="-125.0" y="0.0" z="0.0" />
 		</linear>
 
 		<linear id="linear3" span="2.5">
-			<controlpoint x="-100.0" y="0.0" z="0.0" />
-			<controlpoint x="-150.0" y="20.0" z="-10.0" />
+			<controlpoint x="-125.0" y="0.0" z="0.0" />
+			<controlpoint x="-200.0" y="30.0" z="0.0" />
 		</linear> 
 
-		<linear id="linear4" span="5.0">
-			<controlpoint x="-150.0" y="20.0" z="-10.0" />
-			<controlpoint x="-150.0" y="40.0" z="-150.0" />
+		<linear id="linear4" span="2.5">
+			<controlpoint x="-205.0" y="30.0" z="-300.0" />
+			<controlpoint x="-100.0" y="0.0" z="-300.0" />
 		</linear> 
 
 		<linear id="linear5" span="2.5">
-			<controlpoint x="-150.0" y="40.0" z="-150.0" />
-			<controlpoint x="0.0" y="40.0" z="-170.0" />
+			<controlpoint x="-100.0" y="0.0" z="-300.0" />
+			<controlpoint x="-50.0" y="0.0" z="-250.0" />
 		</linear> 
 
-		<linear id="linear6" span="2.5">
-			<controlpoint x="0.0" y="40.0" z="-170.0" />
-			<controlpoint x="20.0" y="20.0" z="-50.0" />
-		</linear> 
-
-		<linear id="linear7" span="2.5">
-			<controlpoint x="20.0" y="20.0" z="-50.0" />
-			<controlpoint x="10.0" y="10.0" z="-20.0" />
-		</linear> 
-
-		<linear id="linear8" span="5.0">
-			<controlpoint x="10.0" y="10.0" z="-20.0" />
-			<controlpoint x="0.1" y="0.0" z="0.0" />
-		</linear>
-
-		<circular id="circular1" span="30.0" center="0 0 0" radius="5" startang="320" rotang="-3600"/>
+		<circular id="circular1" span="60.0" center="-150 30 -150" radius="160" startang="255" rotang="-3745"/>
 	</animations>
 
 	<!--													PRIMITIVES 													-->
@@ -282,13 +268,9 @@
 				<animationref id="linear1" />
 				<animationref id="linear2" />
 				<animationref id="linear3" />
+				<animationref id="circular1" />
 				<animationref id="linear4" />
 				<animationref id="linear5" />
-				<animationref id="linear6" />
-				<animationref id="linear7" />
-				<animationref id="linear8" />
-
-				<animationref id="circular1" />
 			</animations>
 
 			<materials> 
