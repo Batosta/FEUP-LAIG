@@ -83,8 +83,10 @@ class LinearAnimation extends Animation{
 		if(i==0) previousSegment = 0;
 		else previousSegment = this.distancesSegment[i - 1];
 
-		this.displacement = (this.currentDistance - previousSegment) / (this.distancesSegment[i] - previousSegment);		
+		this.displacement = (this.currentDistance - previousSegment) / (this.distancesSegment[i] - previousSegment);
+				
 		this.angleRotation = Math.atan((this.p2[0] - this.p1[0]) / (this.p2[2] - this.p1[2]));
+		if(isNaN(this.angleRotation)) this.angleRotation = 0;
 
 		if(this.p2[2] - this.p1[2] < 0)
 			this.angleRotation += Math.PI;

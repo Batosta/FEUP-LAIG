@@ -1,3 +1,5 @@
+var DEGREE_TO_RAD = Math.PI / 180;
+
 /**
  * MyVehicle class - Represents the primitive vehicle
  */
@@ -60,6 +62,8 @@ class MyVehicle extends CGFobject {
 
         this.blue = new CGFappearance(this.scene);
         this.blue.setAmbient(0, 0, 0.3, 1);
+
+        this.helixUpdate = 0; 
     };
 
     /**
@@ -197,6 +201,7 @@ class MyVehicle extends CGFobject {
 
 
         this.lightGray.apply();
+
         // Helix holder
         this.scene.pushMatrix();
             this.scene.translate(0, -0.5, 13.4);
@@ -207,6 +212,7 @@ class MyVehicle extends CGFobject {
         // Helix 1
         this.scene.pushMatrix();
             this.scene.translate(0, -0.5, 14.4);
+            this.scene.rotate(this.helixUpdate*DEGREE_TO_RAD, 0, 0, 1);
             this.scene.scale(7.5, 1, 1);
             this.scene.rotate(Math.PI/2.0, 1, 0, 0);
             this.helix.display();
@@ -214,6 +220,7 @@ class MyVehicle extends CGFobject {
         // Helix 2
         this.scene.pushMatrix();
             this.scene.translate(0, -0.5, 14.4);
+            this.scene.rotate(this.helixUpdate*DEGREE_TO_RAD, 0, 0, 1);
             this.scene.scale(7.5, 1, 1);
             this.scene.rotate(-Math.PI/2.0, 1, 0, 0);
             this.helix.display();
@@ -221,6 +228,7 @@ class MyVehicle extends CGFobject {
         // Helix 3
         this.scene.pushMatrix();
             this.scene.translate(0, -0.5, 14.4);
+            this.scene.rotate(this.helixUpdate*DEGREE_TO_RAD, 0, 0, 1);
             this.scene.rotate(Math.PI/2.0, 0, 0, 1);
             this.scene.scale(7.5, 1, 1);
             this.scene.rotate(Math.PI/2.0, 1, 0, 0);
@@ -229,12 +237,12 @@ class MyVehicle extends CGFobject {
         // Helix 4
         this.scene.pushMatrix();
             this.scene.translate(0, -0.5, 14.4);
+            this.scene.rotate(this.helixUpdate*DEGREE_TO_RAD, 0, 0, 1);
             this.scene.rotate(Math.PI/2.0, 0, 0, 1);
             this.scene.scale(7.5, 1, 1);
             this.scene.rotate(-Math.PI/2.0, 1, 0, 0);
             this.helix.display();
         this.scene.popMatrix();
-
 
         this.darkGray.apply();
         // Capsule
@@ -333,5 +341,9 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
     };
 
-    update(time){};
+    update(time){
+
+        this.helixUpdate += 30;
+
+    };
 };
