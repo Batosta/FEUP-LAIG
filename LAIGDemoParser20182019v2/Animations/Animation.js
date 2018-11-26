@@ -5,6 +5,8 @@ class Animation{
 
 	/**
      * @constructor of the animation
+	 * @param scene - The global scene
+     * @param span - Span time for the animation
      *
      */
 	constructor(scene, span){

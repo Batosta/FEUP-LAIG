@@ -43,7 +43,9 @@ class XMLscene extends CGFscene {
 
         this.setUpdatePeriod(1000/60);
     }
-
+    /* 
+     * Calls the update function over time to update the animations with the time, the water shaders and the helix for the airplane.
+     */
     update(currTime){
         var today = new Date();
 

@@ -11,7 +11,7 @@ function getUrlVars() {
     return vars;
 }	 
 //Include additional files here
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'MyGraphNode.js', 'MyRectangle.js', 'MyTriangle.js', 'MyCylinder.js', 'MyCircle.js', 'MySemiSphere.js', 'MySphere.js', 'MyTorus.js', 'MyTube.js', 'MyPlane.js', 'MyPatch.js', 'MyWing.js', 'MySemiSphere2.js', 'MyCylinder2.js', 'MyVehicle.js', 'MyTerrain.js', 'MyWater.js', 'Animation.js', 'CircularAnimation.js', 'LinearAnimation.js',
+serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'MyGraphNode.js', 'Geometry/MyRectangle.js', 'Geometry/MyTriangle.js', 'Geometry/MyCylinder.js', 'Geometry/MyCircle.js', 'Geometry/MySemiSphere.js', 'Geometry/MySphere.js', 'Geometry/MyTorus.js', 'Geometry/MyTube.js', 'NURBS/MyPlane.js', 'NURBS/MyPatch.js', 'NURBS/MyWing.js', 'NURBS/MySemiSphere2.js', 'NURBS/MyCylinder2.js', 'NURBS/MyVehicle.js', 'Shaders/MyTerrain.js', 'Shaders/MyWater.js', 'Animations/Animation.js', 'Animations/CircularAnimation.js', 'Animations/LinearAnimation.js',
 
 main=function()
 {

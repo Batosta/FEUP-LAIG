@@ -7,10 +7,10 @@ class MyTerrain extends MyPlane {
      * @constructor of the terrain
      *
      * @param scene - The global scene
-     * @param idtexture - 
-     * @param idheightmap - 
-     * @param parts - 
-     * @param heightscale - 
+     * @param idtexture - Texture of the terrain
+     * @param idheightmap - Height map for the terrain
+     * @param parts - Parts for the Plane
+     * @param heightscale - Scaling factor for the terrain
      */
     constructor(scene, idtexture, idheightmap, parts, heightscale) {
         

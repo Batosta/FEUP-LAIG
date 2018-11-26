@@ -7,11 +7,11 @@ class MyWater extends MyPlane {
      * @constructor of the water
      *
      * @param scene - The global scene
-     * @param idtexture - 
-     * @param idwavemap - 
-     * @param parts - 
-     * @param heightscale - 
-     * @param texscale - 
+     * @param idtexture - The texture of the water
+     * @param idwavemap - The height map of the water
+     * @param parts - Parts for the Plane
+     * @param heightscale - Scaling factor for the water
+     * @param texscale - textscale for the water
      */
     constructor(scene, idtexture, idwavemap, parts, heightscale, texscale) {
 

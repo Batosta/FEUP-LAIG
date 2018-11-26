@@ -215,7 +215,7 @@
 
 		<!--Nova primitiva: plano deagua baseado em shaders-->
 		<primitive id="water">
-			<water idtexture="water" idwavemap="waves" parts="5" heightscale="0.25" texscale="5"/>
+			<water idtexture="water" idwavemap="waves" parts="50" heightscale="0.25" texscale="3"/>
 		</primitive>
 	</primitives>
 

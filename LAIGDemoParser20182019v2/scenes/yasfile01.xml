@@ -131,29 +131,6 @@
 
 	<!--													ANIMATIONS 															-->
 	<animations>
-		<linear id="animation1" time="10.0">
-			<point x="0.0" y="0.0" z="0.0" />
-			<point x="1.0" y="1.0" z="1.0" />
-			<point x="2.0" y="2.0" z="2.0" />
-			<point x="3.0" y="3.0" z="3.0" />
-		</linear>
-
-		<linear id="animation2" time="10.0">
-			<point x="0.0" y="0.0" z="0.0" />
-			<point x="1.0" y="1.0" z="1.0" />
-			<point x="2.0" y="2.0" z="2.0" />
-			<point x="3.0" y="3.0" z="3.0" />
-		</linear>
-
-		<circular id="animation3" time="20.0" radius="5.0">
-			<center x="10.0" y="10.0" z="10.0" />
-			<angle init="40" rot="20" />
-		</circular>
-
-		<circular id="animation4"  time="15.0" radius="10.0">
-			<center x="1.0" y="1.0" z="1.0" />
-			<angle init="4" rot="2" />
-		</circular>
 	</animations>
 
 	<!--													TRANSFORMATIONS 															-->
