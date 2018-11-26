@@ -880,37 +880,38 @@ class MySceneGraph {
                 var controlpoints = [];
                 var controlpointsAux = [];
                 // Any number of controlpoints
-                for(var k = 0; k < grandgrandChildren.length; k++){
+                var k = 0;
+                while(k < grandgrandChildren.length){
 
-                    this.controlpoint = [];
-                    // x
-                    var x = this.reader.getFloat(grandgrandChildren[k], 'x');
-                    if (!(x != null && !isNaN(x))){
-                        this.onXMLMinorError("Unable to parse x of the patch for ID = " + primitiveId + "Assuming x = 5.0");
-                    x = 5.0;
+                    for(var r = 0; r < npointsV; r++){
+
+                        this.controlpoint = [];
+                        // x
+                        var x = this.reader.getFloat(grandgrandChildren[k], 'x');
+                        if (!(x != null && !isNaN(x))){
+                            this.onXMLMinorError("Unable to parse x of the patch for ID = " + primitiveId + "Assuming x = 5.0");
+                            x = 5.0;
+                        }
+                        // y
+                        var y = this.reader.getFloat(grandgrandChildren[k], 'y');
+                        if (!(y != null && !isNaN(y))){
+                            this.onXMLMinorError("Unable to parse y of the patch for ID = " + primitiveId + "Assuming y = 0.0");
+                            y = 0.0;
+                        }
+                        // z
+                        var z = this.reader.getFloat(grandgrandChildren[k], 'z');
+                        if (!(z != null && !isNaN(z))){
+                            this.onXMLMinorError("Unable to parse z of the patch for ID = " + primitiveId + "Assuming z = 5.0");
+                            z = 5.0;
+                        }
+
+                        counter++;
+                        this.controlpoint.push(x, y, z, 1);
+                        controlpointsAux.push(this.controlpoint);
+                        k++;
                     }
-                    // y
-                    var y = this.reader.getFloat(grandgrandChildren[k], 'y');
-                    if (!(y != null && !isNaN(y))){
-                        this.onXMLMinorError("Unable to parse y of the patch for ID = " + primitiveId + "Assuming y = 0.0");
-                        y = 0.0;
-                    }
-                    // z
-                    var z = this.reader.getFloat(grandgrandChildren[k], 'z');
-                    if (!(z != null && !isNaN(z))){
-                        this.onXMLMinorError("Unable to parse z of the patch for ID = " + primitiveId + "Assuming z = 5.0");
-                        z = 5.0;
-                    }
-
-                    counter++;
-                    this.controlpoint.push(x, y, z, 1.0);
-                    controlpointsAux.push(this.controlpoint);
-
-                    if((k%4) == 3){
-
                         controlpoints.push(controlpointsAux);
                         controlpointsAux = [];
-                    }
                 }
                 
                 if(counter != (npointsU*npointsV)){
