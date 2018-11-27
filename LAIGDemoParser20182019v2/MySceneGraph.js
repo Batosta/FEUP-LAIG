@@ -1037,6 +1037,22 @@ class MySceneGraph {
                 var newPrimitive = new MyWater(this.scene, this.textureMap.get(idtexture), this.textureMap.get(idwavemap), parts, heightscale, texscale);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            else if(grandChildren[0].nodeName == "diamond"){
+                var slices = this.reader.getString(grandChildren[0], 'slices');
+                var newPrimitive = new MyDiamond(this.scene, slices);
+                this.primitiveMap.set(primitiveId, newPrimitive);
+            }
+            else if(grandChildren[0].nodeName == "tree"){
+                var th = this.reader.getFloat(grandChildren[0], 'th');
+                var tb = this.reader.getFloat(grandChildren[0], 'tb');
+                var ch = this.reader.getFloat(grandChildren[0], 'ch');
+                var cb = this.reader.getFloat(grandChildren[0], 'cb');
+                var nt = this.reader.getFloat(grandChildren[0], 'nt');
+                var tm = this.reader.getString(grandChildren[0], 'tm');
+                var material = materialMap.get(tm);
+                var newPrimitive = new MyTree(this.scene, th, tb, ch, cb, nt, material);
+                this.primitiveMap.set(primitiveId, newPrimitive);
+            }
             else
                 return "primitive undefined for ID = " + primitiveId;
         }

@@ -7,7 +7,7 @@
 	<!--													VIEWS 														-->
 	<views default="Perspective">
 		<perspective id="Perspective" near="0.1" far="500" angle="51">
-			<from x="30" y="30" z="30" />
+			<from x="10" y="10" z="10" />
 			<to x="0" y="0" z="0" />
 		</perspective>
 
@@ -87,6 +87,13 @@
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
 		</material>
+
+		<material id="mat1" shininess="100.0">
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
+			<ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
+		</material>
 	</materials>
 
 	<!--													TRANSFORMATIONS 											-->
@@ -150,9 +157,9 @@
 
 		<!-- Triangles -->
 		<primitive id="triangle">
-			<triangle x1="0.0" y1="0.0" z1="0.0" 
-				x2="0.0" y2="-1.0" z2="0.0" 
-				x3="0.0" y3="0.0" z3="1.0" />
+			<triangle x1="0.0" y1="1.0" z1="0.0" 
+				x2="-0.25" y2="0.0" z2="0.25" 
+				x3="0.25" y3="0.0" z3="0.25" />
 		</primitive>
 		
 		<!-- Cylinders -->
@@ -216,6 +223,14 @@
 		<!--Nova primitiva: plano deagua baseado em shaders-->
 		<primitive id="water">
 			<water idtexture="water" idwavemap="waves" parts="50" heightscale="0.25" texscale="3"/>
+		</primitive>
+
+		<primitive id="diamond">
+			<diamond slices="6" />
+		</primitive>
+
+		<primitive id="tree">
+			<tree th="14.0" tb="1.0" ch="10.0" cb="8.0" nt="3" tm="mat1"/>
 		</primitive>
 	</primitives>
 
@@ -288,22 +303,23 @@
 		<!-- Root Component -->
 		<component id="scene">
 			<transformation>
-				<transformationref id="scene" />
+				<!--<transformationref id="scene" />-->
 			</transformation>
 
 			<animations>
 			</animations>
 
 			<materials>
-				<material id="mat0" />
+				<material id="mat0"/>
 			</materials>
 
-			<texture id="texture" length_s="1.0" length_t="1.0" />
+			<texture id="water" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<componentref id="water"/>
+				<!--<componentref id="water"/>
 				<componentref id="terrain"/>
-				<componentref id="vehicle"/>
+				<componentref id="vehicle"/>-->
+
 			</children> 
 		</component>
 	</components>
