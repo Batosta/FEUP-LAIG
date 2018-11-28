@@ -1053,6 +1053,27 @@ class MySceneGraph {
                 var newPrimitive = new MyTree(this.scene, th, tb, ch, cb, nt, material);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            else if(grandChildren[0].nodeName == "square"){
+                var texangle = this.reader.getFloat(grandChildren[0], 'texangle');
+                var newPrimitive = new MySquare(this.scene, texangle);
+                this.primitiveMap.set(primitiveId, newPrimitive);
+            }
+            else if(grandChildren[0].nodeName == "trapezoid"){
+                var top = this.reader.getFloat(grandChildren[0], 'top');
+                var bottom = this.reader.getFloat(grandChildren[0], 'bottom');
+                var stacks = this.reader.getFloat(grandChildren[0], 'stacks');
+
+                var newPrimitive = new MyTrapezoid(this.scene, top, bottom, stacks);
+                this.primitiveMap.set(primitiveId, newPrimitive);
+            }
+            else if(grandChildren[0].nodeName == "beach"){
+                var texture = this.reader.getString(grandChildren[0], 'texture');
+                var height = this.reader.getString(grandChildren[0], 'heightmap');
+                var mask = this.reader.getString(grandChildren[0], 'mask');
+
+                var newPrimitive = new MyBeach(this.scene, this.textureMap.get(texture), this.textureMap.get(height), this.textureMap.get(mask));
+                this.primitiveMap.set(primitiveId, newPrimitive);
+            }
             else
                 return "primitive undefined for ID = " + primitiveId;
         }
