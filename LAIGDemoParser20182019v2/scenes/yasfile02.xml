@@ -352,10 +352,10 @@
 			<texture id="texture" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				<!--<componentref id="water"/>
+				s<componentref id="water"/>
 				<componentref id="terrain"/>
-				<componentref id="vehicle"/>-->
-				<primitiveref id="patch1"/>
+				<componentref id="vehicle"/>
+
 			</children> 
 		</component>
 	</components>
