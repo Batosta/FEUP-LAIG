@@ -120,5 +120,4 @@ class MyTrapezoid extends CGFobject
     updateTex(length_s, length_t){};
 
 	update(time){};
-
 };

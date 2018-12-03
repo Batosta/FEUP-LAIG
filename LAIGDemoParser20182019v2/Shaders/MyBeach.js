@@ -33,4 +33,5 @@ class MyBeach extends MyPlane{
         this.scene.setActiveShader(this.scene.defaultShader);
     }
 
+    update(time){};
 }

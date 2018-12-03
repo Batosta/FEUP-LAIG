@@ -69,4 +69,5 @@ class MySemiSphere extends CGFobject
 		this.initGLBuffers();
 	};
 
+	update(time){};
 };

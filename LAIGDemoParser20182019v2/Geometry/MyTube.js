@@ -90,4 +90,6 @@ class MyTube extends CGFobject {
 
         this.initGLBuffers();
     };
+
+    update(time){};
 };

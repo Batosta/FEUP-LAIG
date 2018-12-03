@@ -1037,11 +1037,13 @@ class MySceneGraph {
                 var newPrimitive = new MyWater(this.scene, this.textureMap.get(idtexture), this.textureMap.get(idwavemap), parts, heightscale, texscale);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            //Retrieves the diamond specifications
             else if(grandChildren[0].nodeName == "diamond"){
                 var slices = this.reader.getString(grandChildren[0], 'slices');
                 var newPrimitive = new MyDiamond(this.scene, slices);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            //Retrieves the tree specifications
             else if(grandChildren[0].nodeName == "tree"){
                 var th = this.reader.getFloat(grandChildren[0], 'th');
                 var tb = this.reader.getFloat(grandChildren[0], 'tb');
@@ -1053,11 +1055,13 @@ class MySceneGraph {
                 var newPrimitive = new MyTree(this.scene, th, tb, ch, cb, nt, material);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            //Retrieves the square specifications
             else if(grandChildren[0].nodeName == "square"){
                 var texangle = this.reader.getFloat(grandChildren[0], 'texangle');
                 var newPrimitive = new MySquare(this.scene, texangle);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            //Retrieves the trapezoid specifications
             else if(grandChildren[0].nodeName == "trapezoid"){
                 var top = this.reader.getFloat(grandChildren[0], 'top');
                 var bottom = this.reader.getFloat(grandChildren[0], 'bottom');
@@ -1066,6 +1070,7 @@ class MySceneGraph {
                 var newPrimitive = new MyTrapezoid(this.scene, top, bottom, stacks);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            //Retrieves the beach specifications
             else if(grandChildren[0].nodeName == "beach"){
                 var texture = this.reader.getString(grandChildren[0], 'texture');
                 var height = this.reader.getString(grandChildren[0], 'heightmap');
@@ -1074,10 +1079,42 @@ class MySceneGraph {
                 var newPrimitive = new MyBeach(this.scene, this.textureMap.get(texture), this.textureMap.get(height), this.textureMap.get(mask));
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            //Retrieves the circle specifications
             else if(grandChildren[0].nodeName == "circle"){
                 var slices = this.reader.getFloat(grandChildren[0], 'slices');
                 var stacks = this.reader.getFloat(grandChildren[0], 'stacks');
                 var newPrimitive = new MyCircle2(this.scene, slices, stacks);
+                this.primitiveMap.set(primitiveId, newPrimitive);
+            }
+            //Retrieves the piece specifications
+            else if(grandChildren[0].nodeName == "piece"){          
+
+                // pieces
+                var pieces = this.reader.getInteger(grandChildren[0], 'pieces');
+                if (!(pieces != null && !isNaN(pieces))){
+                    this.onXMLMinorError("Unable to parse the number of pieces of the piece for ID = " + primitiveId + "Assuming pieces = 20");
+                    pieces = 20;
+                }
+                
+                if(pieces <= 0 || pieces > 20){
+                    this.onXMLMinorError("Unable to parse the number of pieces of the piece for ID = " + primitiveId + "Must be a value between 1 and 20");
+                    pieces = 20;
+                }
+
+                // color
+                var color = this.reader.getString(grandChildren[0], 'color');
+                if (color == null){
+                    this.onXMLMinorError("Unable to parse color of the piece for ID = " + primitiveId + "Assuming color = black");
+                    color = "black";
+                }
+
+                if(color != "black" && color != "white"){
+                    this.onXMLMinorError("Unable to parse color of pieces of the piece for ID = " + primitiveId + "Must be black or white");
+                    color = "black";
+                }
+
+                // Places this piece in the Primitive's Map
+                var newPrimitive = new MyPiece(this.scene, pieces, color);
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
             else
