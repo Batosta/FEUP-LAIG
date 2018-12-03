@@ -4,6 +4,8 @@ precision highp float;
 
 varying vec2 vTextureCoord;
 uniform sampler2D texture;
+
+//Apenas se quisermos ter um scale da textura e movimentação com o time
 uniform float textScale;
 uniform float timeFactor;
 

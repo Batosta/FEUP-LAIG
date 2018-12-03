@@ -1074,6 +1074,12 @@ class MySceneGraph {
                 var newPrimitive = new MyBeach(this.scene, this.textureMap.get(texture), this.textureMap.get(height), this.textureMap.get(mask));
                 this.primitiveMap.set(primitiveId, newPrimitive);
             }
+            else if(grandChildren[0].nodeName == "circle"){
+                var slices = this.reader.getFloat(grandChildren[0], 'slices');
+                var stacks = this.reader.getFloat(grandChildren[0], 'stacks');
+                var newPrimitive = new MyCircle2(this.scene, slices, stacks);
+                this.primitiveMap.set(primitiveId, newPrimitive);
+            }
             else
                 return "primitive undefined for ID = " + primitiveId;
         }

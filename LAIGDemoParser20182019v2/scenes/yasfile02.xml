@@ -20,8 +20,8 @@
 
 	<!--													AMBIENT 													-->
 	<ambient> 
-		<ambient r="0.5" g="0.5" b="0.5" a="1.0" /> 
-		<background r="0" g="0" b="0" a="1" /> 
+		<ambient r="0.8" g="0.8" b="0.8" a="1.0" /> 
+		<background r="0.0" g="0.0" b="0.0" a="1" /> 
 	</ambient> 
 
 
@@ -29,29 +29,29 @@
 	<lights>
 
 		<!-- Omni Lights -->
-		<omni id="Omni0" enabled="0">
-			<location x="9.0" y="9.0" z="-9.0" w="1.0"/>
+		<omni id="Omni0" enabled="1">
+			<location x="9.0" y="15.0" z="-9.0" w="1.0"/>
 			<ambient r="0.5" g="0.5" b="0.5" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
 		</omni>
 
-		<omni id="Omni1" enabled="0">
-			<location x="-9.0" y="9.0" z="9.0" w="1.0"/>
+		<omni id="Omni1" enabled="1">
+			<location x="-9.0" y="15.0" z="9.0" w="1.0"/>
 			<ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="0.0" g="0.0" b="0.0" a="0.0" />
 		</omni>
 
-		<omni id="Omni2" enabled="0">
-			<location x="-9.0" y="9.0" z="-9.0" w="1.0"/>
+		<omni id="Omni2" enabled="1">
+			<location x="-9.0" y="15.0" z="-9.0" w="1.0"/>
 			<ambient r="0.8" g="0.8" b="0.8" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
 		</omni>
 
-		<omni id="Omni3" enabled="0">
-			<location x="9.0" y="9.0" z="9.0" w="1.0"/>
+		<omni id="Omni3" enabled="1">
+			<location x="9.0" y="15.0" z="9.0" w="1.0"/>
 			<ambient r="1.0" g="1.0" b="1.0" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
@@ -59,7 +59,7 @@
 
 		<!-- Spot Lights -->
 		<spot id="Spot0" enabled="1" angle="0.5" exponent="1.0" >
-			<location x="0.0" y="9.0" z="0.0" w="1.0"/>
+			<location x="0.0" y="15.0" z="0.0" w="1.0"/>
 			<target x="5" y="5" z="5" />
 			<ambient r="0.5" g="0.5" b="0.5" a="0.1" />
 			<diffuse r="0.1" g="0.1" b="0.1" a="0.1" />
@@ -84,9 +84,9 @@
 
 	<!--													MATERIALS 													-->
 	<materials>
-		<material id="mat0" shininess="100.0">
+		<material id="mat0" shininess="120.0">
 			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
-			<ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+			<ambient r="0.1" g="0.1" b="0.1" a="1.0" />
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
 		</material>
@@ -225,6 +225,32 @@
 				<controlpoint x="2.0" y="-1.0" z="-0.5" />
 			</patch>
 		</primitive>
+
+		<primitive id="circleImperfect">
+			<patch npointsU="2" npointsV="9" npartsU="50" npartsV="50">
+				<!-- O número de controlPoints dentro da primitiva é dado por npointsU*npointsV-->
+				<controlpoint x="0.0" y="-1.0" z="0.0" />
+				<controlpoint x="-1.0" y="-1.0" z="0.0" />
+				<controlpoint x="-1.0" y="0.0" z="0.0" />
+				<controlpoint x="-1.0" y="1.0" z="0.0" />
+				<controlpoint x="0.0" y="1.0" z="0.0" />
+				<controlpoint x="1.0" y="1.0" z="0.0" />
+				<controlpoint x="1.0" y="0.0" z="0.0" />
+				<controlpoint x="1.0" y="-1.0" z="0.0" />
+				<controlpoint x="0.0" y="-1.0" z="0.0" />
+
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+				<controlpoint x="0.0" y="0.0" z="0.0" />
+
+			</patch>
+		</primitive>
 		
 		<!-- Nova primitiva: Vehicle: corresponde a um veículo voador. Inclui pelo menos uma superficie nao plana gerada utilizando NURBS e javascrips-->
 		<primitive id="vehicle">
@@ -266,6 +292,10 @@
 
 		<primitive id="beach">
 			<beach texture="beachwater" heightmap="beachheight" mask="beachmask"/>
+		</primitive>
+
+		<primitive id="circle">
+			<circle slices="20" stacks="20"/>
 		</primitive>
 
 	</primitives>
@@ -349,13 +379,13 @@
 				<material id="mat0"/>
 			</materials>
 
-			<texture id="texture" length_s="1.0" length_t="1.0" />
+			<texture id="water" length_s="1.0" length_t="1.0" />
 
 			<children> 
-				s<componentref id="water"/>
+				<!--<componentref id="water"/>
 				<componentref id="terrain"/>
-				<componentref id="vehicle"/>
-
+				<componentref id="vehicle"/>-->
+				<primitiveref id="beach"/>
 			</children> 
 		</component>
 	</components>
