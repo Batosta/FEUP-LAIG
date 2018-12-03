@@ -1,0 +1,245 @@
+<yas>
+
+	<!--													SCENE 														-->
+	<scene root="scene" axis_length="5" />
+
+
+	<!--													VIEWS 														-->
+	<views default="Perspective">
+		<perspective id="Perspective" near="0.1" far="500" angle="51">
+			<from x="10" y="10" z="10" />
+			<to x="0" y="0" z="0" />
+		</perspective>
+
+		<ortho id="Orthogonal" near="0.1" far="500.0" left="-2.5" right="22.5" top="7.5" bottom="-7.5" >
+			<from x="15" y="5" z="10" />
+			<to x="10" y="5" z="10" />
+		</ortho>
+	</views>
+
+
+	<!--													AMBIENT 													-->
+	<ambient> 
+		<ambient r="0.5" g="0.5" b="0.5" a="1.0" /> 
+		<background r="0" g="0" b="0" a="1" /> 
+	</ambient> 
+
+
+	<!--													LIGHTS 														-->
+	<lights>
+
+		<!-- Omni Lights -->
+		<omni id="Omni0" enabled="0">
+			<location x="9.0" y="9.0" z="-9.0" w="1.0"/>
+			<ambient r="0.5" g="0.5" b="0.5" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
+		</omni>
+
+		<omni id="Omni1" enabled="0">
+			<location x="-9.0" y="9.0" z="9.0" w="1.0"/>
+			<ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="0.0" g="0.0" b="0.0" a="0.0" />
+		</omni>
+
+		<omni id="Omni2" enabled="0">
+			<location x="-9.0" y="9.0" z="-9.0" w="1.0"/>
+			<ambient r="0.8" g="0.8" b="0.8" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
+		</omni>
+
+		<omni id="Omni3" enabled="0">
+			<location x="9.0" y="9.0" z="9.0" w="1.0"/>
+			<ambient r="1.0" g="1.0" b="1.0" a="1.0"/>
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
+		</omni>
+
+		<!-- Spot Lights -->
+		<spot id="Spot0" enabled="1" angle="0.5" exponent="1.0" >
+			<location x="0.0" y="9.0" z="0.0" w="1.0"/>
+			<target x="5" y="5" z="5" />
+			<ambient r="0.5" g="0.5" b="0.5" a="0.1" />
+			<diffuse r="0.1" g="0.1" b="0.1" a="0.1" />
+			<specular r="0.1" g="0.1" b="0.1" a="0.1" />
+		</spot>
+	</lights>
+
+
+	<!--													TEXTURES 													-->
+	<textures> 
+		<texture id="texture" file="scenes/images/texture.jpg"/>
+	</textures> 
+
+
+	<!--													MATERIALS 													-->
+	<materials>
+		<material id="mat0" shininess="100.0">
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
+			<ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+			<specular r="1.0" g="1.0" b="1.0" a="1.0" />
+		</material>
+	</materials>
+
+
+	<!--													TRANSFORMATIONS 											-->
+	<transformations>
+	</transformations> 
+
+
+	<!--													ANIMATIONS 													-->
+	<animations>
+		<linear id="linear1" span="5.0"> 	<!--5, 2.5, 2.5, -3745-->
+			<controlpoint x="0.0" y="0.0" z="0.0" />
+			<controlpoint x="-50.0" y="0.0" z="0.0" />
+		</linear>
+
+		<circular id="circular1" span="60.0" center="-150 30 -150" radius="160" startang="255" rotang="-3745"/>
+	</animations>
+
+
+	<!--													PRIMITIVES 													-->
+	<primitives>
+
+		<!-- Rectangles -->
+		<primitive id="rectangle">
+			<rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+		</primitive> 
+
+		<!-- Triangles -->
+		<primitive id="triangle">
+			<triangle x1="0.0" y1="1.0" z1="0.0" 
+				x2="-0.25" y2="0.0" z2="0.25" 
+				x3="0.25" y3="0.0" z3="0.25" />
+		</primitive>
+		
+		<!-- Cylinders -->
+		<primitive id="cylinder">
+			<cylinder base="2.5" top="2.5" height="5.0" slices="20" stacks="20" />
+		</primitive>
+
+		<!-- Spheres -->
+		<primitive id="sphere">
+			<sphere radius="2.0" slices="30" stacks="20" />
+		</primitive>
+		
+		<!-- Torus -->
+		<primitive id="torus">
+			<torus inner="1.75" outer="4.0" slices="30" loops="30" />
+		</primitive>
+
+		<!-- Nova primitiva: plano, gerado por NURBS -->
+		<primitive id="plane">
+			<plane npartsU="10" npartsV="10"/>
+		</primitive>
+
+		<!-- Nova primitiva: patch, gerada por NURBS -->
+		<primitive id="patch">
+			<patch npointsU="3" npointsV="4" npartsU="20" npartsV="20">
+				<!-- O número de controlPoints dentro da primitiva é dado por npointsU*npointsV-->
+				<controlpoint x="-2.0" y="-2.0" z="1.0" />
+				<controlpoint x="-2.0" y="-1.0" z="-2.0" />
+				<controlpoint x="-2.0" y="1.0" z="5.0" />
+				<controlpoint x="-2.0" y="2.0" z="-1.0" />
+
+				<controlpoint x="0.0" y="-2.0" z="0.0" />
+				<controlpoint x="0.0" y="-1.0" z="-1.0" />
+				<controlpoint x="0.0" y="1.0" z="1.5" />
+				<controlpoint x="0.0" y="2.0" z="0.0" />
+
+				<controlpoint x="2.0" y="-2.0" z="-1.0" />
+				<controlpoint x="2.0" y="-1.0" z="2.0" />
+				<controlpoint x="2.0" y="1.0" z="-5.0" />
+				<controlpoint x="2.0" y="2.0" z="1.0" />
+			</patch>
+		</primitive>
+
+		<primitive id="patch1">
+			<patch npointsU="3" npointsV="4" npartsU="20" npartsV="20">
+				<!-- O número de controlPoints dentro da primitiva é dado por npointsU*npointsV-->
+				<controlpoint x="-1.0" y="1.0" z="1.0" />
+				<controlpoint x="0.0" y="1.0" z="-3.0" />
+				<controlpoint x="1.0" y="1.0" z="3.0" />
+				<controlpoint x="2.0" y="1.0" z="-0.5" />
+
+				<controlpoint x="-1.5" y="0.0" z="1.5" />
+				<controlpoint x="0.0" y="0.0" z="0.5" />
+				<controlpoint x="1.0" y="0.0" z="1.5" />
+				<controlpoint x="2.0" y="0.0" z="0.5" />
+
+				<controlpoint x="-1.0" y="-1.0" z="1.0" />
+				<controlpoint x="0.0" y="-1.0" z="-3.0" />
+				<controlpoint x="1.0" y="-1.0" z="3.0" />
+				<controlpoint x="2.0" y="-1.0" z="-0.5" />
+			</patch>
+		</primitive>
+		
+		<!-- Nova primitiva: Vehicle: corresponde a um veículo voador. Inclui pelo menos uma superficie nao plana gerada utilizando NURBS e javascrips-->
+		<primitive id="vehicle">
+			<vehicle />
+		</primitive>
+
+		<!-- Nova primitiva: cilindro baseado em NURBS -->
+		<primitive id="cylinder2">
+			<cylinder2 base="0.0" top="5.0" height="20.0" slices="30" stacks="100" />
+		</primitive>
+
+
+		<!--Nova primitiva: terreno baseado em shaders-->
+		<primitive id="terrain">
+			<terrain idtexture="colormap" idheightmap="heightmap" parts="50" heightscale="2.0"/>
+		</primitive>
+
+
+		<!--Nova primitiva: plano deagua baseado em shaders-->
+		<primitive id="water">
+			<water idtexture="water" idwavemap="waves" parts="50" heightscale="0.25" texscale="3"/>
+		</primitive>
+
+		<primitive id="diamond">
+			<diamond slices="6" />
+		</primitive>
+
+		<primitive id="tree">
+			<tree th="14.0" tb="1.0" ch="10.0" cb="8.0" nt="3" tm="mat1"/>
+		</primitive>
+
+		<primitive id="square">
+			<square texangle="30"/>
+		</primitive>
+
+		<primitive id="trapezoid">
+			<trapezoid top="2.5" bottom="5" stacks="30"/>
+		</primitive>
+
+		<primitive id="beach">
+			<beach texture="beachwater" heightmap="beachheight" mask="beachmask"/>
+		</primitive>
+	</primitives>
+
+
+	<!---													COMPONENTS 													-->
+	<components>
+
+		<!-- Root Component -->
+		<component id="scene">
+			<transformation>/
+			</transformation>
+
+			<animations>
+			</animations>
+
+			<materials>
+				<material id="mat0"/>
+			</materials>
+
+			<texture id="texture" length_s="1.0" length_t="1.0" />
+
+			<children> 
+			</children> 
+		</component>
+	</components>
+</yas>
