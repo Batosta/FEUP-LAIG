@@ -13,6 +13,8 @@ class MyPiece extends CGFobject {
     constructor(scene, pieces, color) {
         super(scene);
 
+        this.isPiece = true;
+
         this.pieces = pieces * 0.5;
         this.color = color;
         this.slices = 20;

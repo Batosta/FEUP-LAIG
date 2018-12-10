@@ -17,6 +17,8 @@ class MyDiamond extends CGFobject{
 
         this.triangle = new MyTriangle(this.scene, 0, -this.x, this.x, 1, 0, 0, 0, this.z, this.z);
 
+        this.isPiece = false;
+
     };
 
     display(){

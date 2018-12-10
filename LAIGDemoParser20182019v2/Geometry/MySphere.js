@@ -23,6 +23,8 @@ class MySphere extends CGFobject
 		this.semiSphere0 = new MySemiSphere(this.scene, slices, stacks);
 		this.semiSphere1 = new MySemiSphere(this.scene, slices, stacks);
 
+		this.isPiece = false;
+
 		this.display();
 	};
  

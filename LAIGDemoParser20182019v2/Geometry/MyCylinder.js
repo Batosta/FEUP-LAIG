@@ -22,6 +22,8 @@ class MyCylinder extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
 
+        this.isPiece = false;
+
         // A cylinder is made out of a "tube" and 2 cylinders
         this.tube = new MyTube(this.scene, this.base, this.top, this.height, this.slices, this.stacks);
         this.circle0 = new MyCircle(this.scene, this.slices);

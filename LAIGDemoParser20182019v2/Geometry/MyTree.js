@@ -26,6 +26,8 @@ class MyTree extends CGFobject{
         this.angleInc = 360/nt;
 
         this.triangle = new MyTriangle(this.scene, 0, -this.triangleBase/2, this.triangleBase/2, this.coneHeight, this.height, this.height, 0, 0, 0);
+    
+        this.isPiece = false;
     }
 
     display(){

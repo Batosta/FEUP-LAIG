@@ -1159,7 +1159,6 @@ class MySceneGraph {
      * Parses the <TRANSFORMATIONS> node.
      * @param {transformations block element} transformationsNode
      */
-
     parseTransformations(transformationsNode) {
 
         // transformation
@@ -1975,7 +1974,6 @@ class MySceneGraph {
     }
 
 
-
     /*
      * Callback to be executed on any read error, showing an error on the console.
      * @param {string} message
@@ -2025,6 +2023,7 @@ class MySceneGraph {
         var default_T = null;
 
         // Calls the recursive function that displays the objects
+        this.pickNumber = 1;
         this.recursiveDisplayNode(root_node, default_text, default_mat, default_S, default_T);
     }
 
@@ -2095,9 +2094,15 @@ class MySceneGraph {
 
             if(texture != null)
                 this.primitiveMap.get(node.primitives[i]).updateTex(length_s, length_t);
-      
+
+
+            if(this.primitiveMap.get(node.primitives[i]).isPiece){
+
+                this.scene.registerForPick(this.pickNumber, this.primitiveMap.get(node.primitives[i]));
+                this.pickNumber++;
+            }
+
             this.primitiveMap.get(node.primitives[i]).display();
         }
     }
-
 }

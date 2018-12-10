@@ -24,6 +24,8 @@ class MyCylinder2 extends CGFobject {
 
         this.cylinder2;
 
+        this.isPiece = false;
+
         var degreeU = 1;
         var degreeV = 8;
 

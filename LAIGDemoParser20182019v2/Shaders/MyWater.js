@@ -34,6 +34,8 @@ class MyWater extends MyPlane {
 
         this.wave = this.idwavemap;
         this.texture = this.idtexture;
+
+        this.isPiece = false;
     };
 
     updateValues(){

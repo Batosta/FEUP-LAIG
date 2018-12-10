@@ -16,6 +16,8 @@ class MyCircle extends CGFobject
     	this.slices = slices;
 
     	this.texCoordsAux = [];
+    	
+    	this.isPiece = false;
 
     	this.initBuffers();
     };

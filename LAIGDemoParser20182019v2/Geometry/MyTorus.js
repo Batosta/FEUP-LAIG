@@ -23,6 +23,8 @@ class MyTorus extends CGFobject {
 
        this.texCoordsAux = [];
 
+       this.isPiece = false;
+
     	 this.initBuffers();
   	};
 

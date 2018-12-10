@@ -20,6 +20,8 @@ class MySquare extends CGFobject{
 		this.minT = 0;
 		this.maxT = 1;
 
+		this.isPiece = false;
+
 		this.initBuffers();
 	}
 
