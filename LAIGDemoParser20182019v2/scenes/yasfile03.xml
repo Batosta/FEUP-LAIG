@@ -5,16 +5,16 @@
 
 
 	<!--													VIEWS 														-->
-	<views default="Perspective">
-		<perspective id="Perspective" near="0.1" far="500" angle="51">
-			<from x="10" y="10" z="10" />
-			<to x="0" y="0" z="0" />
+	<views default="Game Above">
+		<perspective id="Game Perspective" near="0.1" far="500" angle="51">
+			<from x="15" y="15" z="5" />
+			<to x="10" y="2.5" z="5" />
 		</perspective>
 
-		<ortho id="Orthogonal" near="0.1" far="500.0" left="-2.5" right="22.5" top="7.5" bottom="-7.5" >
-			<from x="15" y="5" z="10" />
-			<to x="10" y="5" z="10" />
-		</ortho>
+		<perspective id="Game Above" near="0.1" far="500" angle="51">
+			<from x="10" y="12.5" z="5" />
+			<to x="9.99" y="2.5" z="5" />
+		</perspective>
 	</views>
 
 

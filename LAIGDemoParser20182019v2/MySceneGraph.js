@@ -2100,6 +2100,8 @@ class MySceneGraph {
 
                 this.scene.registerForPick(this.pickNumber, this.primitiveMap.get(node.primitives[i]));
                 this.pickNumber++;
+            } else{
+                this.scene.clearPickRegistration();
             }
 
             this.primitiveMap.get(node.primitives[i]).display();

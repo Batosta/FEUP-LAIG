@@ -14,7 +14,6 @@ class XMLscene extends CGFscene {
 
         this.interface = myinterface;
         this.lightValues = {};
-
     }
 
     /**
@@ -70,7 +69,42 @@ class XMLscene extends CGFscene {
                 }
             }
         }
+
+        this.updateCameras();
     }
+
+    updateCameras(){
+
+        //view              perspective             above
+        //position          [15, 15, 5, 0]          [10.01, 12.5, 5, 0]
+        //target            [10, 2.5, 5, 0]         [10, 2.5, 5, 0]
+
+        if(this.currentView == "Game Perspective"){
+
+            if(this.camera.position[0] < 15)
+                this.camera.position[0] += 0.1;
+
+            if(this.camera.position[1] < 15)
+                this.camera.position[1] += 0.1;
+
+            if(this.camera.position[2] > 5)
+                this.camera.position[2] -= 0.1;
+        }
+        else{
+
+            if(this.camera.position[0] > 10)
+                this.camera.position[0] -= 0.1;
+
+            if(this.camera.position[1] < 12.5)
+                this.camera.position[1] += 0.1;
+            if(this.camera.position[1] > 12.5)
+                this.camera.position[1] -= 0.1;
+
+            if(this.camera.position[2] > 5)
+                this.camera.position[2] -= 0.1;
+        }
+    }
+
 
     /**
      * Initializes the scene cameras.
@@ -129,7 +163,7 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.camera = this.graph.viewMap.get(this.graph.defaultView);
-        this.interface.setActiveCamera(this.camera);
+        // this.interface.setActiveCamera(this.camera);
 
         this.axis = new CGFaxis(this, this.graph.axis_length);
 
@@ -154,11 +188,10 @@ class XMLscene extends CGFscene {
             if (this.pickResults != null && this.pickResults.length > 0) {
                 for (var i = 0; i< this.pickResults.length; i++) {
                     var obj = this.pickResults[i][0];
-                    console.log(obj);
                     if (obj)
                     {
                         var customId = this.pickResults[i][1];              
-                        console.log("Picked object: " + obj + ", with pick id " + customId);
+                        console.log("Picked piece, with pick id " + customId);
                     }
                 }
                 this.pickResults.splice(0,this.pickResults.length);
@@ -170,9 +203,8 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
+
         // ---- BEGIN Background, camera and axis setup
-
-
         this.logPicking();
 
         // Clear image and depth buffer everytime we update the scene
@@ -210,8 +242,8 @@ class XMLscene extends CGFscene {
                 }
             }
 
-            this.camera = this.graph.viewMap.get(this.currentView);
-            this.interface.setActiveCamera(this.camera);
+            // this.camera = this.graph.viewMap.get(this.currentView);
+            // this.interface.setActiveCamera(this.camera);
 
             this.graph.displayScene();
         }
