@@ -75,32 +75,26 @@ class XMLscene extends CGFscene {
 
     updateCameras(){
 
-        //view              perspective             above
-        //position          [15, 15, 5, 0]          [10.01, 12.5, 5, 0]
-        //target            [10, 2.5, 5, 0]         [10, 2.5, 5, 0]
-
         if(this.currentView == "Game Perspective"){
 
-            if(this.camera.position[0] < 15)
+            if(this.camera.position[0] < 5)
                 this.camera.position[0] += 0.1;
 
             if(this.camera.position[1] < 15)
                 this.camera.position[1] += 0.1;
 
-            if(this.camera.position[2] > 5)
+            if(this.camera.position[2] > 0)
                 this.camera.position[2] -= 0.1;
         }
         else{
 
-            if(this.camera.position[0] > 10)
+            if(this.camera.position[0] > 0)
                 this.camera.position[0] -= 0.1;
 
-            if(this.camera.position[1] < 12.5)
-                this.camera.position[1] += 0.1;
             if(this.camera.position[1] > 12.5)
                 this.camera.position[1] -= 0.1;
 
-            if(this.camera.position[2] > 5)
+            if(this.camera.position[2] > 0)
                 this.camera.position[2] -= 0.1;
         }
     }
@@ -172,7 +166,7 @@ class XMLscene extends CGFscene {
 
         this.initLights();
 
-        this.interface.addLightsGroup(this.graph.lights);
+        // this.interface.addLightsGroup(this.graph.lights);
 
         this.currentView = this.graph.defaultView;
         

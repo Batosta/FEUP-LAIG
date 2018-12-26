@@ -5,18 +5,17 @@
 
 
 	<!--													VIEWS 														-->
-	<views default="Game Above">
+	<views default="Game Perspective">
 		<perspective id="Game Perspective" near="0.1" far="500" angle="51">
-			<from x="15" y="15" z="5" />
-			<to x="10" y="2.5" z="5" />
+			<from x="5.0" y="15.0" z="0.0" />
+			<to x="-0.1" y="2.5" z="0.0" />
 		</perspective>
 
 		<perspective id="Game Above" near="0.1" far="500" angle="51">
-			<from x="10" y="12.5" z="5" />
-			<to x="9.99" y="2.5" z="5" />
+			<from x="0.0" y="12.5" z="0.0" />
+			<to x="-0.1" y="2.5" z="0.0" />
 		</perspective>
 	</views>
-
 
 	<!--													AMBIENT 													-->
 	<ambient> 
@@ -29,7 +28,7 @@
 	<lights>
 
 		<!-- Omni Lights -->
-		<omni id="Omni0" enabled="0">
+		<!-- <omni id="Omni0" enabled="0">
 			<location x="9.0" y="15.0" z="-9.0" w="1.0"/>
 			<ambient r="0.5" g="0.5" b="0.5" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -55,7 +54,7 @@
 			<ambient r="1.0" g="1.0" b="1.0" a="1.0"/>
 			<diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
 			<specular r="1.0" g="1.0" b="0.0" a="1.0" />
-		</omni>
+		</omni> -->
 
 		<!-- Spot Lights -->
 		<spot id="Spot0" enabled="1" angle="0.5" exponent="1.0" >
@@ -185,11 +184,7 @@
 			<translate x="2.3" y="1.75" z="-1.3" />
 			<scale x="0.3" y="3.5" z="0.3" />
 		</transformation> 
-		<transformation id="full_table">
-			<translate x="20.0" y="0.0" z="15.0" />
-			<rotate axis="y" angle="90" />
-			<scale x="1.5" y="1.0" z="2.5" />
-		</transformation>
+		
 
 
 
@@ -259,15 +254,15 @@
 			<rotate axis="y" angle="180.0" />
 		</transformation>
 		<transformation id="floor">
-			<translate x="12.5" y="0.0" z="12.5" />
+			<!-- <translate x="12.5" y="0.0" z="12.5" /> -->
 			<scale x="25.0" y="1.0" z="25.0" />
 			<rotate axis="x" angle="-90.0" />
 		</transformation>
-		<transformation id="ceiling">
+		<!-- <transformation id="ceiling">
 			<translate x="12.5" y="10.0" z="12.5" />
 			<scale x="25.0" y="1.0" z="25.0" />
 			<rotate axis="x" angle="90.0" />
-		</transformation>
+		</transformation> -->
 
 
 
@@ -422,7 +417,7 @@
 			<rotate axis="x" angle="-90" />
 		</transformation>
 		<transformation id="rocket">
-			<translate x="14.0" y="0.0" z="2.0" />
+			<translate x="-2.0" y="0.0" z="-6.0" />
 		</transformation>
 
 
@@ -583,8 +578,8 @@
 		</transformation>
 		<!-- Train -->
 		<transformation id="train">
-			<translate x="13.0" y="0.45" z="17.5" />
-			<rotate axis="y" angle="90" />
+			<translate x="-6.0" y="0.45" z="8.0" />
+			<rotate axis="y" angle="-45" />
 			<scale x="0.20" y="0.20" z="0.30" />
 		</transformation>
 
@@ -1081,7 +1076,7 @@
 
 
 		<!-- Planets -->
-		<component id="planetSphere0"> 
+		<!-- <component id="planetSphere0"> 
 			<transformation>
 				<transformationref id="planetSphere0" />
 			</transformation>
@@ -1285,7 +1280,7 @@
 				<componentref id="planet2" />
 				<componentref id="planet3" />
 			</children> 
-		</component>
+		</component> -->
 
 
 
@@ -2020,7 +2015,7 @@
 
 
 		<!-- Ladder -->
-		<component id="ladder0"> 
+		<!-- <component id="ladder0"> 
 			<transformation>
 				<transformationref id="ladder0" />
 			</transformation> 
@@ -2129,10 +2124,10 @@
 				<componentref id="ladder4" />
 				<componentref id="ladder5" />
 			</children> 
-		</component>
+		</component> -->
 
 		<!-- Bed -->
-		<component id="bed0"> 
+		<!-- <component id="bed0"> 
 			<transformation>
 				<transformationref id="bed0" />
 			</transformation> 
@@ -2251,10 +2246,10 @@
 			<children> 
 				<componentref id="cube" /> 
 			</children> 
-		</component>
+		</component> -->
 
 		<!-- Smaller Protection -->
-		<component id="bedprotection0">
+		<!-- <component id="bedprotection0">
 			<transformation>
 				<transformationref id="bedprotection0" />
 			</transformation> 
@@ -2268,10 +2263,10 @@
 			<children> 
 				<componentref id="cube" /> 
 			</children> 
-		</component>
+		</component> -->
 
 		<!-- Bigger Protection -->
-		<component id="bedprotection1">
+		<!-- <component id="bedprotection1">
 			<transformation>
 				<transformationref id="bedprotection1" />
 			</transformation> 
@@ -2439,12 +2434,12 @@
 				<componentref id="pillow0" />
 				<componentref id="pillow1" />
 			</children> 
-		</component>
+		</component> -->
 
 
 
 		<!-- Walls -->
-		<component id="wall0"> 
+		<!-- <component id="wall0"> 
 			<transformation> 
 				<transformationref id="wall0" />
 			</transformation> 
@@ -2503,7 +2498,7 @@
 			<children> 
 				<primitiveref id="rectangle" /> 
 			</children> 
-		</component>
+		</component> -->
 		<component id="floor"> 
 			<transformation> 
 				<transformationref id="floor" />
@@ -2513,13 +2508,13 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="floor" length_s="0.25" length_t="0.25" />
+			<texture id="inherit" length_s="0.25" length_t="0.25" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
 			</children> 
 		</component>
-		<component id="ceiling"> 
+		<!-- <component id="ceiling"> 
 			<transformation> 
 				<transformationref id="ceiling" />
 			</transformation> 
@@ -2550,9 +2545,8 @@
 				<componentref id="wall2" />
 				<componentref id="wall3" />
 				<componentref id="floor" />
-				<componentref id="ceiling" />
 			</children> 
-		</component>
+		</component> -->
 
 
 
@@ -2634,7 +2628,9 @@
 		</component>
 		<component id="table"> 
 			<transformation>
-				<transformationref id="full_table" />
+				<!-- <translate x="20.0" y="0.0" z="15.0" /> -->
+				<rotate axis="y" angle="90" />
+				<scale x="1.5" y="1.0" z="2.5" />
 			</transformation>
 
 			<materials> 
@@ -2658,7 +2654,7 @@
 
 
 		<!-- Chair -->
-		<component id="chair0"> 
+<!-- 		<component id="chair0"> 
 			<transformation>
 				<transformationref id="chair0" />
 			</transformation>
@@ -2827,12 +2823,12 @@
 				<componentref id="chair6" />
 				<componentref id="chair7" />
 			</children> 
-		</component>
+		</component> -->
 
 
 
 		<!-- Curtain holder -->
-		<component id="holderA"> 
+		<!-- <component id="holderA"> 
 			<transformation>
 				<transformationref id="holderA" />
 			</transformation>
@@ -2940,10 +2936,10 @@
 				<componentref id="holder1" />
 				<componentref id="holder2" />
 			</children> 
-		</component>
+		</component> -->
 
 		<!-- Curtain -->
-		<component id="curtain"> 
+		<!-- <component id="curtain"> 
 			<transformation>
 				<transformationref id="curtain" />
 			</transformation>
@@ -2957,10 +2953,10 @@
 			<children> 
 				<primitiveref id="rectangle" />
 			</children> 
-		</component>
+		</component> -->
 
 		<!-- Window -->
-		<component id="window"> 
+		<!-- <component id="window"> 
 			<transformation>
 				<transformationref id="window" />
 			</transformation>
@@ -2991,12 +2987,12 @@
 				<componentref id="curtain" />
 				<componentref id="window" />
 			</children> 
-		</component>
+		</component> -->
 
 
 
 		<!-- Rail -->
-		<component id="trailA"> 
+		<!-- <component id="trailA"> 
 			<transformation>
 				<transformationref id="trailA" />
 			</transformation>
@@ -3379,11 +3375,235 @@
 				<componentref id="trail18" />
 				<componentref id="trail19" />
 			</children> 
+		</component> -->
+
+
+		<component id="present1"> 
+			<transformation>
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
 		</component>
+		<component id="present2"> 
+			<transformation>
+				<scale x="0.25" y="1.1" z="1.1" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="red" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="present3"> 
+			<transformation>
+				<rotate axis="y" angle="90.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="present2" />
+			</children> 
+		</component>
+		<component id="presentA"> 
+			<transformation>
+				<translate x="0.0" y="1.0" z="0.0" />
+				<scale x="2.0" y="2.0" z="2.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="earth" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="present1" />
+				<componentref id="present2" />
+				<componentref id="present3" />
+			</children> 
+		</component>
+		<component id="presentB"> 
+			<transformation>
+				<translate x="1.0" y="0.5" z="1.5" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="sun" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="present1" />
+				<componentref id="present2" />
+				<componentref id="present3" />
+			</children> 
+		</component>
+		<component id="presentC"> 
+			<transformation>
+				<translate x="-0.25" y="0.75" z="2.0" />
+				<scale x="1.5" y="1.5" z="1.5" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="mars" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="present1" />
+				<componentref id="present2" />
+				<componentref id="present3" />
+			</children> 
+		</component>
+		<component id="presents"> 
+			<transformation>
+				<translate x="-7.0" y="0.0" z="6.0" />
+				<scale x="1.25" y="1.25" z="1.25" />
+				<rotate axis="y" angle="45" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="presentA" />
+				<componentref id="presentB" />
+				<componentref id="presentC" />
+			</children> 
+		</component>
+
+
+		<component id="christmas_tree1"> 
+			<transformation>
+				<scale x="0.20" y="1.0" z="0.20" />
+				<rotate axis="x" angle="-90.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="cylinder" />
+			</children> 
+		</component>
+		<component id="christmas_tree2"> 
+			<transformation>
+				<translate x="0.0" y="2.0" z="0.0" />
+				<scale x="3.0" y="3" z="3.0" />
+				<rotate axis="x" angle="-90.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="green_planet" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="rocket_nose" />
+			</children> 
+		</component>
+		<component id="christmas_ball1"> 
+			<transformation>
+				<translate x="1.6" y="3.0" z="1.0" />
+				<scale x="0.1" y="0.1" z="0.1" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="earth" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="sphere" />
+			</children> 
+		</component>
+		<component id="christmas_ball2"> 
+			<transformation>
+				<translate x="1.2" y="4.0" z="-1.0" />
+				<scale x="0.1" y="0.1" z="0.1" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="mars" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="sphere" />
+			</children> 
+		</component>
+		<component id="christmas_ball3"> 
+			<transformation>
+				<translate x="0.25" y="4.0" z="1.5" />
+				<scale x="0.1" y="0.1" z="0.1" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="sun" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<primitiveref id="sphere" />
+			</children> 
+		</component>
+		<component id="christmas_tree"> 
+			<transformation>
+				<translate x="-7.0" y="0.0" z="6.0" />
+				<scale x="1.25" y="1.25" z="1.25" />
+				<rotate axis="y" angle="45" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children> 
+				<componentref id="christmas_tree1" />
+				<componentref id="christmas_tree2" />
+				<componentref id="christmas_ball1" />
+				<componentref id="christmas_ball2" />
+				<componentref id="christmas_ball3" />
+			</children> 
+		</component>
+
 
 
 		<component id="white_pieces"> 
 			<transformation>
+				<translate x="0.0" y="0.0" z="-2.0" />
 			</transformation>
 
 			<materials> 
@@ -3398,7 +3618,7 @@
 		</component>
 		<component id="black_pieces"> 
 			<transformation>
-				<translate x="0.0" y="0.0" z="4" />
+				<translate x="0.0" y="0.0" z="2.0" />
 			</transformation>
 
 			<materials> 
@@ -3413,7 +3633,7 @@
 		</component>
 		<component id="pieces"> 
 			<transformation>
-				<translate x="20.0" y="3.5" z="14.5" />
+				<translate x="0.0" y="3.5" z="0.0" />
 				<scale x="0.20" y="0.20" z="0.20" />
 			</transformation>
 
@@ -3429,10 +3649,9 @@
 			</children> 
 		</component>
 
-		<!-- Root Component -->
-		<component id="scene">
+
+		<component id="childroom_scene">
 			<transformation>
-				<transformationref id="scene" />
 			</transformation>
 
 			<animations>
@@ -3442,21 +3661,56 @@
 				<material id="mat0"/>
 			</materials>
 
-			<texture id="bank" length_s="1.0" length_t="1.0" />
+			<texture id="floor" length_s="1.0" length_t="1.0" />
 
 			<children>
-				<componentref id="table" />
-				<componentref id="full_chair1" />
-				<componentref id="full_chair2" />
-				<componentref id="walls" />
-				<componentref id="trail" />
-				<componentref id="bed" />
+				<componentref id="floor" />
 				<componentref id="train" />
 				<componentref id="rocket" />
-				<componentref id="full_window" />
-				<componentref id="planets" />
-
+				<componentref id="table" />
 				<componentref id="pieces" />
+			</children> 
+		</component>
+		<component id="christmas_scene">
+			<transformation>
+			</transformation>
+
+			<animations>
+			</animations>
+
+			<materials>
+				<material id="mat0"/>
+			</materials>
+
+			<texture id="metal" length_s="1.0" length_t="1.0" />
+
+			<children>
+				<componentref id="floor" />
+				<componentref id="presents" />
+				<componentref id="christmas_tree" /> 
+				<componentref id="table" />
+				<componentref id="pieces" />
+			</children> 
+		</component>
+
+		<!-- Root Component -->
+		<component id="scene">
+			<transformation>
+			</transformation>
+
+			<animations>
+			</animations>
+
+			<materials>
+				<material id="mat0"/>
+			</materials>
+
+			<texture id="floor" length_s="1.0" length_t="1.0" />
+
+			<children>
+				<!-- <componentref id="childroom_scene" /> -->
+				<componentref id="christmas_scene" />
+				<!-- minecraft house -->
 			</children> 
 		</component>
 	</components>
