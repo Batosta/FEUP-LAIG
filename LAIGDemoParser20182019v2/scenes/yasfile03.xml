@@ -92,6 +92,7 @@
 		<texture id="curtain" file="scenes/images/curtain.jpg"/>
 		<texture id="black" file="scenes/images/black.jpg"/>
 		<texture id="floor" file="scenes/images/floor.jpg"/>
+		<texture id="fireplace" file="scenes/images/fireplace.jpg"/>
 	</textures> 
 
 
@@ -234,24 +235,24 @@
  
 		<!-- Walls and Floor -->
 		<transformation id="wall0">
-			<translate x="12.5" y="5.0" z="0.0" />
+			<translate x="0.0" y="5.0" z="-12.5" />
 			<scale x="25.0" y="10.0" z="1.0" />
 		</transformation>
-		<transformation id="wall1">
+		<!-- <transformation id="wall1">
+			<translate x="-12.5" y="5.0" z="0.0" />
 			<rotate axis="y" angle="-90.0" />
 			<rotate axis="x" angle="180.0" /> 
-			<translate x="12.5" y="-5.0" z="0.0" />
 			<scale x="25.0" y="10.0" z="1.0" />
 		</transformation>
 		<transformation id="wall2">
 			<translate x="25.0" y="5.0" z="12.5" />
-			<scale x="1.0" y="10.0" z="25.0" />
 			<rotate axis="y" angle="-90.0" />
-		</transformation>
-		<transformation id="wall3">
-			<translate x="12.5" y="5.0" z="25.0" />
 			<scale x="25.0" y="10.0" z="1.0" />
+		</transformation> -->
+		<transformation id="wall3">
+			<translate x="0.0" y="5.0" z="12.5" />
 			<rotate axis="y" angle="180.0" />
+			<scale x="25.0" y="10.0" z="1.0" />
 		</transformation>
 		<transformation id="floor">
 			<!-- <translate x="12.5" y="0.0" z="12.5" /> -->
@@ -668,9 +669,9 @@
 			<rotate axis="y" angle="90" />-->
 		</transformation>
 		<transformation id="full_window">
-			<translate x="7.5" y="7.5" z="24.99" />
-			<scale x="0.2" y="0.2" z="0.2" />
+			<translate x="-6.0" y="7.5" z="12.5" />
 			<rotate axis="y" angle="90" />
+			<scale x="0.2" y="0.2" z="0.2" />
 		</transformation>
 
 
@@ -2439,7 +2440,7 @@
 
 
 		<!-- Walls -->
-		<!-- <component id="wall0"> 
+		<component id="wall0"> 
 			<transformation> 
 				<transformationref id="wall0" />
 			</transformation> 
@@ -2448,13 +2449,13 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="bank" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
 			</children> 
 		</component>
-		<component id="wall1"> 
+		<!-- <component id="wall1"> 
 			<transformation> 
 				<transformationref id="wall1" />
 			</transformation> 
@@ -2463,7 +2464,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="bank" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -2478,12 +2479,12 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="bank" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
 			</children> 
-		</component>
+		</component> -->
 		<component id="wall3"> 
 			<transformation> 
 				<transformationref id="wall3" />
@@ -2493,12 +2494,12 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
+			<texture id="bank" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
 			</children> 
-		</component> -->
+		</component>
 		<component id="floor"> 
 			<transformation> 
 				<transformationref id="floor" />
@@ -2528,7 +2529,7 @@
 			<children> 
 				<primitiveref id="rectangle" /> 
 			</children> 
-		</component>
+		</component> -->
 		<component id="walls"> 
 			<transformation>
 			</transformation>
@@ -2541,12 +2542,12 @@
  
 			<children> 
 				<componentref id="wall0" />
-				<componentref id="wall1" />
-				<componentref id="wall2" />
+				<!-- <componentref id="wall1" /> -->
+				<!-- <componentref id="wall2" /> -->
 				<componentref id="wall3" />
 				<componentref id="floor" />
 			</children> 
-		</component> -->
+		</component>
 
 
 
@@ -2654,7 +2655,7 @@
 
 
 		<!-- Chair -->
-<!-- 		<component id="chair0"> 
+		<!--<component id="chair0"> 
 			<transformation>
 				<transformationref id="chair0" />
 			</transformation>
@@ -2828,7 +2829,7 @@
 
 
 		<!-- Curtain holder -->
-		<!-- <component id="holderA"> 
+		<component id="holderA"> 
 			<transformation>
 				<transformationref id="holderA" />
 			</transformation>
@@ -2936,10 +2937,10 @@
 				<componentref id="holder1" />
 				<componentref id="holder2" />
 			</children> 
-		</component> -->
+		</component>
 
 		<!-- Curtain -->
-		<!-- <component id="curtain"> 
+		<component id="curtain"> 
 			<transformation>
 				<transformationref id="curtain" />
 			</transformation>
@@ -2953,10 +2954,10 @@
 			<children> 
 				<primitiveref id="rectangle" />
 			</children> 
-		</component> -->
+		</component>
 
 		<!-- Window -->
-		<!-- <component id="window"> 
+		<component id="window"> 
 			<transformation>
 				<transformationref id="window" />
 			</transformation>
@@ -2987,7 +2988,7 @@
 				<componentref id="curtain" />
 				<componentref id="window" />
 			</children> 
-		</component> -->
+		</component>
 
 
 
@@ -3599,6 +3600,54 @@
 			</children> 
 		</component>
 
+		<component id="fireplace1"> 
+			<transformation>
+				<translate x="-3.0" y="2.5" z="-12.5" />
+				<scale x="7.5" y="5.0" z="1.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="black" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="fireplace2"> 
+			<transformation>
+				<translate x="-3.0" y="2.5" z="-11.99" />
+				<scale x="6.0" y="4.0" z="1.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="fireplace" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<primitiveref id="rectangle" />
+			</children> 
+		</component>
+		<component id="fireplace"> 
+			<transformation>
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="fireplace1" />
+				<componentref id="fireplace2" />
+			</children> 
+		</component>
+
 
 
 		<component id="white_pieces"> 
@@ -3664,9 +3713,10 @@
 			<texture id="floor" length_s="1.0" length_t="1.0" />
 
 			<children>
-				<componentref id="floor" />
+				<componentref id="walls" />
 				<componentref id="train" />
 				<componentref id="rocket" />
+				<componentref id="full_window" />
 				<componentref id="table" />
 				<componentref id="pieces" />
 			</children> 
@@ -3685,9 +3735,10 @@
 			<texture id="metal" length_s="1.0" length_t="1.0" />
 
 			<children>
-				<componentref id="floor" />
+				<componentref id="walls" />
 				<componentref id="presents" />
-				<componentref id="christmas_tree" /> 
+				<componentref id="christmas_tree" />
+				<componentref id="fireplace" /> 
 				<componentref id="table" />
 				<componentref id="pieces" />
 			</children> 
