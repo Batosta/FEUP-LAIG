@@ -11,7 +11,7 @@ function getUrlVars() {
     return vars;
 }	 
 //Include additional files here
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'MyGraphNode.js', 'Geometry/MyRectangle.js', 'Geometry/MyTriangle.js', 'Geometry/MyCylinder.js', 'Geometry/MyCircle.js', 'Geometry/MySemiSphere.js', 'Geometry/MySphere.js', 'Geometry/MyTorus.js', 'Geometry/MyTube.js', 'NURBS/MyPlane.js', 'NURBS/MyPatch.js', 'NURBS/MyWing.js', 'NURBS/MySemiSphere2.js', 'NURBS/MyCylinder2.js', 'NURBS/MyVehicle.js', 'NURBS/MyPiece.js', 'Shaders/MyTerrain.js', 'Shaders/MyWater.js', 'Animations/Animation.js', 'Animations/CircularAnimation.js', 'Animations/LinearAnimation.js', 'Geometry/MyDiamond.js', 'Geometry/MyTree.js', 'Geometry/MySquare.js', 'Geometry/MyTrapezoid.js','Shaders/MyBeach.js','NURBS/MyCircle2.js',
+serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'MyGraphNode.js', 'Geometry/MyRectangle.js', 'Geometry/MyTriangle.js', 'Geometry/MyCylinder.js', 'Geometry/MyCircle.js', 'Geometry/MySemiSphere.js', 'Geometry/MySphere.js', 'Geometry/MyTorus.js', 'Geometry/MyTube.js', 'NURBS/MyPlane.js', 'NURBS/MyPatch.js', 'NURBS/MyWing.js', 'NURBS/MySemiSphere2.js', 'NURBS/MyCylinder2.js', 'NURBS/MyVehicle.js', 'NURBS/MyPiece.js', 'Shaders/MyTerrain.js', 'Shaders/MyWater.js', 'Animations/Animation.js', 'Animations/CircularAnimation.js', 'Animations/LinearAnimation.js', 'Geometry/MyDiamond.js', 'Geometry/MyTree.js', 'Geometry/MySquare.js', 'Geometry/MyCell.js', 'Geometry/MyTrapezoid.js','Shaders/MyBeach.js','NURBS/MyCircle2.js', 'Game/KnightLine.js',
 
 main=function()
 {

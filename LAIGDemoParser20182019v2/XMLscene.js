@@ -38,7 +38,8 @@ class XMLscene extends CGFscene {
 
         this.keyMPressed = false;
 
-        this.startTime = 0; 
+        this.startTime = 0;
+        this.gameStart = 0;
 
         this.setUpdatePeriod(1000/60);
         this.setPickEnabled(true);
@@ -70,7 +71,7 @@ class XMLscene extends CGFscene {
             }
         }
 
-        this.updateCameras();
+        // this.updateCameras();
     }
 
     updateCameras(){
@@ -157,7 +158,7 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.camera = this.graph.viewMap.get(this.graph.defaultView);
-        // this.interface.setActiveCamera(this.camera);
+        this.interface.setActiveCamera(this.camera);
 
         this.axis = new CGFaxis(this, this.graph.axis_length);
 
@@ -167,10 +168,15 @@ class XMLscene extends CGFscene {
         this.initLights();
 
         // this.interface.addLightsGroup(this.graph.lights);
+        this.currentBackground = "Child Room";
+        this.interface.addBackgroundsGroup(['Child Room', 'Christmas Room']);
 
-        this.currentView = this.graph.defaultView;
-        
+        this.currentView = this.graph.defaultView;        
         this.interface.addViewsGroup(this, this.graph.currentView);
+
+        this.start = null;
+        this.interface.addGameGroup(this);
+
 
         this.sceneInited = true;
     }
@@ -191,6 +197,16 @@ class XMLscene extends CGFscene {
                 this.pickResults.splice(0,this.pickResults.length);
             }       
         }
+    }
+
+    setRoot(){
+
+        if(this.currentBackground == "Child Room")
+            this.graph.root = "childroom_scene";
+        else if(this.currentBackground == "Christmas Room")
+            this.graph.root = "christmas_scene";
+        else
+            this.graph.root = " ";
     }
 
     /**
@@ -239,7 +255,13 @@ class XMLscene extends CGFscene {
             // this.camera = this.graph.viewMap.get(this.currentView);
             // this.interface.setActiveCamera(this.camera);
 
+            this.setRoot();
             this.graph.displayScene();
+
+            if(this.gameStart == 1){
+                
+                this.knightLine.display();
+            }
         }
 
         this.popMatrix();
@@ -258,5 +280,12 @@ class XMLscene extends CGFscene {
             this.graph.counterMaterial++;
             this.keyMPressed = false;
         }
+    }
+
+
+    startGame(){
+
+        this.knightLine = new KnightLine(this);
+        this.gameStart = 1;
     }
 }

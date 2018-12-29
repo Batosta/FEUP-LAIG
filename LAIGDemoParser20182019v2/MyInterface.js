@@ -45,6 +45,22 @@ class MyInterface extends CGFinterface {
         }
     }
 
+    addBackgroundsGroup(backgrounds) {
+
+        var group = this.gui.addFolder("Backgrounds");
+        group.open();
+
+        group.add(this.scene, 'currentBackground', backgrounds).name("Background");
+    }
+
+    addGameGroup(scene) {
+
+        var group = this.gui.addFolder("Game");
+        group.open();
+    
+        group.add(this.scene, "startGame").name("Start Game");
+    }
+
     /**
      * Function that adds the views
      * @param scene - Global scene
