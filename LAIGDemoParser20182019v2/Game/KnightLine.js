@@ -5,7 +5,11 @@ class KnightLine extends CGFobject
 
         super(scene);
 
-        this.diamond = new MyDiamond(this.scene, 6);
+        this.board = [];
+        this.move = [];
+        this.player = null;
+
+        this.scene.client.getPrologRequest('start', this.scene.client.handleReply);
 
         this.display();
     }
@@ -13,8 +17,5 @@ class KnightLine extends CGFobject
     display() 
     {   
 
-        this.scene.pushMatrix();
-            this.diamond.display();
-        this.scene.popMatrix();
     };
 } 

@@ -1,6 +1,5 @@
 var DEGREE_TO_RAD = Math.PI / 180;
 
-
 /**
  * XMLscene class, representing the scene that is to be rendered.
  */
@@ -14,6 +13,8 @@ class XMLscene extends CGFscene {
 
         this.interface = myinterface;
         this.lightValues = {};
+
+        this.client = new Client();
     }
 
     /**
@@ -259,7 +260,7 @@ class XMLscene extends CGFscene {
             this.graph.displayScene();
 
             if(this.gameStart == 1){
-                
+
                 this.knightLine.display();
             }
         }

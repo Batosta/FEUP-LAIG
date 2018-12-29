@@ -1,6 +1,6 @@
 class Client{
+
     constructor(){
-        this.makeRequest();
     }
 
     getPrologRequest(requestString, onSuccess, onError, port){
@@ -16,12 +16,9 @@ class Client{
         request.send();
     }
 
-    makeRequest(){
-        var requestString = document.querySelector("#query_field").value; 
-        this.getPrologRequest(requestString, handleReply);
-    }
-
     handleReply(data){
-        document.querySelector("#query_result").innerHTML=data.target.response;
+
+        console.log(data.target.response);
+        return data.target.response;
     }
 } 
