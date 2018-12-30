@@ -12,7 +12,7 @@ class MyCell extends CGFobject
 	{
 		super(scene);
 
-		this.cell = new MyRectangle(this.scene, 0, 1, 0, 1);
+		this.cell = new MyRectangle(this.scene, -0.5, 0.5, -0.5, 0.5);
 
 		this.isPiece = true;
 
@@ -26,6 +26,7 @@ class MyCell extends CGFobject
 	{	
 
 		this.scene.pushMatrix();
+			this.scene.scale(0.75, 0.75, 0.75);
 			this.cell.display();
 		this.scene.popMatrix();
 	};

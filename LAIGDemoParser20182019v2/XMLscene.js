@@ -13,8 +13,6 @@ class XMLscene extends CGFscene {
 
         this.interface = myinterface;
         this.lightValues = {};
-
-        this.client = new Client();
     }
 
     /**
@@ -41,6 +39,7 @@ class XMLscene extends CGFscene {
 
         this.startTime = 0;
         this.gameStart = 0;
+        this.knightLine = new KnightLine(this);
 
         this.setUpdatePeriod(1000/60);
         this.setPickEnabled(true);
@@ -286,7 +285,46 @@ class XMLscene extends CGFscene {
 
     startGame(){
 
-        this.knightLine = new KnightLine(this);
+        this.knightLine.start();
         this.gameStart = 1;
+    }
+
+
+    getPrologRequest(requestString, onSuccess, onError, port){
+    
+        var requestPort = port || 8081;
+        var request = new XMLHttpRequest();
+
+        request.open('GET', "http://localhost:" + requestPort + "/" + requestString, true);
+
+        var knightLine = this.knightLine;
+
+        request.onload = onSuccess || 
+        function(data){
+            
+            var prologResponse = data.target.response;
+
+            if(requestString == "start"){
+
+                console.log("Request successful. Reply: " + prologResponse);
+                var parsedArray = knightLine.responseParser();
+                knightLine.display(parsedArray);
+            }
+            else{
+
+                console.log("ainda nao fizemos essa parte")
+            }
+
+            requestString = null;
+        };
+
+        request.onerror = onError || 
+        function(){
+
+            console.log("Error waiting for response");
+        };
+
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        request.send();
     }
 }

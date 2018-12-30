@@ -2033,7 +2033,6 @@ class MySceneGraph {
      */
     recursiveDisplayNode(node, textIni, matIni, iniS, iniT){
         
-
         var material = matIni;
         var texture = textIni;
         var length_s = iniS;
@@ -2096,15 +2095,6 @@ class MySceneGraph {
 
             if(texture != null)
                 this.primitiveMap.get(node.primitives[i]).updateTex(length_s, length_t);
-
-
-            // if(this.primitiveMap.get(node.primitives[i]).isPiece){
-
-            //     this.scene.registerForPick(this.pickNumber, this.primitiveMap.get(node.primitives[i]));
-            //     this.pickNumber++;
-            // } else{
-            //     this.scene.clearPickRegistration();
-            // }
 
             this.primitiveMap.get(node.primitives[i]).display();
         }

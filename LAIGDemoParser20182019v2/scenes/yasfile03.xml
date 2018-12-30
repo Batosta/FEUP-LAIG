@@ -954,13 +954,6 @@
 		<primitive id="circle">
 			<circle slices="20" stacks="20"/>
 		</primitive>
-
-		<primitive id="white_pieces">
-			<piece pieces="20" color="white"/>
-		</primitive>
-		<primitive id="black_pieces">
-			<piece pieces="20" color="black"/>
-		</primitive>
 	</primitives>
 
 
@@ -3691,12 +3684,12 @@
 			<texture id="floor" length_s="1.0" length_t="1.0" />
 
 			<children>
-				<componentref id="walls" />
 				<componentref id="train" />
 				<componentref id="rocket" />
 				<componentref id="full_window" />
 				<componentref id="table" />
 				<componentref id="time_supporter" />
+				<componentref id="walls" />
 			</children> 
 		</component>
 		<component id="christmas_scene">
@@ -3713,12 +3706,12 @@
 			<texture id="metal" length_s="1.0" length_t="1.0" />
 
 			<children>
-				<componentref id="walls" />
 				<componentref id="presents" />
 				<componentref id="christmas_tree" />
 				<componentref id="fireplace" /> 
 				<componentref id="table" />
 				<componentref id="time_supporter" />
+				<componentref id="walls" />
 			</children> 
 		</component>
 	</components>

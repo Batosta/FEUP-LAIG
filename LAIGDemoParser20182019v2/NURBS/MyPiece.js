@@ -23,7 +23,6 @@ class MyPiece extends CGFobject {
         this.piece = new MyCylinder(this.scene, 1, 1, this.pieces, this.slices, this.stacks);
         this.circle = new MyCircle(this.scene, this.slices);
 
-
         this.red = new CGFappearance(this.scene);
         this.red.setAmbient(0.3, 0, 0, 1);
         this.black = new CGFappearance(this.scene);
@@ -39,6 +38,7 @@ class MyPiece extends CGFobject {
     {   
 
         this.scene.rotate(-Math.PI/2.0, 1, 0, 0);
+        this.scene.scale(0.25, 0.25, 0.25);
 
         // Top of the stack
         this.scene.pushMatrix();
