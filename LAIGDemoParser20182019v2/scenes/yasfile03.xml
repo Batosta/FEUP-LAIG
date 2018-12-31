@@ -94,6 +94,10 @@
 		<texture id="black" file="scenes/images/black.jpg"/>
 		<texture id="floor" file="scenes/images/floor.jpg"/>
 		<texture id="fireplace" file="scenes/images/fireplace.jpg"/>
+		<texture id="craft_table" file="scenes/images/craft_table.png"/>
+		<texture id="creeper" file="scenes/images/creeper.jpg"/>
+		<texture id="creeper_face" file="scenes/images/creeper_face.jpg"/>
+		<texture id="dirt" file="scenes/images/dirt.jpg"/>
 	</textures> 
 
 
@@ -2506,7 +2510,7 @@
 				<material id="inherit" />
 			</materials>
 
-			<texture id="inherit" length_s="0.25" length_t="0.25" />
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
  
 			<children> 
 				<primitiveref id="rectangle" /> 
@@ -3650,6 +3654,213 @@
 		</component>
 
 
+		<!-- Torch -->
+		<component id="torchA"> 
+			<transformation>
+				<scale x="0.5" y="3.0" z="0.5" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="trunk" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="torchB"> 
+			<transformation>
+				<translate x="0.0" y="1.75" z="0.0" />
+				<scale x="0.5" y="0.5" z="0.5" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="sun" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="torch1"> 
+			<transformation>
+				<translate x="-3.0" y="3.0" z="-12.0" />
+				<rotate axis="x" angle="30" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="torchA" />
+				<componentref id="torchB" />
+			</children> 
+		</component>
+		<component id="torch2"> 
+			<transformation>
+				<translate x="-3.0" y="3.0" z="12.0" />
+				<rotate axis="x" angle="-30" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="torchA" />
+				<componentref id="torchB" />
+			</children> 
+		</component>
+		<component id="torch"> 
+			<transformation>
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="torch1" />
+				<componentref id="torch2" />
+			</children> 
+		</component>
+
+
+		<!-- Craft Table -->
+		<component id="craft_table"> 
+			<transformation>
+				<translate x="-5.0" y="1.0" z="11.0" />
+				<scale x="2.0" y="2.0" z="2.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="craft_table" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+
+
+		<!-- Creeper -->
+		<component id="creeper_leg1"> 
+			<transformation>
+				<translate x="0.75" y="0.5" z="0.0" />
+				<scale x="1.0" y="1.0" z="2.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="creeper_leg2"> 
+			<transformation>
+				<translate x="-0.75" y="0.5" z="0.0" />
+				<scale x="1.0" y="1.0" z="2.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="creeper_body"> 
+			<transformation>
+				<translate x="0.0" y="2.5" z="0.0" />
+				<scale x="1.0" y="3.0" z="2.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="creeper_head"> 
+			<transformation>
+				<translate x="0.0" y="4.75" z="0.0" />
+				<scale x="1.5" y="1.5" z="2.0" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="inherit" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="cube" />
+			</children> 
+		</component>
+		<component id="creeper_face"> 
+			<transformation>
+				<translate x="0.76" y="4.75" z="0.0" />
+				<scale x="1.5" y="1.5" z="2.0" />
+				<rotate axis="y" angle="90" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="creeper_face" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<primitiveref id="rectangle" />
+			</children> 
+		</component>
+		<component id="creeper"> 
+			<transformation>
+				<translate x="-2.0" y="0.0" z="-7.5" />
+				<rotate axis="y" angle="-80" />
+			</transformation>
+
+			<materials> 
+				<material id="inherit" />
+			</materials> 
+ 
+			<texture id="creeper" length_s="1.0" length_t="1.0" />
+ 
+			<children>
+				<componentref id="creeper_leg1" />
+				<componentref id="creeper_leg2" />
+				<componentref id="creeper_body" />
+				<componentref id="creeper_head" />
+				<componentref id="creeper_face" />
+			</children> 
+		</component>
+
+
+		<!-- Time Supporter -->
 		<component id="time_supporter"> 
 			<transformation>
 				<translate x="-4.0" y="4.0" z="0.0" />
@@ -3669,6 +3880,8 @@
 			</children> 
 		</component>
 
+
+
 		<!-- Root Components -->
 		<component id="childroom_scene">
 			<transformation>
@@ -3681,7 +3894,7 @@
 				<material id="mat0"/>
 			</materials>
 
-			<texture id="floor" length_s="1.0" length_t="1.0" />
+			<texture id="floor" length_s="0.25" length_t="0.25" />
 
 			<children>
 				<componentref id="train" />
@@ -3703,12 +3916,34 @@
 				<material id="mat0"/>
 			</materials>
 
-			<texture id="metal" length_s="1.0" length_t="1.0" />
+			<texture id="metal" length_s="0.25" length_t="0.25" />
 
 			<children>
 				<componentref id="presents" />
 				<componentref id="christmas_tree" />
 				<componentref id="fireplace" /> 
+				<componentref id="table" />
+				<componentref id="time_supporter" />
+				<componentref id="walls" />
+			</children> 
+		</component>
+		<component id="minecraft_scene">
+			<transformation>
+			</transformation>
+
+			<animations>
+			</animations>
+
+			<materials>
+				<material id="mat0"/>
+			</materials>
+
+			<texture id="dirt" length_s="0.2" length_t="0.2" />
+
+			<children>
+				<componentref id="torch" />
+				<componentref id="craft_table" />
+				<componentref id="creeper" />
 				<componentref id="table" />
 				<componentref id="time_supporter" />
 				<componentref id="walls" />

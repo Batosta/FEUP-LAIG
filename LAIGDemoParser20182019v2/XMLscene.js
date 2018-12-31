@@ -71,7 +71,7 @@ class XMLscene extends CGFscene {
             }
         }
 
-        // this.updateCameras();
+        this.updateCameras();
     }
 
     updateCameras(){
@@ -158,7 +158,7 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.camera = this.graph.viewMap.get(this.graph.defaultView);
-        this.interface.setActiveCamera(this.camera);
+        // this.interface.setActiveCamera(this.camera);
 
         this.axis = new CGFaxis(this, this.graph.axis_length);
 
@@ -169,7 +169,7 @@ class XMLscene extends CGFscene {
 
         // this.interface.addLightsGroup(this.graph.lights);
         this.currentBackground = "Child Room";
-        this.interface.addBackgroundsGroup(['Child Room', 'Christmas Room']);
+        this.interface.addBackgroundsGroup(['Child Room', 'Christmas Room', 'Minecraft Room']);
 
         this.currentView = this.graph.defaultView;        
         this.interface.addViewsGroup(this, this.graph.currentView);
@@ -206,7 +206,7 @@ class XMLscene extends CGFscene {
         else if(this.currentBackground == "Christmas Room")
             this.graph.root = "christmas_scene";
         else
-            this.graph.root = " ";
+            this.graph.root = "minecraft_scene";
     }
 
     /**
