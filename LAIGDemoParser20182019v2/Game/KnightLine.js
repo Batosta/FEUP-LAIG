@@ -71,7 +71,72 @@ class KnightLine extends CGFobject
 
     responseParser(response){
 
-        var array = [[["empty",0],["black",3],["empty",0],["empty",0]],[["empty",0],["black",20],["white",20],["empty",0]],[["empty",0],["empty",0],["empty",0],["empty",0]],[["empty",0],["empty",0],["empty",0],["empty",0]]];
-        return array;
+        var board = [];
+
+        var easier = response.slice(1, response.length - 1);
+        var resp = easier.split(']],[[');
+
+        // mold the strings into something like [[...],[...],[...]]
+        let auxInit = "[[";
+        let auxFinal = "]]";
+        resp[0] = resp[0].concat(auxFinal);
+        resp[resp.length - 1] = auxInit.concat(resp[resp.length - 1]);
+        
+        let i;
+        for(i = 1; i < resp.length - 1; i++){
+
+            resp[i] = auxInit.concat(resp[i]);
+            resp[i] = resp[i].concat(auxFinal);
+        }
+
+
+        // build the board, line by line, cell by cell
+        for(i = 0; i < resp.length; i++){
+
+            var line = [];
+            let lineStr = resp[i]; 
+            let k;
+            for(k = 2; k < lineStr.length - 1;){
+
+                var cell = [];
+                if(lineStr[k] == 'e'){
+
+                    cell = ["empty", 0];
+                    k += 10;
+                }
+                else if(lineStr[k] == 'b'){
+
+                    if(lineStr[k + 7] == ']'){
+
+                        cell = ["black", parseInt(lineStr[k + 6])];
+                        k += 10;
+                    }
+                    else{
+
+                        cell = ["black", parseInt(lineStr[k + 6] + lineStr[k + 7])];
+                        k += 11;
+                    }
+                }
+                else if(lineStr[k] == 'w'){
+
+                    if(lineStr[k + 7] == ']'){
+
+                        cell = ["white", parseInt(lineStr[k + 6])];
+                        k += 10;
+                    }
+                    else{
+
+                        cell = ["white", parseInt(lineStr[k + 6] + lineStr[k + 7])];
+                        k += 11;
+                    }
+                }
+                
+                line.push(cell);
+            }
+
+            board.push(line);
+        }
+
+        return board;
     }
 } 

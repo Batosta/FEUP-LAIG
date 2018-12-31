@@ -282,7 +282,6 @@ class XMLscene extends CGFscene {
         }
     }
 
-
     startGame(){
 
         this.knightLine.start();
@@ -307,7 +306,7 @@ class XMLscene extends CGFscene {
             if(requestString == "start"){
 
                 console.log("Request successful. Reply: " + prologResponse);
-                var parsedArray = knightLine.responseParser();
+                var parsedArray = knightLine.responseParser(prologResponse);
                 knightLine.display(parsedArray);
             }
             else{
