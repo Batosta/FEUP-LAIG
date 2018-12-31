@@ -147,4 +147,43 @@ class KnightLine extends CGFobject
 
         return board;
     }
+
+    requestParser(board){
+
+        let string = "";
+
+        //Iniciar o Board
+        string = string + "[";
+
+        for(let i = 0; i < board.length; i++){
+
+            var lines = board[i];
+
+            //Iniciar a Linha
+            string = string + "[";
+
+            for(let j = 0; j < lines.length; j++){
+
+                var cell = lines[j];
+                
+                string = string + "[" + cell[0] + ",";
+
+                var number = parseInt(cell[1]);
+
+                if( j == lines.length-1) string = string + number + "]";
+                else string = string + number + "],";
+
+            }
+
+            //Finalizar a linha
+            if(i == board.length-1) string = string + "]";
+            else string = string + "],";
+
+        }
+
+        //Finalizar o Board
+        string = string + "]";
+        return string;
+
+    }
 } 
