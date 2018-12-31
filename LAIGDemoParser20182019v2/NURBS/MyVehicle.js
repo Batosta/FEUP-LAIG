@@ -24,8 +24,6 @@ class MyVehicle extends CGFobject {
         this.floaterHolder = new MyCylinder2(this.scene, 0.20, 0.20, 4, 10, 10);
         this.floater = new MyCylinder2(this.scene, 1.5, 1.5, 11, 20, 20);
 
-        this.isPiece = false;
-
         var controlpoints = [
                                 [
                                     [ -1.5, -3.0, 0.0, 1 ],

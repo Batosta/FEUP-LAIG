@@ -28,8 +28,6 @@ class MyRectangle extends CGFobject{
 		this.sLast = null;
 		this.tLast = null;
 		
-		this.isPiece = false;
-
 		this.initBuffers();
 	}
 

@@ -29,8 +29,6 @@ class MyTerrain extends MyPlane {
 
         this.height = this.idheightmap;
         this.texture = this.idtexture;
-
-        this.isPiece = false;
     };
 
     display(){

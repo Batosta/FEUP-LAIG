@@ -10,8 +10,6 @@ class MyBeach extends MyPlane{
 
         this.shader = new CGFshader(this.scene.gl, "Shaders/beach.vert", "Shaders/beach.frag");
 
-        this.isPiece = false;
-
         this.updateValues();
 
     }

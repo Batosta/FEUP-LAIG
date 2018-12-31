@@ -14,8 +14,6 @@ class MyCell extends CGFobject
 
 		this.cell = new MyRectangle(this.scene, -0.5, 0.5, -0.5, 0.5);
 
-		this.isPiece = true;
-
 		this.display();
 	};
  

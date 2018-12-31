@@ -33,8 +33,6 @@ class MyTriangle extends CGFobject{
 		this.lenght_t = 1;
 		this.lenght_s = 1;
 
-		this.isPiece = false;
-		
 		this.initBuffers();
 	}
 

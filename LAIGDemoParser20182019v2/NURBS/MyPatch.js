@@ -24,8 +24,6 @@ class MyPatch extends CGFobject {
 
         this.patch;
 
-        this.isPiece = false;
-
         // The degrees are the number of points - 1
         var degreeU = this.npointsU - 1;
         var degreeV = this.npointsV - 1;

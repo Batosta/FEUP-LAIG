@@ -8,6 +8,7 @@ class KnightLine extends CGFobject
         this.board = [];
         this.move = [];
         this.player = null;
+        this.pickNumber;
 
         this.cell = new MyCell(this.scene);
         this.blackPiece = new MyPiece(this.scene, 1, "black");
@@ -23,6 +24,8 @@ class KnightLine extends CGFobject
 
         if(this.board != undefined){
 
+            this.pickNumber = 1;
+
             var rows = this.board.length;
             var columns = this.board[0].length;
 
@@ -36,8 +39,9 @@ class KnightLine extends CGFobject
                     if(line[k][0] == "empty"){
 
                         this.scene.pushMatrix();
-                            this.scene.translate(i/rows * 2.5, 3.8, k/columns * 3);
+                            this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
                             this.scene.rotate(-Math.PI/2.0, 1, 0, 0);
+                            this.scene.registerForPick(this.pickNumber, this.cell);
                             this.cell.display();
                         this.scene.popMatrix();
                     }
@@ -45,20 +49,24 @@ class KnightLine extends CGFobject
 
                         var numbPieces = line[k][1];
                         this.scene.pushMatrix();
-                            this.scene.translate(i/rows * 2.5, 3.8, k/columns * 3);
+                            this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
                             this.scene.scale(1, numbPieces, 1);
+                            this.scene.registerForPick(this.pickNumber, this.whitePiece);
                             this.whitePiece.display();
                         this.scene.popMatrix();
                     }
-                    else{
+                    else if(line[k][0] == "black"){
 
                         var numbPieces = line[k][1];
                         this.scene.pushMatrix();
-                            this.scene.translate(i/rows * 2.5, 3.8, k/columns * 3);
+                            this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
                             this.scene.scale(1, numbPieces, 1);
+                            this.scene.registerForPick(this.pickNumber, this.blackPiece);
                             this.blackPiece.display();
                         this.scene.popMatrix();
                     }
+
+                    this.pickNumber++;
                 }
             }
         }

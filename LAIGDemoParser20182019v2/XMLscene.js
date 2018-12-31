@@ -190,8 +190,8 @@ class XMLscene extends CGFscene {
                     var obj = this.pickResults[i][0];
                     if (obj)
                     {
-                        var customId = this.pickResults[i][1];              
-                        console.log("Picked piece, with pick id " + customId);
+                        var customId = this.pickResults[i][1];
+                        console.log("Picked object" + obj + ", with pick id " + customId);
                     }
                 }
                 this.pickResults.splice(0,this.pickResults.length);
@@ -216,6 +216,8 @@ class XMLscene extends CGFscene {
 
         // ---- BEGIN Background, camera and axis setup
         this.logPicking();
+
+        this.clearPickRegistration();
 
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);

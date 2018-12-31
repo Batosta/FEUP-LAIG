@@ -8,8 +8,6 @@ class MyTrapezoid extends CGFobject
 		this.top = top;
 		this.bottom = bottom;
 
-		this.isPiece = false;
-
 		this.initBuffers();
 	}
 

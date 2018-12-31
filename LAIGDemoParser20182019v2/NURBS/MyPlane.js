@@ -19,8 +19,6 @@ class MyPlane extends CGFobject {
 
         this.plane;
 
-        this.isPiece = false;
-
         this.primitiveType = this.scene.gl.TRIANGLES;
 
         var degreeU = 1;
