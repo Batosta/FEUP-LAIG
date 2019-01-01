@@ -15,6 +15,7 @@ class MyPiece extends CGFobject {
 
         this.pieces = pieces;
         this.color = color;      // color = 1 = black || color = 0 = white
+        this.selected = 0;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.slices = 20;
@@ -31,6 +32,8 @@ class MyPiece extends CGFobject {
         this.black.setAmbient(0.0, 0.0, 0.0, 1);
         this.white = new CGFappearance(this.scene);
         this.white.setAmbient(1.0, 1.0, 1.0, 1);
+        this.green = new CGFappearance(this.scene);
+        this.green.setAmbient(0.0, 0.5, 0.25, 1);
     };
 
     /**
@@ -50,10 +53,14 @@ class MyPiece extends CGFobject {
         this.scene.popMatrix();
 
 
-        if(this.color == 1)
-            this.black.apply();
-        else
-            this.white.apply();
+        if(this.selected == 1)
+            this.green.apply();
+        else{
+            if(this.color == 1)
+                this.black.apply();
+            else
+                this.white.apply();
+        }
         // Stack
         this.scene.pushMatrix();
             this.piece.display();

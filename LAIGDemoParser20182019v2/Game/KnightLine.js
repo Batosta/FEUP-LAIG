@@ -19,11 +19,6 @@ class KnightLine extends CGFobject
 
     display(board) {   
 
-        // if(board != undefined){
-
-        //     this.board = board;
-        // }
-
         this.pickNumber = 1;
 
         var rows = this.boardPieces.length;

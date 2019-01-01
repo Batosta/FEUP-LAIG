@@ -193,15 +193,19 @@ class XMLscene extends CGFscene {
                         if(obj.type == "piece"){                                // if it is a piece
                             if(obj.color == this.knightLine.player){            // if the piece is from the current player
 
-                                var request = "checkPossibleMoves(";
-                                request += this.knightLine.requestParser(this.knightLine.board);
-                                request += ",";
-                                request += obj.xPosition;
-                                request += ",";
-                                request += obj.yPosition;
-                                request += ")";
+                                if(obj.selected == 1)
+                                    obj.selected = 0;
+                                else
+                                    obj.selected = 1;
+                                // var request = "checkPossibleMoves(";
+                                // request += this.knightLine.requestParser(this.knightLine.board);
+                                // request += ",";
+                                // request += obj.yPosition;
+                                // request += ",";
+                                // request += obj.xPosition;
+                                // request += ")";
 
-                                console.log(request);
+                                // console.log(request);
                             }
                         }
                     }
