@@ -6,76 +6,81 @@ class KnightLine extends CGFobject
         super(scene);
 
         this.board = [];
+        this.boardPieces = [];
         this.move = [];
-        this.player = null;
+        this.player = 1;     // player = 1 = black || player = 0 = white
         this.pickNumber;
 
-        this.cell = new MyCell(this.scene);
-        this.blackPiece = new MyPiece(this.scene, 1, "black");
-        this.whitePiece = new MyPiece(this.scene, 1, "white");
+        this.green = new CGFappearance(this.scene);
+        this.green.setAmbient(0.0, 0.5, 0.25, 1);
+        this.gray = new CGFappearance(this.scene);
+        this.gray.setAmbient(0.67, 0.67, 0.67, 1);
     }
 
     display(board) {   
 
-        if(board != undefined){
+        // if(board != undefined){
 
-            this.board = board;
-        }
+        //     this.board = board;
+        // }
 
-        if(this.board != undefined){
+        this.pickNumber = 1;
 
-            this.pickNumber = 1;
+        var rows = this.boardPieces.length;
+        var columns = this.boardPieces[0].length;
 
-            var rows = this.board.length;
-            var columns = this.board[0].length;
+        let i;
+        for(i = 0; i < this.boardPieces.length; i++){
 
-            let i;
-            for(i = 0; i < this.board.length; i++){
+            let line = this.boardPieces[i];
+            let k;
+            for(k = 0; k < line.length; k++){
 
-                let line = this.board[i];
-                let k;
-                for(k = 0; k < line.length; k++){
+                this.scene.pushMatrix();
 
-                    if(line[k][0] == "empty"){
+                    this.gray.apply();
+                    this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
 
-                        this.scene.pushMatrix();
-                            this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
-                            this.scene.rotate(-Math.PI/2.0, 1, 0, 0);
-                            this.scene.registerForPick(this.pickNumber, this.cell);
-                            this.cell.display();
-                        this.scene.popMatrix();
-                    }
-                    else if(line[k][0] == "white"){
+                    this.scene.registerForPick(this.pickNumber, line[k]);
+                    line[k].display();
 
-                        var numbPieces = line[k][1];
-                        this.scene.pushMatrix();
-                            this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
-                            this.scene.scale(1, numbPieces, 1);
-                            this.scene.registerForPick(this.pickNumber, this.whitePiece);
-                            this.whitePiece.display();
-                        this.scene.popMatrix();
-                    }
-                    else if(line[k][0] == "black"){
+                this.scene.popMatrix();
 
-                        var numbPieces = line[k][1];
-                        this.scene.pushMatrix();
-                            this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
-                            this.scene.scale(1, numbPieces, 1);
-                            this.scene.registerForPick(this.pickNumber, this.blackPiece);
-                            this.blackPiece.display();
-                        this.scene.popMatrix();
-                    }
-
-                    this.pickNumber++;
-                }
+                this.pickNumber++;
             }
+        }
+    };
+
+    boardToPieces(board){
+
+        this.boardPieces = [];
+        let i;
+        for(i = 0; i < board.length; i++){
+
+            var linePieces = []
+            let line = board[i];
+            let k;
+            for(k = 0; k < line.length; k++){
+
+                var piece;
+                if(line[k][0] == "empty")
+                    piece = new MyCell(this.scene, line.length - k - 1, i);
+                else if(line[k][0] == "white")
+                    piece = new MyPiece(this.scene, 1, 0, line.length - k - 1, i);
+                else if(line[k][0] == "black")
+                    piece = new MyPiece(this.scene, 1, 1, line.length - k - 1, i);
+
+                linePieces.push(piece);
+            }
+
+            this.boardPieces.push(linePieces);
         }
     };
 
     start(){
 
         this.scene.getPrologRequest('start');
-    }
+    };
 
     responseParser(response){
 
@@ -145,8 +150,9 @@ class KnightLine extends CGFobject
             board.push(line);
         }
 
+        this.boardToPieces(board);
         return board;
-    }
+    };
 
     requestParser(board){
 
@@ -184,6 +190,5 @@ class KnightLine extends CGFobject
         //Finalizar o Board
         string = string + "]";
         return string;
-
-    }
+    };
 } 

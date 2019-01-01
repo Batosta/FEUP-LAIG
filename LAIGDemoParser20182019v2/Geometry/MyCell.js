@@ -8,11 +8,15 @@ class MyCell extends CGFobject
      *
      * @param scene - The global scene
      */
-	constructor(scene) 
+	constructor(scene, xPosition, yPosition) 
 	{
 		super(scene);
+		this.xPosition = xPosition;
+        this.yPosition = yPosition;
 
 		this.cell = new MyRectangle(this.scene, -0.5, 0.5, -0.5, 0.5);
+
+		this.type = "cell";
 
 		this.display();
 	};
@@ -24,6 +28,7 @@ class MyCell extends CGFobject
 	{	
 
 		this.scene.pushMatrix();
+			this.scene.rotate(-Math.PI/2, 1, 0, 0);
 			this.scene.scale(0.75, 0.75, 0.75);
 			this.cell.display();
 		this.scene.popMatrix();

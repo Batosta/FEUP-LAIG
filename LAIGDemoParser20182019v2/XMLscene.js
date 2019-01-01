@@ -188,14 +188,28 @@ class XMLscene extends CGFscene {
             if (this.pickResults != null && this.pickResults.length > 0) {
                 for (var i = 0; i< this.pickResults.length; i++) {
                     var obj = this.pickResults[i][0];
-                    if (obj)
-                    {
-                        var customId = this.pickResults[i][1];
-                        console.log("Picked object" + obj + ", with pick id " + customId);
+                    if (obj) {
+
+                        if(obj.type == "piece"){                                // if it is a piece
+                            if(obj.color == this.knightLine.player){            // if the piece is from the current player
+
+                                var request = "checkPossibleMoves(";
+                                request += this.knightLine.requestParser(this.knightLine.board);
+                                request += ",";
+                                request += obj.xPosition;
+                                request += ",";
+                                request += obj.yPosition;
+                                request += ")";
+
+                                console.log(request);
+                            }
+                        }
                     }
+
+                    
                 }
-                this.pickResults.splice(0,this.pickResults.length);
-            }       
+                this.pickResults.splice(0, this.pickResults.length);
+            }     
         }
     }
 
@@ -269,7 +283,7 @@ class XMLscene extends CGFscene {
         this.popMatrix();
     }
 
-     /**
+    /**
      * Function that takes care of the response to the M key being pressed.
      */
     checkKeys(){
@@ -309,7 +323,7 @@ class XMLscene extends CGFscene {
 
                 console.log("Request successful. Reply: " + prologResponse);
                 var parsedArray = knightLine.responseParser(prologResponse);
-                knightLine.display(parsedArray);
+                knightLine.board = parsedArray;
             }
             else{
 

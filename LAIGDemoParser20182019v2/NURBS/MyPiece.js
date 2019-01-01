@@ -10,16 +10,20 @@ class MyPiece extends CGFobject {
      * @param pieces - The number of pieces in the stack
      * @param color - The color of the pieces
      */
-    constructor(scene, pieces, color) {
+    constructor(scene, pieces, color, xPosition, yPosition) {
         super(scene);
 
-        this.pieces = pieces * 0.5;
-        this.color = color;
+        this.pieces = pieces;
+        this.color = color;      // color = 1 = black || color = 0 = white
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
         this.slices = 20;
         this.stacks = 20;
 
         this.piece = new MyCylinder(this.scene, 1, 1, this.pieces, this.slices, this.stacks);
         this.circle = new MyCircle(this.scene, this.slices);
+
+        this.type = "piece";
 
         this.red = new CGFappearance(this.scene);
         this.red.setAmbient(0.3, 0, 0, 1);
@@ -35,8 +39,8 @@ class MyPiece extends CGFobject {
     display() 
     {   
 
+        this.scene.scale(0.25, this.pieces * 2, 0.25);
         this.scene.rotate(-Math.PI/2.0, 1, 0, 0);
-        this.scene.scale(0.25, 0.25, 0.25);
 
         // Top of the stack
         this.scene.pushMatrix();
@@ -46,7 +50,7 @@ class MyPiece extends CGFobject {
         this.scene.popMatrix();
 
 
-        if(this.color == "black")
+        if(this.color == 1)
             this.black.apply();
         else
             this.white.apply();
