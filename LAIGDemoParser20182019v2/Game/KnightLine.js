@@ -10,7 +10,8 @@ class KnightLine extends CGFobject
         this.player = 1;     // player = 1 = black || player = 0 = white
         this.pickNumber;
 
-        this.pickFlag = null;
+        this.pieceFlag = null;
+        this.cellFlag = null;
 
         this.green = new CGFappearance(this.scene);
         this.green.setAmbient(0.0, 0.5, 0.25, 1);
@@ -62,9 +63,9 @@ class KnightLine extends CGFobject
                 if(line[k][0] == "empty")
                     piece = new MyCell(this.scene, line.length - k - 1, i);
                 else if(line[k][0] == "white")
-                    piece = new MyPiece(this.scene, 1, 0, line.length - k - 1, i);
+                    piece = new MyPiece(this.scene, line[k][1], 0, line.length - k - 1, i);
                 else if(line[k][0] == "black")
-                    piece = new MyPiece(this.scene, 1, 1, line.length - k - 1, i);
+                    piece = new MyPiece(this.scene, line[k][1], 1, line.length - k - 1, i);
 
                 linePieces.push(piece);
             }
@@ -77,6 +78,41 @@ class KnightLine extends CGFobject
 
         this.scene.getPrologRequest('start');
     };
+
+    askForPieces(){
+
+        var flag = 0;
+        var piecesAvailable, max, numberPieces;
+
+        while(flag != 1){
+            piecesAvailable = this.pieceFlag.pieces;
+            max = piecesAvailable - 1;
+
+            numberPieces = prompt("You have " + piecesAvailable.toString() + " pieces" + ".\n Please pick the number of pieces you wish to move (1.." + max.toString() + ")", "1");
+            if(numberPieces > 0 && numberPieces <= max)
+                flag = 1;
+        }
+
+        var request = "move(";
+        request += this.requestParser(this.board);
+        request += ",";
+        if(this.player == 1)
+            request += 0;
+        else
+            request += 1;
+        request += ",";
+        request += this.pieceFlag.xPosition;
+        request += ",";
+        request += this.pieceFlag.yPosition;
+        request += ",";
+        request += this.cellFlag.xPosition;
+        request += ",";
+        request += this.cellFlag.yPosition;
+        request += ",";
+        request += numberPieces;
+        request += ")";
+        this.scene.getPrologRequest(request);
+    }
 
     responseParser(response){
 

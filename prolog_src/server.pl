@@ -111,12 +111,17 @@ parse_input(handshake, handshake).
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 
+
+
 parse_input(start, Board):-
 	initialBoard(Board).
 
 
 parse_input(checkPossibleMove(Board, PieceX, PieceY, CellX, CellY), Answer) :-
 	checkTileConditions(Board, PieceX, PieceY, CellX, CellY, Answer).
+
+parse_input(move(Board, Player, PieceX, PieceY, CellX, CellY, Np), Answer) :-
+	move(Board, Player, PieceX, PieceY, CellX, CellY, Np, Answer).
 
 
 test(_,[],N) :- N =< 0.

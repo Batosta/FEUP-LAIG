@@ -42,7 +42,7 @@ class MyPiece extends CGFobject {
     display() 
     {   
 
-        this.scene.scale(0.25, this.pieces * 2, 0.25);
+        this.scene.scale(0.25, 0.15, 0.25);
         this.scene.rotate(-Math.PI/2.0, 1, 0, 0);
 
         // Top of the stack

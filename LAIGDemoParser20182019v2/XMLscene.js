@@ -71,7 +71,7 @@ class XMLscene extends CGFscene {
             }
         }
 
-        this.updateCameras();
+        // this.updateCameras();
     }
 
     updateCameras(){
@@ -158,7 +158,7 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.camera = this.graph.viewMap.get(this.graph.defaultView);
-        // this.interface.setActiveCamera(this.camera);
+        this.interface.setActiveCamera(this.camera);
 
         this.axis = new CGFaxis(this, this.graph.axis_length);
 
@@ -190,6 +190,8 @@ class XMLscene extends CGFscene {
                     var obj = this.pickResults[i][0];
                     if (obj) {
 
+                        console.log("(" + obj.xPosition + "," + obj.yPosition + ")");
+
                         if(obj.type == "piece"){                                // if it is a piece
 
                             if(obj.color == this.knightLine.player){            // if the piece is from the current player
@@ -199,26 +201,25 @@ class XMLscene extends CGFscene {
                         }
                         else if(obj.type == "cell"){
 
-                            if(this.knightLine.pickFlag != null){
+                            if(this.knightLine.pieceFlag != null){
 
                                 // checkPossibleMove(Board, Px, Py, Cx, Cy)
                                 var request = "checkPossibleMove(";
                                 request += this.knightLine.requestParser(this.knightLine.board);
                                 request += ",";
-                                request += this.knightLine.pickFlag.xPosition;
+                                request += this.knightLine.pieceFlag.xPosition;
                                 request += ",";
-                                request += this.knightLine.pickFlag.yPosition;
+                                request += this.knightLine.pieceFlag.yPosition;
                                 request += ",";
                                 request += obj.xPosition;
                                 request += ",";
                                 request += obj.yPosition;
                                 request += ")";
+                                this.knightLine.cellFlag = obj;
                                 this.getPrologRequest(request);
                             }
                         }
                     }
-
-                    
                 }
                 this.pickResults.splice(0, this.pickResults.length);
             }     
@@ -227,19 +228,13 @@ class XMLscene extends CGFscene {
 
     selectPiece(obj){
 
-        if(obj.selected == 1 && this.knightLine.pickFlag != null){
+        if(obj.selected == 1 && this.knightLine.pieceFlag != null){
             obj.selected = 0;
-            this.knightLine.pickFlag = null;
+            this.knightLine.pieceFlag = null;
         }
-        else if(obj.selected == 0 && this.knightLine.pickFlag == null){
+        else if(obj.selected == 0 && this.knightLine.pieceFlag == null){
             obj.selected = 1;
-            this.knightLine.pickFlag = obj;
-            
-            var piecesAvailable = obj.pieces;
-            var max = piecesAvailable - 1;
-
-            var numberpieces = prompt("You have " + piecesAvailable.toString() + "pieces" + ".\n Please pick the number of pieces you wish to move (1.." + max.toString() + ")", "1");
-            console.log(numberpieces);
+            this.knightLine.pieceFlag = obj;
         }
     }
 
@@ -362,8 +357,28 @@ class XMLscene extends CGFscene {
                 
                 if(prologResponse == 0){
 
-                    console.log("prontos para pedir numero de peças e fazer o move");
+                    knightLine.askForPieces();
                 }
+            }
+            else if(requestString.includes("move")){
+
+                console.log("Request successful. Reply: " + prologResponse);
+
+                console.log(prologResponse);
+                var parsedArray = knightLine.responseParser(prologResponse);
+
+                // console.log(prologResponse);
+                // console.log(parsedArray);
+
+                // knightLine.board = parsedArray;
+
+                // if(knightLine.player == 1)
+                //     knightLine.player = 0;
+                // else
+                //     knightLine.player = 1;
+
+                // knightLine.pieceFlag = null;
+                // knightLine.cellFlag = null;
             }
 
             requestString = null;
