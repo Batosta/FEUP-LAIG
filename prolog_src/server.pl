@@ -114,6 +114,11 @@ parse_input(quit, goodbye).
 parse_input(start, Board):-
 	initialBoard(Board).
 
+
+parse_input(checkPossibleMove(Board, PieceX, PieceY, CellX, CellY), Answer) :-
+	checkTileConditions(Board, PieceX, PieceY, CellX, CellY, Answer).
+
+
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).
 	

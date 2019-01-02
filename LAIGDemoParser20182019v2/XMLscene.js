@@ -190,7 +190,6 @@ class XMLscene extends CGFscene {
                     var obj = this.pickResults[i][0];
                     if (obj) {
 
-
                         if(obj.type == "piece"){                                // if it is a piece
 
                             if(obj.color == this.knightLine.player){            // if the piece is from the current player
@@ -202,14 +201,19 @@ class XMLscene extends CGFscene {
 
                             if(this.knightLine.pickFlag != null){
 
+                                // checkPossibleMove(Board, Px, Py, Cx, Cy)
                                 var request = "checkPossibleMove(";
                                 request += this.knightLine.requestParser(this.knightLine.board);
                                 request += ",";
-                                request += obj.yPosition;
+                                request += this.knightLine.pickFlag.xPosition;
+                                request += ",";
+                                request += this.knightLine.pickFlag.yPosition;
                                 request += ",";
                                 request += obj.xPosition;
+                                request += ",";
+                                request += obj.yPosition;
                                 request += ")";
-                                console.log(request);
+                                this.getPrologRequest(request);
                             }
                         }
                     }
@@ -345,9 +349,15 @@ class XMLscene extends CGFscene {
                 var parsedArray = knightLine.responseParser(prologResponse);
                 knightLine.board = parsedArray;
             }
-            else{
+            else if(requestString.includes("checkPossibleMove")){
 
-                console.log("ainda nao fizemos essa parte")
+                // prologResponse = 0 = pode  || 1 = nao pode jogar para ali
+                console.log("Request successful. Reply: " + prologResponse);
+                
+                if(prologResponse == 0){
+
+                    console.log("prontos para pedir numero de peças e fazer o move");
+                }
             }
 
             requestString = null;
