@@ -36,7 +36,7 @@ class KnightLine extends CGFobject
                 this.scene.pushMatrix();
 
                     this.gray.apply();
-                    this.scene.translate(i/rows * 3, 3.8, k/columns * 3.5);
+                    this.scene.translate(i, 3.8, -k);
 
                     this.scene.registerForPick(this.pickNumber, line[k]);
                     line[k].display();
@@ -61,11 +61,11 @@ class KnightLine extends CGFobject
 
                 var piece;
                 if(line[k][0] == "empty")
-                    piece = new MyCell(this.scene, line.length - k - 1, i);
+                    piece = new MyCell(this.scene, k, i);
                 else if(line[k][0] == "white")
-                    piece = new MyPiece(this.scene, line[k][1], 0, line.length - k - 1, i);
+                    piece = new MyPiece(this.scene, line[k][1], 0, k, i);
                 else if(line[k][0] == "black")
-                    piece = new MyPiece(this.scene, line[k][1], 1, line.length - k - 1, i);
+                    piece = new MyPiece(this.scene, line[k][1], 1, k, i);
 
                 linePieces.push(piece);
             }
@@ -93,13 +93,11 @@ class KnightLine extends CGFobject
                 flag = 1;
         }
 
+        // move(Board, Player, Px, Py, Cx, Cy, Np)
         var request = "move(";
         request += this.requestParser(this.board);
         request += ",";
-        if(this.player == 1)
-            request += 0;
-        else
-            request += 1;
+        request += this.player;
         request += ",";
         request += this.pieceFlag.xPosition;
         request += ",";
@@ -112,6 +110,24 @@ class KnightLine extends CGFobject
         request += numberPieces;
         request += ")";
         this.scene.getPrologRequest(request);
+    }
+
+    reset(){
+
+        this.switchPlayer();
+
+        this.pieceFlag = null;
+        this.cellFlag = null;
+
+        console.log(this);
+    }
+
+    switchPlayer(){
+
+        if(this.player == 1)
+            this.player = 0;
+        else
+            this.player = 1;
     }
 
     responseParser(response){
@@ -183,7 +199,7 @@ class KnightLine extends CGFobject
         }
 
         this.boardToPieces(board);
-        return board;
+        this.board = board;
     };
 
     requestParser(board){

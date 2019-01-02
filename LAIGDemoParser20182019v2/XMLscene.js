@@ -190,11 +190,9 @@ class XMLscene extends CGFscene {
                     var obj = this.pickResults[i][0];
                     if (obj) {
 
-                        console.log("(" + obj.xPosition + "," + obj.yPosition + ")");
+                        if(obj.type == "piece"){
 
-                        if(obj.type == "piece"){                                // if it is a piece
-
-                            if(obj.color == this.knightLine.player){            // if the piece is from the current player
+                            if(obj.color == this.knightLine.player){
 
                                 this.selectPiece(obj);
                             }
@@ -293,9 +291,6 @@ class XMLscene extends CGFscene {
                 }
             }
 
-            // this.camera = this.graph.viewMap.get(this.currentView);
-            // this.interface.setActiveCamera(this.camera);
-
             this.setRoot();
             this.graph.displayScene();
 
@@ -329,7 +324,6 @@ class XMLscene extends CGFscene {
         this.gameStart = 1;
     }
 
-
     getPrologRequest(requestString, onSuccess, onError, port){
     
         var requestPort = port || 8081;
@@ -347,12 +341,12 @@ class XMLscene extends CGFscene {
             if(requestString == "start"){
 
                 console.log("Request successful. Reply: " + prologResponse);
-                var parsedArray = knightLine.responseParser(prologResponse);
-                knightLine.board = parsedArray;
+
+                knightLine.responseParser(prologResponse);
             }
             else if(requestString.includes("checkPossibleMove")){
 
-                // prologResponse = 0 = pode  || 1 = nao pode jogar para ali
+                // prologResponse = 0 = can play || 1 = cant play
                 console.log("Request successful. Reply: " + prologResponse);
                 
                 if(prologResponse == 0){
@@ -364,21 +358,8 @@ class XMLscene extends CGFscene {
 
                 console.log("Request successful. Reply: " + prologResponse);
 
-                console.log(prologResponse);
-                var parsedArray = knightLine.responseParser(prologResponse);
-
-                // console.log(prologResponse);
-                // console.log(parsedArray);
-
-                // knightLine.board = parsedArray;
-
-                // if(knightLine.player == 1)
-                //     knightLine.player = 0;
-                // else
-                //     knightLine.player = 1;
-
-                // knightLine.pieceFlag = null;
-                // knightLine.cellFlag = null;
+                knightLine.responseParser(prologResponse);
+                knightLine.reset();
             }
 
             requestString = null;
