@@ -1,0 +1,2 @@
+
+1. pôr cells a verde quando selecionamos a peça

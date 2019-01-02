@@ -190,22 +190,25 @@ class XMLscene extends CGFscene {
                     var obj = this.pickResults[i][0];
                     if (obj) {
 
+
                         if(obj.type == "piece"){                                // if it is a piece
                             if(obj.color == this.knightLine.player){            // if the piece is from the current player
 
-                                if(obj.selected == 1)
-                                    obj.selected = 0;
-                                else
-                                    obj.selected = 1;
-                                // var request = "checkPossibleMoves(";
-                                // request += this.knightLine.requestParser(this.knightLine.board);
-                                // request += ",";
-                                // request += obj.yPosition;
-                                // request += ",";
-                                // request += obj.xPosition;
-                                // request += ")";
+                                this.selectPiece(obj);
+                            }
+                        }
+                        else if(obj.type == "cell"){
 
-                                // console.log(request);
+                            if(this.knightLine.pickFlag != null){
+
+                                var request = "checkPossibleMove(";
+                                request += this.knightLine.requestParser(this.knightLine.board);
+                                request += ",";
+                                request += obj.yPosition;
+                                request += ",";
+                                request += obj.xPosition;
+                                request += ")";
+                                console.log(request);
                             }
                         }
                     }
@@ -214,6 +217,18 @@ class XMLscene extends CGFscene {
                 }
                 this.pickResults.splice(0, this.pickResults.length);
             }     
+        }
+    }
+
+    selectPiece(obj){
+
+        if(obj.selected == 1 && this.knightLine.pickFlag != null){
+            obj.selected = 0;
+            this.knightLine.pickFlag = null;
+        }
+        else if(obj.selected == 0 && this.knightLine.pickFlag == null){
+            obj.selected = 1;
+            this.knightLine.pickFlag = obj;
         }
     }
 

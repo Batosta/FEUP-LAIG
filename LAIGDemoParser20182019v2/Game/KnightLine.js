@@ -1,6 +1,5 @@
 class KnightLine extends CGFobject
 {
-
     constructor(scene){
 
         super(scene);
@@ -11,13 +10,15 @@ class KnightLine extends CGFobject
         this.player = 1;     // player = 1 = black || player = 0 = white
         this.pickNumber;
 
+        this.pickFlag = null;
+
         this.green = new CGFappearance(this.scene);
         this.green.setAmbient(0.0, 0.5, 0.25, 1);
         this.gray = new CGFappearance(this.scene);
         this.gray.setAmbient(0.67, 0.67, 0.67, 1);
-    }
+    };
 
-    display(board) {   
+    display() {   
 
         this.pickNumber = 1;
 
