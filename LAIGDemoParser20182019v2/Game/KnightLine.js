@@ -82,6 +82,8 @@ class KnightLine extends CGFobject
 
         var board = [];
 
+        response = "[[[empty,0],[empty,0],[black,5],[empty,0]],[[empty,0],[black,20],[white,20],[empty,0]],[[empty,0],[empty,0],[empty,0],[empty,0]]]";
+
         var easier = response.slice(1, response.length - 1);
         var resp = easier.split(']],[[');
 

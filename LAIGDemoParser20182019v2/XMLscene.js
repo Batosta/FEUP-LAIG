@@ -192,6 +192,7 @@ class XMLscene extends CGFscene {
 
 
                         if(obj.type == "piece"){                                // if it is a piece
+
                             if(obj.color == this.knightLine.player){            // if the piece is from the current player
 
                                 this.selectPiece(obj);
