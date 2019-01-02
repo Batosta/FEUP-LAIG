@@ -234,6 +234,12 @@ class XMLscene extends CGFscene {
         else if(obj.selected == 0 && this.knightLine.pickFlag == null){
             obj.selected = 1;
             this.knightLine.pickFlag = obj;
+            
+            var piecesAvailable = obj.pieces;
+            var max = piecesAvailable - 1;
+
+            var numberpieces = prompt("You have " + piecesAvailable.toString() + "pieces" + ".\n Please pick the number of pieces you wish to move (1.." + max.toString() + ")", "1");
+            console.log(numberpieces);
         }
     }
 
