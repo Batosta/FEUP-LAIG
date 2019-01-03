@@ -37,7 +37,6 @@ class XMLscene extends CGFscene {
 
         this.keyMPressed = false;
 
-        this.startTime = 0;
         this.gameStart = 0;
         this.knightLine = new KnightLine(this);
 
@@ -71,7 +70,7 @@ class XMLscene extends CGFscene {
             }
         }
 
-        // this.updateCameras();
+        this.updateCameras();
     }
 
     updateCameras(){
@@ -158,7 +157,7 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.camera = this.graph.viewMap.get(this.graph.defaultView);
-        this.interface.setActiveCamera(this.camera);
+        // this.interface.setActiveCamera(this.camera);
 
         this.axis = new CGFaxis(this, this.graph.axis_length);
 
@@ -167,16 +166,14 @@ class XMLscene extends CGFscene {
 
         this.initLights();
 
-        // this.interface.addLightsGroup(this.graph.lights);
-        this.currentBackground = "Child Room";
-        this.interface.addBackgroundsGroup(['Child Room', 'Christmas Room', 'Minecraft Room']);
-
-        this.currentView = this.graph.defaultView;        
-        this.interface.addViewsGroup(this, this.graph.currentView);
-
         this.start = null;
-        this.interface.addGameGroup(this);
+        this.gameDifficulty = "Easy";
+        this.gameType = "Player vs Player";
+        this.interface.addGameGroup(['Easy', 'Hard'], ['Player vs Player', 'Player vs Bot', 'Bot vs Bot']);
 
+        this.currentBackground = "Child Room";
+        this.currentView = this.graph.defaultView;        
+        this.interface.addViewsGroup(this.graph.currentView, ['Child Room', 'Christmas Room', 'Minecraft Room']);
 
         this.sceneInited = true;
     }
@@ -322,6 +319,7 @@ class XMLscene extends CGFscene {
 
         this.knightLine.start();
         this.gameStart = 1;
+        this.knightLine.startedMoveTime = this.lastTime;
     }
 
     getPrologRequest(requestString, onSuccess, onError, port){

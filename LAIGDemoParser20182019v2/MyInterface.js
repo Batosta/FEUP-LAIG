@@ -45,29 +45,33 @@ class MyInterface extends CGFinterface {
         }
     }
 
-    addBackgroundsGroup(backgrounds) {
+    /**
+     * Function that adds the game difficulties types and the start button
+     * @param difficulties - Difficulties to be added
+     * @param types - Types to be added
+     */
+    addGameGroup(difficulties, types) {
 
-        var group = this.gui.addFolder("Backgrounds");
-        group.open();
-
-        group.add(this.scene, 'currentBackground', backgrounds).name("Background");
-    }
-
-    addGameGroup(scene) {
-
-        var group = this.gui.addFolder("Game");
+        var group = this.gui.addFolder("Game Controls");
         group.open();
     
         group.add(this.scene, "startGame").name("Start Game");
+        group.add(this.scene, 'gameDifficulty', ['Easy', 'Hard']).name("Difficulty");
+        group.add(this.scene, 'gameType', types).name("Game Type");
     }
 
     /**
-     * Function that adds the views
-     * @param scene - Global scene
+     * Function that adds the views and backgrounds
      * @param views - Views to be added
+     * @param backgrounds - Backgrounds to be added
      */
-    addViewsGroup(scene, views){
-        this.gui.add(scene, 'currentView', views);
+    addViewsGroup(views, backgrounds){
+
+        var group = this.gui.addFolder("Views Controls");
+        group.open();
+
+        group.add(this.scene, 'currentView', views).name("Views");
+        group.add(this.scene, 'currentBackground', backgrounds).name("Background");
     }
 
     /**

@@ -13,6 +13,8 @@ class KnightLine extends CGFobject
         this.pieceFlag = null;
         this.cellFlag = null;
 
+        this.startedMoveTime;
+
         this.green = new CGFappearance(this.scene);
         this.green.setAmbient(0.0, 0.5, 0.25, 1);
         this.gray = new CGFappearance(this.scene);
@@ -20,6 +22,8 @@ class KnightLine extends CGFobject
     };
 
     display() {   
+
+        this.showTime();
 
         this.pickNumber = 1;
 
@@ -110,7 +114,7 @@ class KnightLine extends CGFobject
         request += numberPieces;
         request += ")";
         this.scene.getPrologRequest(request);
-    }
+    };
 
     reset(){
 
@@ -118,9 +122,10 @@ class KnightLine extends CGFobject
 
         this.pieceFlag = null;
         this.cellFlag = null;
+        this.startedMoveTime = this.scene.lastTime;
 
         console.log(this);
-    }
+    };
 
     switchPlayer(){
 
@@ -128,7 +133,13 @@ class KnightLine extends CGFobject
             this.player = 0;
         else
             this.player = 1;
-    }
+    };
+
+    showTime(){
+
+        var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedMoveTime)/1000.0);
+        console.log(timeLeftPlay);
+    };
 
     responseParser(response){
 
