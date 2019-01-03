@@ -40,6 +40,8 @@ class KnightLine extends CGFobject
         var rows = this.boardPieces.length;
         var columns = this.boardPieces[0].length;
 
+        this.resizeBoard(rows, columns);
+
         let i;
         for(i = 0; i < this.boardPieces.length; i++){
 
@@ -120,9 +122,6 @@ class KnightLine extends CGFobject
                         }
                         else{
 
-                            // console.log(xValue);
-                            // console.log(Math.abs(xValue));
-                            // console.log(this.cellFlag.xPosition);
                             if(Math.abs(xValue) <= this.cellFlag.xPosition){
 
                                 this.movementX = 1;
@@ -163,6 +162,12 @@ class KnightLine extends CGFobject
         }
     };
 
+
+    resizeBoard(rows, columns){
+
+        this.scene.translate(-(columns/2.0 - 1), 0.0, rows/2.0);
+    }
+
     startMovement(prologResponse){
 
         this.waitingBoard = prologResponse;
@@ -173,7 +178,6 @@ class KnightLine extends CGFobject
         this.startedMovementTime = this.scene.lastTime;
         this.calculateDifferences();
     };
-
 
     finishedMovement(){
 

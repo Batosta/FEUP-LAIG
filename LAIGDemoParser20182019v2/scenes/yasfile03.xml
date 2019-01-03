@@ -423,7 +423,7 @@
 			<rotate axis="x" angle="-90" />
 		</transformation>
 		<transformation id="rocket">
-			<translate x="-2.0" y="0.0" z="-6.0" />
+			<translate x="-2.0" y="0.0" z="-10.0" />
 		</transformation>
 
 
@@ -584,7 +584,7 @@
 		</transformation>
 		<!-- Train -->
 		<transformation id="train">
-			<translate x="-6.0" y="0.45" z="8.0" />
+			<translate x="-8.0" y="0.45" z="10.0" />
 			<rotate axis="y" angle="-45" />
 			<scale x="0.20" y="0.20" z="0.30" />
 		</transformation>
@@ -2015,431 +2015,6 @@
 		</component>
 
 
-
-		<!-- Ladder -->
-		<!-- <component id="ladder0"> 
-			<transformation>
-				<transformationref id="ladder0" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="ladder1"> 
-			<transformation>
-				<transformationref id="ladder1" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="ladder2"> 
-			<transformation>
-				<transformationref id="ladder2" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="ladder3"> 
-			<transformation>
-				<transformationref id="ladder3" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="ladder4"> 
-			<transformation>
-				<transformationref id="ladder4" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="ladder5"> 
-			<transformation>
-				<transformationref id="ladder5" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="ladder"> 
-			<transformation>
-				<transformationref id="ladder" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="ladder0" />
-				<componentref id="ladder1" />
-				<componentref id="ladder2" />
-				<componentref id="ladder3" />
-				<componentref id="ladder4" />
-				<componentref id="ladder5" />
-			</children> 
-		</component> -->
-
-		<!-- Bed -->
-		<!-- <component id="bed0"> 
-			<transformation>
-				<transformationref id="bed0" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="bed" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="cube" /> 
-			</children> 
-		</component>
-		<component id="bed1"> 
-			<transformation>
-				<transformationref id="bed1" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="bed" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="cube" /> 
-			</children> 
-		</component>
-		<component id="bed2"> 
-			<transformation>
-				<transformationref id="bed2" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="metal" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="bed3"> 
-			<transformation>
-				<transformationref id="bed3" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="metal" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="bed4"> 
-			<transformation>
-				<transformationref id="bed4" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="metal" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="bed5"> 
-			<transformation>
-				<transformationref id="bed5" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="metal" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="pillow0" > 
-			<transformation>
-				<transformationref id="pillow0" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="pillow" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="cube" /> 
-			</children> 
-		</component>
-		<component id="pillow1"> 
-			<transformation>
-				<transformationref id="pillow1" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="pillow" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="cube" /> 
-			</children> 
-		</component> -->
-
-		<!-- Smaller Protection -->
-		<!-- <component id="bedprotection0">
-			<transformation>
-				<transformationref id="bedprotection0" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="cube" /> 
-			</children> 
-		</component> -->
-
-		<!-- Bigger Protection -->
-		<!-- <component id="bedprotection1">
-			<transformation>
-				<transformationref id="bedprotection1" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="cube" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionA">
-			<transformation>
-				<transformationref id="bedprotectionA" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bedprotection1" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionB">
-			<transformation>
-				<transformationref id="bedprotectionB" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bedprotection1" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionC">
-			<transformation>
-				<transformationref id="bedprotectionC" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bedprotection0" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionD">
-			<transformation>
-				<transformationref id="bedprotectionD" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bedprotection0" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionE">
-			<transformation>
-				<transformationref id="bedprotectionE" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bedprotection0" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionF">
-			<transformation>
-				<transformationref id="bedprotectionF" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bedprotection0" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionG">
-			<transformation>
-				<transformationref id="bedprotectionG" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="inherit" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bedprotection0" /> 
-			</children> 
-		</component>
-		<component id="bedprotectionH">
-			<transformation>
-				<transformationref id="bedprotectionH" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-			</materials>
-
-			<texture id="metal" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<primitiveref id="cylinder" /> 
-			</children> 
-		</component>
-		<component id="bed"> 
-			<transformation>
-				<transformationref id="full_bed" />
-			</transformation> 
-
-			<materials>
-				<material id="inherit" />
-				<material id="mat1" />
-				<material id="mat2" />
-				<material id="mat3" />
-			</materials>
-
-			<texture id="wood" length_s="1.0" length_t="1.0" />
- 
-			<children> 
-				<componentref id="bed0" />
-				<componentref id="bed1" />
-				<componentref id="bed2" />
-				<componentref id="bed3" />
-				<componentref id="bed4" />
-				<componentref id="bed5" />
-				<componentref id="ladder" />
-				<componentref id="bedprotectionA" />
-				<componentref id="bedprotectionB" />
-				<componentref id="bedprotectionC" />
-				<componentref id="bedprotectionD" />
-				<componentref id="bedprotectionE" />
-				<componentref id="bedprotectionF" />
-				<componentref id="bedprotectionG" />
-				<componentref id="bedprotectionH" />
-				<componentref id="pillow0" />
-				<componentref id="pillow1" />
-			</children> 
-		</component> -->
-
-
-
 		<!-- Walls -->
 		<component id="wall0"> 
 			<transformation> 
@@ -2630,9 +2205,8 @@
 		</component>
 		<component id="table"> 
 			<transformation>
-				<!-- <translate x="20.0" y="0.0" z="15.0" /> -->
 				<rotate axis="y" angle="90" />
-				<scale x="1.5" y="1.0" z="2.5" />
+				<scale x="2.75" y="1.0" z="3.0" />
 			</transformation>
 
 			<materials> 
@@ -3480,7 +3054,7 @@
 		</component>
 		<component id="presents"> 
 			<transformation>
-				<translate x="-7.0" y="0.0" z="6.0" />
+				<translate x="-8.0" y="0.0" z="9.0" />
 				<scale x="1.25" y="1.25" z="1.25" />
 				<rotate axis="y" angle="45" />
 			</transformation>
@@ -3583,7 +3157,7 @@
 		</component>
 		<component id="christmas_tree"> 
 			<transformation>
-				<translate x="-7.0" y="0.0" z="6.0" />
+				<translate x="-8.0" y="0.0" z="9.0" />
 				<scale x="1.25" y="1.25" z="1.25" />
 				<rotate axis="y" angle="45" />
 			</transformation>
@@ -3840,8 +3414,8 @@
 		</component>
 		<component id="creeper"> 
 			<transformation>
-				<translate x="-2.0" y="0.0" z="-7.5" />
-				<rotate axis="y" angle="-80" />
+				<translate x="2.0" y="0.0" z="-10" />
+				<rotate axis="y" angle="-50" />
 			</transformation>
 
 			<materials> 
@@ -3863,7 +3437,7 @@
 		<!-- Time Supporter -->
 		<component id="time_supporter"> 
 			<transformation>
-				<translate x="-4.0" y="4.0" z="0.0" />
+				<translate x="-5.0" y="4.0" z="0.0" />
 				<rotate axis="z" angle="60" />
 				<rotate axis="y" angle="90" />
 				<scale x="5.0" y="1.5" z="1.0" />
@@ -3879,7 +3453,6 @@
 				<primitiveref id="rectangle" />
 			</children> 
 		</component>
-
 
 
 		<!-- Root Components -->
