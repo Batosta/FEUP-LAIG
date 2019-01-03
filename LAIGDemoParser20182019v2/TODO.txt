@@ -1,9 +1,10 @@
 Done:
-1. Tabuleiro
+1. Tabuleiro							(falta centrar o tabuleiro)
 2. Modelacao das pecas					(meh idk about this)
 3. Lights
 4. Varios ambientes de jogo
-5. Rodar a camara
+5. Rodar a camara						(falta pôr a camera a ir subindo conforme o tabuleiro cresce)
+6. Display da animação dos objetos
 
 
 
@@ -13,11 +14,10 @@ Por fazer:
 3. Bot vs player						(ja ha a opcao no gui mas nao faz nada)
 4. Bot vs Bot							(ja ha a opcao no gui mas nao faz nada)
 5. Dificuldades							(ja ha a opcao no gui mas nao faz nada)
-6. Display da animação dos objetos
-7. Undo
-8. Filme do jogo
-9. Tempo para cada jogador	(ja ha o tempo de cada jogador...falta mostrar + condicao de perder quando acabar o minuto para jogar)
-10. Scores
+6. Undo
+7. Filme do jogo
+8. Tempo para cada jogador	(ja ha o tempo de cada jogador...falta mostrar + condicao de perder quando acabar o minuto para jogar)
+9. Scores
 69. Comer a Catarina Melo 				(fazivel)
 70. Comer a Inês Fernandes 				(esta muito foda   :'(
 420. Entregar isto 						(idk about this)

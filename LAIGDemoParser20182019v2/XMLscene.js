@@ -319,7 +319,7 @@ class XMLscene extends CGFscene {
 
         this.knightLine.start();
         this.gameStart = 1;
-        this.knightLine.startedMoveTime = this.lastTime;
+        this.knightLine.startedTurnTime = this.lastTime;
     }
 
     getPrologRequest(requestString, onSuccess, onError, port){
@@ -356,8 +356,7 @@ class XMLscene extends CGFscene {
 
                 console.log("Request successful. Reply: " + prologResponse);
 
-                knightLine.responseParser(prologResponse);
-                knightLine.reset();
+                knightLine.startMovement(prologResponse);
             }
 
             requestString = null;
