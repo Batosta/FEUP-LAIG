@@ -135,8 +135,8 @@ parse_input(botMove(Board, Player, Level), Answer) :-
 parse_input(checkWin(Board, Player, MaxRow, MaxCol), Answer) :-
 	checkWin(Board, Player, MaxRow, MaxCol, 0, 0, Answer).
 
-parse_input(checkIfPossible(Board, Player, MaxRow, MaxCol), Answer) :-
-	checkIfPossible(Board, Player, MaxRow, MaxCol, 0, 0, Answer).
+parse_input(checkIfPossible(X, Player, MaxRow, MaxCol), Answer) :-
+	checkIfPossible(X, Player, MaxRow, MaxCol, 0, 0, Answer).
 
 
 test(_,[],N) :- N =< 0.
