@@ -27,6 +27,8 @@ class KnightLine extends CGFobject
         this.newPieces = [];
         this.movementDifferences = [];
 
+        this.movie = [];
+
         this.win = 0;
         this.lose = 0;
         this.scores = [1, 1];
@@ -293,6 +295,10 @@ class KnightLine extends CGFobject
         request += ",";
         request += numberPieces;
         request += ")";
+
+        this.movie.push([this.player, this.pieceFlag.xPosition, this.pieceFlag.yPosition, this.cellFlag.xPosition, this.cellFlag.yPosition, numberPieces]);
+        console.log(this.movie);
+
         this.scene.getPrologRequest(request);
     };
 
