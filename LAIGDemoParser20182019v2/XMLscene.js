@@ -365,9 +365,10 @@ class XMLscene extends CGFscene {
                 console.log("Request successful. Reply: " + prologResponse);
 
                 knightLine.startMovement(prologResponse);
-                knightLine.responseParser(prologResponse);
 
-                knightLine.checkWin();
+                //knightLine.responseParser(prologResponse);
+
+                //knightLine.checkWin();
 
 
             }else if(requestString.includes("checkWin")){
