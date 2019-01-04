@@ -49,11 +49,6 @@ class KnightLine extends CGFobject
         this.pieceOnMovement = 1;
     };
 
-    hardBotMove(){
-
-        console.log("hard bot move");
-    };
-
     display() {   
 
         this.showTime();
