@@ -35,6 +35,17 @@ class KnightLine extends CGFobject
         this.green.setAmbient(0.0, 0.5, 0.25, 1);
         this.gray = new CGFappearance(this.scene);
         this.gray.setAmbient(0.67, 0.67, 0.67, 1);
+
+        this.one = new CGFOBJModel(this.scene, 'Objs/models/20811_Number_1_v1.obj');
+		this.two = new CGFOBJModel(this.scene, 'Objs/models/20812_Number_2_v1.obj');
+		this.three = new CGFOBJModel(this.scene, 'Objs/models/20813_Number_3_v1.obj');
+		this.four = new CGFOBJModel(this.scene, 'Objs/models/20814_Number_4_v1.obj');
+		this.five = new CGFOBJModel(this.scene, 'Objs/models/20815_Number_5_v1.obj');
+		this.six = new CGFOBJModel(this.scene, 'Objs/models/20816_Number_6_v1.obj');
+		this.seven = new CGFOBJModel(this.scene, 'Objs/models/20817_Number_7_v1.obj');
+		this.eight = new CGFOBJModel(this.scene, 'Objs/models/20818_Number_8_v1.obj');
+		this.nine = new CGFOBJModel(this.scene, 'Objs/models/20819_Number_9_v1.obj');
+		this.zero = new CGFOBJModel(this.scene, 'Objs/models/20820_Number_0_v1.obj');
     };
 
     botMove(level){
