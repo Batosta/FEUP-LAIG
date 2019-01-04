@@ -298,9 +298,7 @@ class KnightLine extends CGFobject
         request += rows.toString();
         request += ",";
         request += columns.toString();
-        request += ",";
-        request += "0,0,";
-        request += "Win)";
+        request += ")";
         this.scene.getPrologRequest(request);
     }
 
@@ -316,9 +314,7 @@ class KnightLine extends CGFobject
         request += rows.toString();
         request += ",";
         request += columns.toString();
-        request += ",";
-        request += "0,0,";
-        request += "Lose)";
+        request += ")";
         this.scene.getPrologRequest(request);
     }
 

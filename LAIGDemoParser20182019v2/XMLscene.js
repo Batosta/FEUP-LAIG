@@ -388,7 +388,9 @@ class XMLscene extends CGFscene {
                 //knightLine.checkWin();
 
 
-            }else if(requestString.includes("checkWin")){
+            }
+
+            else if(requestString.includes("checkWin")){
 
                 console.log("Request successful. Reply: " + prologResponse);
 
@@ -397,7 +399,9 @@ class XMLscene extends CGFscene {
                 else
                     knightLine.checkLose();
 
-            }else if(requestString.includes("checkIfPossible")){
+            }
+
+            else if(requestString.includes("checkIfPossible")){
 
                 console.log("Request successful. Reply: " + prologResponse);
 
