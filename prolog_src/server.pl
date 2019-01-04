@@ -123,6 +123,14 @@ parse_input(checkPossibleMove(Board, PieceX, PieceY, CellX, CellY), Answer) :-
 parse_input(move(Board, Player, PieceX, PieceY, CellX, CellY, Np), Answer) :-
 	move(Board, Player, PieceX, PieceY, CellX, CellY, Np, Answer).
 
+parse_input(botMove(Board, Player, Level), Answer) :-
+	choose_move(Board, Player, Level, C1, R1, C2, R2, Np, 2),
+	move(Board, Player, C1, R1, C2, R2, Np, Board1),
+	append([C1], [R1], Aux1),
+	append(Aux1, [C2], Aux2),
+	append(Aux2, [R2], Aux3),
+	append(Aux3, [Np], Aux4),
+	append(Aux4, Board1, Answer).
 
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).

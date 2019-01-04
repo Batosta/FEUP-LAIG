@@ -13,7 +13,7 @@ class XMLscene extends CGFscene {
 
         this.interface = myinterface;
         this.lightValues = {};
-    }
+    };
 
     /**
      * Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
@@ -42,7 +42,7 @@ class XMLscene extends CGFscene {
 
         this.setUpdatePeriod(1000/60);
         this.setPickEnabled(true);
-    }
+    };
     /* 
      * Calls the update function over time to update the animations with the time, the water shaders and the helix for the airplane.
      */
@@ -71,7 +71,7 @@ class XMLscene extends CGFscene {
         }
 
         this.updateCameras();
-    }
+    };
 
     updateCameras(){
 
@@ -97,15 +97,14 @@ class XMLscene extends CGFscene {
             if(this.camera.position[2] > 0)
                 this.camera.position[2] -= 0.1;
         }
-    }
-
+    };
 
     /**
      * Initializes the scene cameras.
      */
     initCameras() {
         this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(40, 25, 40), vec3.fromValues(0, 0, 0));
-    }
+    };
     
     /**
      * Initializes the scene lights with the values read from the XML file.
@@ -149,7 +148,7 @@ class XMLscene extends CGFscene {
                 i++;
             }
         }
-    }
+    };
 
 
     /* Handler called when the graph is finally loaded. 
@@ -176,7 +175,7 @@ class XMLscene extends CGFscene {
         this.interface.addViewsGroup(this.graph.currentView, ['Child Room', 'Christmas Room', 'Minecraft Room']);
 
         this.sceneInited = true;
-    }
+    };
 
 
     logPicking() {
@@ -186,10 +185,8 @@ class XMLscene extends CGFscene {
                 for (var i = 0; i< this.pickResults.length; i++) {
                     var obj = this.pickResults[i][0];
                     if (obj) {
-
                         if(obj.type == "piece"){
-
-                            if(obj.color == this.knightLine.player){
+                            if(obj.color == this.knightLine.player && obj.pieces > 1){
 
                                 this.selectPiece(obj);
                             }
@@ -219,7 +216,7 @@ class XMLscene extends CGFscene {
                 this.pickResults.splice(0, this.pickResults.length);
             }     
         }
-    }
+    };
 
     selectPiece(obj){
 
@@ -231,7 +228,7 @@ class XMLscene extends CGFscene {
             obj.selected = 1;
             this.knightLine.pieceFlag = obj;
         }
-    }
+    };
 
     setRoot(){
 
@@ -241,7 +238,7 @@ class XMLscene extends CGFscene {
             this.graph.root = "christmas_scene";
         else
             this.graph.root = "minecraft_scene";
-    }
+    };
 
     /**
      * Displays the scene.
@@ -249,7 +246,8 @@ class XMLscene extends CGFscene {
     display() {
 
         // ---- BEGIN Background, camera and axis setup
-        this.logPicking();
+
+        this.gameplay();
 
         this.clearPickRegistration();
 
@@ -298,7 +296,7 @@ class XMLscene extends CGFscene {
         }
 
         this.popMatrix();
-    }
+    };
 
     /**
      * Function that takes care of the response to the M key being pressed.
@@ -313,14 +311,31 @@ class XMLscene extends CGFscene {
             this.graph.counterMaterial++;
             this.keyMPressed = false;
         }
-    }
+    };
 
     startGame(){
 
         this.knightLine.start();
         this.gameStart = 1;
         this.knightLine.startedTurnTime = this.lastTime;
-    }
+    };
+
+    gameplay(){
+
+        if(this.knightLine.pieceOnMovement == 0){
+            if(this.gameType == "Player vs Player" || (this.gameType == "Player vs Bot" && this.knightLine.player == 1)){
+
+                this.logPicking();
+            }
+            else if(this.gameType == "Bot vs Bot" || (this.gameType == "Player vs Bot" && this.knightLine.player == 0)){
+
+                if(this.gameDifficulty == "Easy")
+                    this.knightLine.botMove(1);
+                else
+                    this.knightLine.botMove(2);
+            }
+        }
+    };
 
     getPrologRequest(requestString, onSuccess, onError, port){
     
@@ -342,6 +357,7 @@ class XMLscene extends CGFscene {
 
                 knightLine.responseParser(prologResponse);
             }
+
             else if(requestString.includes("checkPossibleMove")){
 
                 // prologResponse = 0 = can play || 1 = cant play
@@ -352,11 +368,19 @@ class XMLscene extends CGFscene {
                     knightLine.askForPieces();
                 }
             }
+
             else if(requestString.includes("move")){
 
                 console.log("Request successful. Reply: " + prologResponse);
 
                 knightLine.startMovement(prologResponse);
+            }
+
+            else if(requestString.includes("botMove")){
+
+                console.log("Request successful. Reply: " + prologResponse);
+
+                knightLine.startBotMovement(prologResponse);
             }
 
             requestString = null;
@@ -370,5 +394,5 @@ class XMLscene extends CGFscene {
 
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         request.send();
-    }
+    };
 }

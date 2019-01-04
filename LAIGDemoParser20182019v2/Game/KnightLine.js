@@ -31,6 +31,24 @@ class KnightLine extends CGFobject
         this.gray.setAmbient(0.67, 0.67, 0.67, 1);
     };
 
+    botMove(level){
+
+        var request = "botMove(";
+        request += this.requestParser(this.board);
+        request += ",";
+        request += this.player;
+        request += ",";
+        request += level;
+        request += ")";
+        this.scene.getPrologRequest(request);
+        this.pieceOnMovement = 1;
+    };
+
+    hardBotMove(){
+
+        console.log("hard bot move");
+    };
+
     display() {   
 
         this.showTime();
@@ -162,11 +180,10 @@ class KnightLine extends CGFobject
         }
     };
 
-
     resizeBoard(rows, columns){
 
         this.scene.translate(-(columns/2.0 - 1), 0.0, rows/2.0);
-    }
+    };
 
     startMovement(prologResponse){
 
@@ -178,6 +195,12 @@ class KnightLine extends CGFobject
         this.startedMovementTime = this.scene.lastTime;
         this.calculateDifferences();
     };
+
+    startBotMovement(prologResponse){
+
+        var parsedPrologResponse = this.botMovementParser(prologResponse);
+        this.startMovement(parsedPrologResponse);
+    }
 
     finishedMovement(){
 
@@ -400,5 +423,67 @@ class KnightLine extends CGFobject
         //Finalizar o Board
         string = string + "]";
         return string;
+    };
+
+    botMovementParser(prologResponse){
+
+        var pieceX, pieceY, cellX, cellY, numbPieces;
+        var boardResponse = "[";
+
+        var i = 1;
+        // pieceX
+        if(prologResponse[i+1] == ',')
+            pieceX = parseInt(prologResponse[i]);
+        else{
+            pieceX = parseInt(prologResponse[i] + prologResponse[i+1]);
+            i++;
+        }
+        i += 2;
+
+        // pieceY
+        if(prologResponse[i+1] == ',')
+            pieceY = parseInt(prologResponse[i]);
+        else{
+            pieceY = parseInt(prologResponse[i] + prologResponse[i+1]);
+            i++;
+        }
+        i += 2;
+        this.pieceFlag = this.boardPieces[pieceY][pieceX];
+
+        // cellX
+        if(prologResponse[i+1] == ',')
+            cellX = parseInt(prologResponse[i]);
+        else{
+            cellX = parseInt(prologResponse[i] + prologResponse[i+1]);
+            i++;
+        }
+        i += 2;
+
+        // cellY
+        if(prologResponse[i+1] == ',')
+            cellY = parseInt(prologResponse[i]);
+        else{
+            cellY = parseInt(prologResponse[i] + prologResponse[i+1]);
+            i++;
+        }
+        i += 2;
+        this.cellFlag = this.boardPieces[cellY][cellX];
+
+        // numbPieces
+        if(prologResponse[i+1] == ',')
+            numbPieces = parseInt(prologResponse[i]);
+        else{
+            numbPieces = parseInt(prologResponse[i] + prologResponse[i+1]);
+            i++
+        }
+        i += 2;
+        this.numberPiecesFlag = numbPieces;
+
+
+        for(; i < prologResponse.length; i++){
+
+            boardResponse += prologResponse[i];
+        }
+        return boardResponse;
     };
 } 
