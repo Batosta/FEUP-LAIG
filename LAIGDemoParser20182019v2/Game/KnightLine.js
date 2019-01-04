@@ -29,6 +29,7 @@ class KnightLine extends CGFobject
 
         this.win = 0;
         this.lose = 0;
+        this.scores = [1, 1];
 
         this.green = new CGFappearance(this.scene);
         this.green.setAmbient(0.0, 0.5, 0.25, 1);
@@ -51,7 +52,7 @@ class KnightLine extends CGFobject
 
     display() {   
 
-        this.showTime();
+        this.showInfo();
 
         this.pickNumber = 1;
 
@@ -206,6 +207,8 @@ class KnightLine extends CGFobject
 
         this.responseParser(this.waitingBoard);
         this.checkWin();
+        this.updateScore();
+        this.reset();
     };
 
     calculateDifferences(){
@@ -295,7 +298,7 @@ class KnightLine extends CGFobject
         request += columns.toString();
         request += ")";
         this.scene.getPrologRequest(request);
-    }
+    };
 
     checkLose(){
         var rows = this.board.length;
@@ -311,7 +314,7 @@ class KnightLine extends CGFobject
         request += columns.toString();
         request += ")";
         this.scene.getPrologRequest(request);
-    }
+    };
 
     reset(){
 
@@ -340,10 +343,86 @@ class KnightLine extends CGFobject
             this.player = 1;
     };
 
-    showTime(){
+    updateScore(){
+
+        var right, down, diagonalA, diagonalB;
+
+        let i;
+        for(i = 0; i < this.boardPieces.length; i++){
+
+            let line = this.boardPieces[i];
+            let k;
+            for(k = 0; k < line.length; k++){
+              
+                if(line[k].type == "piece" && line[k].color == this.player){
+
+                    right = this.updateScoreRight(i, k);
+                    down = this.updateScoreDown(i, k);
+                    diagonalA = this.updateScoreDiagonalA(i, k);
+                    diagonalB = this.updateScoreDiagonalB(i, k);
+
+                    let newMax = Math.max(right, down, diagonalA, diagonalB);
+                    if(this.scores[this.player] < newMax)
+                        this.scores[this.player] = newMax;
+                }
+            }
+        }
+    };
+    updateScoreRight(y, x){
+
+        if(this.boardPieces[y][x+1].type == "piece" && this.boardPieces[y][x+1].color == this.player){
+            if(this.boardPieces[y][x+2].type == "piece" && this.boardPieces[y][x+2].color == this.player)
+                return 3;
+            else
+                return 2;
+        }
+        else
+            return 1;
+    };
+    updateScoreDown(y, x){
+
+        if(this.boardPieces[y+1][x].type == "piece" && this.boardPieces[y+1][x].color == this.player){
+            if(this.boardPieces[y+2][x].type == "piece" && this.boardPieces[y+2][x].color == this.player)
+                return 3;
+            else
+                return 2;
+        }
+        else
+            return 1;
+    };
+    updateScoreDiagonalA(y, x){ //Down Right
+
+        if(this.boardPieces[y+1][x+1].type == "piece" && this.boardPieces[y+1][x+1].color == this.player){
+            if(this.boardPieces[y+2][x+2].type == "piece" && this.boardPieces[y+2][x+2].color == this.player)
+                return 3;
+            else
+                return 2;
+        }
+        else
+            return 1;
+    };
+    updateScoreDiagonalB(y, x){ //Down Right
+
+        if(this.boardPieces[y+1][x-1].type == "piece" && this.boardPieces[y+1][x-1].color == this.player){
+            if(this.boardPieces[y+2][x-2].type == "piece" && this.boardPieces[y+2][x-2].color == this.player)
+                return 3;
+            else
+                return 2;
+        }
+        else
+            return 1;
+    };
+
+    showInfo(){
 
         var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedTurnTime)/1000.0);
+        // if(timeLeftPlay == 0){
+
+        //     funcao de derrota
+        // }
+
         // console.log(timeLeftPlay);
+        // console.log(this.scores);
     };
 
     responseParser(response){
@@ -416,7 +495,6 @@ class KnightLine extends CGFobject
         if(this.board != []){
             this.undoBoard = this.board;
         }
-        console.log(this.undoBoard);
 
         this.boardToPieces(board);
         this.board = board;
@@ -427,8 +505,7 @@ class KnightLine extends CGFobject
         this.boardToPieces(this.undoBoard);
         this.board = this.undoBoard;
         this.switchPlayer();
-
-    }
+    };
 
     requestParser(board){
 
