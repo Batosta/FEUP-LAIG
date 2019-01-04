@@ -5,6 +5,8 @@ class KnightLine extends CGFobject
         super(scene);
 
         this.board = [];
+        this.undoBoard = [];
+
         this.boardPieces = [];
         this.waitingBoard = null;
         this.move = [];
@@ -24,6 +26,9 @@ class KnightLine extends CGFobject
         this.movementDown = 0;
         this.newPieces = [];
         this.movementDifferences = [];
+
+        this.win = 0;
+        this.lose = 0;
 
         this.green = new CGFappearance(this.scene);
         this.green.setAmbient(0.0, 0.5, 0.25, 1);
@@ -220,7 +225,6 @@ class KnightLine extends CGFobject
     };
 
     start(){
-
         this.scene.getPrologRequest('start');
     };
 
@@ -258,6 +262,42 @@ class KnightLine extends CGFobject
         request += ")";
         this.scene.getPrologRequest(request);
     };
+
+    checkWin(){
+        var rows = this.board.length;
+        var columns = this.board[0].length;
+
+        var request = "checkWin(";
+        request += this.requestParser(this.board);
+        request += ",";
+        request += this.player;
+        request += ",";
+        request += rows.toString();
+        request += ",";
+        request += columns.toString();
+        request += ",";
+        request += "0,0,";
+        request += "Win)";
+        this.scene.getPrologRequest(request);
+    }
+
+    checkLose(){
+        var rows = this.board.length;
+        var columns = this.board[0].length;
+
+        var request = "checkIfPossible(";
+        request += this.requestParser(this.board);
+        request += ",";
+        request += this.player;
+        request += ",";
+        request += rows.toString();
+        request += ",";
+        request += columns.toString();
+        request += ",";
+        request += "0,0,";
+        request += "Lose)";
+        this.scene.getPrologRequest(request);
+    }
 
     reset(){
 
@@ -359,10 +399,22 @@ class KnightLine extends CGFobject
 
             board.push(line);
         }
+        if(this.board != []){
+            this.undoBoard = this.board;
+        }
+        console.log(this.undoBoard);
 
         this.boardToPieces(board);
         this.board = board;
     };
+
+    undoPlay(){
+
+        this.boardToPieces(this.undoBoard);
+        this.board = this.undoBoard;
+        this.switchPlayer();
+
+    }
 
     requestParser(board){
 

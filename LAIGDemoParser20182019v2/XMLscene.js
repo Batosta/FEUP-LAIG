@@ -1,5 +1,7 @@
 var DEGREE_TO_RAD = Math.PI / 180;
 
+var initialBoard = [[["empty",0],["empty",0],["empty",0],["empty",0]],[["empty",0],["black",20],["white",20],["empty",0]],[["empty",0],["empty",0],["empty",0],["empty",0]]];
+
 /**
  * XMLscene class, representing the scene that is to be rendered.
  */
@@ -157,7 +159,7 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.camera = this.graph.viewMap.get(this.graph.defaultView);
-        // this.interface.setActiveCamera(this.camera);
+        //this.interface.setActiveCamera(this.camera);
 
         this.axis = new CGFaxis(this, this.graph.axis_length);
 
@@ -322,6 +324,12 @@ class XMLscene extends CGFscene {
         this.knightLine.startedTurnTime = this.lastTime;
     }
 
+    undo(){
+        if(JSON.stringify(this.knightLine.board) === JSON.stringify(initialBoard))
+            console.log("Can't Undo at the start!");
+        else this.knightLine.undoPlay();
+    }
+
     getPrologRequest(requestString, onSuccess, onError, port){
     
         var requestPort = port || 8081;
@@ -357,6 +365,29 @@ class XMLscene extends CGFscene {
                 console.log("Request successful. Reply: " + prologResponse);
 
                 knightLine.startMovement(prologResponse);
+                knightLine.responseParser(prologResponse);
+
+                knightLine.checkWin();
+
+
+            }else if(requestString.includes("checkWin")){
+
+                console.log("Request successful. Reply: " + prologResponse);
+
+                if(parseInt(prologResponse) == 1)
+                    console.log("YOU WON");
+                else
+                    knightLine.checkLose();
+
+            }else if(requestString.includes("checkIfPossible")){
+
+                console.log("Request successful. Reply: " + prologResponse);
+
+                if(parseInt(prologResponse) == 1)
+                    console.log("YOU LOST");
+                else
+                    knightLine.reset();
+
             }
 
             requestString = null;

@@ -123,6 +123,12 @@ parse_input(checkPossibleMove(Board, PieceX, PieceY, CellX, CellY), Answer) :-
 parse_input(move(Board, Player, PieceX, PieceY, CellX, CellY, Np), Answer) :-
 	move(Board, Player, PieceX, PieceY, CellX, CellY, Np, Answer).
 
+parse_input(checkWin(Board, Player, MaxRow, MaxCol, 0, 0, Win), Answer) :-
+	checkWin(Board, Player, MaxRow, MaxCol, 0, 0, Answer).
+
+parse_input(checkIfPossible(X, Player, MaxRow, MaxCol, 0, 0, Lose), Answer) :-
+	checkIfPossible(X, Player, MaxRow, MaxCol, 0, 0, Answer).
+
 
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).

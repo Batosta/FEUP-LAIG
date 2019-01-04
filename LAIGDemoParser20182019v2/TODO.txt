@@ -14,10 +14,9 @@ Por fazer:
 3. Bot vs player						(ja ha a opcao no gui mas nao faz nada)
 4. Bot vs Bot							(ja ha a opcao no gui mas nao faz nada)
 5. Dificuldades							(ja ha a opcao no gui mas nao faz nada)
-6. Undo
-7. Filme do jogo
-8. Tempo para cada jogador	(ja ha o tempo de cada jogador...falta mostrar + condicao de perder quando acabar o minuto para jogar)
-9. Scores
+10. Scores
+9. Tempo para cada jogador	(ja ha o tempo de cada jogador...falta mostrar + condicao de perder quando acabar o minuto para jogar)
+8. Filme do jogo
 69. Comer a Catarina Melo 				(fazivel)
 70. Comer a Inês Fernandes 				(esta muito foda   :'(
 420. Entregar isto 						(idk about this)

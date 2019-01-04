@@ -342,7 +342,7 @@ mainRecursivePLPL(_, _, 1, _):-
 mainRecursivePLPL(_, _, _, 1):-
 	noPiecesMessage.
 mainRecursivePLPL(Board, Counter, _, _) :-
-	write('\33\[2J'),
+	%write('\33\[2J'),
 	display_game(Board),
 	Player is Counter mod 2,
 	(Player \= 0 , turn(1), nl ; turn(0), nl ),
@@ -351,6 +351,18 @@ mainRecursivePLPL(Board, Counter, _, _) :-
 	chooseWhereToMove(Board, C1, R1, C2, R2, Player),
 	chooseNumberPieces(Board, C1, R1, Np, Counter),
 
+	write(Player),
+	nl,nl,
+	write(C1),
+	nl,nl,
+	write(R1),
+	nl,nl, 
+	write(C2),
+	nl,nl,
+	write(R2),
+	nl,nl,
+	write(Np),
+	
 	move(Board, Player, C1, R1, C2, R2, Np, Board1),
 
 	checkLengths(Board1, MaxRow, MaxCol),
