@@ -343,7 +343,7 @@ class XMLscene extends CGFscene {
         if(JSON.stringify(this.knightLine.board) === JSON.stringify(initialBoard))
             console.log("Can't Undo at the start!");
         else this.knightLine.undoPlay();
-    }
+    };
 
     getPrologRequest(requestString, onSuccess, onError, port){
     

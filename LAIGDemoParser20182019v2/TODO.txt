@@ -1,21 +1,20 @@
 Done:
-1. Tabuleiro							(falta centrar o tabuleiro)
-2. Modelacao das pecas					(meh idk about this)
+1. Tabuleiro
+2. Modelacao das pecas
 3. Lights
 4. Varios ambientes de jogo
-5. Rodar a camara						(falta pôr a camera a ir subindo conforme o tabuleiro cresce)
+5. Rodar a camara
 6. Display da animação dos objetos
 7. Bot vs player
 8. Bot vs Bot
 9. Dificuldades
-
+10. Undo
+11. Condicoes de terminacao
 
 
 Por fazer:
 1. Pôr cells a verde quando selecionamos a peça
-4. Filme do jogo
-5. Tempo para cada jogador	(ja ha o tempo de cada jogador...falta mostrar + condicao de perder quando acabar o minuto para jogar)
-6. Scores
-69. Comer a Catarina Melo 				(fazivel)
-70. Comer a Inês Fernandes 				(esta muito foda   :'(
-420. Entregar isto 						(idk about this)
+2. Filme do jogo
+3. Tempo para cada jogador	(falta condicao de perder quando acabar o minuto para jogar)
+4. Scores
+5. Limpar o projecto...fotos + primitivas nao usadas, limpar o yas, limpar o parser das primitivas nao usadas

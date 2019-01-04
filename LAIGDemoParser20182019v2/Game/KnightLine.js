@@ -31,6 +31,8 @@ class KnightLine extends CGFobject
         this.lose = 0;
         this.scores = [1, 1];
 
+        this.black = new CGFappearance(this.scene);
+        this.black.setAmbient(0.0, 0.0, 0.0, 1);
         this.green = new CGFappearance(this.scene);
         this.green.setAmbient(0.0, 0.5, 0.25, 1);
         this.gray = new CGFappearance(this.scene);
@@ -219,7 +221,6 @@ class KnightLine extends CGFobject
         this.responseParser(this.waitingBoard);
         this.checkWin();
         this.updateScore();
-        this.reset();
     };
 
     calculateDifferences(){
@@ -427,13 +428,68 @@ class KnightLine extends CGFobject
     showInfo(){
 
         var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedTurnTime)/1000.0);
-        // if(timeLeftPlay == 0){
 
-        //     funcao de derrota
-        // }
+        this.scene.pushMatrix();
 
-        // console.log(timeLeftPlay);
-        // console.log(this.scores);
+            this.scene.translate(0.0, 0.0, 2.5);
+            this.showDigit(this.scores[0]);
+
+            this.gray.apply();
+            this.scene.translate(0.0, 0.0, -2.0);
+            this.showDigit(Math.floor(timeLeftPlay/10));
+            this.scene.translate(0.0, 0.0, -1.0);
+            this.showDigit(timeLeftPlay%10);
+
+            this.black.apply();
+            this.scene.translate(0.0, 0.0, -2.0);
+            this.showDigit(this.scores[1]);
+
+        this.scene.popMatrix();
+    };
+    showDigit(digit){
+
+        var showed;
+        switch(digit){
+            case 0:
+                showed = this.zero;
+                break;
+            case 1:
+                showed = this.one;
+                break;
+            case 2:
+                showed = this.two;
+                break;
+            case 3:
+                showed = this.three;
+                break;
+            case 4:
+                showed = this.four;
+                break;
+            case 5:
+                showed = this.five;
+                break;
+            case 6:
+                showed = this.six;
+                break;
+            case 7:
+                showed = this.seven;
+                break;
+            case 8:
+                showed = this.eight;
+                break;
+            case 9:
+                showed = this.nine;
+                break;
+        }
+
+        this.scene.pushMatrix();
+            this.scene.translate(-4.5, 3.4, 0.0);
+            this.scene.rotate(-Math.PI/3.0, 0, 0, 1);
+            this.scene.rotate(Math.PI, 1, 0, 0);
+            this.scene.rotate(-Math.PI/2.0, 0, 1, 0);
+            this.scene.scale(0.1, 0.1, 0.1);
+            showed.display();
+        this.scene.popMatrix();
     };
 
     responseParser(response){
