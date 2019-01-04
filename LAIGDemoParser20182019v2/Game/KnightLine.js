@@ -205,7 +205,7 @@ class KnightLine extends CGFobject
     finishedMovement(){
 
         this.responseParser(this.waitingBoard);
-        this.reset();
+        this.checkWin();
     };
 
     calculateDifferences(){

@@ -383,11 +383,6 @@ class XMLscene extends CGFscene {
 
                 knightLine.startMovement(prologResponse);
 
-                //knightLine.responseParser(prologResponse);
-
-                //knightLine.checkWin();
-
-
             }
 
             else if(requestString.includes("checkWin")){
