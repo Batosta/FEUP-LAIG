@@ -27,6 +27,9 @@ class KnightLine extends CGFobject
         this.newPieces = [];
         this.movementDifferences = [];
 
+        this.movie = [];
+
+        this.win = 0;
         this.scores = [1, 1];
 
         this.black = new CGFappearance(this.scene);
@@ -291,6 +294,11 @@ class KnightLine extends CGFobject
         request += ",";
         request += numberPieces;
         request += ")";
+
+        this.movie.push([this.player, this.pieceFlag.xPosition, this.pieceFlag.yPosition, this.cellFlag.xPosition, this.cellFlag.yPosition, numberPieces]);
+        console.log(this.movie);
+
+
         this.scene.getPrologRequest(request);
     };
 
@@ -450,8 +458,7 @@ class KnightLine extends CGFobject
             }
             else{
 
-                this.scene.scale(2.0, 2.0, 2.0);
-                this.victory.display();
+                console.log("You won");
             }
 
         this.scene.popMatrix();
