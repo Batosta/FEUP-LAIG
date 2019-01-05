@@ -298,7 +298,6 @@ class KnightLine extends CGFobject
         this.movie.push([this.player, this.pieceFlag.xPosition, this.pieceFlag.yPosition, this.cellFlag.xPosition, this.cellFlag.yPosition, numberPieces]);
         console.log(this.movie);
 
-
         this.scene.getPrologRequest(request);
     };
 

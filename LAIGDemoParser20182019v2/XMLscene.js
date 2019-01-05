@@ -322,6 +322,45 @@ class XMLscene extends CGFscene {
         this.knightLine.startedTurnTime = this.lastTime;
     };
 
+    playMovie(){
+
+        var boardAux = this.knightLine.board;
+
+        this.knightLine.board = [];
+
+        this.getPrologRequest('start');
+
+        this.knightLine.board = initialBoard;
+
+        //JUST TO TEST
+        this.knightLine.movie = [[1,1,1,3,2,"3"],[0,3,2,1,1,"5"],[1,2,2,4,1,"4"],[0,3,2,1,3,"3"]];
+
+        for(let i = 0; i < this.knightLine.movie.length; i++){
+
+            let movie = this.knightLine.movie[i];
+    
+            // move(Board, Player, Px, Py, Cx, Cy, Np)
+            var request = "move(";
+            request +=  this.knightLine.requestParser(this.knightLine.board);
+            request += ",";
+            request += movie[0].toString();
+            request += ",";
+            request += movie[1].toString();
+            request += ",";
+            request += movie[2].toString();
+            request += ",";
+            request += movie[3].toString();
+            request += ",";
+            request += movie[4].toString();
+            request += ",";
+            request += movie[5].toString();
+            request += ")";
+            this.getPrologRequest(request);
+        }
+
+        console.log("YIKES");
+    }
+
     gameplay(){
 
         if(this.knightLine.pieceOnMovement == 0){
@@ -389,8 +428,10 @@ class XMLscene extends CGFscene {
 
                 console.log("Request successful. Reply: " + prologResponse);
 
-                if(parseInt(prologResponse) == 1)
+                if(parseInt(prologResponse) == 1){
+                    knightLine.movie = [];
                     console.log("YOU WON");
+                }   
                 else
                     knightLine.checkLose();
 
@@ -400,8 +441,10 @@ class XMLscene extends CGFscene {
 
                 console.log("Request successful. Reply: " + prologResponse);
 
-                if(parseInt(prologResponse) == 1)
+                if(parseInt(prologResponse) == 1){
+                    knightLine.movie = [];
                     console.log("YOU LOST");
+                }
                 else
                     knightLine.reset();
 
