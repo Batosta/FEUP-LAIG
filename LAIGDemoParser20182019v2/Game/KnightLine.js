@@ -27,8 +27,6 @@ class KnightLine extends CGFobject
         this.newPieces = [];
         this.movementDifferences = [];
 
-        this.win = 0;
-        this.lose = 0;
         this.scores = [1, 1];
 
         this.black = new CGFappearance(this.scene);
@@ -427,22 +425,34 @@ class KnightLine extends CGFobject
 
     showInfo(){
 
-        var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedTurnTime)/1000.0);
-
         this.scene.pushMatrix();
 
-            this.scene.translate(0.0, 0.0, 2.5);
-            this.showDigit(this.scores[0]);
+            if(this.win == 0){
+                this.scene.translate(0.0, 0.0, 2.5);
+                this.showDigit(this.scores[0]);
 
-            this.gray.apply();
-            this.scene.translate(0.0, 0.0, -2.0);
-            this.showDigit(Math.floor(timeLeftPlay/10));
-            this.scene.translate(0.0, 0.0, -1.0);
-            this.showDigit(timeLeftPlay%10);
+                if(this.pieceOnMovement == 0){
 
-            this.black.apply();
-            this.scene.translate(0.0, 0.0, -2.0);
-            this.showDigit(this.scores[1]);
+                    var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedTurnTime)/1000.0);
+                    this.gray.apply();
+
+                    this.scene.translate(0.0, 0.0, -2.0);
+                    this.showDigit(Math.floor(timeLeftPlay/10));
+                    this.scene.translate(0.0, 0.0, -1.0);
+                    this.showDigit(timeLeftPlay%10);
+                    this.scene.translate(0.0, 0.0, -2.0);
+                }
+                else
+                    this.scene.translate(0.0, 0.0, -5.0);
+
+                this.black.apply();
+                this.showDigit(this.scores[1]);
+            }
+            else{
+
+                this.scene.scale(2.0, 2.0, 2.0);
+                this.victory.display();
+            }
 
         this.scene.popMatrix();
     };
