@@ -441,6 +441,9 @@ class KnightLine extends CGFobject
                 if(this.pieceOnMovement == 0){
 
                     var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedTurnTime)/1000.0);
+                    if(timeLeftPlay <= 0)
+                        this.overTimeMessage();
+
                     this.gray.apply();
 
                     this.scene.translate(0.0, 0.0, -2.0);
@@ -688,5 +691,47 @@ class KnightLine extends CGFobject
             boardResponse += prologResponse[i];
         }
         return boardResponse;
+    };
+
+    victoryMessage(){
+
+        var message = "The ";
+
+        if(this.player == 1)
+            message += "black ";
+        else
+            message += "white ";
+
+        message += "player got 4 stacks in a row. Victory!";
+        alert(message);
+        this.scene.gameStart = 0;
+    };
+
+    overTimeMessage(){
+
+        var message = "The ";
+
+        if(this.player == 1)
+            message += "black ";
+        else
+            message += "white ";
+
+        message += "player took over 60 seconds to play. He lost!";
+        alert(message);
+        this.scene.gameStart = 0;
+    };
+
+    noPiecesMessage(){
+
+        var message = "The ";
+
+        if(this.player == 1)
+            message += "black ";
+        else
+            message += "white ";
+
+        message += "player has no more pieces to play. He lost!";
+        alert(message);
+        this.scene.gameStart = 0;
     };
 } 

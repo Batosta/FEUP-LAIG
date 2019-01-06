@@ -357,8 +357,6 @@ class XMLscene extends CGFscene {
             request += ")";
             this.getPrologRequest(request);
         }
-
-        console.log("YIKES");
     }
 
     gameplay(){
@@ -407,7 +405,6 @@ class XMLscene extends CGFscene {
 
             else if(requestString.includes("checkPossibleMove")){
 
-                // prologResponse = 0 = can play || 1 = cant play
                 console.log("Request successful. Reply: " + prologResponse);
                 
                 if(prologResponse == 0){
@@ -430,7 +427,7 @@ class XMLscene extends CGFscene {
 
                 if(parseInt(prologResponse) == 1){
                     knightLine.movie = [];
-                    console.log("YOU WON");
+                    knightLine.victoryMessage();
                 }   
                 else
                     knightLine.checkLose();
@@ -443,7 +440,7 @@ class XMLscene extends CGFscene {
 
                 if(parseInt(prologResponse) == 1){
                     knightLine.movie = [];
-                    console.log("YOU LOST");
+                    knightLine.noPiecesMessage();
                 }
                 else
                     knightLine.reset();
