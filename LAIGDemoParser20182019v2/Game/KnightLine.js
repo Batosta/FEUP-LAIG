@@ -29,7 +29,6 @@ class KnightLine extends CGFobject
 
         this.movie = [];
 
-        this.win = 0;
         this.scores = [1, 1];
 
         this.black = new CGFappearance(this.scene);
@@ -434,34 +433,28 @@ class KnightLine extends CGFobject
 
         this.scene.pushMatrix();
 
-            if(this.win == 0){
-                this.scene.translate(0.0, 0.0, 2.5);
-                this.showDigit(this.scores[0]);
+            this.scene.translate(0.0, 0.0, 2.5);
+            this.showDigit(this.scores[0]);
 
-                if(this.pieceOnMovement == 0){
+            if(this.pieceOnMovement == 0){
 
-                    var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedTurnTime)/1000.0);
-                    if(timeLeftPlay <= 0)
-                        this.overTimeMessage();
+                var timeLeftPlay = 60 - Math.floor((this.scene.lastTime - this.startedTurnTime)/1000.0);
+                if(timeLeftPlay <= 0)
+                    this.overTimeMessage();
 
-                    this.gray.apply();
+                this.gray.apply();
 
-                    this.scene.translate(0.0, 0.0, -2.0);
-                    this.showDigit(Math.floor(timeLeftPlay/10));
-                    this.scene.translate(0.0, 0.0, -1.0);
-                    this.showDigit(timeLeftPlay%10);
-                    this.scene.translate(0.0, 0.0, -2.0);
-                }
-                else
-                    this.scene.translate(0.0, 0.0, -5.0);
-
-                this.black.apply();
-                this.showDigit(this.scores[1]);
+                this.scene.translate(0.0, 0.0, -2.0);
+                this.showDigit(Math.floor(timeLeftPlay/10));
+                this.scene.translate(0.0, 0.0, -1.0);
+                this.showDigit(timeLeftPlay%10);
+                this.scene.translate(0.0, 0.0, -2.0);
             }
-            else{
+            else
+                this.scene.translate(0.0, 0.0, -5.0);
 
-                console.log("You won");
-            }
+            this.black.apply();
+            this.showDigit(this.scores[1]);
 
         this.scene.popMatrix();
     };
