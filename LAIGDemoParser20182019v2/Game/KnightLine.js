@@ -27,8 +27,7 @@ class KnightLine extends CGFobject
         this.newPieces = [];
         this.movementDifferences = [];
 
-        this.movie = [];
-
+        this.win = 0;
         this.scores = [1, 1];
 
         this.black = new CGFappearance(this.scene);
@@ -68,7 +67,6 @@ class KnightLine extends CGFobject
         this.showInfo();
 
         this.pickNumber = 1;
-
         var rows = this.boardPieces.length;
         var columns = this.boardPieces[0].length;
 
@@ -91,7 +89,7 @@ class KnightLine extends CGFobject
 
                     this.scene.popMatrix();
 
-                    var increase = (this.scene.lastTime - this.startedMovementTime)/1000.0;
+                    var increase = 10*(this.scene.lastTime - this.startedMovementTime)/1000.0;
                     if(this.movementUp == 0){
 
                         this.scene.pushMatrix();
@@ -196,6 +194,8 @@ class KnightLine extends CGFobject
 
     resizeBoard(rows, columns){
 
+        if(rows > 9) 
+            this.scene.scale(Math.pow(0.9, rows-9), 1.0, Math.pow(0.9, rows-9));
         this.scene.translate(-(columns/2.0 - 1), 0.0, rows/2.0);
     };
 
@@ -217,7 +217,6 @@ class KnightLine extends CGFobject
     }
 
     finishedMovement(){
-
         this.responseParser(this.waitingBoard);
         this.checkWin();
         this.updateScore();
@@ -258,6 +257,7 @@ class KnightLine extends CGFobject
     };
 
     start(){
+        this.player = 1;
         this.scene.getPrologRequest('start');
     };
 
@@ -293,9 +293,6 @@ class KnightLine extends CGFobject
         request += ",";
         request += numberPieces;
         request += ")";
-
-        this.movie.push([this.player, this.pieceFlag.xPosition, this.pieceFlag.yPosition, this.cellFlag.xPosition, this.cellFlag.yPosition, numberPieces]);
-        console.log(this.movie);
 
         this.scene.getPrologRequest(request);
     };
@@ -430,6 +427,7 @@ class KnightLine extends CGFobject
     };
 
     showInfo(){
+            this.scene.pushMatrix();
 
         this.scene.pushMatrix();
 
@@ -577,6 +575,7 @@ class KnightLine extends CGFobject
 
         this.boardToPieces(board);
         this.board = board;
+        this.scene.canStartDisplay = 1;
     };
 
     undoPlay(){

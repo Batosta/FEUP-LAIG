@@ -40,6 +40,7 @@ class XMLscene extends CGFscene {
         this.keyMPressed = false;
 
         this.gameStart = 0;
+        this.canStartDisplay = 0;
         this.knightLine = new KnightLine(this);
 
         this.setUpdatePeriod(1000/60);
@@ -181,43 +182,42 @@ class XMLscene extends CGFscene {
 
 
     logPicking() {
-        
-        if (this.pickMode == false) {
-            if (this.pickResults != null && this.pickResults.length > 0) {
-                for (var i = 0; i< this.pickResults.length; i++) {
-                    var obj = this.pickResults[i][0];
-                    if (obj) {
-                        if(obj.type == "piece"){
-                            if(obj.color == this.knightLine.player && obj.pieces > 1){
-
-                                this.selectPiece(obj);
+            if (this.pickMode == false) {
+                if (this.pickResults != null && this.pickResults.length > 0) {
+                    for (var i = 0; i< this.pickResults.length; i++) {
+                        var obj = this.pickResults[i][0];
+                        if (obj) {
+                            if(obj.type == "piece"){
+                                if(obj.color == this.knightLine.player && obj.pieces > 1){
+    
+                                    this.selectPiece(obj);
+                                }
                             }
-                        }
-                        else if(obj.type == "cell"){
-
-                            if(this.knightLine.pieceFlag != null){
-
-                                // checkPossibleMove(Board, Px, Py, Cx, Cy)
-                                var request = "checkPossibleMove(";
-                                request += this.knightLine.requestParser(this.knightLine.board);
-                                request += ",";
-                                request += this.knightLine.pieceFlag.xPosition;
-                                request += ",";
-                                request += this.knightLine.pieceFlag.yPosition;
-                                request += ",";
-                                request += obj.xPosition;
-                                request += ",";
-                                request += obj.yPosition;
-                                request += ")";
-                                this.knightLine.cellFlag = obj;
-                                this.getPrologRequest(request);
+                            else if(obj.type == "cell"){
+    
+                                if(this.knightLine.pieceFlag != null){
+    
+                                    // checkPossibleMove(Board, Px, Py, Cx, Cy)
+                                    var request = "checkPossibleMove(";
+                                    request += this.knightLine.requestParser(this.knightLine.board);
+                                    request += ",";
+                                    request += this.knightLine.pieceFlag.xPosition;
+                                    request += ",";
+                                    request += this.knightLine.pieceFlag.yPosition;
+                                    request += ",";
+                                    request += obj.xPosition;
+                                    request += ",";
+                                    request += obj.yPosition;
+                                    request += ")";
+                                    this.knightLine.cellFlag = obj;
+                                    this.getPrologRequest(request);
+                                }
                             }
                         }
                     }
-                }
-                this.pickResults.splice(0, this.pickResults.length);
-            }     
-        }
+                    this.pickResults.splice(0, this.pickResults.length);
+                }     
+            }
     };
 
     selectPiece(obj){
@@ -291,7 +291,7 @@ class XMLscene extends CGFscene {
             this.setRoot();
             this.graph.displayScene();
 
-            if(this.gameStart == 1){
+            if(this.gameStart == 1 && this.canStartDisplay == 1){
 
                 this.knightLine.display();
             }
@@ -322,58 +322,23 @@ class XMLscene extends CGFscene {
         this.knightLine.startedTurnTime = this.lastTime;
     };
 
-    playMovie(){
-
-        var boardAux = this.knightLine.board;
-
-        this.knightLine.board = [];
-
-        this.getPrologRequest('start');
-
-        this.knightLine.board = initialBoard;
-
-        //JUST TO TEST
-        this.knightLine.movie = [[1,1,1,3,2,"3"],[0,3,2,1,1,"5"],[1,2,2,4,1,"4"],[0,3,2,1,3,"3"]];
-
-        for(let i = 0; i < this.knightLine.movie.length; i++){
-
-            let movie = this.knightLine.movie[i];
-    
-            // move(Board, Player, Px, Py, Cx, Cy, Np)
-            var request = "move(";
-            request +=  this.knightLine.requestParser(this.knightLine.board);
-            request += ",";
-            request += movie[0].toString();
-            request += ",";
-            request += movie[1].toString();
-            request += ",";
-            request += movie[2].toString();
-            request += ",";
-            request += movie[3].toString();
-            request += ",";
-            request += movie[4].toString();
-            request += ",";
-            request += movie[5].toString();
-            request += ")";
-            this.getPrologRequest(request);
-        }
-    }
-
     gameplay(){
 
-        if(this.knightLine.pieceOnMovement == 0){
-            if(this.gameType == "Player vs Player" || (this.gameType == "Player vs Bot" && this.knightLine.player == 1)){
-
-                this.logPicking();
-            }
-            else if(this.gameType == "Bot vs Bot" || (this.gameType == "Player vs Bot" && this.knightLine.player == 0)){
-
-                if(this.gameDifficulty == "Easy")
-                    this.knightLine.botMove(1);
-                else
-                    this.knightLine.botMove(2);
-            }
-        }
+            if(this.knightLine.pieceOnMovement == 0){
+                
+                if(this.gameType == "Player vs Player" || (this.gameType == "Player vs Bot" && this.knightLine.player == 1)){
+    
+                    this.logPicking();
+                }
+                else if(this.gameType == "Bot vs Bot" || (this.gameType == "Player vs Bot" && this.knightLine.player == 0)){
+    
+                    if(this.gameDifficulty == "Easy")
+                        this.knightLine.botMove(1);
+                    else
+                        this.knightLine.botMove(2);
+                }
+            }          
+    
     };
 
     undo(){
@@ -418,7 +383,6 @@ class XMLscene extends CGFscene {
                 console.log("Request successful. Reply: " + prologResponse);
 
                 knightLine.startMovement(prologResponse);
-
             }
 
             else if(requestString.includes("checkWin")){

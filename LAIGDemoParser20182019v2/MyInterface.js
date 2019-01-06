@@ -57,7 +57,6 @@ class MyInterface extends CGFinterface {
     
         group.add(this.scene, "startGame").name("Start Game");
         group.add(this.scene, "undo").name("Undo last play");
-        group.add(this.scene, "playMovie").name("Play Game Movie");
         group.add(this.scene, 'gameDifficulty', ['Easy', 'Hard']).name("Difficulty");
         group.add(this.scene, 'gameType', types).name("Game Type");
     }
