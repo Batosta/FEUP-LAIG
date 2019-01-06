@@ -40,7 +40,6 @@ class XMLscene extends CGFscene {
         this.keyMPressed = false;
 
         this.gameStart = 0;
-        this.canStartDisplay = 0;
         this.knightLine = new KnightLine(this);
 
         this.setUpdatePeriod(1000/60);
@@ -291,7 +290,7 @@ class XMLscene extends CGFscene {
             this.setRoot();
             this.graph.displayScene();
 
-            if(this.gameStart == 1 && this.canStartDisplay == 1){
+            if(this.gameStart == 1){
 
                 this.knightLine.display();
             }

@@ -27,7 +27,6 @@ class KnightLine extends CGFobject
         this.newPieces = [];
         this.movementDifferences = [];
 
-        this.win = 0;
         this.scores = [1, 1];
 
         this.black = new CGFappearance(this.scene);
@@ -89,7 +88,7 @@ class KnightLine extends CGFobject
 
                     this.scene.popMatrix();
 
-                    var increase = 10*(this.scene.lastTime - this.startedMovementTime)/1000.0;
+                    var increase = (this.scene.lastTime - this.startedMovementTime)/1000.0;
                     if(this.movementUp == 0){
 
                         this.scene.pushMatrix();
@@ -257,7 +256,6 @@ class KnightLine extends CGFobject
     };
 
     start(){
-        this.player = 1;
         this.scene.getPrologRequest('start');
     };
 
@@ -427,7 +425,6 @@ class KnightLine extends CGFobject
     };
 
     showInfo(){
-            this.scene.pushMatrix();
 
         this.scene.pushMatrix();
 
@@ -575,7 +572,6 @@ class KnightLine extends CGFobject
 
         this.boardToPieces(board);
         this.board = board;
-        this.scene.canStartDisplay = 1;
     };
 
     undoPlay(){
